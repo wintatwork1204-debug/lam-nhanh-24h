@@ -3,149 +3,344 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Sống sót ngày Tết: bạn trụ được mấy câu hỏi của họ hàng?</title>
-<meta name="description" content="Game vui 1 phút: Tết về, họ hàng hỏi lương, hỏi người yêu, hỏi bao giờ cưới. Chọn cách đáp, xem bạn được danh hiệu gì rồi khoe thẻ kết quả.">
+<title>Sống sót ngày Tết 🧧 Bạn trụ được mấy câu hỏi của họ hàng?</title>
+<meta name="description" content="Game 3 phút: về quê ăn Tết từ 30 đến mùng 3, họ hàng hỏi lương, hỏi người yêu, hỏi bao giờ cưới. Chọn cách đáp, mở 12 danh hiệu, thách bạn bè.">
 <meta property="og:title" content="Sống sót ngày Tết 🧧 Bạn trụ được mấy câu hỏi của họ hàng?">
-<meta property="og:description" content="Game 1 phút. Chơi xong nhận thẻ danh hiệu để khoe.">
+<meta property="og:description" content="Game 3 phút. 4 vai, 12 kết thúc. Chơi xong nhận thẻ danh hiệu để khoe và thách bạn.">
 <meta property="og:image" content="https://wintatwork1204-debug.github.io/lam-nhanh-24h/tet/og.png">
+<meta property="og:type" content="website">
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#b91c1c;background-image:radial-gradient(circle at 20% 10%,#dc2626 0,transparent 40%),radial-gradient(circle at 80% 90%,#991b1b 0,transparent 45%);color:#3b0a0a;min-height:100vh;display:flex;justify-content:center}
-.khung{width:100%;max-width:480px;padding:16px}
-.the{background:#fffbeb;border-radius:22px;padding:20px;box-shadow:0 8px 0 #7f1d1d,0 12px 30px rgba(0,0,0,.3);border:3px solid #fbbf24;position:relative}
-h1{font-size:1.6rem;margin:.2em 0 .3em;color:#b91c1c;text-align:center;line-height:1.2}
-.phu{text-align:center;color:#92400e;margin:0 0 14px}
-.to{font-size:64px;text-align:center;margin:6px 0}
-button{font:inherit;cursor:pointer;border:0}
-.nut{display:block;width:100%;background:#facc15;color:#7f1d1d;font-weight:800;font-size:1.1rem;padding:14px;border-radius:14px;box-shadow:0 4px 0 #ca8a04;margin-top:12px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#b91c1c;background-image:radial-gradient(circle at 15% 8%,#ef4444 0,transparent 35%),radial-gradient(circle at 85% 95%,#7f1d1d 0,transparent 45%);background-attachment:fixed;color:#3b0a0a;min-height:100vh;display:flex;justify-content:center}
+.khung{width:100%;max-width:480px;padding:14px}
+.the{background:#fffbeb;border-radius:22px;padding:18px;box-shadow:0 7px 0 #7f1d1d,0 12px 30px rgba(0,0,0,.3);border:3px solid #fbbf24;position:relative;overflow:hidden}
+.the.nen{background:#fffbeb url(img/nen.jpg) center top/cover}
+.the.nen::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(255,251,235,.55),rgba(255,251,235,.92) 38%)}
+.the.nen>*{position:relative}
+h1{font-size:1.65rem;margin:.15em 0 .3em;color:#b91c1c;text-align:center;line-height:1.2}
+h2{font-size:1.15rem;margin:.2em 0;color:#b91c1c;text-align:center}
+.phu{text-align:center;color:#92400e;margin:0 0 12px}
+.to{font-size:58px;text-align:center;margin:4px 0;line-height:1.1}
+button{font:inherit;cursor:pointer;border:0;color:inherit}
+.nut{display:block;width:100%;background:#facc15;color:#7f1d1d;font-weight:800;font-size:1.08rem;padding:14px;border-radius:14px;box-shadow:0 4px 0 #ca8a04;margin-top:12px}
 .nut:active{transform:translateY(3px);box-shadow:0 1px 0 #ca8a04}
 .nut.phu2{background:#fff;border:2px solid #fbbf24;box-shadow:none;font-weight:700}
-.thanh{display:flex;gap:10px;margin-bottom:12px;font-size:.9rem;font-weight:700}
-.thanh>div{flex:1}
-.vach{height:12px;background:#fde68a;border-radius:8px;overflow:hidden;margin-top:4px}
-.vach i{display:block;height:100%;background:#16a34a;transition:width .4s}
-.vach.do i{background:#dc2626}
-.nguoi{display:flex;gap:10px;align-items:center;margin:8px 0}
-.nguoi .mat{font-size:44px}
-.bong{background:#fff;border:2px solid #fcd34d;border-radius:16px;padding:12px 14px;font-size:1.08rem;font-weight:600;position:relative}
-.dap{display:block;width:100%;text-align:left;background:#fff;border:2px solid #fecaca;border-radius:14px;padding:12px 14px;margin-top:10px;font-size:1rem;color:#3b0a0a}
+.vai{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.vai button{background:#fff;border:2px solid #fecaca;border-radius:16px;padding:10px 6px;text-align:center;font-weight:700;font-size:.95rem}
+.vai button:hover,.vai button.chon{border-color:#dc2626;background:#fff1f2}
+.vai .hinh{font-size:44px;height:74px;display:flex;align-items:center;justify-content:center}
+.vai .hinh img{height:74px}
+.vai small{display:block;font-weight:400;color:#92400e;font-size:.78rem;margin-top:2px}
+input{font:inherit;width:100%;padding:12px;border-radius:12px;border:2px solid #fcd34d;margin-top:10px;text-align:center}
+.chiso{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px}
+.cs{text-align:center;font-size:.72rem;font-weight:700}
+.cs .ic{font-size:20px}
+.vach{height:9px;background:#fde68a;border-radius:6px;overflow:hidden;margin-top:3px}
+.vach i{display:block;height:100%;background:#16a34a;transition:width .45s}
+.vach.thap i{background:#dc2626}
+.cs.nhay{animation:nhay .5s}
+@keyframes nhay{50%{transform:scale(1.25)}}
+.chuong{display:flex;justify-content:space-between;font-size:.8rem;color:#92400e;font-weight:700;margin-bottom:4px}
+.nguoi{display:flex;gap:10px;align-items:flex-end;margin:6px 0 0}
+.nguoi .mat{width:96px;height:96px;flex:none;display:flex;align-items:flex-end;justify-content:center;font-size:62px}
+.nguoi .mat img{width:96px;height:96px;object-fit:contain}
+.ten-ai{font-weight:800;color:#b91c1c;margin-bottom:4px}
+.bong{background:#fff;border:2px solid #fcd34d;border-radius:16px 16px 16px 4px;padding:12px 14px;font-size:1.06rem;font-weight:600;flex:1;min-height:70px}
+.dap{display:block;width:100%;text-align:left;background:#fff;border:2px solid #fecaca;border-radius:14px;padding:12px 14px;margin-top:9px;font-size:.98rem;color:#3b0a0a;transition:transform .1s}
 .dap:hover{border-color:#ef4444;background:#fff1f2}
-.ketqua-dap{background:#ecfdf5;border-radius:14px;padding:12px;margin-top:12px;font-size:.98rem}
-.vong{text-align:right;font-size:.85rem;color:#92400e}
+.dap:active{transform:scale(.98)}
+.phanhoi{background:#ecfdf5;border-radius:14px;padding:12px;margin-top:10px;font-size:.98rem}
+.doi{font-size:.85rem;margin-top:6px;display:flex;gap:8px;flex-wrap:wrap}
+.doi span{background:#fff;border-radius:8px;padding:2px 7px}
+.doi .tru{color:#b91c1c}.doi .cong{color:#15803d}
+.sukien{text-align:center;padding:8px 0}
+.sukien .to{font-size:64px}
 canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
-.chan{color:#fde68a;text-align:center;font-size:.8rem;margin:14px 0 30px}
+.bst{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+.bst div{background:#fff;border:2px dashed #fcd34d;border-radius:12px;padding:6px 2px;text-align:center;font-size:.66rem;min-height:62px}
+.bst div b{display:block;font-size:24px}
+.bst div.khoa{filter:grayscale(1);opacity:.45}
+.thach{background:#fef3c7;border:2px solid #f59e0b;border-radius:14px;padding:10px;margin-bottom:10px;text-align:center;font-weight:600}
+.chan{color:#fde68a;text-align:center;font-size:.8rem;margin:14px 0 30px;line-height:1.6}
 .chan a{color:#fff}
-.an{display:none}
-@keyframes rung{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.rung{animation:rung .3s 2}
+.an{display:none!important}
+@keyframes rung{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.rung{animation:rung .28s 2}
+@keyframes vao{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.vao{animation:vao .35s}
+.amthanh{position:absolute;top:10px;right:12px;background:none;font-size:20px;z-index:2}
 </style>
 </head>
 <body>
 <div class="khung">
 
-<div class="the" id="mo">
-  <div class="to">🧧👵🧓👨‍🦳</div>
+<!-- MÀN MỞ ĐẦU -->
+<div class="the nen" id="mMo">
+  <button class="amthanh" onclick="batTat()" id="nutAm" title="Âm thanh">🔊</button>
+  <div id="loiThach"></div>
+  <div class="thach an" id="brMo"></div>
+  <div class="to">🧧</div>
   <h1>Sống sót ngày Tết</h1>
-  <p class="phu">Tết về, họ hàng xúm lại hỏi thăm. Mỗi câu đáp khéo thì giữ được bình tĩnh, đáp hớ thì… bị hỏi tiếp.<br><b>Bạn trụ được mấy câu?</b></p>
-  <button class="nut" onclick="batDau()">Vào nhà nội ăn Tết ▶</button>
-  <p class="phu" style="font-size:.85rem;margin-top:12px">1 phút · không cần đăng nhập · không thu thông tin gì</p>
+  <p class="phu">30 Tết đến mùng 3. Họ hàng xếp hàng hỏi thăm.<br>Đáp khéo thì sống, đáp hớ thì… bị hỏi tiếp.</p>
+  <h2>Bạn về quê với vai nào?</h2>
+  <div class="vai" id="dsVai"></div>
+  <input id="tenNC" maxlength="18" placeholder="Tên bạn (in lên thẻ khoe, có thể bỏ trống)">
+  <button class="nut" onclick="batDau()">Lên đường về quê ▶</button>
+  <p class="phu" style="font-size:.8rem;margin-top:10px">3 phút · không đăng nhập · không thu thông tin gì<br>Đã mở <b id="soMo">0</b>/12 danh hiệu</p>
 </div>
 
-<div class="the an" id="choi">
-  <div class="thanh">
-    <div>😌 Bình tĩnh<div class="vach" id="vBT"><i id="bt"></i></div></div>
-    <div>😎 Độ khéo<div class="vach"><i id="kheo" style="background:#f59e0b"></i></div></div>
+<!-- MÀN CHƠI -->
+<div class="the an" id="mChoi">
+  <div class="chiso">
+    <div class="cs" id="c_bt"><div class="ic">😌</div>Bình tĩnh<div class="vach"><i></i></div></div>
+    <div class="cs" id="c_hk"><div class="ic">🤝</div>Hòa khí<div class="vach"><i></i></div></div>
+    <div class="cs" id="c_vi"><div class="ic">👛</div>Ví tiền<div class="vach"><i></i></div></div>
+    <div class="cs" id="c_sd"><div class="ic">😎</div>Sĩ diện<div class="vach"><i></i></div></div>
   </div>
-  <div class="vong" id="vong"></div>
-  <div class="nguoi"><div class="mat" id="mat"></div><div><b id="ai"></b></div></div>
-  <div class="bong" id="hoi"></div>
-  <div id="cacdap"></div>
-  <div id="phanhoi" class="an"></div>
+  <div class="chuong"><span id="tenChuong"></span><span id="dem"></span></div>
+  <div id="vung"></div>
 </div>
 
-<div class="the an" id="het">
-  <h1 id="danhhieu"></h1>
-  <p class="phu" id="mota"></p>
+<!-- MÀN KẾT -->
+<div class="the an" id="mKet">
+  <h1 id="kDanhHieu"></h1>
+  <p class="phu" id="kMoTa"></p>
+  <div class="thach an" id="brKet"></div>
   <canvas id="anh" width="1080" height="1350"></canvas>
-  <button class="nut" onclick="taiAnh()">⬇️ Tải thẻ về để khoe</button>
-  <button class="nut phu2" onclick="chiaSe()" id="nutChia">🔗 Gửi game cho đứa em họ</button>
-  <button class="nut phu2" onclick="batDau()">🔁 Chơi lại (họ hàng đổi câu hỏi)</button>
+  <button class="nut" onclick="taiAnh()">⬇️ Lưu thẻ về máy để khoe</button>
+  <button class="nut phu2" onclick="thachBan()" id="nutThach">⚔️ Thách bạn bè vượt mặt mình</button>
+  <button class="nut phu2" onclick="veMo()">🔁 Chơi lại với vai khác</button>
+  <h2 style="margin-top:16px">Bộ sưu tập danh hiệu <span id="kSo"></span></h2>
+  <div class="bst" id="bst"></div>
 </div>
 
-<p class="chan">Game làm cho vui, nhân vật và câu hỏi là hư cấu. <a href="../">Trang của tác giả</a></p>
+<p class="chan">Game làm cho vui, nhân vật và tình huống là hư cấu, không nhắm vào ai.<br>
+<a href="doanh-nghiep.html">🎁 Muốn game Tết mang thương hiệu shop/công ty bạn?</a><br>
+<a href="../">Trang của tác giả</a></p>
 </div>
 
 <script>
-const HO=[["👵","Bà nội"],["🧓","Bác cả"],["👩‍🦱","Cô út"],["👨‍🦳","Ông chú bên ngoại"],["👩","Mợ hai"],["🧔","Anh họ hơn 10 tuổi"],["👴","Ông bạn của bố"],["👩‍🦳","Bác gái nhà bên"]];
-// [câu hỏi, [[đáp, đổi bình tĩnh, đổi khéo, họ hàng nói gì], ...]]
-const CAU=[
-["Năm nay lương tháng bao nhiêu rồi cháu?",[["Dạ đủ để năm nay lì xì cho các em ạ 🧧",0,3,"Ôi giỏi quá, thế thì lì xì to vào nhé!"],["Dạ… 50 triệu ạ (nói dối)",-2,1,"Thế cho bác vay 20 triệu sửa nhà!"],["Dạ cháu không tiện nói ạ",-1,0,"Ít thì nói ít, có gì đâu mà giấu!"]]],
-["Có người yêu chưa? Bao giờ dẫn về ra mắt?",[["Dạ đang chờ bác giới thiệu đây ạ 😁",1,3,"Để bác gọi con bé nhà bên sang nhé!"],["Dạ có rồi ạ, ở trong điện thoại",-1,2,"Cái thằng/con này, điện thoại thì ai cưới!"],["Dạ con chưa muốn yêu ạ",-2,0,"Chưa muốn thì đến bao giờ? Tuổi này bác có 2 đứa rồi!"]]],
-["Bao giờ cưới? Bạn cùng lớp con bác bế con rồi đấy!",[["Dạ cháu chờ bác lo hộ tiền cỗ ạ",1,3,"Hahaha, thằng/con này láu cá!"],["Dạ sang năm ạ (năm nào cũng nói vậy)",-1,1,"Năm ngoái cũng bảo sang năm!"],["Dạ cưới làm gì cho mệt ạ",-3,0,"Ối giời ơi, ông bà ơi nghe nó nói gì này!"]]],
-["Sao dạo này béo thế? / Sao gầy thế?",[["Dạ tại Tết nhà mình nấu ngon quá ạ",1,3,"Ừ thì ăn thêm bát nữa đi!"],["Dạ cháu đang giảm cân ạ",-1,1,"Giảm gì, Tết phải ăn! Gắp thêm miếng thịt mỡ!"],["Dạ bác cũng thế mà ạ",-3,0,"…(cả nhà im lặng 3 giây)"]]],
-["Làm ở đâu? Công ty đấy có to không? Nhà nước không?",[["Dạ công ty to lắm, to nhất tầng ạ",1,3,"Ừ, tầng to là được!"],["Dạ cháu làm tự do ạ",-1,1,"Tự do là thất nghiệp à?"],["Dạ cháu làm online ạ",-2,1,"Online là bán hàng đa cấp đúng không?"]]],
-["Học xong chưa? Ra trường bao năm rồi mà chưa có nhà à?",[["Dạ cháu đang ở nhà bố mẹ, tiết kiệm cho bố mẹ vui ạ",1,2,"Thế cũng phải!"],["Dạ đang góp ạ, 30 năm nữa có",0,2,"30 năm nữa thì bác về với ông bà rồi!"],["Dạ giá nhà Hà Nội 100 triệu/m² bác ạ",-1,1,"Thế mới phải chịu khó! Như bác ngày xưa…"]]],
-["Thằng/con nhà bác Tư được học bổng đi Úc đấy, còn cháu?",[["Dạ cháu được học bổng ở lại chăm ông bà ạ",2,3,"Ừ, ở nhà cũng tốt!"],["Dạ giỏi thật ạ, cháu chúc mừng bạn",1,2,"Ừ, phải học hỏi người ta!"],["Dạ thế bác Tư có đi cùng không ạ",-1,1,"Cái gì? Bác không hiểu…"]]],
-["Thế lì xì cho các em chưa?",[["Dạ có ngay ạ, mỗi đứa một bao đỏ 🧧",1,3,"Đấy, người lớn rồi là phải thế!"],["Dạ cháu đang chờ bác lì xì cháu trước ạ",-1,2,"Lớn tướng rồi còn đòi lì xì!"],["Dạ cháu chuyển khoản sau ạ",-1,1,"Chuyển khoản thì không có lộc!"]]],
-["Uống với bác một chén! Không uống là không nể bác!",[["Dạ cháu lái xe, cháu xin cạn bằng nước ngọt ạ 🥤",1,3,"Ừ, an toàn là trên hết!"],["Dạ một chén thôi ạ… (5 chén sau)",-2,1,"Đấy, thế mới là cháu bác!"],["Dạ cháu không uống được ạ",-1,0,"Thanh niên gì mà không uống được!"]]],
-["Đẻ đứa thứ hai đi, một đứa buồn lắm!",[["Dạ bác nuôi giúp cháu một đứa nhé ạ",1,3,"Hahaha, láu thế!"],["Dạ để cháu bàn thêm ạ",0,1,"Bàn gì, cứ đẻ đi, trời sinh voi sinh cỏ!"],["Dạ nuôi một đứa đã hết lương ạ",-1,1,"Ngày xưa bác nuôi 5 đứa có sao đâu!"]]],
-["Sao không về quê làm cho gần nhà?",[["Dạ cháu ở xa để Tết về quý hơn ạ",1,3,"Ừ, nói nghe cũng phải!"],["Dạ quê mình ít việc lắm ạ",-1,1,"Ít việc thì về mở quán!"],["Dạ cháu đang tính ạ",0,1,"Tính từ năm ngoái rồi!"]]],
-["Cháu chơi điện thoại suốt thế, ra đây phụ bác gói bánh!",[["Dạ vâng ạ, bác dạy cháu gói nhé 🍃",2,3,"Ngoan quá, gói cái này cho cháu mang về!"],["Dạ cháu đang làm việc ạ",-1,1,"Tết mà còn làm việc gì!"],["Dạ 5 phút nữa ạ (1 tiếng sau)",-2,0,"Bánh chín rồi đấy con ạ!"]]]
+// ===== DỮ LIỆU =====
+const AI={me:["🙎‍♀️","Mẹ"],ba:["👵","Bà nội"],ong:["👴","Ông nội"],bac:["🧔","Bác cả"],co:["👩‍🦱","Cô út"],chu:["👨‍🦲","Chú"],mo:["👩","Mợ"],cau:["🧔","Cậu"],anh:["😎","Anh họ"],xom:["👩‍🦳","Bà hàng xóm"],tre:["🧒","Bọn trẻ con"],lop:["🧑‍🤝‍🧑","Lớp trưởng"]};
+const IMG={}; // điền khi có ảnh: IMG.ba='img/ba.png'
+const VAI={
+ sv:{ten:"Sinh viên",hinh:"🧑‍🎓",mo:"Ví mỏng, điểm thì… để sau",cs:{bt:60,hk:60,vi:35,sd:50}},
+ dl:{ten:"Mới đi làm",hinh:"🧑‍💼",mo:"Lương tháng đầu, áp lực tháng mười ba",cs:{bt:55,hk:55,vi:65,sd:55}},
+ dt:{ten:"Độc thân 30+",hinh:"💁",mo:"Ổn định mọi thứ, trừ chuyện cưới",cs:{bt:50,hk:55,vi:80,sd:65}},
+ td:{ten:"Làm tự do/online",hinh:"🎧",mo:"Đi làm thật đấy, chỉ là ở nhà",cs:{bt:55,hk:50,vi:55,sd:45}}
+};
+const CHUONG=[["🧹 Chiều 30 Tết",3],["🏮 Mùng 1 · Nhà nội",4],["🍶 Mùng 2 · Nhà ngoại",3],["🎓 Mùng 3 · Thầy, bạn",2]];
+// [chương, vai|null, ai, câu hỏi, [[đáp, bt, hk, vi, sd, nhãn, phản hồi]...]]
+// nhãn: kheo (khéo), ne (né), thang (thẳng), hai (hài), phet (khoác lác), nhau (uống)
+const THE=[
+[0,null,"me","Về đến nhà là ôm điện thoại à? Ra lau bàn thờ, quét sân, rồi đi chợ hoa với bố!",[["Dạ con làm liền, tiện quay video 'dọn nhà đón Tết' luôn",5,10,0,5,"kheo","Ừ, quay mẹ cho đẹp vào nhé!"],["Dạ 5 phút nữa con xong deadline ạ",-10,-10,0,0,"ne","Deadline gì chiều 30 Tết! (mẹ cầm chổi đứng chờ)"],["Con thuê dịch vụ dọn nhà rồi mẹ ạ, 500k",10,-5,-15,5,"thang","Tiền nhiều thế thì đưa mẹ giữ cho!"]]],
+[0,null,"ba","Gói bánh chưng với bà không? Năm nay để cháu gói cái to nhất!",[["Dạ cháu gói ạ (bánh méo như chiếc dép)",5,15,0,-10,"hai","Méo thế này thì cháu tự ăn nhé!"],["Dạ cháu ngồi canh nồi bánh thâu đêm ạ",-10,15,0,5,"kheo","Ngoan quá. Nhớ thêm nước kẻo cháy."],["Bà ơi giờ người ta đặt bánh online ạ",0,-15,0,0,"thang","Online thì lấy đâu ra cái Tết hả cháu!"]]],
+[0,null,"ong","Tất niên rồi, cháu lên ngồi mâm trên với các bác cho ra dáng người lớn.",[["Dạ cháu xin phép ngồi ạ",-10,10,0,10,"kheo","Phải thế chứ! (các bác quay sang, chuẩn bị hỏi…)"],["Dạ cháu ngồi mâm dưới trông bọn trẻ ạ",10,-5,0,-5,"ne","Lớn tướng rồi còn ngồi với trẻ con!"],["Dạ cháu ngồi đâu cũng được, miễn gần nồi thịt đông",5,5,0,0,"hai","Cái đứa này, chỉ được cái ăn!"]]],
+[0,null,"anh","Giao thừa đi phố xem pháo hoa không? Xe anh mới tậu, 7 chỗ, đi cho sướng!",[["Thôi em ở nhà cúng giao thừa với ông bà",5,10,0,0,"kheo","Ừ ngoan, để anh đăng story một mình vậy."],["Đi! Anh cho em lái thử không?",10,-5,-5,-5,"hai","Lái thì được, xăng em đổ nhé."],["Xe mới à anh? Trả góp mấy năm thế?",-5,-10,0,10,"thang","…(im lặng 3 giây) Thôi anh đi đây."]]],
+[0,null,"xom","Ơ cháu nhà bà Tư về đấy à? Năm nay có dẫn ai về không?",[["Dạ cháu dẫn theo… cái vali ạ",5,5,0,-5,"hai","Vali thì không cưới được đâu cháu ơi!"],["Dạ bà vào nhà uống nước đã ạ",0,10,0,0,"ne","Ừ vào thì vào, nhưng vẫn phải trả lời đấy nhé."],["Dạ năm sau cháu dẫn cả hai ạ",5,0,0,10,"phet","Ối giời, hai đứa cơ à! (cả xóm biết sau 5 phút)"]]],
+[1,null,"bac","Năm nay lương tháng bao nhiêu rồi cháu?",[["Dạ đủ mua trà sữa size L mỗi ngày ạ",5,5,0,0,"hai","Trà sữa thì bao nhiêu… thôi bác không hỏi nữa!"],["Dạ cháu sống ổn với số tiền kiếm được ạ, cảm ơn bác quan tâm",5,5,0,5,"kheo","Ừ, ổn là được."],["Dạ 50 triệu ạ",-5,0,-15,20,"phet","Thế cho bác vay 20 triệu sửa nhà nhé!"]]],
+[1,null,"co","Có người yêu chưa? Bao giờ dẫn về ra mắt cả họ?",[["Dạ cháu đang có nhiều người theo đuổi nên còn phân vân ạ",0,5,0,10,"hai","Ối giời, kén vừa thôi!"],["Dạ thế em Bống nhà cô có chưa ạ?",5,-10,0,5,"thang","…À cô đi xem nồi canh."],["Dạ cháu ra rót nước cho các bác ạ",5,0,0,-5,"ne","(nói với theo) Rót nước thì vẫn phải cưới nhé!"]]],
+[1,null,"ba","Bà lì xì cháu này. Thế cháu đã mừng tuổi ông bà chưa?",[["Dạ cháu mừng tuổi bà 1 triệu ạ",0,20,-25,10,"kheo","Cháu bà giỏi quá! (bà kể với cả xóm)"],["Dạ cháu mừng tuổi bà 200k kèm một cái ôm thật chặt",5,10,-8,0,"hai","Ôm thì bà nhận, tiền bà cũng nhận!"],["Dạ cháu chuyển khoản sau ạ",0,-10,0,-5,"ne","Bà không có cái app đấy đâu cháu."]]],
+[1,null,"chu","Đứa nhà bác Hai được học bổng đi Úc rồi đấy. Còn cháu năm nay làm được gì?",[["Dạ giỏi thật ạ, cháu chúc mừng bạn",5,5,0,-5,"kheo","Ừ, học hỏi người ta vào."],["Dạ cháu được 'học bổng' ở lại chăm ông bà ạ",5,10,0,5,"hai","Hahaha, láu cá!"],["Dạ thế con chú năm nay làm được gì ạ?",10,-15,0,10,"thang","…Ăn đi, ăn đi, nguội hết rồi."]]],
+[1,null,"tre","Anh/chị ơi, lì xì! Lì xì! (5 đứa xếp hàng, mắt long lanh)",[["Phát mỗi đứa một bao 50k",0,10,-15,5,"kheo","Con cảm ơn ạ!!! (cúi chào đồng loạt)"],["Phát mỗi đứa một bao… kẹo",5,-5,0,-5,"hai","(nhìn nhau thất vọng) …Dạ con cảm ơn."],["Trốn vào nhà vệ sinh 15 phút",5,-5,0,-10,"ne","(vẫn đứng chờ ngoài cửa, đông hơn)"]]],
+[2,null,"cau","Uống với cậu một ly! Không uống là không coi cậu ra gì!",[["Dạ cháu lái xe, cháu xin cạn bằng nước ngọt ạ",5,5,0,0,"kheo","Ừ, an toàn là trên hết!"],["Một ly thôi ạ… (8 ly sau)",-20,15,0,-5,"nhau","Đấy! Thế mới là cháu cậu! Ly nữa!"],["Dạ cháu kiêng rượu theo lời bác sĩ ạ",5,0,0,0,"ne","Bác sĩ nào? Gọi đây cậu nói chuyện!"]]],
+[2,null,"mo","Sao dạo này béo thế? À không, sao gầy thế? Ăn thêm bát nữa!",[["Dạ tại Tết nhà mình nấu ngon quá ạ",5,10,0,0,"kheo","Thế ăn thêm miếng thịt mỡ nữa!"],["Dạ cháu đang giảm cân ạ",-5,-5,0,0,"thang","Giảm gì, Tết phải ăn! (gắp 3 miếng vào bát)"],["Dạ mợ dạo này trẻ ra nhiều quá ạ!",5,15,0,0,"hai","Thật à? Ôi cái đứa này dẻo miệng!"]]],
+[2,null,"chu","Giá vàng với đất năm nay lên ghê. Cháu có chơi coin không? Chú nghe bảo lời lắm!",[["Dạ cháu không rành, chú hỏi chuyên gia ạ",5,0,0,0,"ne","Chuyên gia toàn nói dối! Chú tự tìm hiểu."],["Chú ơi đừng vay tiền mà mua nhé, rủi ro lắm",0,5,0,5,"thang","Ừ… thế chú bán bớt vậy. (chú đã mua rồi)"],["Dạ cháu all-in rồi chú ạ, giờ cháu ăn mì tôm",10,0,-5,-5,"hai","Hahaha, thế mà cũng gọi là đầu tư!"]]],
+[2,null,"cau","Ngoại bảo năm nay cả nhà chụp ảnh gia đình. Cháu đứng giữa nhé!",[["Dạ cháu đứng giữa, cười tươi nhất ạ",5,10,0,5,"kheo","Đẹp! In ra treo phòng khách!"],["Dạ cháu cầm máy chụp cho mọi người ạ",5,5,0,-5,"ne","Thế là năm nay lại không có mặt trong ảnh!"],["Cháu xin chỉnh màu, thêm filter rồi đăng Facebook",0,0,0,10,"hai","Đăng thì tag cậu vào, nhớ chưa!"]]],
+[3,null,"lop","Họp lớp! Đứa nào chưa cưới thì trả tiền cả bàn nhé!",[["Tớ cưới… deadline rồi, tính không?",5,0,0,0,"hai","Không tính! Chuyển khoản nhé!"],["Chia đều đi mọi người ơi",0,5,-10,0,"kheo","Ừ công bằng! (đứa giàu nhất lớp vẫn bị chia đều)"],["Tớ bận, hẹn năm sau",5,-10,0,-5,"ne","Năm ngoái cũng hẹn năm sau!"]]],
+[3,null,"xom","Ra Giêng định làm gì? Có nhảy việc không? Bên con tôi đang tuyển đấy.",[["Dạ cháu đang tính ạ",0,0,0,0,"ne","Tính từ năm ngoái rồi!"],["Dạ bên đấy lương bao nhiêu ạ?",5,-5,0,5,"thang","À… cái đấy phải hỏi con tôi."],["Dạ năm Đinh Mùi cháu quyết bứt phá ạ",5,10,0,5,"kheo","Ừ, tuổi trẻ phải thế!"]]],
+[3,null,"me","Mùng 3 rồi, mang quà đi Tết thầy cô cũ đi con. Hồi đấy thầy thương con lắm.",[["Dạ con đi, mang giỏ quà to nhất ạ",5,10,-15,10,"kheo","Thầy chắc vui lắm! (thầy hỏi: giờ em làm gì?)"],["Dạ con nhắn tin chúc Tết thầy rồi ạ",5,-5,0,0,"ne","Nhắn tin thì sao bằng đến tận nhà!"],["Mẹ ơi thầy chuyển trường 5 năm rồi",5,0,0,0,"thang","Thế à? …Thế thì đi Tết cô chủ nhiệm!"]]],
+[1,null,"bac","Đi làm mấy năm rồi, đã mua được nhà chưa? Con bác Ba mua chung cư rồi đấy.",[["Dạ cháu đang ở nhà… của chủ trọ ạ",5,5,0,-5,"hai","Hahaha, thế cũng là có nhà!"],["Dạ cháu đang tích lũy, bác có mảnh đất nào bán rẻ không ạ?",5,0,0,5,"thang","À… cái đấy bác phải hỏi bác gái."],["Dạ sắp rồi ạ, cháu đang xem căn view hồ",-5,0,0,15,"phet","Thế tân gia nhớ mời cả họ nhé!"]]],
+[2,null,"mo","Năm nay biếu bố mẹ bao nhiêu? Con mợ biếu hẳn một chỉ vàng đấy.",[["Dạ cháu biếu bố mẹ chuyến du lịch đầu xuân ạ",5,10,-15,10,"kheo","Ối, thế thì bố mẹ cháu sướng nhất họ!"],["Dạ biếu bao nhiêu là chuyện nhà cháu ạ",5,-10,0,5,"thang","Ừ thì… mợ hỏi thăm thôi mà."],["Dạ cháu biếu bố mẹ đứa con ngoan ạ",10,5,0,-5,"hai","Ngoan thì ngoan, vàng vẫn hơn!"]]],
+[3,null,"ong","Sao không về quê làm cho gần bố mẹ? Ở quê giờ cũng phát triển lắm.",[["Dạ cháu đang tính, vài năm nữa cháu về ạ",5,10,0,0,"kheo","Ừ, ông chờ được."],["Dạ việc của cháu ở quê chưa có ạ",0,0,0,5,"thang","Thế thì mở công ty ở quê!"],["Dạ cháu làm online, ở đâu cũng là ở quê ạ",5,5,0,0,"hai","Online là ở đâu? Có xa không?"]]],
+// ===== theo vai =====
+[0,"sv","me","Tiền lì xì năm nay đưa mẹ giữ hộ nhé, mẹ cất cho.",[["Dạ mẹ giữ ạ (lần thứ 20 trong đời)",5,10,-20,0,"kheo","Ngoan. (tiền bay về túi mẹ)"],["Mẹ ơi con lớn rồi, con tự giữ",0,-5,5,5,"thang","Lớn rồi thì tự đóng học phí nhé!"],["Con giữ một nửa, mẹ giữ một nửa",5,5,-10,0,"hai","Thương lượng giỏi đấy, ra trường đi làm sale đi!"]]],
+[1,"sv","chu","Học ngành gì? Ra trường có xin được việc không?",[["Dạ ngành… (giải thích 10 phút, chú vẫn không hiểu)",-10,5,0,0,"thang","Thế tóm lại là làm gì?"],["Dạ ngành của tương lai ạ, AI chưa thay được",5,0,0,10,"hai","AI là cái gì? Có vào nhà nước được không?"],["Dạ cháu xin phép kể sau, cháu đi lấy thêm bánh ạ",5,0,0,-5,"ne","Ừ, lấy cho chú miếng giò luôn!"]]],
+[2,"sv","mo","Điểm kỳ này bao nhiêu? Có học bổng không?",[["Dạ GPA 3.6 ạ",0,10,0,15,"kheo","Giỏi! (rồi kể con mợ được 3.9)"],["Dạ điểm là chuyện riêng tư ạ",5,-10,0,5,"thang","Riêng tư gì, mợ hỏi thăm thôi mà!"],["Dạ cháu qua hết môn ạ (qua… sát nút)",5,0,0,-5,"hai","Qua là được, ngày xưa mợ còn…"]]],
+[3,"sv","anh","Cho anh mượn tiền lì xì của em đi, ra Giêng anh trả.",[["Dạ anh cần bao nhiêu ạ?",0,10,-20,5,"kheo","Không nhiều đâu, em cứ đưa hết đây!"],["Em đang giữ hộ mẹ rồi anh ạ",5,0,0,0,"ne","Mẹ em giữ thì anh chịu…"],["Anh ơi xe 7 chỗ mà mượn tiền sinh viên?",5,-10,0,10,"thang","…Ừ thì xe trả góp mà em!"]]],
+[0,"dl","bac","Thưởng Tết được mấy tháng lương?",[["Dạ được tháng 13 và một giỏ quà ạ",5,5,0,5,"kheo","Ừ, công ty có tâm đấy!"],["Dạ thưởng bằng… lời chúc của sếp ạ",10,5,0,-10,"hai","Hahaha, sếp tiết kiệm nhỉ!"],["Dạ 3 tháng ạ",-5,0,-10,15,"phet","Thế lì xì cả họ cho to vào nhé!"]]],
+[1,"dl","co","Công ty cháu tên gì? Cô chưa nghe bao giờ, có to không?",[["Dạ công ty to lắm, to nhất tầng ạ",5,5,0,0,"hai","Ừ, tầng to là được!"],["Dạ startup ạ, đang lên ạ",-5,0,0,5,"thang","Startup là sắp phá sản phải không?"],["Dạ công ty làm cho đối tác nước ngoài ạ",0,5,0,10,"kheo","À nước ngoài! Thế có được đi Tây không?"]]],
+[2,"dl","cau","Sao không thi công chức? Ổn định, có lương hưu!",[["Dạ cháu đang tích lũy kinh nghiệm trước ạ",5,5,0,5,"kheo","Ừ, nhưng nhớ là vẫn nên thi nhé!"],["Dạ cháu thích làm tư nhân ạ",0,-5,0,5,"thang","Tư nhân bấp bênh lắm cháu ơi!"],["Dạ để cháu hỏi AI xem nó khuyên gì ạ",5,0,0,0,"hai","AI là đứa nào? Bạn cháu à?"]]],
+[3,"dl","me","Lì xì sếp với con sếp bao nhiêu thì vừa hả con?",[["Con mừng tuổi con sếp 200k là vừa ạ",0,5,-10,5,"kheo","Ừ, có đi có lại!"],["Sếp chưa lì xì con thì con chưa lì xì",5,0,0,0,"thang","Tính toán thế thì bao giờ lên chức!"],["Con chúc Tết sếp bằng một tin nhắn thật dài",5,0,0,-5,"ne","Tin nhắn thì sếp đọc xong là quên!"]]],
+[0,"dt","ba","Năm nay ba mươi mấy rồi? Bà chỉ mong được bế chắt thôi.",[["Dạ bà khỏe mạnh sống lâu thì kiểu gì cũng bế ạ",10,15,0,0,"kheo","Ừ, bà cố! (bà cười móm mém)"],["Dạ cháu đang có vài vấn đề khó nói, cháu cũng khổ tâm lắm",0,5,0,0,"ne","Thôi thôi bà không hỏi nữa, tội cháu bà!"],["Dạ cháu nuôi mèo rồi bà ạ, mèo cũng là chắt",5,-5,0,5,"hai","Mèo thì làm sao mà gọi bà được!"]]],
+[1,"dt","co","Cô giới thiệu cho một mối, ngân hàng, có nhà, mùng 4 gặp nhé!",[["Dạ cháu cảm ơn cô, cháu gặp thử ạ",-5,15,0,0,"kheo","Đấy! Cô gửi Zalo luôn đây!"],["Dạ cháu có người rồi ạ (chưa có)",5,0,0,10,"phet","Thế à? Mùng 4 dẫn về luôn!"],["Dạ mùng 4 cháu bận đi chùa cầu duyên ạ",5,5,0,-5,"hai","Cầu thì cầu, gặp thì vẫn phải gặp!"]]],
+[2,"dt","mo","Kén vừa thôi! Ngày xưa tuổi này mợ có hai đứa rồi.",[["Dạ ngày xưa khác, giờ cháu kén cho chắc ạ",5,0,0,10,"thang","Chắc thì cũng phải có người mà chắc chứ!"],["Dạ mợ dạy cháu bí quyết đi ạ",5,10,0,0,"kheo","(mợ kể chuyện tình 45 phút)"],["Dạ cháu kén chứ không ế ạ",5,-5,0,10,"hai","Kén với ế khác gì nhau?"]]],
+[3,"dt","bac","Đông lạnh trứng chưa? Bác đọc báo thấy bảo người ta làm thế đấy.",[["Dạ bác đọc báo nhiều quá ạ",5,-10,0,5,"thang","Báo là kiến thức!"],["Dạ cháu sẽ tìm hiểu thêm ạ",0,5,0,0,"ne","Ừ, tìm hiểu nhanh lên!"],["Dạ trong tủ cháu chỉ có trứng gà luộc ạ",10,5,0,0,"hai","Hahaha… cái đứa này!"]]],
+[0,"td","me","Con làm online ở nhà cả ngày, có đi làm thật không đấy?",[["Dạ con mở máy cho mẹ xem đơn hàng ạ",5,10,0,10,"kheo","Ối, cũng nhiều đấy nhỉ!"],["Dạ có ạ, con làm lúc mọi người ngủ",-5,5,0,0,"ne","Thảo nào mắt thâm thế!"],["Con là CEO của chính con, mẹ ạ",5,-5,0,10,"hai","CEO mà ngủ trưa đến 2 giờ chiều?"]]],
+[1,"td","bac","Làm TikTok, YouTube có phải nghề đàng hoàng không? Có lương hưu không?",[["Dạ có thu nhập đều, cháu đóng bảo hiểm tự nguyện ạ",5,10,0,10,"kheo","À thế thì được!"],["Dạ nghề này mới, bác chưa quen thôi ạ",0,-5,0,5,"thang","Mới thì lại càng không chắc!"],["Dạ bác follow kênh cháu đi, bác sẽ hiểu",5,5,0,0,"hai","Follow là cái gì? Bấm vào đâu?"]]],
+[2,"td","chu","Cháu rành mạng thế, tư vấn chú đầu tư cái gì giàu nhanh đi!",[["Dạ đầu tư cho sức khỏe ạ, lãi suất cao nhất",5,10,0,0,"kheo","Ừ, câu này chuẩn!"],["Dạ giàu nhanh thường là lừa đảo đấy chú",0,0,0,10,"thang","Thế à… thế cái nhóm Zalo chú vừa vào?"],["Dạ để cháu lên livestream hỏi hộ chú ạ",5,5,0,0,"hai","Livestream thì nhớ đừng quay mặt chú!"]]],
+[3,"td","anh","Làm tự do thì rảnh nhỉ? Thiết kế hộ anh cái logo, anh em với nhau mà!",[["Dạ được ạ, em làm tặng anh lấy may đầu năm",0,15,0,0,"kheo","Đấy, anh em là phải thế! (sửa 17 lần)"],["Dạ em báo giá anh nhé, giá người nhà",5,-5,10,5,"thang","Người nhà mà cũng tính tiền à?"],["Dạ em đang kín lịch đến rằm tháng Giêng ạ",5,0,0,5,"ne","Thế rằm anh nhắn lại!"]]]
 ];
-const DH=[
- [26,"🏆 Cao thủ võ lâm ngày Tết","Họ hàng hỏi gì cũng đỡ được, còn được dúi thêm bánh chưng mang về."],
- [20,"😎 Ngoại giao viên của dòng họ","Đáp khéo, giữ hòa khí, năm sau vẫn được mời ngồi mâm trên."],
- [14,"😅 Sống sót có thương tích","Trụ được, nhưng tối về phải nằm im 30 phút để hồi máu."],
- [8,"🫠 Bị hỏi tới tấp","Năm sau nên tập trước bài 'Dạ, cháu đang tính ạ'."],
- [-99,"🏃 Chạy ra sân nghe điện thoại","Chiến thuật cổ điển nhưng hiệu quả. Không ai trách bạn cả."]];
-let bt,kheo,vong,ds,soCau=6;
+const BOSS=["bac","Thôi cháu lên đường. Nhưng nhớ: Tết sang năm phải có người yêu, có nhà, có xe, có thêm đứa nữa nhé! Bác đợi đấy!",[["Dạ sang năm cháu dẫn cả nhà người yêu về ăn Tết ạ",5,15,0,10,"phet","Đấy! Bác đợi! (bác ghi vào sổ)"],["Dạ cháu sẽ cố gắng, bác giữ gìn sức khỏe ạ",10,10,0,0,"kheo","Ừ, sức khỏe là nhất!"],["Dạ, bác cũng thế nhé ạ",0,-15,0,15,"thang","…Cái đứa này!"]]];
+const SUKIEN=[
+["🧧","Bà ngoại dúi thêm phong bao: 'Đừng nói với ai nhé!'",{vi:15,hk:5}],
+["🚌","Kẹt xe 6 tiếng trên đường về quê. Đến nhà thì hết sạch kiên nhẫn.",{bt:-10}],
+["🎆","Pháo hoa giao thừa đẹp quá, tự nhiên thấy năm nay sẽ ổn.",{bt:15}],
+["📱","Nhóm chat gia đình gửi 47 ảnh chúc Tết hoa lá. Bạn thả tim tất cả.",{hk:10,bt:-5}],
+["🏍️","Mẹ sai chạy đi mua đá, mua lá dong, mua thêm hành. Ba lần.",{bt:-10,hk:10}],
+["🍊","Xông đất nhà bác, bác bảo 'tuổi cháu hợp'. Được lì xì to.",{vi:10,sd:5}],
+["💸","Cuối buổi đếm lại: lì xì phát ra nhiều hơn nhận về.",{vi:-10}],
+["😴","Ngủ trưa mùng 1 được 3 tiếng. Hồi phục hoàn toàn.",{bt:15}]
+];
+const KET={
+ bao:["🌪️","Bão Tố Mâm Cỗ","Bình tĩnh về 0. Bạn đã nói ra điều cả họ không muốn nghe. Năm sau chắc được ngồi mâm riêng."],
+ gach:["📜","Bị Cả Họ Nhắc Tên","Hòa khí về 0. Tên bạn sẽ được nhắc trong mọi bữa cỗ đến Tết năm sau."],
+ chay:["🔥","Ví Cháy Mùng 3","Ví tiền về 0. Ra Giêng ăn mì tôm đợi lương, nhưng ít ra cả họ đều vui."],
+ hien:["🚪","Kẻ Trốn Ra Hiên","Sĩ diện về 0. Bạn ra hiên 'nghe điện thoại' và không quay lại nữa."],
+ ngoaigiao:["🏆","Bậc Thầy Ngoại Giao","Mọi chỉ số đều đẹp. Họ hàng hỏi gì cũng đỡ được, còn được dúi thêm bánh chưng."],
+ conng:["🌟","Con Nhà Người Ta","Sĩ diện ngút trời, ví vẫn dày. Năm sau bạn sẽ là đứa bị đem ra so sánh."],
+ lang:["🌀","Thánh Lảng Tránh","Bạn né được hết. Không ai biết lương, người yêu hay kế hoạch của bạn. Huyền thoại."],
+ noiloan:["🔥","Kẻ Nổi Loạn Có Tâm","Bạn nói thẳng, cả họ đơ vài lần, nhưng cuối cùng vẫn thương bạn."],
+ hai:["🎤","Diễn Viên Hài Của Dòng Họ","Câu nào cũng biến thành chuyện cười. Họ hàng quên luôn câu hỏi ban đầu."],
+ nhau:["🍶","Huyền Thoại Bàn Nhậu","Cậu, chú, bác đều công nhận bạn là người nhà thật sự. Gan thì không đồng ý."],
+ ngoan:["😇","Ngoan Quá Hóa Rối","Ai nhờ gì cũng nhận, ai hỏi gì cũng dạ. Họ hàng quý, nhưng bạn mệt rã rời."],
+ thuongtich:["🩹","Sống Sót Có Thương Tích","Bạn trụ tới mùng 3, hơi trầy xước. Tối về nằm im 30 phút để hồi máu."],
+ phet:["🎈","Vua Nổ Ngày Tết","Lương 50 triệu, người yêu xếp hàng, thưởng 3 tháng. Sang năm phải… làm thật."]
+};
+const THU_TU=["ngoaigiao","conng","lang","noiloan","hai","nhau","ngoan","phet","thuongtich","bao","gach","chay","hien"];
+// 13 danh hiệu (12 + 1 ẩn)
+
+// ===== TRẠNG THÁI =====
+let st,vaiChon="dl",hang,chiSo,nhan,cauKho,am=true,soCau;
 const $=id=>document.getElementById(id);
+// Chế độ thương hiệu (demo bán cho shop): ?b=Tên&vc=MÃ&vt=Nội dung ưu đãi
+const QS=new URLSearchParams(location.search);
+const BR=QS.get('b')?{ten:QS.get('b').slice(0,30),vc:(QS.get('vc')||'').slice(0,20),vt:(QS.get('vt')||'').slice(0,60)}:null;
+const luu=()=>JSON.parse(localStorage.getItem("sstet_bst")||"{}");
 function tron(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
-function batDau(){bt=10;kheo=0;vong=0;ds=tron(CAU).slice(0,soCau);$('mo').classList.add('an');$('het').classList.add('an');$('choi').classList.remove('an');hienCau()}
-function capThanh(){$('bt').style.width=Math.max(0,bt*10)+'%';$('vBT').classList.toggle('do',bt<=4);$('kheo').style.width=Math.min(100,kheo/18*100)+'%'}
-function hienCau(){
-  capThanh();
-  if(vong>=ds.length||bt<=0)return ketThuc();
-  const [q,da]=ds[vong];const h=HO[(Math.random()*HO.length)|0];
-  $('vong').textContent=`Câu ${vong+1}/${ds.length}`;$('mat').textContent=h[0];$('ai').textContent=h[1]+' hỏi:';$('hoi').textContent=q;
-  $('phanhoi').classList.add('an');
-  $('cacdap').innerHTML='';
-  tron(da).forEach(d=>{const b=document.createElement('button');b.className='dap';b.textContent=d[0];b.onclick=()=>chon(d);$('cacdap').appendChild(b)});
+function hinhAi(k,cl){return IMG[k]?`<img src="${IMG[k]}" alt="" class="${cl||''}">`:AI[k][0]}
+
+// ===== ÂM THANH (WebAudio, không cần file) =====
+let ac;function tieng(loai){if(!am)return;try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(ac.destination);const t=ac.currentTime;const m={tot:[660,880],xau:[300,180],bam:[520,520],ket:[523,1046]}[loai];o.frequency.setValueAtTime(m[0],t);o.frequency.exponentialRampToValueAtTime(m[1],t+.18);o.type=loai=="xau"?"sawtooth":"triangle";g.gain.setValueAtTime(.08,t);g.gain.exponentialRampToValueAtTime(.001,t+.25);o.start(t);o.stop(t+.26)}catch(e){}}
+function batTat(){am=!am;$('nutAm').textContent=am?'🔊':'🔇'}
+
+// ===== MỞ ĐẦU =====
+function veMo(){
+  $('mKet').classList.add('an');$('mChoi').classList.add('an');$('mMo').classList.remove('an');
+  $('dsVai').innerHTML=Object.entries(VAI).map(([k,v])=>`<button class="${k==vaiChon?'chon':''}" onclick="chonVai('${k}')"><div class="hinh">${IMG['v_'+k]?`<img src="${IMG['v_'+k]}" alt="">`:v.hinh}</div>${v.ten}<small>${v.mo}</small></button>`).join('');
+  $('soMo').textContent=Object.keys(luu()).length;
+  if(BR){$('brMo').innerHTML=`🎁 <b>${esc(BR.ten)}</b> lì xì bạn: chơi xong nhận ưu đãi${BR.vt?' '+esc(BR.vt):''}`;$('brMo').classList.remove('an')}
+  const p=new URLSearchParams(location.search);
+  if(p.get('k')&&KET[p.get('k')]){const k=KET[p.get('k')];$('loiThach').innerHTML=`<div class="thach">⚔️ ${p.get('n')?esc(p.get('n').slice(0,18)):'Bạn của bạn'} vừa đạt <b>${k[0]} ${k[1]}</b> với ${+p.get('d')||0} điểm.<br>Bạn dám vượt mặt không?</div>`}
+  window.scrollTo(0,0);
 }
-function chon(d){
-  bt=Math.min(10,bt+d[1]);kheo+=d[2];capThanh();
-  if(d[1]<0){$('choi').classList.remove('rung');void $('choi').offsetWidth;$('choi').classList.add('rung')}
-  $('cacdap').innerHTML='';
-  const p=$('phanhoi');p.className='ketqua-dap';
-  p.innerHTML=`<b>${$('ai').textContent.replace(' hỏi:','')}:</b> “${d[3]}”<br><small>${d[1]>0?'😌 +'+d[1]+' bình tĩnh':d[1]<0?'😵 '+d[1]+' bình tĩnh':'😐 không đổi'} · 😎 +${d[2]} khéo</small>`;
-  const n=document.createElement('button');n.className='nut';n.textContent=vong+1>=ds.length||bt<=0?'Xem kết quả 🎉':'Câu tiếp theo ▶';n.onclick=()=>{vong++;hienCau()};p.appendChild(n);
+function chonVai(k){vaiChon=k;tieng('bam');veMo()}
+
+// ===== CHƠI =====
+function batDau(){
+  tieng('bam');
+  chiSo={...VAI[vaiChon].cs};nhan={kheo:0,ne:0,thang:0,hai:0,phet:0,nhau:0};cauKho=null;
+  hang=[];
+  CHUONG.forEach((c,i)=>{
+    const rieng=tron(THE.filter(t=>t[0]==i&&t[1]==vaiChon));
+    const chung=tron(THE.filter(t=>t[0]==i&&!t[1]));
+    const lay=rieng.slice(0,1).concat(chung).slice(0,c[1]);
+    hang.push({loai:'chuong',i});
+    tron(lay).forEach(t=>hang.push({loai:'the',t,i}));
+    if(i<3)hang.push({loai:'sk',i});
+  });
+  hang.push({loai:'the',t:[3,null].concat(BOSS),i:3,boss:true});
+  soCau=hang.filter(h=>h.loai=='the').length;
+  st=0;
+  $('mMo').classList.add('an');$('mKet').classList.add('an');$('mChoi').classList.remove('an');
+  capChiSo();tiep();
 }
-function ketThuc(){
-  const diem=kheo+bt;const d=DH.find(x=>diem>=x[0]);
-  $('choi').classList.add('an');$('het').classList.remove('an');
-  $('danhhieu').textContent=d[1];$('mota').textContent=d[2];
-  veThe(d,diem);
+function capChiSo(doi){
+  for(const k of ['bt','hk','vi','sd']){
+    const v=Math.max(0,Math.min(100,chiSo[k]));chiSo[k]=v;
+    const el=$('c_'+k);el.querySelector('i').style.width=v+'%';el.querySelector('.vach').classList.toggle('thap',v<=25);
+    if(doi&&doi[k]){el.classList.remove('nhay');void el.offsetWidth;el.classList.add('nhay')}
+  }
 }
-function veThe(d,diem){
-  const c=$('anh'),x=c.getContext('2d');
+function daCau(){return hang.slice(0,st).filter(h=>h.loai=='the').length}
+function tiep(){
+  for(const k of ['bt','hk','vi','sd'])if(chiSo[k]<=0)return ketThuc({bt:'bao',hk:'gach',vi:'chay',sd:'hien'}[k]);
+  if(st>=hang.length)return ketThuc();
+  const h=hang[st++];
+  $('tenChuong').textContent=CHUONG[h.i][0];$('dem').textContent=`Câu ${Math.max(1,daCau())}/${soCau}`;
+  const v=$('vung');v.className='vao';void v.offsetWidth;
+  if(h.loai=='chuong'){
+    v.innerHTML=`<div class="sukien"><div class="to">${CHUONG[h.i][0].split(' ')[0]}</div><h2>${CHUONG[h.i][0].slice(3)}</h2><p class="phu">${['Về đến cổng đã nghe mùi bánh chưng. Và mùi… câu hỏi.','Mùng 1 đi Tết nhà nội. Cả họ đông đủ, mâm cỗ đã dọn.','Mùng 2 về nhà ngoại. Rượu đã rót, cậu đã ngồi chờ.','Mùng 3 Tết thầy, gặp bạn. Trận cuối trước khi lên đường.'][h.i]}</p><button class="nut" onclick="tiep()">Vào thôi ▶</button></div>`;
+    return;
+  }
+  if(h.loai=='sk'){
+    const s=SUKIEN[(Math.random()*SUKIEN.length)|0];
+    for(const k in s[2])chiSo[k]+=s[2][k];capChiSo(s[2]);
+    v.innerHTML=`<div class="sukien"><div class="to">${s[0]}</div><p style="font-weight:600">${s[1]}</p><div class="doi" style="justify-content:center">${hienDoi(s[2])}</div><button class="nut" onclick="tiep()">Đi tiếp ▶</button></div>`;
+    tieng(Object.values(s[2]).reduce((a,b)=>a+b,0)>=0?'tot':'xau');
+    return;
+  }
+  const [,,ai,q,da]=h.t;
+  v.innerHTML=`<div class="nguoi"><div class="mat">${hinhAi(ai)}</div><div style="flex:1"><div class="ten-ai">${h.boss?'👑 Trận cuối · ':''}${AI[ai][1]}</div><div class="bong">${q}</div></div></div><div id="dsDap"></div>`;
+  tron(da).forEach(d=>{const b=document.createElement('button');b.className='dap';b.textContent=d[0];b.onclick=()=>chon(h,d);$('dsDap').appendChild(b)});
+}
+function hienDoi(d){const ten={bt:'😌 Bình tĩnh',hk:'🤝 Hòa khí',vi:'👛 Ví',sd:'😎 Sĩ diện'};return Object.entries(d).filter(([k,x])=>x).map(([k,x])=>`<span class="${x<0?'tru':'cong'}">${ten[k]} ${x>0?'+':''}${x}</span>`).join('')}
+function chon(h,d){
+  const doi={bt:d[1],hk:d[2],vi:d[3],sd:d[4]};
+  for(const k in doi)chiSo[k]+=doi[k];
+  nhan[d[5]]=(nhan[d[5]]||0)+1;
+  const tong=d[1]+d[2]+d[3]+d[4];
+  if(!cauKho||tong<cauKho[1])cauKho=[h.t[3],tong];
+  capChiSo(doi);
+  if(tong<0){tieng('xau');const c=$('mChoi');c.classList.remove('rung');void c.offsetWidth;c.classList.add('rung');navigator.vibrate&&navigator.vibrate(60)}else tieng('tot');
+  $('dsDap').innerHTML=`<div class="phanhoi"><div style="opacity:.75;font-size:.9rem">Bạn: “${d[0]}”</div><b>${AI[h.t[2]][1]}:</b> “${d[6]}”<div class="doi">${hienDoi(doi)}</div><button class="nut" onclick="tiep()">${st>=hang.length?'Xem kết quả 🎉':'Tiếp ▶'}</button></div>`;
+}
+function ketThuc(chet){
+  let k=chet;
+  if(!k){
+    const c=chiSo,n=nhan;
+    if(Math.min(c.bt,c.hk,c.vi,c.sd)>=55)k='ngoaigiao';
+    else if(n.nhau>=1&&c.hk>=60&&c.bt<45)k='nhau';
+    else if(n.phet>=3)k='phet';
+    else if(c.sd>=75&&c.vi>=55)k='conng';
+    else if(n.ne>=5)k='lang';
+    else if(n.thang>=5)k='noiloan';
+    else if(n.hai>=5)k='hai';
+    else if(c.hk>=80&&c.bt<45)k='ngoan';
+    else k='thuongtich';
+  }
+  const kq=KET[k];const diem=Math.round(chiSo.bt+chiSo.hk+chiSo.vi+chiSo.sd+daCau()*10);
+  const b=luu();b[k]=1;localStorage.setItem('sstet_bst',JSON.stringify(b));
+  window._kq={k,diem};
+  tieng('ket');
+  $('mChoi').classList.add('an');$('mKet').classList.remove('an');
+  $('kDanhHieu').textContent=kq[0]+' '+kq[1];$('kMoTa').textContent=kq[2];
+  if(BR){$('brKet').innerHTML=`🧧 <b>${esc(BR.ten)}</b> lì xì bạn vì đã sống sót!<br>${BR.vt?esc(BR.vt)+'<br>':''}${BR.vc?`Mã: <span style="font-size:1.4em;letter-spacing:2px;color:#b91c1c">${esc(BR.vc)}</span>`:''}`;$('brKet').classList.remove('an')}
+  veThe(kq,diem);veBST(k);window.scrollTo(0,0);
+}
+function veBST(moi){
+  const b=luu();$('kSo').textContent=`${Object.keys(b).length}/${THU_TU.length-1}`;
+  $('bst').innerHTML=THU_TU.map(k=>{const m=b[k];const an=k=='phet'&&!m;if(an)return '';return `<div class="${m?'':'khoa'}" style="${k==moi?'border-color:#dc2626;border-style:solid':''}"><b>${m?KET[k][0]:'❔'}</b>${m?KET[k][1]:'Chưa mở'}</div>`}).join('');
+}
+// ===== THẺ KHOE =====
+function veThe(kq,diem){
+  const c=$('anh'),x=c.getContext('2d');const ten=$('tenNC').value.trim();
   const g=x.createLinearGradient(0,0,0,1350);g.addColorStop(0,'#dc2626');g.addColorStop(1,'#7f1d1d');x.fillStyle=g;x.fillRect(0,0,1080,1350);
-  x.fillStyle='rgba(250,204,21,.15)';for(let i=0;i<40;i++){x.beginPath();x.arc(Math.random()*1080,Math.random()*1350,4+Math.random()*10,0,7);x.fill()}
-  x.fillStyle='#fffbeb';rr(x,70,170,940,1010,48);x.fill();x.strokeStyle='#fbbf24';x.lineWidth=10;x.stroke();
-  x.textAlign='center';x.fillStyle='#fde68a';x.font='bold 64px system-ui,sans-serif';x.fillText('SỐNG SÓT NGÀY TẾT 🧧',540,120);
-  x.font='150px system-ui';x.fillText(d[1].split(' ')[0],540,370);
-  x.fillStyle='#b91c1c';x.font='bold 70px system-ui,sans-serif';
-  let y=wrap(x,d[1].split(' ').slice(1).join(' '),540,500,860,84);
-  x.fillStyle='#78350f';x.font='42px system-ui,sans-serif';wrap(x,d[2],540,y+90,820,56);
-  x.fillStyle='#3b0a0a';x.font='bold 46px system-ui,sans-serif';
-  x.fillText(`Trụ được ${Math.min(vong,ds.length)}/${ds.length} câu hỏi của họ hàng`,540,920);
-  x.fillText(`😌 Bình tĩnh còn ${Math.max(0,bt)}/10   😎 Độ khéo ${kheo}`,540,995);
-  x.fillStyle='#92400e';x.font='36px system-ui,sans-serif';x.fillText('Bạn trụ được mấy câu? Chơi thử 👇',540,1110);
-  x.fillStyle='#fde68a';x.font='bold 34px system-ui,sans-serif';x.fillText('wintatwork1204-debug.github.io/lam-nhanh-24h/tet',540,1260);
+  x.fillStyle='rgba(250,204,21,.18)';for(let i=0;i<45;i++){x.beginPath();x.arc(Math.random()*1080,Math.random()*1350,4+Math.random()*10,0,7);x.fill()}
+  x.textAlign='center';x.fillStyle='#fde68a';x.font='bold 58px system-ui,sans-serif';x.fillText('🧧 SỐNG SÓT NGÀY TẾT 2027',540,105);
+  x.fillStyle='#fffbeb';rr(x,60,150,960,1060,48);x.fill();x.strokeStyle='#fbbf24';x.lineWidth=10;x.stroke();
+  x.fillStyle='#92400e';x.font='40px system-ui,sans-serif';x.fillText(`${ten?ten+' · ':''}vai ${VAI[vaiChon].ten}`,540,230);
+  x.font='140px system-ui';x.fillText(kq[0],540,400);
+  x.fillStyle='#b91c1c';x.font='bold 76px system-ui,sans-serif';let y=wrap(x,kq[1],540,510,880,88);
+  x.fillStyle='#78350f';x.font='38px system-ui,sans-serif';y=wrap(x,kq[2],540,y+70,860,52);
+  const cs=[['😌 Bình tĩnh','bt'],['🤝 Hòa khí','hk'],['👛 Ví tiền','vi'],['😎 Sĩ diện','sd']];
+  y=Math.max(y+60,800);
+  cs.forEach(([t,k],i)=>{const yy=y+i*62;x.textAlign='left';x.fillStyle='#3b0a0a';x.font='bold 34px system-ui,sans-serif';x.fillText(t,140,yy+12);x.fillStyle='#fde68a';rr(x,440,yy-14,500,30,15);x.fill();x.fillStyle=chiSo[k]<=25?'#dc2626':'#16a34a';rr(x,440,yy-14,Math.max(30,5*chiSo[k]),30,15);x.fill()});
+  x.textAlign='center';x.fillStyle='#b91c1c';x.font='bold 46px system-ui,sans-serif';x.fillText(`Điểm sống sót: ${diem}`,540,y+300);
+  x.fillStyle='#fde68a';x.font='bold 36px system-ui,sans-serif';x.fillText('Bạn trụ được không? Chơi thử 👇',540,1265);
+  x.font='30px system-ui,sans-serif';x.fillText(BR?`🎁 Quà Tết từ ${BR.ten}`:'wintatwork1204-debug.github.io/lam-nhanh-24h/tet',540,1312);
 }
 function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
-function wrap(x,t,cx,y,mw,lh){let dong='';for(const w of t.split(' ')){const th=dong?dong+' '+w:w;if(x.measureText(th).width>mw&&dong){x.fillText(dong,cx,y);y+=lh;dong=w}else dong=th}x.fillText(dong,cx,y);return y}
+function wrap(x,t,cx,y,mw,lh){let d='';for(const w of t.split(' ')){const th=d?d+' '+w:w;if(x.measureText(th).width>mw&&d){x.fillText(d,cx,y);y+=lh;d=w}else d=th}x.fillText(d,cx,y);return y}
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function taiAnh(){const a=document.createElement('a');a.href=$('anh').toDataURL('image/png');a.download='song-sot-ngay-tet.png';a.click()}
-function chiaSe(){const u=location.href.split('#')[0];const t='Tết này bạn trụ được mấy câu hỏi của họ hàng? 🧧';if(navigator.share)navigator.share({title:t,url:u}).catch(()=>{});else{navigator.clipboard.writeText(t+' '+u);$('nutChia').textContent='✅ Đã chép link, dán gửi bạn bè nhé'}}
+function thachBan(){
+  const ten=$('tenNC').value.trim();const u=location.origin+location.pathname+(BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}`+(ten?`&n=${encodeURIComponent(ten)}`:'');
+  const t=`Mình vừa đạt "${KET[_kq.k][1]}" (${_kq.diem} điểm) trong Sống sót ngày Tết 🧧 Bạn trụ được không?`;
+  if(navigator.share)navigator.share({title:'Sống sót ngày Tết',text:t,url:u}).catch(()=>{});
+  else{navigator.clipboard.writeText(t+' '+u);$('nutThach').textContent='✅ Đã chép lời thách, dán gửi bạn bè nhé'}
+}
+veMo();
 </script>
 </body>
 </html>
