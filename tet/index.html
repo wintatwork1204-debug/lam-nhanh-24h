@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Sống sót ngày Tết: bạn trụ được mấy câu hỏi của họ hàng?</title>
+<meta name="description" content="Game vui 1 phút: Tết về, họ hàng hỏi lương, hỏi người yêu, hỏi bao giờ cưới. Chọn cách đáp, xem bạn được danh hiệu gì rồi khoe thẻ kết quả.">
+<meta property="og:title" content="Sống sót ngày Tết 🧧 Bạn trụ được mấy câu hỏi của họ hàng?">
+<meta property="og:description" content="Game 1 phút. Chơi xong nhận thẻ danh hiệu để khoe.">
+<meta property="og:image" content="https://wintatwork1204-debug.github.io/lam-nhanh-24h/tet/og.png">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#b91c1c;background-image:radial-gradient(circle at 20% 10%,#dc2626 0,transparent 40%),radial-gradient(circle at 80% 90%,#991b1b 0,transparent 45%);color:#3b0a0a;min-height:100vh;display:flex;justify-content:center}
+.khung{width:100%;max-width:480px;padding:16px}
+.the{background:#fffbeb;border-radius:22px;padding:20px;box-shadow:0 8px 0 #7f1d1d,0 12px 30px rgba(0,0,0,.3);border:3px solid #fbbf24;position:relative}
+h1{font-size:1.6rem;margin:.2em 0 .3em;color:#b91c1c;text-align:center;line-height:1.2}
+.phu{text-align:center;color:#92400e;margin:0 0 14px}
+.to{font-size:64px;text-align:center;margin:6px 0}
+button{font:inherit;cursor:pointer;border:0}
+.nut{display:block;width:100%;background:#facc15;color:#7f1d1d;font-weight:800;font-size:1.1rem;padding:14px;border-radius:14px;box-shadow:0 4px 0 #ca8a04;margin-top:12px}
+.nut:active{transform:translateY(3px);box-shadow:0 1px 0 #ca8a04}
+.nut.phu2{background:#fff;border:2px solid #fbbf24;box-shadow:none;font-weight:700}
+.thanh{display:flex;gap:10px;margin-bottom:12px;font-size:.9rem;font-weight:700}
+.thanh>div{flex:1}
+.vach{height:12px;background:#fde68a;border-radius:8px;overflow:hidden;margin-top:4px}
+.vach i{display:block;height:100%;background:#16a34a;transition:width .4s}
+.vach.do i{background:#dc2626}
+.nguoi{display:flex;gap:10px;align-items:center;margin:8px 0}
+.nguoi .mat{font-size:44px}
+.bong{background:#fff;border:2px solid #fcd34d;border-radius:16px;padding:12px 14px;font-size:1.08rem;font-weight:600;position:relative}
+.dap{display:block;width:100%;text-align:left;background:#fff;border:2px solid #fecaca;border-radius:14px;padding:12px 14px;margin-top:10px;font-size:1rem;color:#3b0a0a}
+.dap:hover{border-color:#ef4444;background:#fff1f2}
+.ketqua-dap{background:#ecfdf5;border-radius:14px;padding:12px;margin-top:12px;font-size:.98rem}
+.vong{text-align:right;font-size:.85rem;color:#92400e}
+canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
+.chan{color:#fde68a;text-align:center;font-size:.8rem;margin:14px 0 30px}
+.chan a{color:#fff}
+.an{display:none}
+@keyframes rung{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.rung{animation:rung .3s 2}
+</style>
+</head>
+<body>
+<div class="khung">
+
+<div class="the" id="mo">
+  <div class="to">🧧👵🧓👨‍🦳</div>
+  <h1>Sống sót ngày Tết</h1>
+  <p class="phu">Tết về, họ hàng xúm lại hỏi thăm. Mỗi câu đáp khéo thì giữ được bình tĩnh, đáp hớ thì… bị hỏi tiếp.<br><b>Bạn trụ được mấy câu?</b></p>
+  <button class="nut" onclick="batDau()">Vào nhà nội ăn Tết ▶</button>
+  <p class="phu" style="font-size:.85rem;margin-top:12px">1 phút · không cần đăng nhập · không thu thông tin gì</p>
+</div>
+
+<div class="the an" id="choi">
+  <div class="thanh">
+    <div>😌 Bình tĩnh<div class="vach" id="vBT"><i id="bt"></i></div></div>
+    <div>😎 Độ khéo<div class="vach"><i id="kheo" style="background:#f59e0b"></i></div></div>
+  </div>
+  <div class="vong" id="vong"></div>
+  <div class="nguoi"><div class="mat" id="mat"></div><div><b id="ai"></b></div></div>
+  <div class="bong" id="hoi"></div>
+  <div id="cacdap"></div>
+  <div id="phanhoi" class="an"></div>
+</div>
+
+<div class="the an" id="het">
+  <h1 id="danhhieu"></h1>
+  <p class="phu" id="mota"></p>
+  <canvas id="anh" width="1080" height="1350"></canvas>
+  <button class="nut" onclick="taiAnh()">⬇️ Tải thẻ về để khoe</button>
+  <button class="nut phu2" onclick="chiaSe()" id="nutChia">🔗 Gửi game cho đứa em họ</button>
+  <button class="nut phu2" onclick="batDau()">🔁 Chơi lại (họ hàng đổi câu hỏi)</button>
+</div>
+
+<p class="chan">Game làm cho vui, nhân vật và câu hỏi là hư cấu. <a href="../">Trang của tác giả</a></p>
+</div>
+
+<script>
+const HO=[["👵","Bà nội"],["🧓","Bác cả"],["👩‍🦱","Cô út"],["👨‍🦳","Ông chú bên ngoại"],["👩","Mợ hai"],["🧔","Anh họ hơn 10 tuổi"],["👴","Ông bạn của bố"],["👩‍🦳","Bác gái nhà bên"]];
+// [câu hỏi, [[đáp, đổi bình tĩnh, đổi khéo, họ hàng nói gì], ...]]
+const CAU=[
+["Năm nay lương tháng bao nhiêu rồi cháu?",[["Dạ đủ để năm nay lì xì cho các em ạ 🧧",0,3,"Ôi giỏi quá, thế thì lì xì to vào nhé!"],["Dạ… 50 triệu ạ (nói dối)",-2,1,"Thế cho bác vay 20 triệu sửa nhà!"],["Dạ cháu không tiện nói ạ",-1,0,"Ít thì nói ít, có gì đâu mà giấu!"]]],
+["Có người yêu chưa? Bao giờ dẫn về ra mắt?",[["Dạ đang chờ bác giới thiệu đây ạ 😁",1,3,"Để bác gọi con bé nhà bên sang nhé!"],["Dạ có rồi ạ, ở trong điện thoại",-1,2,"Cái thằng/con này, điện thoại thì ai cưới!"],["Dạ con chưa muốn yêu ạ",-2,0,"Chưa muốn thì đến bao giờ? Tuổi này bác có 2 đứa rồi!"]]],
+["Bao giờ cưới? Bạn cùng lớp con bác bế con rồi đấy!",[["Dạ cháu chờ bác lo hộ tiền cỗ ạ",1,3,"Hahaha, thằng/con này láu cá!"],["Dạ sang năm ạ (năm nào cũng nói vậy)",-1,1,"Năm ngoái cũng bảo sang năm!"],["Dạ cưới làm gì cho mệt ạ",-3,0,"Ối giời ơi, ông bà ơi nghe nó nói gì này!"]]],
+["Sao dạo này béo thế? / Sao gầy thế?",[["Dạ tại Tết nhà mình nấu ngon quá ạ",1,3,"Ừ thì ăn thêm bát nữa đi!"],["Dạ cháu đang giảm cân ạ",-1,1,"Giảm gì, Tết phải ăn! Gắp thêm miếng thịt mỡ!"],["Dạ bác cũng thế mà ạ",-3,0,"…(cả nhà im lặng 3 giây)"]]],
+["Làm ở đâu? Công ty đấy có to không? Nhà nước không?",[["Dạ công ty to lắm, to nhất tầng ạ",1,3,"Ừ, tầng to là được!"],["Dạ cháu làm tự do ạ",-1,1,"Tự do là thất nghiệp à?"],["Dạ cháu làm online ạ",-2,1,"Online là bán hàng đa cấp đúng không?"]]],
+["Học xong chưa? Ra trường bao năm rồi mà chưa có nhà à?",[["Dạ cháu đang ở nhà bố mẹ, tiết kiệm cho bố mẹ vui ạ",1,2,"Thế cũng phải!"],["Dạ đang góp ạ, 30 năm nữa có",0,2,"30 năm nữa thì bác về với ông bà rồi!"],["Dạ giá nhà Hà Nội 100 triệu/m² bác ạ",-1,1,"Thế mới phải chịu khó! Như bác ngày xưa…"]]],
+["Thằng/con nhà bác Tư được học bổng đi Úc đấy, còn cháu?",[["Dạ cháu được học bổng ở lại chăm ông bà ạ",2,3,"Ừ, ở nhà cũng tốt!"],["Dạ giỏi thật ạ, cháu chúc mừng bạn",1,2,"Ừ, phải học hỏi người ta!"],["Dạ thế bác Tư có đi cùng không ạ",-1,1,"Cái gì? Bác không hiểu…"]]],
+["Thế lì xì cho các em chưa?",[["Dạ có ngay ạ, mỗi đứa một bao đỏ 🧧",1,3,"Đấy, người lớn rồi là phải thế!"],["Dạ cháu đang chờ bác lì xì cháu trước ạ",-1,2,"Lớn tướng rồi còn đòi lì xì!"],["Dạ cháu chuyển khoản sau ạ",-1,1,"Chuyển khoản thì không có lộc!"]]],
+["Uống với bác một chén! Không uống là không nể bác!",[["Dạ cháu lái xe, cháu xin cạn bằng nước ngọt ạ 🥤",1,3,"Ừ, an toàn là trên hết!"],["Dạ một chén thôi ạ… (5 chén sau)",-2,1,"Đấy, thế mới là cháu bác!"],["Dạ cháu không uống được ạ",-1,0,"Thanh niên gì mà không uống được!"]]],
+["Đẻ đứa thứ hai đi, một đứa buồn lắm!",[["Dạ bác nuôi giúp cháu một đứa nhé ạ",1,3,"Hahaha, láu thế!"],["Dạ để cháu bàn thêm ạ",0,1,"Bàn gì, cứ đẻ đi, trời sinh voi sinh cỏ!"],["Dạ nuôi một đứa đã hết lương ạ",-1,1,"Ngày xưa bác nuôi 5 đứa có sao đâu!"]]],
+["Sao không về quê làm cho gần nhà?",[["Dạ cháu ở xa để Tết về quý hơn ạ",1,3,"Ừ, nói nghe cũng phải!"],["Dạ quê mình ít việc lắm ạ",-1,1,"Ít việc thì về mở quán!"],["Dạ cháu đang tính ạ",0,1,"Tính từ năm ngoái rồi!"]]],
+["Cháu chơi điện thoại suốt thế, ra đây phụ bác gói bánh!",[["Dạ vâng ạ, bác dạy cháu gói nhé 🍃",2,3,"Ngoan quá, gói cái này cho cháu mang về!"],["Dạ cháu đang làm việc ạ",-1,1,"Tết mà còn làm việc gì!"],["Dạ 5 phút nữa ạ (1 tiếng sau)",-2,0,"Bánh chín rồi đấy con ạ!"]]]
+];
+const DH=[
+ [26,"🏆 Cao thủ võ lâm ngày Tết","Họ hàng hỏi gì cũng đỡ được, còn được dúi thêm bánh chưng mang về."],
+ [20,"😎 Ngoại giao viên của dòng họ","Đáp khéo, giữ hòa khí, năm sau vẫn được mời ngồi mâm trên."],
+ [14,"😅 Sống sót có thương tích","Trụ được, nhưng tối về phải nằm im 30 phút để hồi máu."],
+ [8,"🫠 Bị hỏi tới tấp","Năm sau nên tập trước bài 'Dạ, cháu đang tính ạ'."],
+ [-99,"🏃 Chạy ra sân nghe điện thoại","Chiến thuật cổ điển nhưng hiệu quả. Không ai trách bạn cả."]];
+let bt,kheo,vong,ds,soCau=6;
+const $=id=>document.getElementById(id);
+function tron(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+function batDau(){bt=10;kheo=0;vong=0;ds=tron(CAU).slice(0,soCau);$('mo').classList.add('an');$('het').classList.add('an');$('choi').classList.remove('an');hienCau()}
+function capThanh(){$('bt').style.width=Math.max(0,bt*10)+'%';$('vBT').classList.toggle('do',bt<=4);$('kheo').style.width=Math.min(100,kheo/18*100)+'%'}
+function hienCau(){
+  capThanh();
+  if(vong>=ds.length||bt<=0)return ketThuc();
+  const [q,da]=ds[vong];const h=HO[(Math.random()*HO.length)|0];
+  $('vong').textContent=`Câu ${vong+1}/${ds.length}`;$('mat').textContent=h[0];$('ai').textContent=h[1]+' hỏi:';$('hoi').textContent=q;
+  $('phanhoi').classList.add('an');
+  $('cacdap').innerHTML='';
+  tron(da).forEach(d=>{const b=document.createElement('button');b.className='dap';b.textContent=d[0];b.onclick=()=>chon(d);$('cacdap').appendChild(b)});
+}
+function chon(d){
+  bt=Math.min(10,bt+d[1]);kheo+=d[2];capThanh();
+  if(d[1]<0){$('choi').classList.remove('rung');void $('choi').offsetWidth;$('choi').classList.add('rung')}
+  $('cacdap').innerHTML='';
+  const p=$('phanhoi');p.className='ketqua-dap';
+  p.innerHTML=`<b>${$('ai').textContent.replace(' hỏi:','')}:</b> “${d[3]}”<br><small>${d[1]>0?'😌 +'+d[1]+' bình tĩnh':d[1]<0?'😵 '+d[1]+' bình tĩnh':'😐 không đổi'} · 😎 +${d[2]} khéo</small>`;
+  const n=document.createElement('button');n.className='nut';n.textContent=vong+1>=ds.length||bt<=0?'Xem kết quả 🎉':'Câu tiếp theo ▶';n.onclick=()=>{vong++;hienCau()};p.appendChild(n);
+}
+function ketThuc(){
+  const diem=kheo+bt;const d=DH.find(x=>diem>=x[0]);
+  $('choi').classList.add('an');$('het').classList.remove('an');
+  $('danhhieu').textContent=d[1];$('mota').textContent=d[2];
+  veThe(d,diem);
+}
+function veThe(d,diem){
+  const c=$('anh'),x=c.getContext('2d');
+  const g=x.createLinearGradient(0,0,0,1350);g.addColorStop(0,'#dc2626');g.addColorStop(1,'#7f1d1d');x.fillStyle=g;x.fillRect(0,0,1080,1350);
+  x.fillStyle='rgba(250,204,21,.15)';for(let i=0;i<40;i++){x.beginPath();x.arc(Math.random()*1080,Math.random()*1350,4+Math.random()*10,0,7);x.fill()}
+  x.fillStyle='#fffbeb';rr(x,70,170,940,1010,48);x.fill();x.strokeStyle='#fbbf24';x.lineWidth=10;x.stroke();
+  x.textAlign='center';x.fillStyle='#fde68a';x.font='bold 64px system-ui,sans-serif';x.fillText('SỐNG SÓT NGÀY TẾT 🧧',540,120);
+  x.font='150px system-ui';x.fillText(d[1].split(' ')[0],540,370);
+  x.fillStyle='#b91c1c';x.font='bold 70px system-ui,sans-serif';
+  let y=wrap(x,d[1].split(' ').slice(1).join(' '),540,500,860,84);
+  x.fillStyle='#78350f';x.font='42px system-ui,sans-serif';wrap(x,d[2],540,y+90,820,56);
+  x.fillStyle='#3b0a0a';x.font='bold 46px system-ui,sans-serif';
+  x.fillText(`Trụ được ${Math.min(vong,ds.length)}/${ds.length} câu hỏi của họ hàng`,540,920);
+  x.fillText(`😌 Bình tĩnh còn ${Math.max(0,bt)}/10   😎 Độ khéo ${kheo}`,540,995);
+  x.fillStyle='#92400e';x.font='36px system-ui,sans-serif';x.fillText('Bạn trụ được mấy câu? Chơi thử 👇',540,1110);
+  x.fillStyle='#fde68a';x.font='bold 34px system-ui,sans-serif';x.fillText('wintatwork1204-debug.github.io/lam-nhanh-24h/tet',540,1260);
+}
+function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
+function wrap(x,t,cx,y,mw,lh){let dong='';for(const w of t.split(' ')){const th=dong?dong+' '+w:w;if(x.measureText(th).width>mw&&dong){x.fillText(dong,cx,y);y+=lh;dong=w}else dong=th}x.fillText(dong,cx,y);return y}
+function taiAnh(){const a=document.createElement('a');a.href=$('anh').toDataURL('image/png');a.download='song-sot-ngay-tet.png';a.click()}
+function chiaSe(){const u=location.href.split('#')[0];const t='Tết này bạn trụ được mấy câu hỏi của họ hàng? 🧧';if(navigator.share)navigator.share({title:t,url:u}).catch(()=>{});else{navigator.clipboard.writeText(t+' '+u);$('nutChia').textContent='✅ Đã chép link, dán gửi bạn bè nhé'}}
+</script>
+</body>
+</html>
