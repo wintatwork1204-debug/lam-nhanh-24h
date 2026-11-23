@@ -1,0 +1,209 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tiệm Bánh Nhà Mây</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Be+Vietnam+Pro:wght@400;500;600&display=swap">
+<style>
+/* Layout: một cột kể chuyện theo mẻ bánh trong ngày; dải giờ ra lò là điểm nhấn duy nhất */
+:root{
+  --bg:#fbf7f2; --surface:#ffffff; --ink:#2a211c; --muted:#6e625a;
+  --crust:#b4572e; --crust-ink:#ffffff; --butter:#f3dfb8; --line:#e8ddd0;
+  --display:"Fraunces", Georgia, "Times New Roman", serif;
+  --body:"Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1c1713; --surface:#26201b; --ink:#f3ebe3; --muted:#b5a89c;
+  --crust:#e0875c; --crust-ink:#1c1713; --butter:#3d3226; --line:#3a3029; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1c1713; --surface:#26201b; --ink:#f3ebe3; --muted:#b5a89c;
+  --crust:#e0875c; --crust-ink:#1c1713; --butter:#3d3226; --line:#3a3029; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.3rem,6vw,4rem);font-weight:700}
+h2{font-size:clamp(1.6rem,3.5vw,2.3rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:500}
+p{margin:0}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--crust);font-weight:600}
+a{color:inherit}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.3rem;border-radius:999px;font-weight:600;text-decoration:none;border:2px solid var(--crust);font-size:1rem;cursor:pointer;font-family:var(--body)}
+.btn.primary{background:var(--crust);color:var(--crust-ink)}
+.btn.ghost{background:transparent;color:var(--crust)}
+.btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+
+header.top{padding-block:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-family:var(--display);font-weight:700;font-size:1.3rem}
+.logo span{color:var(--crust)}
+.top nav{display:flex;gap:18px;font-size:.95rem;color:var(--muted)}
+.top nav a{text-decoration:none}
+
+.hero{padding-block:36px 48px;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.hero > *{min-width:0}
+.hero p.lead{font-size:1.15rem;color:var(--muted);max-width:34ch;margin-top:16px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.loaf{aspect-ratio:1/1;max-width:100%;border-radius:50% 50% 46% 46%/58% 58% 42% 42%;background:
+  radial-gradient(ellipse at 50% 30%, color-mix(in srgb,var(--butter) 70%,transparent) 0 18%, transparent 19%),
+  repeating-linear-gradient(115deg, transparent 0 26px, color-mix(in srgb,var(--crust) 55%, #000 10%) 26px 30px),
+  radial-gradient(circle at 40% 35%, color-mix(in srgb,var(--crust) 70%, #fff 25%), var(--crust) 70%);
+  box-shadow:0 30px 60px -30px color-mix(in srgb,var(--crust) 70%,transparent)}
+
+.oven{background:var(--butter);padding-block:28px}
+.oven .wrap{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.oven .wrap > *{min-width:0}
+.times{display:flex;gap:10px;flex-wrap:wrap}
+.time{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;min-width:120px}
+.time b{font-family:var(--display);font-size:1.5rem;font-variant-numeric:tabular-nums;display:block}
+.time small{color:var(--muted);font-size:.85rem}
+.time.now{border-color:var(--crust);box-shadow:inset 0 0 0 1px var(--crust)}
+
+section.block{padding-block:56px}
+.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.item .price{font-variant-numeric:tabular-nums;font-weight:600;color:var(--crust)}
+.item p{color:var(--muted);font-size:.95rem}
+.item .meta{font-size:.82rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px;margin-top:auto}
+
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:24px}
+.why div{min-width:0}
+.why p{color:var(--muted);margin-top:6px}
+
+.order{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.order > *{min-width:0}
+form{display:grid;gap:12px}
+label{font-size:.9rem;font-weight:500}
+input,select,textarea{width:100%;font:inherit;padding:.65rem .8rem;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--crust);outline-offset:1px}
+.contact-line{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.contact-line code{font-family:var(--body);font-weight:600;font-size:1.1rem;user-select:all}
+.note{font-size:.88rem;color:var(--muted)}
+#ok{margin-top:6px;color:var(--crust);font-weight:600}
+
+footer{padding-block:32px;color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);margin-top:40px}
+.demo{background:var(--ink);color:var(--bg);font-size:.85rem;text-align:center;padding-block:8px}
+
+@media (max-width:760px){
+  .hero,.order{grid-template-columns:1fr}
+  .loaf{max-width:260px;margin:0 auto;width:100%}
+  .menu,.why{grid-template-columns:1fr}
+  .oven .wrap{grid-template-columns:1fr;gap:14px}
+  .top nav{display:none}
+}
+@media (prefers-reduced-motion:no-preference){
+  .loaf{animation:rise 1.4s ease-out both}
+  @keyframes rise{from{transform:scale(.92)}to{transform:scale(1)}}
+}
+</style>
+
+<div class="demo"><div class="wrap">Trang mẫu minh họa. Tiệm bánh, số điện thoại và giá trên trang là hư cấu.</div></div>
+
+<header class="top wrap">
+  <div class="logo">Nhà <span>Mây</span></div>
+  <nav><a href="#menu">Thực đơn</a><a href="#vi-sao">Vì sao chọn tiệm</a><a href="#dat-banh">Đặt bánh</a></nav>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div>
+      <p class="eyebrow">Bánh mì men tự nhiên · Quận 3</p>
+      <h1>Bánh nướng mỗi sáng, giao nóng trong 30 phút</h1>
+      <p class="lead">Bột ủ 18 tiếng, bơ Pháp, không chất bảo quản. Đặt trước 10 giờ tối để có bánh lúc 7 giờ sáng.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#dat-banh">Đặt bánh ngay</a>
+        <a class="btn ghost" href="#menu">Xem thực đơn</a>
+      </div>
+    </div>
+    <div class="loaf" role="img" aria-label="Ổ bánh mì men tự nhiên vừa ra lò"></div>
+  </section>
+
+  <div class="oven">
+    <div class="wrap">
+      <h3>Giờ ra lò hôm nay</h3>
+      <div class="times" id="times">
+        <div class="time"><b>06:30</b><small>Bánh mì đặc ruột</small></div>
+        <div class="time"><b>09:00</b><small>Croissant bơ</small></div>
+        <div class="time"><b>14:00</b><small>Bánh bông lan</small></div>
+        <div class="time"><b>17:30</b><small>Bánh mì que</small></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="block wrap" id="menu">
+    <p class="eyebrow">Thực đơn</p>
+    <h2>Món bán chạy nhất tuần</h2>
+    <div class="menu">
+      <article class="item">
+        <h3>Sourdough lúa mạch</h3>
+        <p>Vỏ giòn, ruột dai, chua nhẹ. Ăn kèm bơ hoặc làm sandwich.</p>
+        <span class="price">85.000 đ / ổ 500 g</span>
+        <span class="meta">Hydration 75% · ủ 18 giờ</span>
+      </article>
+      <article class="item">
+        <h3>Croissant bơ Pháp</h3>
+        <p>27 lớp bột, nướng vàng đều, thơm bơ.</p>
+        <span class="price">35.000 đ / cái</span>
+        <span class="meta">Hộp 6 cái: 190.000 đ</span>
+      </article>
+      <article class="item">
+        <h3>Bông lan trứng muối</h3>
+        <p>Cốt mềm, trứng muối tự làm, sốt bơ không quá ngọt.</p>
+        <span class="price">160.000 đ / hộp</span>
+        <span class="meta">Đặt trước 1 ngày</span>
+      </article>
+    </div>
+  </section>
+
+  <section class="block wrap" id="vi-sao">
+    <p class="eyebrow">Vì sao chọn tiệm</p>
+    <h2>Làm ít, làm kỹ, giao đúng giờ</h2>
+    <div class="why">
+      <div><h3>Nướng theo đơn</h3><p>Tiệm chỉ nướng số bánh đã được đặt, nên bánh tới tay bạn luôn trong ngày.</p></div>
+      <div><h3>Giao trong 3 km miễn phí</h3><p>Ngoài 3 km tính 5.000 đ mỗi km. Đơn từ 300.000 đ được miễn phí giao.</p></div>
+      <div><h3>Đổi bánh nếu không ưng</h3><p>Bánh hỏng hoặc sai món, tiệm đổi ngay trong ngày, không cần hỏi lý do.</p></div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="dat-banh">
+    <div class="order">
+      <div>
+        <p class="eyebrow">Đặt bánh</p>
+        <h2>Để lại thông tin, tiệm gọi lại trong 15 phút</h2>
+        <p class="note" style="margin-top:12px">Hoặc nhắn Zalo cho tiệm theo số dưới đây.</p>
+        <div class="contact-line">
+          <code id="phone">0900 000 000</code>
+          <button class="btn ghost" type="button" id="copy">Sao chép số</button>
+        </div>
+        <p class="note" style="margin-top:14px">Mở cửa 6:00–20:00 mỗi ngày.</p>
+      </div>
+      <form id="f">
+        <div><label for="name">Tên của bạn</label><input id="name" required placeholder="Ví dụ: Lan"></div>
+        <div><label for="tel">Số điện thoại</label><input id="tel" required inputmode="tel" placeholder="09xx xxx xxx"></div>
+        <div><label for="dish">Món muốn đặt</label>
+          <select id="dish"><option>Sourdough lúa mạch</option><option>Croissant bơ Pháp</option><option>Bông lan trứng muối</option></select></div>
+        <div><label for="when">Nhận lúc</label><input id="when" type="datetime-local"></div>
+        <button class="btn primary" type="submit">Gửi đơn</button>
+        <p id="ok" hidden>Đây là trang mẫu nên đơn không được gửi đi. Trang thật sẽ chuyển đơn về Zalo hoặc Google Sheets của tiệm.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">Nhà Mây · 12 đường mẫu, Quận 3, TP.HCM (địa chỉ minh họa)</footer>
+
+<script>
+(function(){
+  var h=new Date().getHours()*60+new Date().getMinutes();
+  var cards=[].slice.call(document.querySelectorAll('#times .time'));
+  var next=cards.find(function(c){var t=c.querySelector('b').textContent.split(':');return (+t[0])*60+(+t[1])>=h;});
+  if(next){next.classList.add('now');next.querySelector('small').textContent+=' · mẻ tiếp theo';}
+  document.getElementById('f').addEventListener('submit',function(e){e.preventDefault();document.getElementById('ok').hidden=false;});
+  document.getElementById('copy').addEventListener('click',function(){
+    var t=document.getElementById('phone').textContent,b=this;
+    var done=function(){b.textContent='Đã sao chép';};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){selectIt();});}else{selectIt();}
+    function selectIt(){var r=document.createRange();r.selectNodeContents(document.getElementById('phone'));var s=getSelection();s.removeAllRanges();s.addRange(r);}
+  });
+})();
+</script>
+
+</body></html>
