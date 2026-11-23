@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://wintatwork1204-debug.github.io/lam-nhanh-24h/sitemap.xml
