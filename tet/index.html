@@ -28,8 +28,8 @@ button{font:inherit;cursor:pointer;border:0;color:inherit}
 .vai{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
 .vai button{background:#fff;border:2px solid #fecaca;border-radius:16px;padding:10px 6px;text-align:center;font-weight:700;font-size:.95rem}
 .vai button:hover,.vai button.chon{border-color:#dc2626;background:#fff1f2}
-.vai .hinh{font-size:44px;height:74px;display:flex;align-items:center;justify-content:center}
-.vai .hinh img{height:74px}
+.vai .hinh{font-size:52px;height:104px;display:flex;align-items:center;justify-content:center}
+.vai .hinh img{height:104px}
 .vai small{display:block;font-weight:400;color:#92400e;font-size:.78rem;margin-top:2px}
 input{font:inherit;width:100%;padding:12px;border-radius:12px;border:2px solid #fcd34d;margin-top:10px;text-align:center}
 .chiso{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px}
@@ -42,8 +42,8 @@ input{font:inherit;width:100%;padding:12px;border-radius:12px;border:2px solid #
 @keyframes nhay{50%{transform:scale(1.25)}}
 .chuong{display:flex;justify-content:space-between;font-size:.8rem;color:#92400e;font-weight:700;margin-bottom:4px}
 .nguoi{display:flex;gap:10px;align-items:flex-end;margin:6px 0 0}
-.nguoi .mat{width:96px;height:96px;flex:none;display:flex;align-items:flex-end;justify-content:center;font-size:62px}
-.nguoi .mat img{width:96px;height:96px;object-fit:contain}
+.nguoi .mat{width:110px;height:130px;flex:none;display:flex;align-items:flex-end;justify-content:center;font-size:62px}
+.nguoi .mat img{width:110px;height:130px;object-fit:contain}
 .ten-ai{font-weight:800;color:#b91c1c;margin-bottom:4px}
 .bong{background:#fff;border:2px solid #fcd34d;border-radius:16px 16px 16px 4px;padding:12px 14px;font-size:1.06rem;font-weight:600;flex:1;min-height:70px}
 .dap{display:block;width:100%;text-align:left;background:#fff;border:2px solid #fecaca;border-radius:14px;padding:12px 14px;margin-top:9px;font-size:.98rem;color:#3b0a0a;transition:transform .1s}
@@ -90,7 +90,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
 </div>
 
 <!-- MÀN CHƠI -->
-<div class="the an" id="mChoi">
+<div class="the nen an" id="mChoi">
   <div class="chiso">
     <div class="cs" id="c_bt"><div class="ic">😌</div>Bình tĩnh<div class="vach"><i></i></div></div>
     <div class="cs" id="c_hk"><div class="ic">🤝</div>Hòa khí<div class="vach"><i></i></div></div>
@@ -122,7 +122,8 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
 <script>
 // ===== DỮ LIỆU =====
 const AI={me:["🙎‍♀️","Mẹ"],ba:["👵","Bà nội"],ong:["👴","Ông nội"],bac:["🧔","Bác cả"],co:["👩‍🦱","Cô út"],chu:["👨‍🦲","Chú"],mo:["👩","Mợ"],cau:["🧔","Cậu"],anh:["😎","Anh họ"],xom:["👩‍🦳","Bà hàng xóm"],tre:["🧒","Bọn trẻ con"],lop:["🧑‍🤝‍🧑","Lớp trưởng"]};
-const IMG={}; // điền khi có ảnh: IMG.ba='img/ba.png'
+const IMG={};['ba','bac','co','chu','mo','anh','xom','ong','v_sv','v_dl','v_dt','v_td'].forEach(k=>IMG[k]='img/'+k+'.webp');
+
 const VAI={
  sv:{ten:"Sinh viên",hinh:"🧑‍🎓",mo:"Ví mỏng, điểm thì… để sau",cs:{bt:60,hk:60,vi:35,sd:50}},
  dl:{ten:"Mới đi làm",hinh:"🧑‍💼",mo:"Lương tháng đầu, áp lực tháng mười ba",cs:{bt:55,hk:55,vi:65,sd:55}},
