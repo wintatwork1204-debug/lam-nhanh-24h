@@ -87,7 +87,23 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
 @keyframes vao{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .vao{animation:vao .35s}
 .amthanh{position:absolute;top:10px;right:12px;background:none;font-size:20px;z-index:2}
-#lixi img{width:220px;max-width:80%;display:block;margin:8px auto;border-radius:12px}
+#lixi img{width:210px;max-width:75%;display:block;margin:10px auto 4px;border-radius:10px;border:6px solid #fff}
+.hanhtrinh{display:flex;justify-content:space-between;align-items:center;margin:0 4px 10px;position:relative}
+.hanhtrinh::before{content:"";position:absolute;left:14px;right:14px;top:50%;height:3px;background:#fcd34d;z-index:0}
+.hanhtrinh span{position:relative;z-index:1;width:34px;height:34px;border-radius:50%;background:#fff;border:3px solid #fcd34d;display:flex;align-items:center;justify-content:center;font-size:16px}
+.hanhtrinh span.xong{background:#16a34a;border-color:#16a34a;color:#fff;font-size:13px;font-weight:800}
+.hanhtrinh span.nay{border-color:#dc2626;transform:scale(1.18);box-shadow:0 0 0 4px rgba(220,38,38,.2)}
+.saoTo{font-size:46px;letter-spacing:4px;text-align:center;margin:6px 0}
+.saoTo i{font-style:normal;display:inline-block;animation:sao .5s both}
+.saoTo i:nth-child(2){animation-delay:.25s}.saoTo i:nth-child(3){animation-delay:.5s}
+@keyframes sao{from{transform:scale(0) rotate(-90deg);opacity:0}to{transform:none;opacity:1}}
+.hang{background:linear-gradient(135deg,#7f1d1d,#b91c1c);color:#fde68a;border-radius:16px;padding:14px;text-align:center;margin:8px 0}
+.hang b{display:block;font-size:1.5rem;color:#fff}
+.luoi{font-family:ui-monospace,monospace;background:#fff;border:2px dashed #fcd34d;border-radius:12px;padding:10px;white-space:pre-line;font-size:.92rem;margin-top:8px;color:#3b0a0a}
+.baolixi{display:block;width:100%;background:linear-gradient(#dc2626,#991b1b);color:#fde68a;border:3px solid #fbbf24;border-radius:16px;padding:14px;font-weight:800;font-size:1.05rem;margin-top:14px;box-shadow:0 4px 0 #7f1d1d}
+.baolixi small{display:block;font-weight:400;color:#fecaca;font-size:.82rem;margin-top:3px}
+@keyframes phao{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(105vh) rotate(720deg);opacity:.2}}
+.hoa{position:fixed;top:-20px;font-size:22px;pointer-events:none;animation:phao linear forwards;z-index:9}
 </style>
 </head>
 <body>
@@ -105,11 +121,12 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
   <div class="vai" id="dsVai"></div>
   <input id="tenNC" maxlength="18" placeholder="Tên bạn (in lên thẻ khoe, có thể bỏ trống)">
   <button class="nut" onclick="moDau()">Lên đường về quê ▶</button>
-  <p class="phu" style="font-size:.8rem;margin-top:10px">5 phút · không đăng nhập · không thu thông tin gì<br>Đã mở <b id="soMo">0</b>/12 danh hiệu · <b id="soKT">0</b>/20 kết truyện</p>
+  <p class="phu" style="font-size:.8rem;margin-top:10px">5 phút · không đăng nhập · chỉ đếm lượt chơi ẩn danh<br>Đã mở <b id="soMo">0</b>/12 danh hiệu · <b id="soKT">0</b>/20 kết truyện</p>
 </div>
 
 <!-- MÀN CHƠI -->
 <div class="the nen an" id="mChoi">
+  <div class="hanhtrinh" id="hanhtrinh"></div>
   <div class="chiso">
     <div class="cs" id="c_bt"><div class="ic">😌</div>Bình tĩnh<div class="vach"><i></i></div></div>
     <div class="cs" id="c_hk"><div class="ic">🤝</div>Hòa khí<div class="vach"><i></i></div></div>
@@ -124,13 +141,17 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
 <div class="the an" id="mKet">
   <h1 id="kDanhHieu"></h1>
   <p class="phu" id="kMoTa"></p>
+  <div class="hang" id="kHang"></div>
   <div class="ketTruyen" id="kTruyen"></div>
   <div class="thach an" id="brKet"></div>
   <canvas id="anh" width="1080" height="1350"></canvas>
   <button class="nut" onclick="taiAnh()">⬇️ Lưu thẻ về máy để khoe</button>
+  <button class="nut phu2" onclick="taiAnh(1)">📱 Lưu bản dọc cho story</button>
+  <div class="luoi" id="kLuoi"></div>
   <button class="nut phu2" onclick="thachBan()" id="nutThach">⚔️ Thách bạn bè vượt mặt mình</button>
-  <button class="nut phu2" onclick="veMo()">🔁 Chơi lại, thử cách khác</button>
-  <div class="thach an" id="lixi" style="margin-top:14px">🧧 Thấy game vui? Lì xì tác giả một bao nhỏ để có thêm chương mới nhé.<img id="lixiImg" alt="Mã QR lì xì tác giả"></div>
+  <button class="nut phu2" onclick="tk('choi_lai');veMo()">🔁 Chơi lại, thử cách khác</button>
+  <button class="baolixi an" id="nutLixi" onclick="moLixi()">🧧 Lì xì tác giả một bao<small>Game miễn phí, không quảng cáo. Bao nhiêu cũng quý.</small></button>
+  <div class="thach an" id="lixi">Cảm ơn bạn đã chơi tới đêm mùng 3 🥹<br>Mở app ngân hàng, quét mã để lì xì. Tác giả sẽ dùng để làm thêm vai và chương mới cho Tết sau.<img id="lixiImg" alt="Mã QR lì xì tác giả"><small style="font-weight:400">Lời chúc ghi ở phần nội dung chuyển khoản, tác giả đọc hết.</small></div>
   <h2 style="margin-top:16px">Kết truyện đã mở <span id="kSoKT"></span></h2>
   <div class="bst kt" id="bstKT"></div>
   <h2 style="margin-top:16px">Danh hiệu <span id="kSo"></span></h2>
@@ -138,7 +159,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
 </div>
 
 <p class="chan">Game làm cho vui, nhân vật và tình huống là hư cấu, không nhắm vào ai.<br>
-<a href="doanh-nghiep.html">🎁 Muốn game Tết mang thương hiệu shop/công ty bạn?</a><br>
+<a href="doanh-nghiep.html" onclick="tk('mo_doanh_nghiep')">🎁 Muốn game Tết mang thương hiệu shop/công ty bạn?</a><br>
 <a href="../">Trang của tác giả</a></p>
 </div>
 
@@ -159,8 +180,14 @@ const VAI={
 const CHUONG=[["🧹","Chiều 30 Tết","Xe khách dừng ở đầu huyện. Mùi khói bếp, mùi lá dong. Và mùi… câu hỏi."],
  ["🏮","Mùng 1 · Nhà nội","Cả họ đông đủ. Mâm cỗ đã dọn. Bác cả ngồi đầu mâm, hắng giọng."],
  ["🍶","Mùng 2 · Nhà ngoại","Rượu đã rót. Cậu đã ngồi chờ. Điện thoại trong túi bạn rung lên."],
- ["🎓","Mùng 3 · Ngày cuối","Đi Tết thầy, gặp bạn cũ. Mai là lên lại thành phố."]];
-const SO_THE=[2,3,2,1];
+ ["🎓","Mùng 3 · Ngày cuối","Đi Tết thầy, gặp bạn cũ. Mai là lên lại thành phố."],
+ ["🌙","Đêm mùng 3","Đồ đã xếp xong. Mai lên xe sớm. Đèn phòng khách vẫn còn sáng."]];
+const AI_TEN=["Cổng làng","Mâm cỗ nhà nội","Rượu nhà ngoại","Trận tiễn chân","Đêm cuối"];
+const SO_THE=[2,3,2,1,0];
+const HANG=[[14,"👑","Huyền Thoại Tết"],[11,"💎","Cao Thủ Ăn Tết"],[8,"⚔️","Chiến Binh Mâm Cỗ"],[5,"🛡️","Tân Binh Về Quê"],[0,"🐣","Gà Mờ Ngày Tết"]];
+const SAO_KT={hieu:3,doi:2,giu:2,khoc:1,lo:0};
+// ngưỡng [3 sao, 2 sao] theo tổng chỉ số tăng trong ải, đặt theo phân bố chơi ngẫu nhiên 24/11
+const NG_AI=[[40,15],[45,20],[25,0],[25,5]];
 // Lựa chọn: [lời đáp, bình tĩnh, hòa khí, ví, sĩ diện, nhãn, phản hồi, {lo:áp lực bí mật, f:'cờ', kt:'kết'}]
 // nhãn: kheo, ne, thang, hai, phet (khoác lác), nhau
 // Thẻ ngẫu nhiên: [chương, vai|null, người hỏi, câu, lựa chọn]
@@ -329,6 +356,13 @@ const doc=k=>JSON.parse(localStorage.getItem(k)||"{}");
 function tron(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
 function hinhAi(k){return IMG[k]?`<img src="${IMG[k]}" alt="">`:AI[k][0]}
 const theObj=t=>({ai:t[2],q:t[3],da:t[4]});
+// ----- đo lường (GA4). Không gửi tên người chơi hay dữ liệu cá nhân. -----
+const GA_ID='G-1VH65XEHJN';
+if(GA_ID){const g=document.createElement('script');g.async=1;g.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(g);
+ window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());
+ gtag('config',GA_ID,{anonymize_ip:true,ban_thuong_hieu:BR?BR.ten:'goc',tu_thach:QS.get('k')?1:0});}
+function tk(ev,p){try{window.gtag&&gtag('event',ev,Object.assign({vai:vaiChon,ban:BR?'thuong_hieu':'goc'},p||{}))}catch(e){}}
+let tBatDau=0,sao=[],moc=null,aiNay=0;
 
 // ----- âm thanh -----
 let ac;function tieng(loai){if(!am)return;try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(ac.destination);const t=ac.currentTime;const m={tot:[660,880],xau:[300,180],bam:[520,520],ket:[523,1046],dem:[392,330]}[loai];o.frequency.setValueAtTime(m[0],t);o.frequency.exponentialRampToValueAtTime(m[1],t+.18);o.type=loai=="xau"?"sawtooth":"triangle";g.gain.setValueAtTime(.08,t);g.gain.exponentialRampToValueAtTime(.001,t+.25);o.start(t);o.stop(t+.26)}catch(e){}}
@@ -340,7 +374,7 @@ function veMo(){
   $('dsVai').innerHTML=Object.entries(VAI).map(([k,v])=>`<button class="${k==vaiChon?'chon':''}" onclick="chonVai('${k}')"><div class="hinh">${IMG['v_'+k]?`<img src="${IMG['v_'+k]}" alt="">`:v.hinh}</div>${v.ten}<small>${v.mo}</small></button>`).join('');
   $('soMo').textContent=Object.keys(doc('sstet_bst')).length;
   $('soKT').textContent=Object.keys(doc('sstet_kt')).length;
-  if(QS.get('k')&&KET[QS.get('k')]){const k=KET[QS.get('k')];$('loiThach').innerHTML=`<div class="thach">⚔️ ${QS.get('n')?esc(QS.get('n').slice(0,18)):'Bạn của bạn'} vừa đạt <b>${k[0]} ${k[1]}</b> với ${+QS.get('d')||0} điểm.<br>Bạn dám vượt mặt không?</div>`}
+  if(QS.get('k')&&KET[QS.get('k')]){const k=KET[QS.get('k')],sv=Math.min(15,+QS.get('s')||0),hg=hangTu(sv);$('loiThach').innerHTML=`<div class="thach">⚔️ ${QS.get('n')?esc(QS.get('n').slice(0,18)):'Bạn của bạn'} vừa vượt <b>${Math.min(5,+QS.get('a')||0)}/5 ải</b>, đạt hạng <b>${hg[1]} ${hg[2]}</b> (⭐ ${sv}/15)<br>với danh hiệu ${k[0]} ${k[1]}.<br>Bạn dám vượt mặt không?</div>`}
   if(BR){$('brMo').innerHTML=`🎁 <b>${esc(BR.ten)}</b> lì xì bạn: chơi xong nhận ưu đãi${BR.vt?' '+esc(BR.vt):''}`;$('brMo').classList.remove('an')}
   window.scrollTo(0,0);
 }
@@ -349,7 +383,7 @@ function moDau(){
   tieng('bam');
   $('mMo').classList.add('an');$('mKet').classList.add('an');$('mChoi').classList.remove('an');$('mChoi').classList.remove('dem');
   chiSo={...VAI[vaiChon].cs};capChiSo();
-  $('tenChuong').textContent='🤫 Trước khi lên xe';$('bimat').textContent='';$('bimat').className='bimat an';
+  $('tenChuong').textContent='🤫 Trước khi lên xe';$('hanhtrinh').innerHTML='';$('bimat').textContent='';$('bimat').className='bimat an';
   const v=$('vung');v.className='vao';
   v.innerHTML=`<div class="truyen"><div class="to">${IMG['v_'+vaiChon]?`<img src="${IMG['v_'+vaiChon]}" style="height:130px" alt="">`:VAI[vaiChon].hinh}</div><h2>Năm nay bạn về quê với một bí mật</h2><p>${VAI[vaiChon].bm}</p><p>Giữ hay nói, tùy bạn. Nhưng <b>mỗi câu nói dối sẽ làm bí mật nặng thêm</b>. Đến một lúc, nó sẽ tự lộ ra.</p></div><button class="nut" onclick="batDau()">Lên xe về quê ▶</button>`;
   window.scrollTo(0,0);
@@ -369,10 +403,12 @@ function batDau(){
     lay.forEach(t=>hang.push({loai:'the',i,c:theObj(t)}));
     if(i==1)hang.push({loai:'the',i,c:CANH.ba});
     if(i==2)hang.push({loai:'the',i,c:CANH[vaiChon]});
-    if(i==3){hang.push({loai:'boss',i});hang.push({loai:'cuoi',i})}
+    if(i==3)hang.push({loai:'boss',i});
+    if(i==4)hang.push({loai:'cuoi',i});
     if(i<3)hang.push({loai:'sk',i});
   });
-  st=0;capChiSo();tiep();
+  st=0;sao=[];moc=null;aiNay=0;tBatDau=Date.now();$('lixi').classList.add('an');
+  tk('bat_dau',{tu_thach:QS.get('k')?1:0});capChiSo();tiep();
 }
 function capChiSo(doi){
   for(const k of ['bt','hk','vi','sd']){
@@ -388,11 +424,14 @@ function tiep(){
   for(const k of ['bt','hk','vi','sd'])if(chiSo[k]<=0)return ketThuc({bt:'bao',hk:'gach',vi:'chay',sd:'hien'}[k]);
   if(st>=hang.length)return ketThuc();
   const h=hang[st++];
-  const C=CHUONG[h.i];$('tenChuong').textContent=`${C[0]} ${C[1]} · ${h.i+1}/4`;
+  const C=CHUONG[h.i];$('tenChuong').textContent=`Ải ${h.i+1}/5 · ${AI_TEN[h.i]}`;
   const v=$('vung');v.className='vao';void v.offsetWidth;
   $('mChoi').classList.toggle('dem',false);
   if(h.loai=='chuong'){
-    v.innerHTML=`<div class="sukien"><div class="to">${C[0]}</div><h2>${C[1]}</h2><p class="phu">${C[2]}</p><button class="nut" onclick="tiep()">Vào thôi ▶</button></div>`;return;
+    let qua='';
+    if(moc){const s=chamAi(aiNay);qua=`<div class="hang" style="margin-bottom:14px">✅ Vượt ải ${aiNay+1}: ${AI_TEN[aiNay]}<b>${'⭐'.repeat(s)}${'☆'.repeat(3-s)}</b></div>`;tieng('ket')}
+    aiNay=h.i;moc={...chiSo};veHT();
+    v.innerHTML=`${qua}<div class="sukien"><div class="to">${C[0]}</div><div style="font-weight:800;color:#b91c1c;letter-spacing:1px">ẢI ${h.i+1} · ${AI_TEN[h.i].toUpperCase()}</div><h2>${C[1]}</h2><p class="phu">${C[2]}</p><button class="nut" onclick="tiep()">Vào ải ▶</button></div>`;return;
   }
   if(h.loai=='goilai'){
     const them=GOILAI.filter(g=>co[g[0]]).map(g=>({loai:'the',i:3,c:g[1]}));
@@ -417,6 +456,10 @@ function tiep(){
   v.innerHTML=`${c.ke?`<div class="ke">${c.ke}</div>`:''}<div class="nguoi"><div class="mat">${hinhAi(c.ai)}</div><div style="flex:1"><div class="ten-ai">${c.boss?'👑 Trận cuối · ':''}${AI[c.ai][1]}</div><div class="bong">${c.q}</div></div></div><div id="dsDap"></div>`;
   (c.ke?c.da:tron(c.da)).forEach(d=>{const b=document.createElement('button');b.className='dap';b.textContent=d[0];b.onclick=()=>chon(d);$('dsDap').appendChild(b)});
 }
+const tong4=o=>o.bt+o.hk+o.vi+o.sd;
+function chamAi(i){const d=tong4(chiSo)-tong4(moc);const ng=NG_AI[i];let s=d>=ng[0]?3:d>=ng[1]?2:1;if(Math.min(chiSo.bt,chiSo.hk,chiSo.vi,chiSo.sd)<=20)s=Math.min(s,1);sao[i]=s;tk('qua_ai',{ai:i+1,sao:s});return s}
+function veHT(){$('hanhtrinh').innerHTML=AI_TEN.map((t,i)=>i<aiNay?`<span class="xong" title="${t}">${sao[i]}★</span>`:`<span class="${i==aiNay?'nay':''}" title="${t}">${CHUONG[i][0]}</span>`).join('')}
+function hangTu(n){return HANG.find(h=>n>=h[0])}
 function hienDoi(d){const ten={bt:'😌 Bình tĩnh',hk:'🤝 Hòa khí',vi:'👛 Ví',sd:'😎 Sĩ diện'};return Object.entries(d).filter(([k,x])=>x).map(([k,x])=>`<span class="${x<0?'tru':'cong'}">${ten[k]} ${x>0?'+':''}${x}</span>`).join('')}
 function chon(d){
   soQuyet++;
@@ -455,20 +498,30 @@ function ketThuc(chet){
   }
   // Thua sớm thì bí mật lộ theo cách tệ nhất
   const kt=chet?(co.noi_som?'khoc':'lo'):tinhKetTruyen();
+  if(chet)sao[aiNay]=0;else sao[4]=SAO_KT[kt];
+  for(let i=0;i<5;i++)if(sao[i]===undefined)sao[i]=0;
+  const tongSao=sao.reduce((a,b)=>a+b,0),soAi=sao.filter(x=>x>0).length,hg=hangTu(tongSao);
   const ktInfo=KT[vaiChon][kt];
   const kq=KET[k];const diem=Math.round(c.bt+c.hk+c.vi+c.sd+soQuyet*10+(kt=='hieu'?100:kt=='doi'?60:0));
   const b=doc('sstet_bst');b[k]=1;localStorage.setItem('sstet_bst',JSON.stringify(b));
   const bk=doc('sstet_kt');bk[vaiChon+'_'+kt]=1;localStorage.setItem('sstet_kt',JSON.stringify(bk));
-  window._kq={k,diem,kt};
+  window._kq={k,diem,kt,tongSao,soAi,hg};
   tieng('ket');
   $('mChoi').classList.add('an');$('mKet').classList.remove('an');
   $('kDanhHieu').textContent=kq[0]+' '+kq[1];$('kMoTa').textContent=kq[2];
+  $('kHang').innerHTML=`Hành trình về quê: vượt ${soAi}/5 ải<div class="saoTo">${'<i>⭐</i>'.repeat(Math.min(3,Math.round(tongSao/5)))}</div><b>${hg[1]} ${hg[2]}</b>⭐ ${tongSao}/15 sao${hg[0]<14?` · còn ${HANG[HANG.indexOf(hg)-1][0]-tongSao} sao nữa lên ${HANG[HANG.indexOf(hg)-1][2]}`:''}`;
+  $('kLuoi').textContent=luoiKhoe(kq,diem);
+  if(!BR)$('nutLixi').classList.remove('an');
+  tk('ket_thuc',{danh_hieu:k,ket_truyen:kt,diem,sao:tongSao,hang:hg[2],so_ai:soAi,chet:chet?1:0,giay:Math.round((Date.now()-tBatDau)/1000)});
+  if(tongSao>=10||kt=='hieu')phaoHoa();
   const icon=KT_LOAI.find(x=>x[0]==kt)[1];
   const ky=Object.keys(KY_UC).filter(f=>co[f]).map(f=>`<li>${KY_UC[f]}</li>`).join('');
   $('kTruyen').innerHTML=`<h3>${icon} Kết truyện: ${ktInfo[0]}</h3><div>${chet?'<i>Bạn không trụ được đến đêm mùng 3…</i><br>':''}${ktInfo[1]}</div>${ky?`<ul>${ky}</ul>`:''}<div style="font-size:.85rem;color:#92400e;margin-top:8px">Vai ${VAI[vaiChon].ten} còn ${5-KT_LOAI.filter(x=>bk[vaiChon+'_'+x[0]]).length} kết truyện chưa mở. Thử chọn khác đi?</div>`;
   if(BR){$('brKet').innerHTML=`🧧 <b>${esc(BR.ten)}</b> lì xì bạn vì đã sống sót!<br>${BR.vt?esc(BR.vt)+'<br>':''}${BR.vc?`Mã: <span style="font-size:1.4em;letter-spacing:2px;color:#b91c1c">${esc(BR.vc)}</span>`:''}`;$('brKet').classList.remove('an')}
   veThe(kq,diem,ktInfo[0],icon);veBST(k);window.scrollTo(0,0);
 }
+function luoiKhoe(kq,diem){const k=window._kq;return `Sống sót ngày Tết 2027 🧧\n${VAI[vaiChon].ten} · ${k.hg[1]} ${k.hg[2]}\n${AI_TEN.map((t,i)=>CHUONG[i][0]+' '+(sao[i]?'⭐'.repeat(sao[i])+'☆'.repeat(3-sao[i]):'💀')).join('\n')}\n${kq[0]} ${kq[1]} · ${diem} điểm`}
+function phaoHoa(){const e=['🌸','🧧','✨','🏮','🌼'];for(let i=0;i<28;i++){const d=document.createElement('div');d.className='hoa';d.textContent=e[i%5];d.style.left=Math.random()*100+'vw';d.style.animationDuration=(2.5+Math.random()*2.5)+'s';d.style.animationDelay=Math.random()*1.2+'s';document.body.appendChild(d);setTimeout(()=>d.remove(),6500)}}
 function veBST(moi){
   const b=doc('sstet_bst');$('kSo').textContent=`${Object.keys(b).length}/${THU_TU.length-1}`;
   $('bst').innerHTML=THU_TU.map(k=>{const m=b[k];if(k=='phet'&&!m)return '';return `<div class="${m?'':'khoa'}" style="${k==moi?'border-color:#dc2626;border-style:solid':''}"><b>${m?KET[k][0]:'❔'}</b>${m?KET[k][1]:'Chưa mở'}</div>`}).join('');
@@ -489,21 +542,24 @@ function veThe(kq,diem,ktTen,ktIcon){
   y+=80;x.fillStyle='#1e1b4b';rr(x,130,y-50,820,80,40);x.fill();x.fillStyle='#fde68a';x.font='bold 38px system-ui,sans-serif';x.fillText(`${ktIcon} Kết truyện: ${ktTen}`,540,y+4);
   y+=90;
   [['😌 Bình tĩnh','bt'],['🤝 Hòa khí','hk'],['👛 Ví tiền','vi'],['😎 Sĩ diện','sd']].forEach(([t,k],i)=>{const yy=y+i*58;x.textAlign='left';x.fillStyle='#3b0a0a';x.font='bold 32px system-ui,sans-serif';x.fillText(t,150,yy+11);x.fillStyle='#fde68a';rr(x,440,yy-14,490,28,14);x.fill();x.fillStyle=chiSo[k]<=25?'#dc2626':'#16a34a';rr(x,440,yy-14,Math.max(28,4.9*chiSo[k]),28,14);x.fill()});
-  x.textAlign='center';x.fillStyle='#b91c1c';x.font='bold 44px system-ui,sans-serif';x.fillText(`Điểm sống sót: ${diem}`,540,Math.min(y+290,1180));
+  const K=window._kq;x.textAlign='center';x.fillStyle='#b91c1c';x.font='bold 42px system-ui,sans-serif';x.fillText(`${K.hg[1]} ${K.hg[2]} · vượt ${K.soAi}/5 ải`,540,Math.min(y+272,1128));
+  x.fillStyle='#78350f';x.font='bold 34px system-ui,sans-serif';x.fillText(`⭐ ${K.tongSao}/15 sao · ${diem} điểm`,540,Math.min(y+326,1182));
   x.fillStyle='#fde68a';x.font='bold 36px system-ui,sans-serif';x.fillText('Bạn sẽ giữ hay nói? Chơi thử 👇',540,1265);
   x.font='30px system-ui,sans-serif';x.fillText(BR?`🎁 Quà Tết từ ${BR.ten}`:'wintatwork1204-debug.github.io/lam-nhanh-24h/tet',540,1312);
 }
 function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
 function wrap(x,t,cx,y,mw,lh){let d='';for(const w of t.split(' ')){const th=d?d+' '+w:w;if(x.measureText(th).width>mw&&d){x.fillText(d,cx,y);y+=lh;d=w}else d=th}x.fillText(d,cx,y);return y}
-function taiAnh(){const a=document.createElement('a');a.href=$('anh').toDataURL('image/png');a.download='song-sot-ngay-tet.png';a.click()}
+function taiAnh(doc9){let c=$('anh');
+  if(doc9){const s=document.createElement('canvas');s.width=1080;s.height=1920;const x=s.getContext('2d');const g=x.createLinearGradient(0,0,0,1920);g.addColorStop(0,'#7f1d1d');g.addColorStop(.5,'#dc2626');g.addColorStop(1,'#7f1d1d');x.fillStyle=g;x.fillRect(0,0,1080,1920);x.drawImage(c,0,285);x.textAlign='center';x.fillStyle='#fde68a';x.font='bold 52px system-ui,sans-serif';x.fillText('Bạn vượt được mấy ải? 🧧',540,1745);c=s}
+  const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='song-sot-ngay-tet'+(doc9?'-story':'')+'.png';a.click();tk('tai_anh',{kieu:doc9?'story':'feed'})}
 function thachBan(){
-  const ten=$('tenNC').value.trim();const u=location.origin+location.pathname+(BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}`+(ten?`&n=${encodeURIComponent(ten)}`:'');
-  const t=`Mình vừa đạt "${KET[_kq.k][1]}" (${_kq.diem} điểm), kết truyện "${KT[vaiChon][_kq.kt][0]}" trong Sống sót ngày Tết 🧧 Bạn sẽ giữ bí mật hay nói ra?`;
+  const ten=$('tenNC').value.trim();const u=location.origin+location.pathname+(BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}&s=${_kq.tongSao}&a=${_kq.soAi}`+(ten?`&n=${encodeURIComponent(ten)}`:'');
+  const t=$('kLuoi').textContent+`\nMình vượt ${_kq.soAi}/5 ải. Bạn vượt được mấy ải?`;tk('thach_ban',{sao:_kq.tongSao});
   if(navigator.share)navigator.share({title:'Sống sót ngày Tết',text:t,url:u}).catch(()=>{});
   else{navigator.clipboard.writeText(t+' '+u);$('nutThach').textContent='✅ Đã chép lời thách, dán gửi bạn bè nhé'}
 }
-// Nút lì xì tác giả: chỉ hiện khi có file img/lixi.png (chủ game tự đặt), không hiện ở bản thương hiệu
-if(!BR){const im=$('lixiImg');im.onload=()=>$('lixi').classList.remove('an');im.src='img/lixi.png';}
+// Nút lì xì tác giả: chỉ hiện ở màn kết bản gốc, không hiện ở bản thương hiệu
+function moLixi(){$('lixiImg').src='img/lixi.png';$('lixi').classList.remove('an');$('nutLixi').classList.add('an');tk('lixi_mo')}
 veMo();
 </script>
 </body>
