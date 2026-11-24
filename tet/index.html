@@ -449,7 +449,7 @@ function veMo(){
   window.scrollTo(0,0);
 }
 function veNgay(){$('cbNgay').checked=!!NGAY;$('lbNgay').classList.toggle('bat',!!NGAY);const kl=doc('sstet_ngay')[HOMNAY+'_'+vaiChon];$('lbNgay').title='';const e=$('klNgay');if(e)e.remove();if(NGAY&&kl){const d=document.createElement('div');d.id='klNgay';d.className='phu';d.style.cssText='font-size:.85rem;margin-top:4px';d.textContent=`Kỷ lục đề ${ngayDep(HOMNAY)} của bạn (vai này): ${kl.diem} điểm, ⭐ ${kl.sao}/15`;$('lbNgay').after(d)}}
-function chonVai(k){vaiChon=k;tieng('bam');veMo()}
+function chonVai(k){vaiChon=k;tieng('bam');veMo();tk('chon_vai',{vai:k})}
 function moDau(){
   tieng('bam');nhac('que');setTimeout(()=>['s_bam','s_tot','s_xau','mamco','cang','dem','ai'].forEach(k=>nhacNap(k).catch(()=>{})),2500);
   $('mMo').classList.add('an');$('mKet').classList.add('an');$('mChoi').classList.remove('an');$('mChoi').classList.remove('dem');
