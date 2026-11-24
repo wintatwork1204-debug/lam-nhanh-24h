@@ -27,6 +27,7 @@ ul{padding-left:20px;margin:6px 0}
 .buoc li::before{content:counter(b);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:#b91c1c;color:#fff;text-align:center;font-weight:700;line-height:28px}
 .hop{background:#fff;border-left:5px solid #f59e0b;border-radius:10px;padding:12px 16px;margin:12px 0}
 small{color:#92400e}
+#taoDemo label{display:block;font-weight:600;margin:6px 0}#taoDemo input{display:block;width:100%;box-sizing:border-box;padding:10px;border:2px solid #fcd34d;border-radius:10px;font-size:1rem;margin-top:4px}
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1VH65XEHJN"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-1VH65XEHJN',{anonymize_ip:true});
@@ -36,10 +37,30 @@ function tk(e,p){try{gtag('event',e,p||{})}catch(x){}}</script>
 <div class="dau">
   <h1>🧧 Minigame Tết mang tên shop của bạn</h1>
   <p>Khách chơi 5 phút “Sống sót ngày Tết”, chơi xong nhận voucher của shop, rồi khoe thẻ danh hiệu có tên shop lên Facebook, Zalo. Bạn có thêm khách quay lại và lượt chia sẻ tự nhiên dịp Tết.</p>
-  <p style="margin-top:16px"><a class="nut" onclick="tk('xem_demo')" href="./?shop=tiem-banh-may">▶ Chơi thử bản demo “Tiệm Bánh Mây”</a></p>
+  <p style="margin-top:16px"><a class="nut" onclick="tk('xem_demo')" href="./?shop=tiem-banh-may">▶ Chơi thử bản demo “Tiệm Bánh Mây”</a> <a class="nut" href="#taoDemo" onclick="tk('xem_tao_demo')">⚡ Tạo demo tên shop bạn</a></p>
   <p><small style="color:#fecaca">Tiệm Bánh Mây là tên giả để minh họa.</small></p>
 </div>
 <div class="khung">
+
+<h2>⚡ Tạo demo cho shop bạn trong 10 giây</h2>
+<div class="hop" id="taoDemo">
+<label>Tên shop hoặc công ty<input id="dTen" maxlength="30" placeholder="Ví dụ: Bánh mì Cô Ba"></label>
+<label>Ưu đãi tặng người chơi<input id="dVt" maxlength="60" placeholder="Ví dụ: Giảm 10% đơn Tết"></label>
+<label>Mã ưu đãi (nếu có)<input id="dVc" maxlength="20" placeholder="Ví dụ: TET10"></label>
+<button class="nut" style="border:0;cursor:pointer;font-size:1rem" onclick="taoDemo()">🎮 Tạo link demo</button>
+<div id="dKq" style="display:none;margin-top:10px">
+<p style="margin:4px 0">Link demo của bạn (có nhãn <b>BẢN DEMO</b>):</p>
+<input id="dLink" readonly onclick="this.select()">
+<p><a class="nut" id="dChoi" target="_blank" rel="noopener" onclick="tk('choi_demo_tu_tao')">▶ Chơi thử ngay</a> <a class="nut" id="dDat" onclick="tk('lien_he',{kenh:'email_tu_demo'})">✉️ Đặt bản chính thức</a></p>
+<small>Bản chính thức bỏ nhãn DEMO, thêm nút dẫn khách về fanpage hoặc web shop, và (gói Thương Hiệu) logo, màu, câu hỏi riêng về sản phẩm của shop.</small>
+</div></div>
+<script>
+function taoDemo(){const g=id=>document.getElementById(id).value.trim();const ten=g('dTen');if(!ten){document.getElementById('dTen').focus();return}
+ const u=new URL('./',location.href);u.searchParams.set('b',ten);if(g('dVt'))u.searchParams.set('vt',g('dVt'));if(g('dVc'))u.searchParams.set('vc',g('dVc'));
+ const l=u.toString();document.getElementById('dLink').value=l;document.getElementById('dChoi').href=l;
+ document.getElementById('dDat').href='mailto:quandidao@gmail.com?subject='+encodeURIComponent('Đặt minigame Tết cho '+ten)+'&body='+encodeURIComponent('Mình đã chơi thử demo: '+l+'\nMình muốn đặt gói: (Chốt Đơn / Thương Hiệu / YEP)\nLink fanpage hoặc web shop: \nNgày muốn chạy: \nSố điện thoại hoặc Zalo (nếu muốn trao đổi nhanh): ');
+ document.getElementById('dKq').style.display='block';tk('tao_demo',{co_ma:g('dVc')?1:0})}
+</script>
 
 <h2>🎬 Trailer game (40 giây)</h2>
 <p>Video dọc để shop đăng Reels, TikTok, story trước khi tung game. Gói Thương Hiệu có thêm bản trailer gắn tên shop và ưu đãi ở cảnh cuối, như mẫu dưới đây (Tiệm Bánh Mây là tên minh họa).</p>
