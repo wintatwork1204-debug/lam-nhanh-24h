@@ -152,6 +152,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
   <h1 id="kDanhHieu"></h1>
   <p class="phu" id="kMoTa"></p>
   <div class="hang" id="kHang"></div>
+  <button class="nut" onclick="window._vt='tren';thachBan()" id="nutThachTren">⚔️ Thách bạn bè vượt mặt mình</button>
   <div class="ketTruyen" id="kTruyen"></div>
   <div id="kNk"></div>
   <div class="thach an" id="brKet"></div>
@@ -160,7 +161,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
   <button class="nut phu2" onclick="taiAnh(1)">📱 Lưu bản dọc cho story</button>
   <div id="kBxh"></div>
   <div class="luoi" id="kLuoi"></div>
-  <button class="nut phu2" onclick="thachBan()" id="nutThach">⚔️ Thách bạn bè vượt mặt mình</button>
+  <button class="nut phu2" onclick="window._vt='duoi';thachBan()" id="nutThach">⚔️ Thách bạn bè vượt mặt mình</button>
   <button class="nut phu2" onclick="tk('choi_lai');veMo()">🔁 Chơi lại, thử cách khác</button>
   <button class="baolixi an" id="nutLixi" onclick="moLixi()">🧧 Lì xì tác giả một bao<small>Game miễn phí, không quảng cáo. Bao nhiêu cũng quý.</small></button>
   <div class="thach an" id="lixi">Cảm ơn bạn đã chơi tới đêm mùng 3 🥹<br>Mở app ngân hàng, quét mã để lì xì. Tác giả sẽ dùng để làm thêm vai và chương mới cho Tết sau.<img id="lixiImg" alt="Mã QR lì xì tác giả"><small style="font-weight:400">Lời chúc ghi ở phần nội dung chuyển khoản, tác giả đọc hết.</small></div>
@@ -610,6 +611,7 @@ function ketThuc(chet){
   $('kDanhHieu').innerHTML=(HIEM.includes(k)?'<span class="hiem">KẾT HIẾM</span> ':'')+kq[0]+' '+esc(kq[1]);$('kMoTa').textContent=kq[2];
   $('kHang').innerHTML=`Hành trình về quê: vượt ${soAi}/5 ải<div class="saoTo">${'<i>⭐</i>'.repeat(Math.min(3,Math.round(tongSao/5)))}</div><b>${hg[1]} ${hg[2]}</b>⭐ ${tongSao}/15 sao${hg[0]<14?` · còn ${HANG[HANG.indexOf(hg)-1][0]-tongSao} sao nữa lên ${HANG[HANG.indexOf(hg)-1][2]}`:''}`;
   $('kNk').innerHTML=veNK();
+  ['nutThach','nutThachTren'].forEach(i=>$(i).textContent='⚔️ Thách bạn bè vượt mặt mình');
   $('kLuoi').textContent=luoiKhoe(kq,diem);
   $('kBxh').innerHTML=BX.length?veBX(_kq.bx,_kq.hang)+(_kq.hang===0?'<div class="phu" style="text-align:center">👑 Bạn đang đứng đầu nhóm. Gửi link để giữ ngôi!</div>':_kq.hang>0?`<div class="phu" style="text-align:center">Còn ${_kq.bx[_kq.hang-1][1]-diem} điểm nữa là vượt ${esc(_kq.bx[_kq.hang-1][0])}. Chơi lại?</div>`:''):'';
   if(NGAY)$('kHang').insertAdjacentHTML('afterbegin',`<div style="font-size:.85rem;color:#fde68a">📅 Đề ${ngayDep(NGAY)} · ${diem} điểm${window._kq.kyLuc?' · 🏅 kỷ lục mới của bạn':''}</div>`);
@@ -659,9 +661,9 @@ function taiAnh(doc9){let c=$('anh');
   const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='song-sot-ngay-tet'+(doc9?'-story':'')+'.png';a.click();tk('tai_anh',{kieu:doc9?'story':'feed'})}
 function thachBan(){
   const ten=$('tenNC').value.trim();const u=new URL('k/'+_kq.k+'.html',location.href).href+(BR&&BR.id?`?shop=${BR.id}&`:BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}&s=${_kq.tongSao}&a=${_kq.soAi}`+(NGAY?`&ng=${NGAY}&v=${vaiChon}`:'')+(ten?`&n=${encodeURIComponent(ten)}`:'')+`&bx=${maBX(_kq.bx)}`;
-  const t=$('kLuoi').textContent+`\nMình vượt ${_kq.soAi}/5 ải. Bạn vượt được mấy ải?`+(_kq.bx.length>1&&_kq.hang>=0?`\nMình đang đứng #${_kq.hang+1}/${_kq.bx.length} bảng vàng nhóm 🏆`:'');tk('thach_ban',{bxh:_kq.bx.length,sao:_kq.tongSao,thu_thach_ngay:NGAY?1:0});
+  const t=$('kLuoi').textContent+`\nMình vượt ${_kq.soAi}/5 ải. Bạn vượt được mấy ải?`+(_kq.bx.length>1&&_kq.hang>=0?`\nMình đang đứng #${_kq.hang+1}/${_kq.bx.length} bảng vàng nhóm 🏆`:'');tk('thach_ban',{vi_tri:window._vt||'duoi',bxh:_kq.bx.length,sao:_kq.tongSao,thu_thach_ngay:NGAY?1:0});
   if(navigator.share)navigator.share({title:'Sống sót ngày Tết',text:t,url:u}).catch(()=>{});
-  else{navigator.clipboard.writeText(t+' '+u);$('nutThach').textContent='✅ Đã chép lời thách, dán gửi bạn bè nhé'}
+  else{navigator.clipboard.writeText(t+' '+u);['nutThach','nutThachTren'].forEach(i=>$(i).textContent='✅ Đã chép lời thách, dán gửi bạn bè nhé')}
 }
 // Nút lì xì tác giả: chỉ hiện ở màn kết bản gốc, không hiện ở bản thương hiệu
 function moLixi(){$('lixiImg').src='img/lixi.png';$('lixi').classList.remove('an');$('nutLixi').classList.add('an');tk('lixi_mo')}
