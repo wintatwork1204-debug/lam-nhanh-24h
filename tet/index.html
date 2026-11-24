@@ -109,6 +109,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
 .ngay{display:block;margin:10px auto 0;max-width:340px;font-size:.88rem;background:#fff7ed;border:1px dashed #f59e0b;border-radius:12px;padding:8px 10px;cursor:pointer;text-align:left}.ngay.bat{background:#fef3c7;border-style:solid}.ngay input{vertical-align:middle}
 .nhanDemo{position:fixed;top:14px;right:-34px;transform:rotate(45deg);background:#1e1b4b;color:#fde68a;font-weight:800;font-size:12px;letter-spacing:1px;padding:4px 40px;z-index:98;pointer-events:none}
 .hauTruyen{margin-top:12px;padding:12px;border:2px dashed #b45309;border-radius:10px;background:#fffbeb;animation:hienHau 1.2s ease}.hauTruyen h3{margin:0 0 6px;color:#92400e}@keyframes hienHau{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
+.noiTam{font-style:italic;color:#7c2d12;background:#fff7ed;border-radius:10px;padding:10px 14px;margin:-4px 0 14px;line-height:1.5;animation:hienHau 1.2s ease}
 .nk{background:#fff7ed;border-left:4px solid #b91c1c;border-radius:10px;padding:8px 12px;margin:10px 0;text-align:left;color:#3b0a0a;font-size:.92rem}.nk h3{margin:0 0 6px;font-size:1rem;color:#7f1d1d}.nk div{margin:6px 0}.nk q{font-style:italic;color:#7c2d12}.nk small{display:block;color:#92400e;font-size:.8rem}
 .bxh{background:#fffbeb;border:2px solid #f59e0b;border-radius:12px;padding:8px 12px;margin:10px 0;text-align:left;color:#3b0a0a}.bxh h3{margin:0 0 6px;text-align:center;font-size:1rem}.bxh ol{list-style:none;margin:0;padding:0}.bxh li{display:flex;justify-content:space-between;gap:8px;padding:4px 6px;border-bottom:1px dashed #fcd34d;font-size:.92rem}.bxh li.toi{background:#fde68a;border-radius:6px;font-weight:700}
 </style>
@@ -505,7 +506,8 @@ function tiep(){
   $('mChoi').classList.toggle('dem',false);
   if(h.loai=='chuong'){
     let qua='';
-    if(moc){const s=chamAi(aiNay);nhac('ai',false);qua=`<div class="hang" style="margin-bottom:14px">✅ Vượt ải ${aiNay+1}: ${AI_TEN[aiNay]}<b>${'⭐'.repeat(s)}${'☆'.repeat(3-s)}</b></div>`}
+    if(moc){const s=chamAi(aiNay);nhac('ai',false);qua=`<div class="hang" style="margin-bottom:14px">✅ Vượt ải ${aiNay+1}: ${AI_TEN[aiNay]}<b>${'⭐'.repeat(s)}${'☆'.repeat(3-s)}</b></div>`;
+      const nt=(NOITAM[vaiChon]||[])[h.i-1];if(nt){const tt=co.noi_som?'noi':lo>=35?'nang':'nhe';qua+=`<div class="noiTam">💭 ${esc(nt[tt]||nt.nhe)}</div>`}}
     aiNay=h.i;moc={...chiSo};veHT();setTimeout(()=>nhacCanh(h),moc&&h.i?1800:0);
     v.innerHTML=`${qua}<div class="sukien"><div class="to">${C[0]}</div><div style="font-weight:800;color:#b91c1c;letter-spacing:1px">ẢI ${h.i+1} · ${AI_TEN[h.i].toUpperCase()}</div><h2>${C[1]}</h2><p class="phu">${C[2]}</p><button class="nut" onclick="tiep()">Vào ải ▶</button></div>`;return;
   }
@@ -560,6 +562,24 @@ function tinhKetTruyen(){
   if(t=='nua')return 'doi';
   return lo>=60?'lo':'giu';
 }
+// Độc thoại nội tâm lúc qua ải (trước ải 2..5); 'noi' chỉ có từ ải 4 vì nói ra xảy ra ở ải 3
+const NOITAM={
+ sv:[{nhe:"Mùi hương trầm sáng mùng Một. Cuốn sổ vẽ nằm dưới đáy balo, kẹp giữa hai cái áo len. Cứ để nó nằm đó đã.",nang:"Mấy câu trả lời hôm qua cứ lởn vởn trong đầu. Bảng điểm thì nằm trong mail trường, còn bác cả thì ngồi đầu mâm."},
+  {nhe:"Điện thoại rung trong túi. Lại mail trường. Bạn úp màn hình xuống, cầm đũa lên như không có gì.",nang:"Nói dối thêm một câu thì phải nhớ thêm một câu. Bạn bắt đầu không nhớ nổi mình đã nói gì với ai."},
+  {nhe:"Bạn cũ khoe chỗ thực tập. Bạn chỉ cười, trong máy còn mấy bản phác thảo vẽ lúc ba giờ sáng.",nang:"Đứng giữa đám bạn cũ mà chỉ sợ ai đó nhắc tới chuyện học. Áo khoác dày mà lưng vẫn đổ mồ hôi.",noi:"Cả nhà biết rồi. Bố chưa nói gì, nhưng sáng nay bố hỏi: “Ngành thiết kế học mấy năm?”"},
+  {nhe:"Đồ đã xếp xong. Mẹ vẫn ngồi gói bánh chưng cho bạn mang đi. Cuốn sổ vẽ ở trong cặp. Hay là mở ra cho mẹ xem?",nang:"Ba ngày Tết, mỗi ngày thêm một lời nói dối. Mẹ nhét hũ măng vào túi, dặn “ráng học”. Sống mũi cay xè.",noi:"Mọi người đã biết. Còn một việc: cho mẹ xem bức vẽ đầu tiên. Bức vẽ cổng làng, vẽ hồi lớp mười."}],
+ dl:[{nhe:"Xấp phong bao đỏ đã sẵn. Lương tháng cuối rút gần hết. Chỉ mong năm nay không ai hỏi thưởng mấy tháng.",nang:"Lời nói hôm qua đã lan khắp họ. Bạn cắn miếng giò mà nghẹn ở cổ."},
+  {nhe:"Điện thoại báo tin. Không phải email tuyển dụng, chỉ là phí thẻ ngân hàng. Bạn thở ra, rồi lại thấy hụt hẫng.",nang:"Cậu rót rượu chúc “năm mới thăng tiến”. Bạn nâng chén. Mỗi chén là một lần gật đầu với điều không có thật."},
+  {nhe:"Họp lớp toàn sơ mi là phẳng và chìa khóa xe. Trong ví còn mấy trăm nghìn phòng thân. Bạn gọi cốc trà đá.",nang:"Cả bàn đòi bạn khao vì “lương cao nhất lớp”. Bạn nhìn cái ví, rồi nhìn đồng hồ.",noi:"Từ hôm nói ra, bố gọi điện cho mấy người quen hỏi việc giúp bạn. Bố không nói, nhưng bạn nghe thấy."},
+  {nhe:"Vali đã đóng. Mẹ còn lúi húi gói đòn chả cho bạn mang lên. Đèn phòng khách vàng ấm cả gian nhà.",nang:"Cả Tết đóng vai người thành đạt, giờ mệt rã rời. Mẹ đang vuốt phẳng mấy tờ tiền, định nhét lại vào túi bạn.",noi:"Mọi người biết cả rồi. Giờ chỉ còn ngồi với mẹ, kể nốt chuyện ngày mai bắt đầu lại từ đầu."}],
+ dt:[{nhe:"Ngõ còn mùi pháo hoa đêm qua. Trong túi áo khoác có cái kẹp tóc hoa đào bé Na lén nhét vào lúc tiễn bạn ra xe.",nang:"Hôm qua lỡ để mọi người tin là “chưa có ai”. Hôm nay mâm cỗ đông gấp đôi, và câu hỏi chắc cũng thế."},
+  {nhe:"Tin nhắn từ máy anh ấy, chữ ngọng nghịu: “Na chúc cô năm mới vui vẻ”. Bạn cười một mình giữa mâm rượu.",nang:"Ảnh bé Na gọi video hiện lên màn hình. Bạn úp vội điện thoại xuống chiếu. Tim đập loạn giữa tiếng cụng ly."},
+  {nhe:"Bạn bè dẫn con đi chúc Tết thầy. Lũ trẻ chạy ầm ngoài sân. Bạn nhớ nụ cười sún răng của bé Na.",nang:"Đám bạn đòi xem ảnh “người yêu bí mật”. Điện thoại toàn clip bé Na múa. Bạn bấm khóa màn hình.",noi:"Từ hôm bé Na đến, mẹ hỏi bạn ba lần: “Con bé thích ăn gì?” Lần nào cũng giả vờ hỏi vu vơ."},
+  {nhe:"Túi đã xếp gọn. Mẹ ngồi cắn hạt dưa một mình ngoài hiên. Cái kẹp tóc hoa đào vẫn nằm ấm trong lòng bàn tay.",nang:"Ba ngày đóng vai “ế vui vẻ”. Bạn thấy mẹ lau nước mắt vì lo con gái sống một mình. Chân bạn khựng lại.",noi:"Anh vừa nhắn: “Mai anh với Na ra bến xe đón em.” Mẹ vẫn còn thức. Còn vài điều nữa muốn kể với mẹ."}],
+ td:[{nhe:"Mùi nhang trầm khắp gian thờ. Bạn tắt thông báo bình luận của kênh trước khi vào chào bác cả.",nang:"Câu chuyện hôm qua đã thành “cháu làm to ở thành phố”. Bác cả chắc sắp nhờ xin việc cho thằng út."},
+  {nhe:"Kênh vừa qua mười nghìn người theo dõi. Vui mà không biết khoe với ai, nên bạn ăn thêm miếng giò.",nang:"Cậu khen “làm nhà nước nhàn mà chắc”. Đúng lúc ứng dụng báo doanh thu tháng này gần bằng không. Chén rượu đắng."},
+  {nhe:"Gặp thầy cũ, bạn cũ. Ai cũng kể chuyện lương, chuyện sếp. Bạn chỉ gật đầu, trong đầu đang nghĩ kịch bản video tới.",nang:"Đám bạn nhao nhao đòi chỉ cách “kiếm trăm triệu”. Bạn cười cứng đờ, nghĩ tới số dư tài khoản.",noi:"Từ hôm mở máy cho bố xem, bố hỏi tên kênh. Sáng nay bạn thấy bố bấm theo dõi bằng tài khoản của mẹ."},
+  {nhe:"Balo máy tính đã kéo khóa. Mẹ ngồi khâu cúc áo dưới ánh đèn vàng. Bạn muốn nói: con không ở nhà chơi đâu mẹ.",nang:"Cả Tết nói về một “công việc ổn định” không có thật. Nhìn mẹ cặm cụi gói đồ, bạn không nói nổi câu nào.",noi:"Mọi người đã biết bạn làm gì. Giờ ra phòng khách ngồi với mẹ, kể về những đêm thức dựng video."}]};
 const HAU={sv:["Bức tranh đầu tiên","Hè năm đó, bạn gửi về nhà bức tranh đầu tiên bán được: cổng làng ngày Tết, khói bếp, cây nêu. Bố đóng khung, treo ngay phòng khách, chỗ trước kia treo giấy khen của bạn. Khách đến chơi hỏi, bố bảo: \"Con tôi vẽ đấy.\" Rồi bố kể thêm mười phút, không ai ngắt được."],
  dl:["Chuyện của bố","Tháng Ba bạn có việc mới. Tối nhận lương đầu, bố gọi: \"Hồi bố bỏ nhà máy, ông nội không nói chuyện với bố nửa năm. Bố không muốn con phải qua nửa năm như thế.\" Đó là lần đầu hai bố con nói chuyện điện thoại quá 10 phút. Không ai nhắc chữ thưởng Tết."],
  dt:["Tết sau","Tết năm sau, bé Na là người đầu tiên chạy ra cổng, tay cầm bao lì xì mẹ bạn gửi từ rằm tháng Chạp. Bác cả vừa mở miệng \"bao giờ cưới\", bé Na đã trả lời hộ: \"Sắp rồi ạ!\" Cả mâm cười. Mẹ bạn gắp cho con bé miếng giò to nhất."],
