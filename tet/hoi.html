@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tết nhà bạn bị hỏi câu gì? Làm thẻ trong 30 giây</title>
+<meta name="description" content="Chọn người hỏi, gõ câu họ hàng hỏi bạn Tết này và câu bạn đáp. Ra ảnh đăng story, gửi bạn bè xem họ đáp sao.">
+<meta property="og:title" content="Tết này bác nhà bạn hỏi câu gì?">
+<meta property="og:description" content="Gõ câu bị hỏi, ra ảnh trong 30 giây. Gửi bạn bè xem họ đáp sao.">
+<meta property="og:image" content="https://wintatwork1204-debug.github.io/lam-nhanh-24h/tet/og.jpg">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#7f1d1d;color:#fff7ed}
+main{max-width:520px;margin:0 auto;padding:16px 14px 40px}
+h1{font-family:"Noto Serif",Georgia,serif;font-size:26px;margin:6px 0 4px;color:#fde68a}
+p.sub{margin:0 0 14px;opacity:.9;font-size:15px}
+.the{background:#fff7ed;color:#3f1d0b;border-radius:16px;padding:14px;margin:12px 0}
+.the h2{font-size:16px;margin:0 0 8px}
+.ai{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.ai button{border:2px solid transparent;background:#fde68a;border-radius:12px;padding:4px 2px;font-size:12px;color:#3f1d0b;cursor:pointer}
+.ai button img{width:100%;aspect-ratio:1;object-fit:contain;display:block}
+.ai button.on{border-color:#dc2626;background:#fecaca}
+textarea,input{width:100%;border:1px solid #d6b38a;border-radius:10px;padding:10px;font:inherit;font-size:16px;resize:none}
+.goi{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.goi button{border:0;background:#fee2e2;color:#7f1d1d;border-radius:999px;padding:6px 10px;font-size:13px;cursor:pointer}
+.nut{display:block;width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:700;cursor:pointer;margin-top:10px}
+.do{background:#facc15;color:#7f1d1d}.phu{background:#fff7ed;color:#7f1d1d}
+canvas{width:100%;border-radius:14px;display:block;margin-top:10px}
+#thach{background:#fde68a;color:#3f1d0b;border-radius:16px;padding:14px;margin:8px 0;display:none}
+#thach b{color:#7f1d1d}
+small{opacity:.8}
+a{color:#fde68a}
+.an{display:none}
+</style>
+</head>
+<body>
+<main>
+<div id="thach"></div>
+<h1>Tết này bạn bị hỏi câu gì?</h1>
+<p class="sub">Chọn người hỏi, gõ câu bị hỏi và câu bạn đáp. Ra ảnh đăng story, gửi bạn bè xem họ đáp sao.</p>
+
+<div class="the"><h2>1. Ai hỏi?</h2><div class="ai" id="ai"></div></div>
+
+<div class="the"><h2>2. Hỏi gì?</h2>
+<textarea id="q" rows="2" maxlength="90" placeholder="VD: Lương tháng bao nhiêu rồi? Chắc hai chục nhỉ?"></textarea>
+<div class="goi" id="goi"></div></div>
+
+<div class="the"><h2>3. Bạn đáp sao?</h2>
+<textarea id="d" rows="2" maxlength="90" placeholder="VD: Dạ đủ sống ạ (cười trừ)"></textarea>
+<input id="ten" maxlength="20" placeholder="Tên bạn (không bắt buộc)" style="margin-top:8px"></div>
+
+<button class="nut do" id="lam">Làm ảnh</button>
+<div id="kq" class="an">
+<canvas id="c" width="1080" height="1920"></canvas>
+<button class="nut do" id="tai">Tải ảnh (đăng story, TikTok)</button>
+<button class="nut phu" id="gui">Gửi bạn bè: xem họ đáp sao</button>
+<small id="bao"></small>
+<button class="nut phu" onclick="location.href='./?utm_source=hoi&utm_medium=web&utm_campaign=ugc'">Chơi game Vượt Ải Tết (5 phút)</button>
+</div>
+<p><small>Không lưu gì lên máy chủ. Câu chữ chỉ nằm trong ảnh và link bạn gửi.</small></p>
+</main>
+<script>
+const NGUOI=[["bac","Bác"],["co","Cô"],["chu","Chú"],["mo","Mợ"],["cau","Cậu"],["ba","Bà"],["ong","Ông"],["me","Mẹ"],["bo","Bố"],["xom","Hàng xóm"]];
+const GOI=["Lương tháng bao nhiêu rồi?","Có người yêu chưa?","Bao giờ cưới cho các bác ăn cỗ?","Sao dạo này béo thế?","Gầy thế, ở trên ấy không ai nấu cho ăn à?","Công ty gì? Sao chả nghe tên bao giờ?","Sao không về quê mà làm?","Bao giờ mua nhà?","Năm nay biếu bố mẹ bao nhiêu?","Thưởng Tết được mấy tháng?","Sao năm nay về một mình?","Khi nào cho bố mẹ bế cháu?"];
+const GA_ID='G-1VH65XEHJN';
+if(GA_ID){const g=document.createElement('script');g.async=1;g.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(g);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',GA_ID,{anonymize_ip:true});}
+function tk(e,p){try{window.gtag&&gtag('event',e,p||{})}catch(_){}}
+const $=i=>document.getElementById(i);
+let ai="bac";
+const vungAi=$("ai");
+NGUOI.forEach(([k,t])=>{const b=document.createElement("button");b.innerHTML='<img src="img/'+k+'.webp" alt="">';b.append(t);b.dataset.k=k;b.onclick=()=>chonAi(k);vungAi.append(b)});
+function chonAi(k){ai=k;[...vungAi.children].forEach(b=>b.classList.toggle("on",b.dataset.k===k))}
+chonAi(ai);
+GOI.forEach(t=>{const b=document.createElement("button");b.textContent=t;b.onclick=()=>{$("q").value=t};$("goi").append(b)});
+// link thách
+function ma(o){return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
+function giai(s){try{s=s.replace(/-/g,"+").replace(/_/g,"/");return JSON.parse(decodeURIComponent(escape(atob(s))))}catch(_){return null}}
+const den=giai(location.hash.slice(1));
+if(den&&den.q){
+  const k=NGUOI.find(x=>x[0]===den.a)?den.a:"bac",tenNg=NGUOI.find(x=>x[0]===k)[1];
+  const th=$("thach");th.style.display="block";
+  const ten=(den.n||"Một người bạn").slice(0,20);
+  th.innerHTML="";const a=document.createElement("div");
+  a.innerHTML="<b></b> bị "+tenNg.toLowerCase()+" hỏi: <b></b><br>Và đáp: <i></i><br><br>Nếu là bạn thì đáp sao? Gõ ở ô số 3 👇";
+  a.querySelectorAll("b")[0].textContent=ten;a.querySelectorAll("b")[1].textContent="“"+den.q.slice(0,90)+"”";a.querySelector("i").textContent="“"+(den.d||"…").slice(0,90)+"”";
+  th.append(a);chonAi(k);$("q").value=den.q.slice(0,90);tk("ugc_tu_thach");
+}
+tk("ugc_mo",{tu_thach:den?1:0});
+// vẽ
+const nen=new Image();nen.src="img/nen.jpg";
+function anh(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src})}
+function dong(x,t,w){const ch=t.split(/\s+/),ra=[];let s="";for(const c of ch){const th=s?s+" "+c:c;if(x.measureText(th).width>w&&s){ra.push(s);s=c}else s=th}if(s)ra.push(s);return ra}
+function bong(x,t,X,Y,W,mau,chu,font,lh){x.font=font;const L=dong(x,t,W-80);const H=L.length*lh+60;x.fillStyle=mau;x.beginPath();x.roundRect(X,Y,W,H,36);x.fill();x.fillStyle=chu;L.forEach((l,i)=>x.fillText(l,X+40,Y+30+lh*(i+1)-lh*0.25));return H}
+async function ve(){
+  const c=$("c"),x=c.getContext("2d");const q=$("q").value.trim(),d=$("d").value.trim()||"(cười trừ)";const ten=$("ten").value.trim();
+  const tenNg=NGUOI.find(n=>n[0]===ai)[1];
+  x.fillStyle="#7f1d1d";x.fillRect(0,0,1080,1920);
+  if(nen.complete&&nen.naturalWidth){const s=Math.max(1080/nen.naturalWidth,1920/nen.naturalHeight);x.globalAlpha=.35;x.drawImage(nen,(1080-nen.naturalWidth*s)/2,(1920-nen.naturalHeight*s)/2,nen.naturalWidth*s,nen.naturalHeight*s);x.globalAlpha=1}
+  const g=x.createLinearGradient(0,0,0,1920);g.addColorStop(0,"rgba(127,29,29,.75)");g.addColorStop(1,"rgba(60,10,10,.9)");x.fillStyle=g;x.fillRect(0,0,1080,1920);
+  x.textAlign="center";x.fillStyle="#fde68a";x.font="bold 64px 'Noto Serif',Georgia,serif";x.fillText("Tết này nhà "+(ten||"tôi"),540,170);
+  x.font="38px system-ui,sans-serif";x.fillStyle="#fff7ed";x.fillText("câu hỏi được chờ đợi nhất năm",540,235);
+  const h=await anh("img/"+ai+".webp");if(h){const s=660/Math.max(h.width,h.height);x.drawImage(h,540-h.width*s/2,300,h.width*s,h.height*s)}
+  x.textAlign="left";x.fillStyle="#fde68a";x.font="bold 42px system-ui,sans-serif";x.fillText(tenNg+" hỏi:",80,1040);
+  const h1=bong(x,"“"+q+"”",80,1070,920,"#fff7ed","#3f1d0b","bold 58px system-ui,sans-serif",76);
+  const y2=1070+h1+60;x.fillStyle="#fde68a";x.font="bold 42px system-ui,sans-serif";x.fillText((ten||"Tôi")+" đáp:",80,y2);
+  bong(x,"“"+d+"”",80,y2+30,920,"#facc15","#7f1d1d","bold 54px system-ui,sans-serif",70);
+  x.textAlign="center";x.fillStyle="#fff7ed";x.font="40px system-ui,sans-serif";x.fillText("Nhà bạn bị hỏi câu gì?",540,1760);
+  x.fillStyle="#fde68a";x.font="bold 46px system-ui,sans-serif";x.fillText("is.gd/cauhoitet",540,1830);
+}
+$("lam").onclick=async()=>{const q=$("q").value.trim();if(!q){$("q").focus();$("q").placeholder="Gõ câu bị hỏi trước nhé";return}
+  await ve();$("kq").classList.remove("an");$("c").scrollIntoView({behavior:"smooth"});tk("ugc_tao",{nguoi:ai,tu_go:GOI.includes(q)?0:1,tu_thach:den?1:0})};
+$("tai").onclick=()=>{const a=document.createElement("a");a.href=$("c").toDataURL("image/png");a.download="tet-nha-toi.png";a.click();tk("ugc_tai_anh")};
+$("gui").onclick=async()=>{
+  const link=location.origin+location.pathname+"?utm_source=ban&utm_medium=thach&utm_campaign=ugc#"+ma({a:ai,q:$("q").value.trim().slice(0,90),d:$("d").value.trim().slice(0,90),n:$("ten").value.trim().slice(0,20)});
+  const txt="Tết này mình bị hỏi câu này. Bạn mà bị hỏi thì đáp sao?";tk("ugc_thach");
+  if(navigator.share){try{await navigator.share({title:"Tết nhà bạn bị hỏi câu gì?",text:txt,url:link});return}catch(_){}}
+  try{await navigator.clipboard.writeText(txt+" "+link);$("bao").textContent="Đã chép link. Dán vào Messenger/Zalo gửi bạn nhé."}catch(_){prompt("Chép link này gửi bạn:",link)}};
+</script>
+</body>
+</html>
