@@ -109,6 +109,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
 .ngay{display:block;margin:10px auto 0;max-width:340px;font-size:.88rem;background:#fff7ed;border:1px dashed #f59e0b;border-radius:12px;padding:8px 10px;cursor:pointer;text-align:left}.ngay.bat{background:#fef3c7;border-style:solid}.ngay input{vertical-align:middle}
 .nhanDemo{position:fixed;top:14px;right:-34px;transform:rotate(45deg);background:#1e1b4b;color:#fde68a;font-weight:800;font-size:12px;letter-spacing:1px;padding:4px 40px;z-index:98;pointer-events:none}
 .hauTruyen{margin-top:12px;padding:12px;border:2px dashed #b45309;border-radius:10px;background:#fffbeb;animation:hienHau 1.2s ease}.hauTruyen h3{margin:0 0 6px;color:#92400e}@keyframes hienHau{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
+.soKe{background:#fffbeb;border:2px solid #f59e0b;border-radius:14px;padding:10px 12px;margin:10px 0;color:#3b0a0a;text-align:center}.soKe h3{margin:0 0 6px;color:#b91c1c}.soKe table{width:100%;border-collapse:collapse;font-size:.9rem;margin-bottom:6px}.soKe td,.soKe th{padding:4px 2px;border-bottom:1px dashed #fcd34d}.soKe td:first-child{text-align:left}.soKe tr.thang td{background:#dcfce7}.soKe tr.thua td{background:#fee2e2}
 .noiTam{font-style:italic;color:#7c2d12;background:#fff7ed;border-radius:10px;padding:10px 14px;margin:-4px 0 14px;line-height:1.5;animation:hienHau 1.2s ease}
 .nk{background:#fff7ed;border-left:4px solid #b91c1c;border-radius:10px;padding:8px 12px;margin:10px 0;text-align:left;color:#3b0a0a;font-size:.92rem}.nk h3{margin:0 0 6px;font-size:1rem;color:#7f1d1d}.nk div{margin:6px 0}.nk q{font-style:italic;color:#7c2d12}.nk small{display:block;color:#92400e;font-size:.8rem}
 .bxh{background:#fffbeb;border:2px solid #f59e0b;border-radius:12px;padding:8px 12px;margin:10px 0;text-align:left;color:#3b0a0a}.bxh h3{margin:0 0 6px;text-align:center;font-size:1rem}.bxh ol{list-style:none;margin:0;padding:0}.bxh li{display:flex;justify-content:space-between;gap:8px;padding:4px 6px;border-bottom:1px dashed #fcd34d;font-size:.92rem}.bxh li.toi{background:#fde68a;border-radius:6px;font-weight:700}
@@ -584,6 +585,16 @@ const HAU={sv:["Bức tranh đầu tiên","Hè năm đó, bạn gửi về nhà 
  dl:["Chuyện của bố","Tháng Ba bạn có việc mới. Tối nhận lương đầu, bố gọi: \"Hồi bố bỏ nhà máy, ông nội không nói chuyện với bố nửa năm. Bố không muốn con phải qua nửa năm như thế.\" Đó là lần đầu hai bố con nói chuyện điện thoại quá 10 phút. Không ai nhắc chữ thưởng Tết."],
  dt:["Tết sau","Tết năm sau, bé Na là người đầu tiên chạy ra cổng, tay cầm bao lì xì mẹ bạn gửi từ rằm tháng Chạp. Bác cả vừa mở miệng \"bao giờ cưới\", bé Na đã trả lời hộ: \"Sắp rồi ạ!\" Cả mâm cười. Mẹ bạn gắp cho con bé miếng giò to nhất."],
  td:["Học trò mới","Tháng Tư, bố nhắn một tin dài nhất từ trước tới giờ: \"Mẹ muốn bán mấy hũ tương nhà làm lên mạng. Con dạy mẹ được không?\" Ba tuần sau, đơn đầu tiên đi Sài Gòn. Bố đứng đóng thùng, quay video gửi cả họ, chú thích: \"Nhà có chuyên gia online.\""]};
+// So kè từng ải với người gửi lời thách (link có ss=5 chữ số sao từng ải)
+function veSoKe(){
+  const ss=QS.get('ss');if(!ss||!/^[0-3]{5}$/.test(ss))return '';
+  const ho=QS.get('n')?esc(QS.get('n').slice(0,18)):'Bạn ấy';let t=0,h=0;
+  const dong=AI_TEN.map((ten,i)=>{const a=sao[i]||0,b=+ss[i];if(a>b)t++;else if(a<b)h++;
+    const v=x=>x?'⭐'.repeat(x):'💀';return `<tr class="${a>b?'thang':a<b?'thua':''}"><td>${CHUONG[i][0]} ${ten}</td><td>${v(a)}</td><td>${v(b)}</td></tr>`}).join('');
+  const kl=t>h?`🔥 Bạn thắng ${t}/5 ải. Gửi lại để ${ho} cay!`:t<h?`😤 ${ho} hơn bạn ${h} ải. Chơi lại phục thù?`:'🤝 Hòa! Ván quyết định?';
+  tk('so_ke',{thang:t,thua:h});
+  return `<div class="soKe"><h3>⚔️ So kè từng ải</h3><table><tr><th></th><th>Bạn</th><th>${ho}</th></tr>${dong}</table><b>${kl}</b></div>`;
+}
 function veNK(){
   if(nk.length<3)return '';
   const cat=x=>x.length>70?x.slice(0,68)+'…':x,ten=a=>(AI[a]||['',''])[1]||'';
@@ -630,7 +641,7 @@ function ketThuc(chet){
   $('mChoi').classList.add('an');$('mKet').classList.remove('an');
   $('kDanhHieu').innerHTML=(HIEM.includes(k)?'<span class="hiem">KẾT HIẾM</span> ':'')+kq[0]+' '+esc(kq[1]);$('kMoTa').textContent=kq[2];
   $('kHang').innerHTML=`Hành trình về quê: vượt ${soAi}/5 ải<div class="saoTo">${'<i>⭐</i>'.repeat(Math.min(3,Math.round(tongSao/5)))}</div><b>${hg[1]} ${hg[2]}</b>⭐ ${tongSao}/15 sao${hg[0]<14?` · còn ${HANG[HANG.indexOf(hg)-1][0]-tongSao} sao nữa lên ${HANG[HANG.indexOf(hg)-1][2]}`:''}`;
-  $('kNk').innerHTML=veNK();
+  $('kNk').innerHTML=veSoKe()+veNK();
   ['nutThach','nutThachTren'].forEach(i=>$(i).textContent='⚔️ Thách bạn bè vượt mặt mình');
   $('kLuoi').textContent=luoiKhoe(kq,diem);
   $('kBxh').innerHTML=BX.length?veBX(_kq.bx,_kq.hang)+(_kq.hang===0?'<div class="phu" style="text-align:center">👑 Bạn đang đứng đầu nhóm. Gửi link để giữ ngôi!</div>':_kq.hang>0?`<div class="phu" style="text-align:center">Còn ${_kq.bx[_kq.hang-1][1]-diem} điểm nữa là vượt ${esc(_kq.bx[_kq.hang-1][0])}. Chơi lại?</div>`:''):'';
@@ -680,7 +691,7 @@ function taiAnh(doc9){let c=$('anh');
   if(doc9){const s=document.createElement('canvas');s.width=1080;s.height=1920;const x=s.getContext('2d');const g=x.createLinearGradient(0,0,0,1920);g.addColorStop(0,'#7f1d1d');g.addColorStop(.5,'#dc2626');g.addColorStop(1,'#7f1d1d');x.fillStyle=g;x.fillRect(0,0,1080,1920);x.drawImage(c,0,285);x.textAlign='center';x.fillStyle='#fde68a';x.font='bold 52px system-ui,sans-serif';x.fillText('Bạn vượt được mấy ải? 🧧',540,1745);c=s}
   const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='song-sot-ngay-tet'+(doc9?'-story':'')+'.png';a.click();tk('tai_anh',{kieu:doc9?'story':'feed'})}
 function thachBan(){
-  const ten=$('tenNC').value.trim();const u=new URL('k/'+_kq.k+'.html',location.href).href+(BR&&BR.id?`?shop=${BR.id}&`:BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}&s=${_kq.tongSao}&a=${_kq.soAi}`+(NGAY?`&ng=${NGAY}&v=${vaiChon}`:'')+(ten?`&n=${encodeURIComponent(ten)}`:'')+`&bx=${maBX(_kq.bx)}`;
+  const ten=$('tenNC').value.trim();const u=new URL('k/'+_kq.k+'.html',location.href).href+(BR&&BR.id?`?shop=${BR.id}&`:BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}&s=${_kq.tongSao}&a=${_kq.soAi}&ss=${sao.join('')}`+(NGAY?`&ng=${NGAY}&v=${vaiChon}`:'')+(ten?`&n=${encodeURIComponent(ten)}`:'')+`&bx=${maBX(_kq.bx)}`;
   const t=$('kLuoi').textContent+`\nMình vượt ${_kq.soAi}/5 ải. Bạn vượt được mấy ải?`+(_kq.bx.length>1&&_kq.hang>=0?`\nMình đang đứng #${_kq.hang+1}/${_kq.bx.length} bảng vàng nhóm 🏆`:'');tk('thach_ban',{vi_tri:window._vt||'duoi',bxh:_kq.bx.length,sao:_kq.tongSao,thu_thach_ngay:NGAY?1:0});
   if(navigator.share)navigator.share({title:'Sống sót ngày Tết',text:t,url:u}).catch(()=>{});
   else{navigator.clipboard.writeText(t+' '+u);['nutThach','nutThachTren'].forEach(i=>$(i).textContent='✅ Đã chép lời thách, dán gửi bạn bè nhé')}
