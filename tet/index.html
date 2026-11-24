@@ -179,6 +179,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
   <button class="nut" onclick="taiAnh()">⬇️ Lưu thẻ về máy để khoe</button>
   <button class="nut phu2" onclick="taiAnh(1)">📱 Lưu bản dọc cho story</button>
   <button class="nut phu2" onclick="taiPoster()">🎬 Lưu poster phim đời bạn</button>
+  <button class="nut phu2" id="nutTrailer" onclick="xuatTrailer()">🎞️ Quay trailer 13 giây ván của bạn (đăng TikTok, Reels)</button>
   <div id="kBxh"></div>
   <div class="luoi" id="kLuoi"></div>
   <button class="nut phu2" onclick="window._vt='duoi';thachBan()" id="nutThach">⚔️ Thách bạn bè vượt mặt mình</button>
@@ -769,6 +770,73 @@ function taiPoster(){
   x.fillStyle='#facc15';x.font='bold 30px system-ui,sans-serif';x.fillText(`⭐ ${S}/15 · VƯỢT ${K.soAi}/5 ẢI · KHỞI CHIẾU MÙNG 1 TẾT`,540,1284);
   x.fillStyle='#a8a29e';x.font='22px system-ui,sans-serif';x.fillText(BR?`Quà Tết từ ${BR.ten}${BR.demo?" · bản demo":""}`:'wintatwork1204-debug.github.io/lam-nhanh-24h/tet',540,1324);
   const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='poster-song-sot-ngay-tet.png';a.click();window._poster=a.href;tk('tai_anh',{kieu:'poster'})})}
+// Trailer 13 giây của chính ván vừa chơi: vẽ canvas theo đồng hồ nhạc, quay bằng MediaRecorder (mp4 nếu máy hỗ trợ, không thì webm)
+const HOI_BAC={sv:'HỌC HÀNH THẾ NÀO RỒI?',dl:'THƯỞNG TẾT BAO NHIÊU?',dt:'BAO GIỜ CƯỚI?',td:'RỐT CUỘC CHÁU LÀM GÌ?'};
+let _dangQuay=0;
+function xuatTrailer(){
+  const K=window._kq;if(!K||_dangQuay)return;const C=document.createElement('canvas');
+  if(!window.MediaRecorder||!C.captureStream){alert('Máy này chưa quay được video. Bấm "Lưu poster phim" nhé.');return}
+  _dangQuay=1;const nut=$('nutTrailer'),cu=nut.textContent;nut.textContent='⏳ Đang dựng trailer…';tk('trailer_ban',{buoc:'bat_dau'});
+  const ten=($('tenNC').value.trim()||'Bạn').slice(0,18).toUpperCase(),S=K.tongSao,hg=K.hg,v=vaiChon;
+  const an={};const nap=['nen','v_'+v,'bac'].map(k=>new Promise(r=>{const i=new Image();i.onload=()=>{an[k]=i;r()};i.onerror=r;i.src=k=='nen'?'img/nen.jpg':IMG[k]}));
+  const A=new (window.AudioContext||window.webkitAudioContext)();
+  const nhac=fetch('nhac/trailer_ban.mp3').then(r=>r.arrayBuffer()).then(b=>new Promise((ok,loi)=>A.decodeAudioData(b,ok,loi))).catch(()=>null);
+  Promise.all([nhac,...nap]).then(([buf])=>{
+    C.width=720;C.height=1280;const x=C.getContext('2d'),W=720,H=1280,D=13.2;
+    const st=C.captureStream(30),dich=A.createMediaStreamDestination();
+    if(buf){const s=A.createBufferSource();s.buffer=buf;s.connect(dich);if(am)s.connect(A.destination);window._tsrc=s}
+    dich.stream.getAudioTracks().forEach(t=>st.addTrack(t));
+    const kieu=['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/mp4;codecs=avc1,mp4a','video/mp4;codecs=avc1,opus','video/mp4','video/webm;codecs=vp9,opus','video/webm'].find(m=>MediaRecorder.isTypeSupported(m))||'';
+    const rec=new MediaRecorder(st,kieu?{mimeType:kieu,videoBitsPerSecond:4e6}:{}),ph=[];rec.ondataavailable=e=>e.data.size&&ph.push(e.data);
+    const cl=q=>Math.max(0,Math.min(1,q)),rp=(t,a,b)=>cl((t-a)/(b-a)),ez=q=>1-Math.pow(1-q,3),hien=(t,a,b,f=.2)=>Math.min(rp(t,a,a+f),1-rp(t,b-f,b));
+    const chu=(t,y,font,mau,al,cx=W/2)=>{x.globalAlpha=al;x.fillStyle=mau;x.font=font;x.fillText(t,cx,y);x.globalAlpha=1};
+    const ve=(i,cx,by,h,f,al=1)=>{if(!i)return;const w=i.width*h/i.height;x.save();x.globalAlpha=al;x.filter=f||'none';x.drawImage(i,cx-w/2,by-h,w,h);x.restore()};
+    const T0=[3,4.2,5.4,6.6,7.8],HIT=[1.6,3,4.2,5.4,6.6,7.8,8.9,10.4];
+    function ve1(t){
+      x.setTransform(1,0,0,1,0,0);let rung=0;for(const h of HIT)if(t>=h&&t<h+.4)rung=Math.max(rung,(1-(t-h)/.4)*(h==1.6||h==8.9||h==10.4?16:8));
+      if(rung)x.translate(Math.sin(t*97)*rung,Math.cos(t*83)*rung);
+      x.fillStyle='#050101';x.fillRect(-30,-30,W+60,H+60);x.textAlign='center';
+      if(t>=1.6&&an.nen){x.save();x.globalAlpha=t<10.4?.35:.22;x.filter=`blur(4px) saturate(${t>=8.9&&t<10.4?.3:.8})`;const z=1.1+t*.006;x.drawImage(an.nen,W/2-W*z*.9,0,W*z*1.8,H*z);x.restore()}
+      let g=x.createRadialGradient(W/2,H*.45,80,W/2,H*.45,760);g.addColorStop(0,t>=8.9&&t<10.4?'rgba(220,38,38,.35)':'rgba(250,204,21,.12)');g.addColorStop(1,'rgba(0,0,0,.9)');x.fillStyle=g;x.fillRect(0,0,W,H);
+      // 0–1,6 mở màn
+      chu('TẾT 2027.',600,'900 84px "Noto Serif",Georgia,serif','#fff',hien(t,.1,1.55,.3));
+      chu('Một người con về quê. Một bí mật.',690,'600 34px system-ui,sans-serif','#fecaca',hien(t,.6,1.55,.3));
+      // 1,6–3,0 giới thiệu
+      if(t>=1.6&&t<8.9){const vao=ez(rp(t,1.6,2.0));ve(an['v_'+v],W/2,H-150,t<3?560:420,`drop-shadow(0 0 30px rgba(250,204,21,.55)) brightness(${t<3?1:.55})`,vao)}
+      if(t>=1.6&&t<3){const al=hien(t,1.6,2.95,.15);chu('HỌ HÀNG NHÀ BẠN TRÌNH CHIẾU',250,'700 26px system-ui,sans-serif','#fecaca',al);chu(ten,330,'900 64px "Noto Serif",Georgia,serif','#fde68a',al);chu('trong vai '+VAI[v].ten.toUpperCase(),384,'600 30px system-ui,sans-serif','#fff',al)}
+      // 3,0–8,9 năm ải
+      let k=-1;for(let i=0;i<5;i++)if(t>=T0[i])k=i;
+      if(k>=0&&t<8.9){const t0=T0[k],sk=1+.25*(1-ez(rp(t,t0,t0+.2))),al=hien(t,t0,t0+1.2,.08);
+        x.save();x.translate(W/2,300);x.scale(sk,sk);chu(`ẢI ${k+1}/5`,-60,'800 34px system-ui,sans-serif','#fca5a5',al,0);chu(AI_TEN[k].toUpperCase(),20,'900 62px "Noto Serif",Georgia,serif','#fff',al,0);x.restore();
+        const s=sao[k]||0,ls=t>=t0+.12,sz=1+.6*(1-ez(rp(t,t0+.12,t0+.3)));
+        if(ls){x.save();x.translate(W/2,470);x.scale(sz,sz);x.font='80px system-ui,sans-serif';x.fillStyle=s?'#facc15':'#e5e7eb';x.fillText(s?'★'.repeat(s)+'☆'.repeat(3-s):'💀 GỤC NGÃ',0,0);x.restore()}
+        let tong=0;for(let i=0;i<=k;i++)if(i<k||ls)tong+=sao[i]||0;
+        chu(`⭐ ${tong}/15`,560,'900 46px system-ui,sans-serif','#fde68a',1)}
+      // 8,9–10,4 bác cả
+      if(t>=8.9&&t<10.4){ve(an.bac,W/2,H-40,900+rp(t,8.9,10.4)*60,'brightness(.5) drop-shadow(0 0 40px rgba(220,38,38,.95))');
+        const sk=1+.3*(1-ez(rp(t,8.95,9.15)));x.save();x.translate(W/2,300);x.scale(sk,sk);x.shadowColor='#7f1d1d';x.shadowOffsetY=6;chu('Bác cả hỏi:',-70,'700 34px system-ui,sans-serif','#fecaca',1,0);
+        x.font='900 66px "Noto Serif",Georgia,serif';x.fillStyle='#fff';wrap(x,HOI_BAC[v]||'BAO GIỜ CƯỚI?',0,10,640,76);x.restore()}
+      // 10,4–13,2 tựa đề
+      if(t>=10.4){const sk=1+.3*(1-ez(rp(t,10.4,11)));x.save();x.translate(W/2,560);x.scale(sk,sk);g=x.createLinearGradient(0,-90,0,110);g.addColorStop(0,'#fff7cc');g.addColorStop(.55,'#facc15');g.addColorStop(1,'#b45309');
+        x.shadowColor='#7f1d1d';x.shadowOffsetY=8;x.fillStyle=g;x.font='900 104px "Noto Serif",Georgia,serif';x.fillText('SỐNG SÓT',0,0);x.fillText('NGÀY TẾT',0,110);x.restore();
+        const al=rp(t,10.9,11.3);chu(`${hg[1]} ${hg[2]}`,800,'800 46px system-ui,sans-serif','#fff',al);chu(`⭐ ${S}/15 · vượt ${K.soAi}/5 ải`,870,'700 38px system-ui,sans-serif','#fde68a',al);
+        const al2=rp(t,11.5,11.9);chu('Bạn vượt được mấy ải?',1010,'800 42px system-ui,sans-serif','#fff',al2);
+        x.globalAlpha=al2;x.fillStyle='#facc15';x.fillRect(110,1050,500,64);x.globalAlpha=1;chu(BR?`Quà Tết từ ${BR.ten}`:'Chơi miễn phí · link ở bình luận',1094,'800 30px system-ui,sans-serif','#7f1d1d',al2)}
+      // chớp trắng
+      let f=0;for(const h of HIT)if(t>=h)f=Math.max(f,(h==1.6||h==10.4?.9:.35)*(1-rp(t,h,h+.25)));if(f){x.setTransform(1,0,0,1,0,0);x.fillStyle=`rgba(255,255,255,${f})`;x.fillRect(0,0,W,H)}
+      // khung điện ảnh
+      x.setTransform(1,0,0,1,0,0);x.fillStyle='#000';x.fillRect(0,0,W,70);x.fillRect(0,H-70,W,70);
+    }
+    ve1(0);rec.start(250);const bd=A.currentTime+.05;if(window._tsrc){window._tsrc.start(bd);window._tsrc=null}
+    (function vong(){const t=A.currentTime-bd;ve1(Math.max(0,t));nut.textContent=`⏳ Đang quay trailer… ${Math.min(99,Math.round(t/D*100))}%`;if(t<D)requestAnimationFrame(vong);else rec.stop()})();
+    rec.onstop=()=>{_dangQuay=0;nut.textContent=cu;try{A.close()}catch(e){}
+      const mt=(rec.mimeType||kieu||'video/webm').split(';')[0],duoi=mt.includes('mp4')?'mp4':'webm',blob=new Blob(ph,{type:mt}),tenF=`trailer-song-sot-ngay-tet.${duoi}`;
+      const f=window.File?new File([blob],tenF,{type:mt}):null;tk('trailer_ban',{buoc:'xong',dinh_dang:duoi});
+      if(f&&navigator.canShare&&navigator.canShare({files:[f]}))navigator.share({files:[f],title:'Trailer Tết của mình',text:'Mình vượt '+K.soAi+'/5 ải ngày Tết. Bạn thì sao?'}).catch(()=>luu());else luu();
+      function luu(){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=tenF;a.click()}
+      window._trailerBlob=blob};
+  }).catch(e=>{_dangQuay=0;nut.textContent=cu;alert('Chưa dựng được trailer trên máy này. Bấm "Lưu poster phim" nhé.')});
+}
 function qThach(){const ten=$('tenNC').value.trim();return (BR&&BR.id?`?shop=${BR.id}&`:BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}&s=${_kq.tongSao}&a=${_kq.soAi}&ss=${sao.join('')}`+(NGAY?`&ng=${NGAY}&v=${vaiChon}`:'')+(ten?`&n=${encodeURIComponent(ten)}`:'')+`&bx=${maBX(_kq.bx)}`}
 function chuyenMay(){tk('chuyen_may',{so:_kq.bx.length});const u=new URL('./',location.href).href+qThach()+'&chuyen=1';setTimeout(()=>location.href=u,250)}
 function thachBan(){
