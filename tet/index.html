@@ -162,6 +162,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
   <canvas id="anh" width="1080" height="1350"></canvas>
   <button class="nut" onclick="taiAnh()">⬇️ Lưu thẻ về máy để khoe</button>
   <button class="nut phu2" onclick="taiAnh(1)">📱 Lưu bản dọc cho story</button>
+  <button class="nut phu2" onclick="taiPoster()">🎬 Lưu poster phim đời bạn</button>
   <div id="kBxh"></div>
   <div class="luoi" id="kLuoi"></div>
   <button class="nut phu2" onclick="window._vt='duoi';thachBan()" id="nutThach">⚔️ Thách bạn bè vượt mặt mình</button>
@@ -716,6 +717,35 @@ function wrap(x,t,cx,y,mw,lh){let d='';for(const w of t.split(' ')){const th=d?d
 function taiAnh(doc9){let c=$('anh');
   if(doc9){const s=document.createElement('canvas');s.width=1080;s.height=1920;const x=s.getContext('2d');const g=x.createLinearGradient(0,0,0,1920);g.addColorStop(0,'#7f1d1d');g.addColorStop(.5,'#dc2626');g.addColorStop(1,'#7f1d1d');x.fillStyle=g;x.fillRect(0,0,1080,1920);x.drawImage(c,0,285);x.textAlign='center';x.fillStyle='#fde68a';x.font='bold 52px system-ui,sans-serif';x.fillText('Bạn vượt được mấy ải? 🧧',540,1745);c=s}
   const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='song-sot-ngay-tet'+(doc9?'-story':'')+'.png';a.click();tk('tai_anh',{kieu:doc9?'story':'feed'})}
+function taiPoster(){
+  const K=window._kq;if(!K)return;const ten=($('tenNC').value.trim()||'Bạn').slice(0,18).toUpperCase();
+  const ds=['nen',vaiChon&&'v_'+vaiChon,'bac','ba'],an={};
+  Promise.all(ds.map(k=>new Promise(r=>{const i=new Image();i.onload=()=>{an[k]=i;r()};i.onerror=r;i.src=k=='nen'?'img/nen.jpg':IMG[k]}))).then(()=>{
+  const c=document.createElement('canvas');c.width=1080;c.height=1350;const x=c.getContext('2d');
+  x.fillStyle='#0a0303';x.fillRect(0,0,1080,1350);
+  if(an.nen){x.globalAlpha=.32;x.filter='blur(6px) saturate(.6)';x.drawImage(an.nen,-120,0,1320,1350);x.filter='none';x.globalAlpha=1}
+  let g=x.createRadialGradient(540,620,120,540,620,820);g.addColorStop(0,'rgba(220,38,38,.35)');g.addColorStop(1,'rgba(0,0,0,.92)');x.fillStyle=g;x.fillRect(0,0,1080,1350);
+  const S=K.tongSao,sv=Math.max(1,Math.min(5,Math.round(S/3)));
+  const BINH=S>=13?[['“Mười điểm, không có nhưng.”','Bà nội'],['“Bom tấn của năm.”','Bọn trẻ con']]:S>=8?[['“Căng hơn phim Tết.”','Bác cả'],['“Xem xong phải ăn thêm bánh chưng.”','Mợ']]:[['“Tôi đã khóc. Vì cười.”','Cô út'],['“Một thảm họa đáng xem.”','Bà hàng xóm']];
+  x.textAlign='center';
+  BINH.forEach(([q,a],i)=>{const cx=i?780:300;x.fillStyle='#facc15';x.font='34px system-ui,sans-serif';x.fillText('★'.repeat(sv)+'☆'.repeat(5-sv),cx,82);
+    x.fillStyle='#fff7ed';x.font='italic 600 30px "Noto Serif",Georgia,serif';wrap(x,q,cx,128,420,38);x.fillStyle='#fca5a5';x.font='24px system-ui,sans-serif';x.fillText('— '+a.toUpperCase()+' —',cx,q.length>22?212:174)});
+  const ve=(i,cx,h,f)=>{if(!i)return;const w=i.width*h/i.height;x.save();x.filter=f;x.drawImage(i,cx-w/2,1010-h,w,h);x.restore()};
+  ve(an.bac,250,520,'brightness(.45) drop-shadow(0 0 30px rgba(220,38,38,.9))');ve(an.ba,830,480,'brightness(.45) drop-shadow(0 0 30px rgba(220,38,38,.9))');
+  ve(an['v_'+vaiChon],540,640,'drop-shadow(0 0 40px rgba(250,204,21,.6))');
+  g=x.createLinearGradient(0,700,0,1350);g.addColorStop(0,'rgba(10,3,3,0)');g.addColorStop(.35,'rgba(10,3,3,.95)');g.addColorStop(1,'#0a0303');x.fillStyle=g;x.fillRect(0,700,1080,650);
+  x.fillStyle='#fecaca';x.font='600 26px system-ui,sans-serif';x.fillText('HỌ HÀNG NHÀ BẠN TRÌNH CHIẾU',540,292);
+  x.fillStyle='#fff';x.font='bold 40px "Noto Serif",Georgia,serif';x.fillText(ten,540,338);
+  const TAG={hieu:'Năm nay, có người nói thật.',doi:'Có những điều chỉ nói được ngày Tết.',giu:'Có những bí mật phải giữ đến cùng.',lo:'Bí mật nào rồi cũng lộ.',khoc:'Ba ngày Tết. Một bí mật. Không lối thoát.'};
+  g=x.createLinearGradient(0,880,0,1080);g.addColorStop(0,'#fff7cc');g.addColorStop(.55,'#facc15');g.addColorStop(1,'#b45309');
+  x.save();x.shadowColor='#7f1d1d';x.shadowOffsetY=8;x.fillStyle=g;x.font='900 118px "Noto Serif",Georgia,serif';x.fillText('SỐNG SÓT',540,975);x.fillText('NGÀY TẾT',540,1090);x.restore();
+  x.fillStyle='#fde68a';x.font='italic 34px "Noto Serif",Georgia,serif';x.fillText(TAG[K.kt]||TAG.lo,540,1148);
+  x.fillStyle='#d6d3d1';x.font='600 21px system-ui,sans-serif';
+  x.fillText(`${ten} trong vai ${VAI[vaiChon].ten.toUpperCase()}  ·  BÁC CẢ  ·  BÀ NỘI  ·  CÔ ÚT  ·  MỢ`,540,1200);
+  x.fillText('ĐẠO DIỄN HỌ HÀNG  ·  KỊCH BẢN BÀ HÀNG XÓM  ·  ÂM NHẠC TIẾNG TIM ĐẬP',540,1232);
+  x.fillStyle='#facc15';x.font='bold 30px system-ui,sans-serif';x.fillText(`⭐ ${S}/15 · VƯỢT ${K.soAi}/5 ẢI · KHỞI CHIẾU MÙNG 1 TẾT`,540,1284);
+  x.fillStyle='#a8a29e';x.font='22px system-ui,sans-serif';x.fillText(BR?`Quà Tết từ ${BR.ten}`:'wintatwork1204-debug.github.io/lam-nhanh-24h/tet',540,1324);
+  const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='poster-song-sot-ngay-tet.png';a.click();window._poster=a.href;tk('tai_anh',{kieu:'poster'})})}
 function thachBan(){
   const ten=$('tenNC').value.trim();const u=new URL('k/'+_kq.k+'.html',location.href).href+(BR&&BR.id?`?shop=${BR.id}&`:BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}&s=${_kq.tongSao}&a=${_kq.soAi}&ss=${sao.join('')}`+(NGAY?`&ng=${NGAY}&v=${vaiChon}`:'')+(ten?`&n=${encodeURIComponent(ten)}`:'')+`&bx=${maBX(_kq.bx)}`;
   const t=$('kLuoi').textContent+`\nMình vượt ${_kq.soAi}/5 ải. Bạn vượt được mấy ải?`+(_kq.bx.length>1&&_kq.hang>=0?`\nMình đang đứng #${_kq.hang+1}/${_kq.bx.length} bảng vàng nhóm 🏆`:'');tk('thach_ban',{vi_tri:window._vt||'duoi',bxh:_kq.bx.length,sao:_kq.tongSao,thu_thach_ngay:NGAY?1:0});
