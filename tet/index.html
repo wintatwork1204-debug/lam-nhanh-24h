@@ -109,6 +109,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
 .ngay{display:block;margin:10px auto 0;max-width:340px;font-size:.88rem;background:#fff7ed;border:1px dashed #f59e0b;border-radius:12px;padding:8px 10px;cursor:pointer;text-align:left}.ngay.bat{background:#fef3c7;border-style:solid}.ngay input{vertical-align:middle}
 .nhanDemo{position:fixed;top:14px;right:-34px;transform:rotate(45deg);background:#1e1b4b;color:#fde68a;font-weight:800;font-size:12px;letter-spacing:1px;padding:4px 40px;z-index:98;pointer-events:none}
 .hauTruyen{margin-top:12px;padding:12px;border:2px dashed #b45309;border-radius:10px;background:#fffbeb;animation:hienHau 1.2s ease}.hauTruyen h3{margin:0 0 6px;color:#92400e}@keyframes hienHau{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
+.bxh{background:#fffbeb;border:2px solid #f59e0b;border-radius:12px;padding:8px 12px;margin:10px 0;text-align:left;color:#3b0a0a}.bxh h3{margin:0 0 6px;text-align:center;font-size:1rem}.bxh ol{list-style:none;margin:0;padding:0}.bxh li{display:flex;justify-content:space-between;gap:8px;padding:4px 6px;border-bottom:1px dashed #fcd34d;font-size:.92rem}.bxh li.toi{background:#fde68a;border-radius:6px;font-weight:700}
 </style>
 </head>
 <body>
@@ -155,6 +156,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
   <canvas id="anh" width="1080" height="1350"></canvas>
   <button class="nut" onclick="taiAnh()">⬇️ Lưu thẻ về máy để khoe</button>
   <button class="nut phu2" onclick="taiAnh(1)">📱 Lưu bản dọc cho story</button>
+  <div id="kBxh"></div>
   <div class="luoi" id="kLuoi"></div>
   <button class="nut phu2" onclick="thachBan()" id="nutThach">⚔️ Thách bạn bè vượt mặt mình</button>
   <button class="nut phu2" onclick="tk('choi_lai');veMo()">🔁 Chơi lại, thử cách khác</button>
@@ -392,6 +394,14 @@ const BR=QS.get('shop')?napShop(QS.get('shop')):QS.get('b')?{ten:QS.get('b').sli
 if(BR&&BR.mau)document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent=`#brMo,#brKet{border-color:${BR.mau}!important;box-shadow:0 0 0 3px ${BR.mau}33}#brKet .nut{background:${BR.mau};color:#fff}`;document.head.appendChild(s)});
 if(BR&&BR.demo)document.addEventListener('DOMContentLoaded',()=>{const d=document.createElement('div');d.className='nhanDemo';d.textContent='BẢN DEMO';document.body.appendChild(d)});
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// Bảng vàng nhóm: link thách mang điểm của những người chơi trước, không cần server
+function docBX(){let a=[];const so=(v,m)=>Math.max(0,Math.min(m,v|0));
+ try{const r=QS.get('bx');if(r){const j=JSON.parse(decodeURIComponent(escape(atob(r.replace(/-/g,'+').replace(/_/g,'/')))));if(Array.isArray(j))a=j.filter(e=>Array.isArray(e)&&e.length>=4).slice(0,15).map(e=>[String(e[0]).slice(0,18)||'Ẩn danh',so(e[1],9999),so(e[2],15),so(e[3],5),VAI[e[4]]?e[4]:''])}}catch(e){a=[]}
+ if(!a.length&&QS.get('k')&&QS.get('d'))a=[[(QS.get('n')||'Bạn của bạn').slice(0,18),so(+QS.get('d'),9999),so(+QS.get('s'),15),so(+QS.get('a'),5),VAI[QS.get('v')]?QS.get('v'):'']];
+ return a}
+const BX=docBX();
+function maBX(a){return btoa(unescape(encodeURIComponent(JSON.stringify(a)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function veBX(a,toi){return `<div class="bxh"><h3>🏆 Bảng vàng nhóm · ${a.length} người</h3><ol>${a.map((e,i)=>`<li class="${toi===i?'toi':''}"><span>${i<3?['🥇','🥈','🥉'][i]:(i+1)+'.'} ${esc(e[0])}${e[4]?' '+VAI[e[4]].hinh:''}${toi===i?' (bạn)':''}</span><b>${e[1]}đ · ⭐${e[2]}</b></li>`).join('')}</ol></div>`}
 const doc=k=>JSON.parse(localStorage.getItem(k)||"{}");
 let RNG=Math.random;
 function mb32(s){return function(){s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
@@ -433,6 +443,7 @@ function veMo(){
   $('soMo').textContent=Object.keys(doc('sstet_bst')).filter(k=>!HIEM.includes(k)).length;
   $('soKT').textContent=Object.keys(doc('sstet_kt')).length;
   if(QS.get('k')&&KET[QS.get('k')]){const k=KET[QS.get('k')],sv=Math.min(15,+QS.get('s')||0),hg=hangTu(sv);$('loiThach').innerHTML=`<div class="thach">⚔️ ${QS.get('n')?esc(QS.get('n').slice(0,18)):'Bạn của bạn'} vừa vượt <b>${Math.min(5,+QS.get('a')||0)}/5 ải</b>${QS.get('ng')?(QS.get('ng')===HOMNAY?` ở <b>đề hôm nay</b>`:` ở đề ngày ${esc(ngayDep(QS.get('ng')))} (đã hết, chơi đề hôm nay nhé)`):''}, đạt hạng <b>${hg[1]} ${hg[2]}</b> (⭐ ${sv}/15${QS.get('d')?' · '+((+QS.get('d'))|0)+' điểm':''})${QS.get('v')&&VAI[QS.get('v')]?', vai '+VAI[QS.get('v')].ten:''}<br>với danh hiệu ${k[0]} ${k[1]}.<br>Bạn dám vượt mặt không?</div>`}
+  if(BX.length>1)$('loiThach').insertAdjacentHTML('beforeend',veBX(BX));
   veNgay();
   if(BR){$('brMo').innerHTML=`${BR.logo?`<img src="${BR.logo}" alt="" style="max-height:52px;max-width:85%;display:block;margin:0 auto 6px">`:''}${BR.loiMo?esc(BR.loiMo):`🎁 <b>${esc(BR.ten)}</b> lì xì bạn: chơi xong nhận ưu đãi${BR.vt?' '+esc(BR.vt):''}`}`;$('brMo').classList.remove('an')}
   window.scrollTo(0,0);
@@ -578,15 +589,18 @@ function ketThuc(chet){
   const bk=doc('sstet_kt');bk[vaiChon+'_'+kt]=1;localStorage.setItem('sstet_kt',JSON.stringify(bk));
   const hau=!chet&&kt=='hieu'&&tongSao>=13;if(hau){const bh=doc('sstet_hau');bh[vaiChon]=1;localStorage.setItem('sstet_hau',JSON.stringify(bh))}
   window._kq={k,diem,kt,tongSao,soAi,hg};
+  {const ten=($('tenNC').value.trim()||'Bạn').slice(0,18),cu=BX.find(e=>e[0]===ten),me=cu&&cu[1]>diem?cu:[ten,diem,tongSao,soAi,vaiChon];
+   const a=BX.filter(e=>e[0]!==ten).concat([me]).sort((x,y)=>y[1]-x[1]||y[2]-x[2]).slice(0,15);window._kq.bx=a;window._kq.hang=a.indexOf(me)}
   if(NGAY){const kn=doc('sstet_ngay'),kk=NGAY+'_'+vaiChon,cu=kn[kk];window._kq.kyLuc=!cu||diem>cu.diem;if(window._kq.kyLuc)kn[kk]={diem,sao:tongSao};for(const x in kn)if(x.slice(0,8)<NGAY)delete kn[x];localStorage.setItem('sstet_ngay',JSON.stringify(kn))}
   const vui=['hieu','doi','giu'].includes(kt);nen.k&&nhac(vui?'que':'dem');nhac(vui?'ketvui':'ketbuon',false);
   $('mChoi').classList.add('an');$('mKet').classList.remove('an');
   $('kDanhHieu').innerHTML=(HIEM.includes(k)?'<span class="hiem">KẾT HIẾM</span> ':'')+kq[0]+' '+esc(kq[1]);$('kMoTa').textContent=kq[2];
   $('kHang').innerHTML=`Hành trình về quê: vượt ${soAi}/5 ải<div class="saoTo">${'<i>⭐</i>'.repeat(Math.min(3,Math.round(tongSao/5)))}</div><b>${hg[1]} ${hg[2]}</b>⭐ ${tongSao}/15 sao${hg[0]<14?` · còn ${HANG[HANG.indexOf(hg)-1][0]-tongSao} sao nữa lên ${HANG[HANG.indexOf(hg)-1][2]}`:''}`;
   $('kLuoi').textContent=luoiKhoe(kq,diem);
+  $('kBxh').innerHTML=BX.length?veBX(_kq.bx,_kq.hang)+(_kq.hang===0?'<div class="phu" style="text-align:center">👑 Bạn đang đứng đầu nhóm. Gửi link để giữ ngôi!</div>':_kq.hang>0?`<div class="phu" style="text-align:center">Còn ${_kq.bx[_kq.hang-1][1]-diem} điểm nữa là vượt ${esc(_kq.bx[_kq.hang-1][0])}. Chơi lại?</div>`:''):'';
   if(NGAY)$('kHang').insertAdjacentHTML('afterbegin',`<div style="font-size:.85rem;color:#fde68a">📅 Đề ${ngayDep(NGAY)} · ${diem} điểm${window._kq.kyLuc?' · 🏅 kỷ lục mới của bạn':''}</div>`);
   if(!BR)$('nutLixi').classList.remove('an');
-  tk('ket_thuc',{hau:hau?1:0,hiem:HIEM.includes(k)?1:0,danh_hieu:k,ket_truyen:kt,diem,sao:tongSao,hang:hg[2],so_ai:soAi,chet:chet?1:0,giay:Math.round((Date.now()-tBatDau)/1000)});
+  tk('ket_thuc',{bxh:BX.length,hau:hau?1:0,hiem:HIEM.includes(k)?1:0,danh_hieu:k,ket_truyen:kt,diem,sao:tongSao,hang:hg[2],so_ai:soAi,chet:chet?1:0,giay:Math.round((Date.now()-tBatDau)/1000)});
   if(tongSao>=10||kt=='hieu'||HIEM.includes(k))phaoHoa();
   const icon=KT_LOAI.find(x=>x[0]==kt)[1];
   const ky=Object.keys(KY_UC).filter(f=>co[f]).map(f=>`<li>${KY_UC[f]}</li>`).join('');
@@ -630,8 +644,8 @@ function taiAnh(doc9){let c=$('anh');
   if(doc9){const s=document.createElement('canvas');s.width=1080;s.height=1920;const x=s.getContext('2d');const g=x.createLinearGradient(0,0,0,1920);g.addColorStop(0,'#7f1d1d');g.addColorStop(.5,'#dc2626');g.addColorStop(1,'#7f1d1d');x.fillStyle=g;x.fillRect(0,0,1080,1920);x.drawImage(c,0,285);x.textAlign='center';x.fillStyle='#fde68a';x.font='bold 52px system-ui,sans-serif';x.fillText('Bạn vượt được mấy ải? 🧧',540,1745);c=s}
   const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='song-sot-ngay-tet'+(doc9?'-story':'')+'.png';a.click();tk('tai_anh',{kieu:doc9?'story':'feed'})}
 function thachBan(){
-  const ten=$('tenNC').value.trim();const u=location.origin+location.pathname+(BR&&BR.id?`?shop=${BR.id}&`:BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}&s=${_kq.tongSao}&a=${_kq.soAi}`+(NGAY?`&ng=${NGAY}&v=${vaiChon}`:'')+(ten?`&n=${encodeURIComponent(ten)}`:'');
-  const t=$('kLuoi').textContent+`\nMình vượt ${_kq.soAi}/5 ải. Bạn vượt được mấy ải?`;tk('thach_ban',{sao:_kq.tongSao,thu_thach_ngay:NGAY?1:0});
+  const ten=$('tenNC').value.trim();const u=location.origin+location.pathname+(BR&&BR.id?`?shop=${BR.id}&`:BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}&s=${_kq.tongSao}&a=${_kq.soAi}`+(NGAY?`&ng=${NGAY}&v=${vaiChon}`:'')+(ten?`&n=${encodeURIComponent(ten)}`:'')+`&bx=${maBX(_kq.bx)}`;
+  const t=$('kLuoi').textContent+`\nMình vượt ${_kq.soAi}/5 ải. Bạn vượt được mấy ải?`+(_kq.bx.length>1&&_kq.hang>=0?`\nMình đang đứng #${_kq.hang+1}/${_kq.bx.length} bảng vàng nhóm 🏆`:'');tk('thach_ban',{bxh:_kq.bx.length,sao:_kq.tongSao,thu_thach_ngay:NGAY?1:0});
   if(navigator.share)navigator.share({title:'Sống sót ngày Tết',text:t,url:u}).catch(()=>{});
   else{navigator.clipboard.writeText(t+' '+u);$('nutThach').textContent='✅ Đã chép lời thách, dán gửi bạn bè nhé'}
 }
