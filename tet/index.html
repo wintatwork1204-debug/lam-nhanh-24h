@@ -169,6 +169,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
   <p class="phu" id="kMoTa"></p>
   <div class="hang" id="kHang"></div>
   <button class="nut" onclick="window._vt='tren';thachBan()" id="nutThachTren">⚔️ Thách bạn bè vượt mặt mình</button>
+  <button class="nut phu2" onclick="chuyenMay()">👪 Chuyền máy cho người bên cạnh</button>
   <div class="ketTruyen" id="kTruyen"></div>
   <div id="kNk"></div>
   <div class="thach an" id="brKet"></div>
@@ -488,6 +489,7 @@ function veMo(){
   $('soKT').textContent=Object.keys(doc('sstet_kt')).length;
   if(QS.get('k')&&KET[QS.get('k')]){const k=KET[QS.get('k')],sv=Math.min(15,+QS.get('s')||0),hg=hangTu(sv);$('loiThach').innerHTML=`<div class="thach">⚔️ ${QS.get('n')?esc(QS.get('n').slice(0,18)):'Bạn của bạn'} vừa vượt <b>${Math.min(5,+QS.get('a')||0)}/5 ải</b>${QS.get('ng')?(QS.get('ng')===HOMNAY?` ở <b>đề hôm nay</b>`:` ở đề ngày ${esc(ngayDep(QS.get('ng')))} (đã hết, chơi đề hôm nay nhé)`):''}, đạt hạng <b>${hg[1]} ${hg[2]}</b> (⭐ ${sv}/15${QS.get('d')?' · '+((+QS.get('d'))|0)+' điểm':''})${QS.get('v')&&VAI[QS.get('v')]?', vai '+VAI[QS.get('v')].ten:''}<br>với danh hiệu ${k[0]} ${k[1]}.<br>Bạn dám vượt mặt không?${/^[0-3]{5}$/.test(QS.get('ss')||'')?'<br><small>⚔️ Qua mỗi ải sẽ hiện tỉ số sao giữa hai người.</small>':''}</div>`}
   if(BX.length>1)$('loiThach').insertAdjacentHTML('beforeend',veBX(BX));
+  if(QS.get('chuyen')){$('loiThach').insertAdjacentHTML('afterbegin','<div class="thach" style="margin-bottom:8px">👪 <b>Chuyền máy</b>: đến lượt người tiếp theo. Gõ tên để lên bảng vàng của bàn.</div>');$('tenNC').placeholder='Tên người chơi tiếp theo';}
   veNgay();
   if(BR){$('brMo').innerHTML=`${BR.logo?`<img src="${BR.logo}" alt="" style="max-height:52px;max-width:85%;display:block;margin:0 auto 6px">`:''}${BR.loiMo?esc(BR.loiMo):`🎁 <b>${esc(BR.ten)}</b> lì xì bạn: chơi xong nhận ưu đãi${BR.vt?' '+esc(BR.vt):''}`}`;$('brMo').classList.remove('an')}
   window.scrollTo(0,0);
@@ -495,6 +497,7 @@ function veMo(){
 function veNgay(){$('cbNgay').checked=!!NGAY;$('lbNgay').classList.toggle('bat',!!NGAY);const kl=doc('sstet_ngay')[HOMNAY+'_'+vaiChon];$('lbNgay').title='';const e=$('klNgay');if(e)e.remove();if(NGAY&&kl){const d=document.createElement('div');d.id='klNgay';d.className='phu';d.style.cssText='font-size:.85rem;margin-top:4px';d.textContent=`Kỷ lục đề ${ngayDep(HOMNAY)} của bạn (vai này): ${kl.diem} điểm, ⭐ ${kl.sao}/15`;$('lbNgay').after(d)}}
 function chonVai(k){vaiChon=k;tieng('bam');veMo();tk('chon_vai',{vai:k})}
 function moDau(){
+  if(QS.get('chuyen')&&!$('tenNC').value.trim())$('tenNC').value='Người '+(BX.length+1);
   tieng('bam');nhac('que');setTimeout(()=>['s_bam','s_tot','s_xau','s_lo','s_boss','mamco','ruou','cang','dem','ai'].forEach(k=>nhacNap(k).catch(()=>{})),2500);
   $('mMo').classList.add('an');$('mKet').classList.add('an');$('mChoi').classList.remove('an');$('mChoi').classList.remove('dem');
   chiSo={...VAI[vaiChon].cs};capChiSo();
@@ -764,8 +767,10 @@ function taiPoster(){
   x.fillStyle='#facc15';x.font='bold 30px system-ui,sans-serif';x.fillText(`⭐ ${S}/15 · VƯỢT ${K.soAi}/5 ẢI · KHỞI CHIẾU MÙNG 1 TẾT`,540,1284);
   x.fillStyle='#a8a29e';x.font='22px system-ui,sans-serif';x.fillText(BR?`Quà Tết từ ${BR.ten}${BR.demo?" · bản demo":""}`:'wintatwork1204-debug.github.io/lam-nhanh-24h/tet',540,1324);
   const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='poster-song-sot-ngay-tet.png';a.click();window._poster=a.href;tk('tai_anh',{kieu:'poster'})})}
+function qThach(){const ten=$('tenNC').value.trim();return (BR&&BR.id?`?shop=${BR.id}&`:BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}&s=${_kq.tongSao}&a=${_kq.soAi}&ss=${sao.join('')}`+(NGAY?`&ng=${NGAY}&v=${vaiChon}`:'')+(ten?`&n=${encodeURIComponent(ten)}`:'')+`&bx=${maBX(_kq.bx)}`}
+function chuyenMay(){tk('chuyen_may',{so:_kq.bx.length});const u=new URL('./',location.href).href+qThach()+'&chuyen=1';setTimeout(()=>location.href=u,250)}
 function thachBan(){
-  const ten=$('tenNC').value.trim();const u=new URL('k/'+_kq.k+'.html',location.href).href+(BR&&BR.id?`?shop=${BR.id}&`:BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}&s=${_kq.tongSao}&a=${_kq.soAi}&ss=${sao.join('')}`+(NGAY?`&ng=${NGAY}&v=${vaiChon}`:'')+(ten?`&n=${encodeURIComponent(ten)}`:'')+`&bx=${maBX(_kq.bx)}`;
+  const u=new URL('k/'+_kq.k+'.html',location.href).href+qThach();
   const t=$('kLuoi').textContent+`\nMình vượt ${_kq.soAi}/5 ải. Bạn vượt được mấy ải?`+(_kq.bx.length>1&&_kq.hang>=0?`\nMình đang đứng #${_kq.hang+1}/${_kq.bx.length} bảng vàng nhóm 🏆`:'');tk('thach_ban',{vi_tri:window._vt||'duoi',bxh:_kq.bx.length,sao:_kq.tongSao,thu_thach_ngay:NGAY?1:0});
   if(navigator.share)navigator.share({title:'Sống sót ngày Tết',text:t,url:u}).catch(()=>{});
   else{navigator.clipboard.writeText(t+' '+u);['nutThach','nutThachTren'].forEach(i=>$(i).textContent='✅ Đã chép lời thách, dán gửi bạn bè nhé')}
