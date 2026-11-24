@@ -106,7 +106,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
 .hoa{position:fixed;top:-20px;font-size:22px;pointer-events:none;animation:phao linear forwards;z-index:9}
 .hiem{display:inline-block;background:linear-gradient(90deg,#f59e0b,#fde047,#f59e0b);color:#7c2d12;font-size:.7em;padding:2px 8px;border-radius:99px;vertical-align:middle;animation:anhKim 1.6s infinite}@keyframes anhKim{50%{filter:brightness(1.3)}}.bHiem{border-color:#f59e0b!important;background:#fffbeb}
 .lkTrailer{background:none;border:1px dashed #b91c1c;color:#b91c1c;border-radius:99px;padding:6px 14px;margin-top:8px;font:inherit;font-size:.85rem;cursor:pointer}#hopTrailer{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:99;display:flex;align-items:center;justify-content:center}#hopTrailer.an{display:none}#hopTrailer>div{display:flex;flex-direction:column;align-items:center;gap:10px}#vTrailer{max-height:82vh;max-width:92vw;border-radius:12px;background:#000}#hopTrailer button{background:#fff;border:0;border-radius:99px;padding:8px 18px;font:inherit;cursor:pointer}
-.ngay{display:block;margin:10px auto 0;max-width:340px;font-size:.88rem;background:#fff7ed;border:1px dashed #f59e0b;border-radius:12px;padding:8px 10px;cursor:pointer;text-align:left}.ngay.bat{background:#fef3c7;border-style:solid}.ngay input{vertical-align:middle}
+.ngay{display:block;margin:10px auto 0;max-width:340px;font-size:.88rem;background:#fff7ed;border:1px dashed #f59e0b;border-radius:12px;padding:8px 10px;cursor:pointer;text-align:left}.ngay.bat{background:#fef3c7;border-style:solid}.ngay input{display:inline-block;width:auto;margin:0 6px 0 0;padding:0;vertical-align:middle;transform:scale(1.25)}
 .nhanDemo{position:fixed;top:14px;right:-34px;transform:rotate(45deg);background:#1e1b4b;color:#fde68a;font-weight:800;font-size:12px;letter-spacing:1px;padding:4px 40px;z-index:98;pointer-events:none}
 .hauTruyen{margin-top:12px;padding:12px;border:2px dashed #b45309;border-radius:10px;background:#fffbeb;animation:hienHau 1.2s ease}.hauTruyen h3{margin:0 0 6px;color:#92400e}@keyframes hienHau{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
 .soKeNho{background:#fef3c7;border-radius:10px;padding:6px 10px;margin:-6px 0 12px;font-size:.9rem;color:#3b0a0a;font-weight:600;text-align:center}
@@ -129,7 +129,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
   <p class="phu">Năm nay bạn về quê với <b>một bí mật</b>.<br>Họ hàng thì hỏi lương, hỏi cưới. Giữ hay nói, tùy bạn.</p>
   <h2>Bạn về quê với vai nào?</h2>
   <div class="vai" id="dsVai"></div>
-  <input id="tenNC" maxlength="18" placeholder="Tên bạn (in lên thẻ khoe, có thể bỏ trống)">
+  <input id="tenNC" maxlength="18" placeholder="Tên bạn (in lên thẻ, tùy chọn)">
   <label class="ngay" id="lbNgay"><input type="checkbox" id="cbNgay" onchange="NGAY=this.checked?HOMNAY:null;veNgay()"> 📅 <b>Thử thách hôm nay</b>: cả nhóm bạn cùng một đề, so điểm công bằng</label>
   <button class="nut" onclick="moDau()">Lên đường về quê ▶</button>
   <p class="phu" style="font-size:.8rem;margin-top:10px">5 phút · không đăng nhập · chỉ đếm lượt chơi ẩn danh<br>Đã mở <b id="soMo">0</b>/12 danh hiệu · <b id="soKT">0</b>/20 kết truyện · 4 kết hiếm 🔒 · 4 hậu truyện 📜</p>
