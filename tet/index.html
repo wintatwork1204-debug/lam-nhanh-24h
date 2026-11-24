@@ -177,9 +177,10 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
   <div class="thach an" id="brKet"></div>
   <canvas id="anh" width="1080" height="1350"></canvas>
   <button class="nut" onclick="taiAnh()">⬇️ Lưu thẻ về máy để khoe</button>
-  <button class="nut phu2" onclick="taiAnh(1)">📱 Lưu bản dọc cho story</button>
+  <button class="nut phu2" id="nutTrailer" onclick="xuatTrailer()" style="border-color:#dc2626">🎞️ Quay trailer phim 13 giây <span style="background:#dc2626;color:#fff;font-size:.7rem;border-radius:6px;padding:1px 6px;vertical-align:middle">MỚI</span></button>
   <button class="nut phu2" onclick="taiPoster()">🎬 Lưu poster phim đời bạn</button>
-  <button class="nut phu2" id="nutTrailer" onclick="xuatTrailer()">🎞️ Quay trailer 13 giây ván của bạn (đăng TikTok, Reels)</button>
+  <button class="nut phu2" onclick="taiAnh(1)">📱 Lưu bản dọc cho story</button>
+
   <div id="kBxh"></div>
   <div class="luoi" id="kLuoi"></div>
   <button class="nut phu2" onclick="window._vt='duoi';thachBan()" id="nutThach">⚔️ Thách bạn bè vượt mặt mình</button>
@@ -780,7 +781,7 @@ let _dangQuay=0;
 function xuatTrailer(){
   const K=window._kq;if(!K||_dangQuay)return;const C=document.createElement('canvas');
   if(!window.MediaRecorder||!C.captureStream){alert('Máy này chưa quay được video. Bấm "Lưu poster phim" nhé.');return}
-  _dangQuay=1;const nut=$('nutTrailer'),cu=nut.textContent;nut.textContent='⏳ Đang dựng trailer…';tk('trailer_ban',{buoc:'bat_dau'});
+  _dangQuay=1;const nut=$('nutTrailer'),cu=nut.innerHTML;nut.textContent='⏳ Đang dựng trailer…';tk('trailer_ban',{buoc:'bat_dau'});
   const ten=($('tenNC').value.trim()||'Bạn').slice(0,18).toUpperCase(),S=K.tongSao,hg=K.hg,v=vaiChon;
   const an={};const nap=['nen','v_'+v,'bac'].map(k=>new Promise(r=>{const i=new Image();i.onload=()=>{an[k]=i;r()};i.onerror=r;i.src=k=='nen'?'img/nen.jpg':IMG[k]}));
   const A=new (window.AudioContext||window.webkitAudioContext)();
@@ -833,13 +834,13 @@ function xuatTrailer(){
     }
     ve1(0);rec.start(250);const bd=A.currentTime+.05;if(window._tsrc){window._tsrc.start(bd);window._tsrc=null}
     (function vong(){const t=A.currentTime-bd;ve1(Math.max(0,t));nut.textContent=`⏳ Đang quay trailer… ${Math.min(99,Math.round(t/D*100))}%`;if(t<D)requestAnimationFrame(vong);else rec.stop()})();
-    rec.onstop=()=>{_dangQuay=0;nut.textContent=cu;try{A.close()}catch(e){}
+    rec.onstop=()=>{_dangQuay=0;nut.innerHTML=cu;try{A.close()}catch(e){}
       const mt=(rec.mimeType||kieu||'video/webm').split(';')[0],duoi=mt.includes('mp4')?'mp4':'webm',blob=new Blob(ph,{type:mt}),tenF=`trailer-song-sot-ngay-tet.${duoi}`;
       const f=window.File?new File([blob],tenF,{type:mt}):null;tk('trailer_ban',{buoc:'xong',dinh_dang:duoi});
       if(f&&navigator.canShare&&navigator.canShare({files:[f]}))navigator.share({files:[f],title:'Trailer Tết của mình',text:'Mình vượt '+K.soAi+'/5 ải ngày Tết. Bạn thì sao?'}).catch(()=>luu());else luu();
       function luu(){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=tenF;a.click()}
       window._trailerBlob=blob};
-  }).catch(e=>{_dangQuay=0;nut.textContent=cu;alert('Chưa dựng được trailer trên máy này. Bấm "Lưu poster phim" nhé.')});
+  }).catch(e=>{_dangQuay=0;nut.innerHTML=cu;alert('Chưa dựng được trailer trên máy này. Bấm "Lưu poster phim" nhé.')});
 }
 function qThach(){const ten=$('tenNC').value.trim();return (BR&&BR.id?`?shop=${BR.id}&`:BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}&s=${_kq.tongSao}&a=${_kq.soAi}&ss=${sao.join('')}`+(NGAY?`&ng=${NGAY}&v=${vaiChon}`:'')+(ten?`&n=${encodeURIComponent(ten)}`:'')+`&bx=${maBX(_kq.bx)}`}
 function chuyenMay(){tk('chuyen_may',{so:_kq.bx.length});const u=new URL('./',location.href).href+qThach()+'&chuyen=1';setTimeout(()=>location.href=u,250)}
