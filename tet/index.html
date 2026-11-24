@@ -571,8 +571,12 @@ function tiep(){
   }
   let c=h.c;
   if(h.loai=='boss'){
-    const q=co.hua_ny?"Bà hàng xóm bảo cháu sắp dẫn mấy người yêu về. Tốt! Tết sang năm phải có người yêu, có nhà, có xe, có thêm đứa nữa nhé! Bác đợi đấy!":"Thôi cháu lên đường. Nhưng nhớ: Tết sang năm phải có người yêu, có nhà, có xe, có thêm đứa nữa nhé! Bác đợi đấy!";
-    c={ai:"bac",boss:1,ke:"Trước giờ tiễn, bác cả đứng chắn ở cổng, tay chắp sau lưng.",q,da:[["Dạ sang năm cháu dẫn cả nhà người yêu về ăn Tết ạ",5,15,0,10,"phet","Đấy! Bác đợi! (bác ghi vào sổ)",{lo:5}],["Dạ cháu sẽ cố gắng, bác giữ gìn sức khỏe ạ",10,10,0,0,"kheo","Ừ, sức khỏe là nhất!"],["Dạ, bác cũng thế nhé ạ",0,-15,0,15,"thang","…Cái đứa này!"]]};
+    const BD={sv:["sang năm ra trường loại giỏi, vào ngân hàng như con nhà bác Tư, rồi có người yêu, có nhà, có xe nhé!","Dạ sang năm cháu tốt nghiệp loại giỏi, vào thẳng ngân hàng luôn ạ"],
+      dl:["sang năm lên trưởng phòng, thưởng Tết gấp đôi, rồi có người yêu, có nhà, có xe nhé!","Dạ sang năm cháu lên trưởng phòng, biếu bác phong bì dày gấp đôi ạ"],
+      dt:["Tết sang năm phải có người yêu, có nhà, có xe, có thêm đứa nữa nhé!","Dạ sang năm cháu dẫn cả nhà người yêu về ăn Tết ạ"],
+      td:["sang năm kiếm việc gì ổn định, có bảo hiểm, rồi có người yêu, có nhà, có xe nhé!","Dạ sang năm kênh cháu một triệu người theo dõi, cháu mời bác lên sóng ạ"]}[vaiChon]||["Tết sang năm phải có người yêu, có nhà, có xe, có thêm đứa nữa nhé!","Dạ sang năm cháu dẫn cả nhà người yêu về ăn Tết ạ"];
+    const q=(co.hua_ny?"Bà hàng xóm bảo cháu sắp dẫn mấy người yêu về. Tốt! Nhưng nhớ: ":"Thôi cháu lên đường. Nhưng nhớ: ")+BD[0]+" Bác đợi đấy!";
+    c={ai:"bac",boss:1,ke:"Trước giờ tiễn, bác cả đứng chắn ở cổng, tay chắp sau lưng.",q,da:[[BD[1],5,15,0,10,"phet","Đấy! Bác đợi! (bác ghi vào sổ)",{lo:5}],["Dạ cháu sẽ cố gắng, bác giữ gìn sức khỏe ạ",10,10,0,0,"kheo","Ừ, sức khỏe là nhất!"],["Dạ, bác cũng thế nhé ạ",0,-15,0,15,"thang","…Cái đứa này!"]]};
   }
   if(h.loai=='cuoi'){
     const q=co.noi_som?"Chuyện hôm trước… giờ con định thế nào? Kể mẹ nghe cho hết đi.":co.hen_me?"Con hứa Tết xong kể mẹ nghe. Mai con đi rồi đấy.":"Mai con đi rồi. Có chuyện gì muốn nói với mẹ không?";
