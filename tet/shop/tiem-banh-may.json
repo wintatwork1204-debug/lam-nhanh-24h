@@ -1,0 +1,82 @@
+{
+ "ten": "Tiệm Bánh Mây",
+ "vc": "MAYTET27",
+ "vt": "Giảm 15% hộp bánh Tết",
+ "url": "https://wintatwork1204-debug.github.io/lam-nhanh-24h/tet/doanh-nghiep.html",
+ "het_han": "2027-03-01",
+ "mau": "#be185d",
+ "logo": "tiem-banh-may.png",
+ "ghi_chu": "Tên minh họa, dùng làm mẫu cấu hình. the: [chuong 0-2, null, ai, cau hoi, [[dap an, bt, hk, vi, sd, tag, phan hoi] x3]]",
+ "the": [
+  [
+   0,
+   null,
+   "me",
+   "Năm nay nhà mình đặt hộp bánh ở Tiệm Bánh Mây nhé, con chọn vị đi!",
+   [
+    [
+     "Dạ con chọn hộp mix, vị nào cũng có cho cả họ",
+     5,
+     10,
+     -5,
+     0,
+     "kheo",
+     "Ừ, chu đáo đấy!"
+    ],
+    [
+     "Con chọn vị sầu riêng cho… mình con ăn",
+     10,
+     -5,
+     0,
+     0,
+     "hai",
+     "Thế cả nhà ăn vỏ hộp à?"
+    ],
+    [
+     "Mẹ chọn đi, con ăn gì cũng được",
+     0,
+     0,
+     0,
+     0,
+     "ne",
+     "Lần nào cũng 'gì cũng được'!"
+    ]
+   ]
+  ],
+  [
+   1,
+   null,
+   "co",
+   "Bánh này mua ở đâu mà ngon thế? Cô phải đặt mấy hộp biếu sếp!",
+   [
+    [
+     "Dạ Tiệm Bánh Mây, cháu gửi cô mã giảm giá luôn",
+     5,
+     15,
+     0,
+     5,
+     "kheo",
+     "Cháu cô biết mua sắm ghê!"
+    ],
+    [
+     "Dạ cháu tự làm đấy ạ (thật ra là mua)",
+     0,
+     5,
+     0,
+     10,
+     "phet",
+     "Giỏi thế! Năm sau làm cho cô 10 hộp nhé."
+    ],
+    [
+     "Bí mật kinh doanh cô ạ",
+     5,
+     -5,
+     0,
+     5,
+     "hai",
+     "Cái đứa này, giấu cả cô!"
+    ]
+   ]
+  ]
+ ]
+}

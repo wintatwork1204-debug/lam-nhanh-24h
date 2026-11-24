@@ -107,6 +107,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
 .hiem{display:inline-block;background:linear-gradient(90deg,#f59e0b,#fde047,#f59e0b);color:#7c2d12;font-size:.7em;padding:2px 8px;border-radius:99px;vertical-align:middle;animation:anhKim 1.6s infinite}@keyframes anhKim{50%{filter:brightness(1.3)}}.bHiem{border-color:#f59e0b!important;background:#fffbeb}
 .lkTrailer{background:none;border:1px dashed #b91c1c;color:#b91c1c;border-radius:99px;padding:6px 14px;margin-top:8px;font:inherit;font-size:.85rem;cursor:pointer}#hopTrailer{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:99;display:flex;align-items:center;justify-content:center}#hopTrailer.an{display:none}#hopTrailer>div{display:flex;flex-direction:column;align-items:center;gap:10px}#vTrailer{max-height:82vh;max-width:92vw;border-radius:12px;background:#000}#hopTrailer button{background:#fff;border:0;border-radius:99px;padding:8px 18px;font:inherit;cursor:pointer}
 .ngay{display:block;margin:10px auto 0;max-width:340px;font-size:.88rem;background:#fff7ed;border:1px dashed #f59e0b;border-radius:12px;padding:8px 10px;cursor:pointer;text-align:left}.ngay.bat{background:#fef3c7;border-style:solid}.ngay input{vertical-align:middle}
+.nhanDemo{position:fixed;top:14px;right:-34px;transform:rotate(45deg);background:#1e1b4b;color:#fde68a;font-weight:800;font-size:12px;letter-spacing:1px;padding:4px 40px;z-index:98;pointer-events:none}
 </style>
 </head>
 <body>
@@ -384,7 +385,11 @@ const KY_UC={
 let vaiChon="dl",hang,st,chiSo,nhan,co,lo,am=true,ketTruyen,soQuyet;
 const $=id=>document.getElementById(id);
 const QS=new URLSearchParams(location.search);
-const BR=QS.get('b')?{ten:QS.get('b').slice(0,30),vc:(QS.get('vc')||'').slice(0,20),vt:(QS.get('vt')||'').slice(0,60)}:null;
+// Bản thương hiệu chính thức: ?shop=<mã>, cấu hình ở shop/<mã>.json. Link ?b=... chỉ là bản DEMO (có nhãn).
+function napShop(id){if(!/^[a-z0-9-]{3,40}$/.test(id))return null;try{const x=new XMLHttpRequest();x.open('GET','shop/'+id+'.json?v='+Date.now(),false);x.send();if(x.status==200){const j=JSON.parse(x.responseText);if(j.het_han&&new Date().toISOString().slice(0,10)>j.het_han)return null;return {id,ten:String(j.ten||'').slice(0,30),vc:String(j.vc||'').slice(0,20),vt:String(j.vt||'').slice(0,60),url:/^https:\/\//.test(j.url||'')?j.url:'',mau:/^#[0-9a-f]{6}$/i.test(j.mau||'')?j.mau:'',logo:/^[a-z0-9-]+\.(png|jpg|webp)$/.test(j.logo||'')?'shop/'+j.logo:'',the:(Array.isArray(j.the)?j.the:[]).filter(t=>Array.isArray(t)&&t.length==5&&t[0]>=0&&t[0]<=2&&typeof t[3]=='string'&&Array.isArray(t[4])&&t[4].length==3&&t[4].every(d=>Array.isArray(d)&&d.length>=7&&d.slice(1,5).every(n=>typeof n=='number'))).map(t=>[t[0],null,AI[t[2]]?t[2]:'me',t[3],t[4]]),demo:false}}}catch(e){}return null}
+const BR=QS.get('shop')?napShop(QS.get('shop')):QS.get('b')?{ten:QS.get('b').slice(0,30),vc:(QS.get('vc')||'').slice(0,20),vt:(QS.get('vt')||'').slice(0,60),demo:true}:null;
+if(BR&&BR.mau)document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent=`#brMo,#brKet{border-color:${BR.mau}!important;box-shadow:0 0 0 3px ${BR.mau}33}#brKet .nut{background:${BR.mau};color:#fff}`;document.head.appendChild(s)});
+if(BR&&BR.demo)document.addEventListener('DOMContentLoaded',()=>{const d=document.createElement('div');d.className='nhanDemo';d.textContent='BẢN DEMO';document.body.appendChild(d)});
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const doc=k=>JSON.parse(localStorage.getItem(k)||"{}");
 let RNG=Math.random;
@@ -400,8 +405,8 @@ const theObj=t=>({ai:t[2],q:t[3],da:t[4]});
 const GA_ID='G-1VH65XEHJN';
 if(GA_ID){const g=document.createElement('script');g.async=1;g.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(g);
  window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());
- gtag('config',GA_ID,{anonymize_ip:true,ban_thuong_hieu:BR?BR.ten:'goc',tu_thach:QS.get('k')?1:0});}
-function tk(ev,p){try{window.gtag&&gtag('event',ev,Object.assign({vai:vaiChon,ban:BR?'thuong_hieu':'goc'},p||{}))}catch(e){}}
+ gtag('config',GA_ID,{anonymize_ip:true,ban_thuong_hieu:BR?(BR.demo?'demo:':'')+BR.ten:'goc',tu_thach:QS.get('k')?1:0});}
+function tk(ev,p){try{window.gtag&&gtag('event',ev,Object.assign({vai:vaiChon,ban:BR?(BR.demo?'demo':'thuong_hieu'):'goc'},p||{}))}catch(e){}}
 let tBatDau=0,sao=[],moc=null,aiNay=0;
 
 // ----- âm thanh -----
@@ -428,7 +433,7 @@ function veMo(){
   $('soKT').textContent=Object.keys(doc('sstet_kt')).length;
   if(QS.get('k')&&KET[QS.get('k')]){const k=KET[QS.get('k')],sv=Math.min(15,+QS.get('s')||0),hg=hangTu(sv);$('loiThach').innerHTML=`<div class="thach">⚔️ ${QS.get('n')?esc(QS.get('n').slice(0,18)):'Bạn của bạn'} vừa vượt <b>${Math.min(5,+QS.get('a')||0)}/5 ải</b>${QS.get('ng')?(QS.get('ng')===HOMNAY?` ở <b>đề hôm nay</b>`:` ở đề ngày ${esc(ngayDep(QS.get('ng')))} (đã hết, chơi đề hôm nay nhé)`):''}, đạt hạng <b>${hg[1]} ${hg[2]}</b> (⭐ ${sv}/15${QS.get('d')?' · '+((+QS.get('d'))|0)+' điểm':''})${QS.get('v')&&VAI[QS.get('v')]?', vai '+VAI[QS.get('v')].ten:''}<br>với danh hiệu ${k[0]} ${k[1]}.<br>Bạn dám vượt mặt không?</div>`}
   veNgay();
-  if(BR){$('brMo').innerHTML=`🎁 <b>${esc(BR.ten)}</b> lì xì bạn: chơi xong nhận ưu đãi${BR.vt?' '+esc(BR.vt):''}`;$('brMo').classList.remove('an')}
+  if(BR){$('brMo').innerHTML=`${BR.logo?`<img src="${BR.logo}" alt="" style="max-height:52px;max-width:85%;display:block;margin:0 auto 6px">`:''}🎁 <b>${esc(BR.ten)}</b> lì xì bạn: chơi xong nhận ưu đãi${BR.vt?' '+esc(BR.vt):''}`;$('brMo').classList.remove('an')}
   window.scrollTo(0,0);
 }
 function veNgay(){$('cbNgay').checked=!!NGAY;$('lbNgay').classList.toggle('bat',!!NGAY);const kl=doc('sstet_ngay')[HOMNAY+'_'+vaiChon];$('lbNgay').title='';const e=$('klNgay');if(e)e.remove();if(NGAY&&kl){const d=document.createElement('div');d.id='klNgay';d.className='phu';d.style.cssText='font-size:.85rem;margin-top:4px';d.textContent=`Kỷ lục đề ${ngayDep(HOMNAY)} của bạn (vai này): ${kl.diem} điểm, ⭐ ${kl.sao}/15`;$('lbNgay').after(d)}}
@@ -452,7 +457,8 @@ function batDau(){
     hang.push({loai:'chuong',i});
     if(i==3)hang.push({loai:'goilai',i});
     const rieng=tron(THE.filter(t=>t[0]==i&&t[1]==vaiChon));
-    const chung=tron(THE.filter(t=>t[0]==i&&!t[1]));
+    const thShop=BR&&BR.the?tron(BR.the.filter(t=>t[0]==i)):[];
+    const chung=thShop.concat(tron(THE.filter(t=>t[0]==i&&!t[1])));
     const lay=tron(rieng.slice(0,1).concat(chung).slice(0,SO_THE[i]));
     if(i==0)hang.push({loai:'the',i,c:CANH.don});
     lay.forEach(t=>hang.push({loai:'the',i,c:theObj(t)}));
@@ -579,7 +585,7 @@ function ketThuc(chet){
   const icon=KT_LOAI.find(x=>x[0]==kt)[1];
   const ky=Object.keys(KY_UC).filter(f=>co[f]).map(f=>`<li>${KY_UC[f]}</li>`).join('');
   $('kTruyen').innerHTML=`<h3>${icon} Kết truyện: ${ktInfo[0]}</h3><div>${chet?'<i>Bạn không trụ được đến đêm mùng 3…</i><br>':''}${ktInfo[1]}</div>${ky?`<ul>${ky}</ul>`:''}<div style="font-size:.85rem;color:#92400e;margin-top:8px">Vai ${VAI[vaiChon].ten} còn ${5-KT_LOAI.filter(x=>bk[vaiChon+'_'+x[0]]).length} kết truyện chưa mở. Thử chọn khác đi?</div>`;
-  if(BR){$('brKet').innerHTML=`🧧 <b>${esc(BR.ten)}</b> lì xì bạn vì đã sống sót!<br>${BR.vt?esc(BR.vt)+'<br>':''}${BR.vc?`Mã: <span style="font-size:1.4em;letter-spacing:2px;color:#b91c1c">${esc(BR.vc)}</span>`:''}`;$('brKet').classList.remove('an')}
+  if(BR){$('brKet').innerHTML=`${BR.logo?`<img src="${BR.logo}" alt="" style="max-height:60px;max-width:85%;display:block;margin:0 auto 6px">`:''}🧧 <b>${esc(BR.ten)}</b> lì xì bạn vì đã sống sót!<br>${BR.vt?esc(BR.vt)+'<br>':''}${BR.vc?`Mã: <span style="font-size:1.4em;letter-spacing:2px;color:#b91c1c">${esc(BR.vc)}</span>`:''}${BR.url?`<br><a class="nut" style="display:inline-block;margin-top:10px;text-decoration:none" href="${esc(BR.url)}" target="_blank" rel="noopener" onclick="tk('ve_shop')">🛍️ Dùng ưu đãi tại ${esc(BR.ten)}</a>`:''}${BR.demo?'<div style="font-size:.75rem;color:#92400e;margin-top:8px">Bản demo để shop xem thử. Bản chính thức không có nhãn DEMO.</div>':''}`;$('brKet').classList.remove('an')}
   veThe(kq,diem,ktInfo[0],icon);veBST(k);window.scrollTo(0,0);
 }
 function moTrailer(){$("hopTrailer").classList.remove("an");try{nen.k&&tongAm().gain.setTargetAtTime(0,0,0.2)}catch(e){}const v=$("vTrailer");v.play().catch(()=>{});tk("xem_trailer")}
@@ -610,7 +616,7 @@ function veThe(kq,diem,ktTen,ktIcon){
   const K=window._kq;x.textAlign='center';x.fillStyle='#b91c1c';x.font='bold 42px system-ui,sans-serif';x.fillText(`${K.hg[1]} ${K.hg[2]} · vượt ${K.soAi}/5 ải`,540,Math.min(y+272,1128));
   x.fillStyle='#78350f';x.font='bold 34px system-ui,sans-serif';x.fillText(`⭐ ${K.tongSao}/15 sao · ${diem} điểm`,540,Math.min(y+326,1182));
   x.fillStyle='#fde68a';x.font='bold 36px system-ui,sans-serif';x.fillText('Bạn sẽ giữ hay nói? Chơi thử 👇',540,1265);
-  x.font='30px system-ui,sans-serif';x.fillText(BR?`🎁 Quà Tết từ ${BR.ten}`:'wintatwork1204-debug.github.io/lam-nhanh-24h/tet',540,1312);
+  x.font='30px system-ui,sans-serif';x.fillText(BR?`🎁 Quà Tết từ ${BR.ten}${BR.demo?' · bản demo':''}`:'wintatwork1204-debug.github.io/lam-nhanh-24h/tet',540,1312);
 }
 function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
 function wrap(x,t,cx,y,mw,lh){let d='';for(const w of t.split(' ')){const th=d?d+' '+w:w;if(x.measureText(th).width>mw&&d){x.fillText(d,cx,y);y+=lh;d=w}else d=th}x.fillText(d,cx,y);return y}
@@ -618,7 +624,7 @@ function taiAnh(doc9){let c=$('anh');
   if(doc9){const s=document.createElement('canvas');s.width=1080;s.height=1920;const x=s.getContext('2d');const g=x.createLinearGradient(0,0,0,1920);g.addColorStop(0,'#7f1d1d');g.addColorStop(.5,'#dc2626');g.addColorStop(1,'#7f1d1d');x.fillStyle=g;x.fillRect(0,0,1080,1920);x.drawImage(c,0,285);x.textAlign='center';x.fillStyle='#fde68a';x.font='bold 52px system-ui,sans-serif';x.fillText('Bạn vượt được mấy ải? 🧧',540,1745);c=s}
   const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='song-sot-ngay-tet'+(doc9?'-story':'')+'.png';a.click();tk('tai_anh',{kieu:doc9?'story':'feed'})}
 function thachBan(){
-  const ten=$('tenNC').value.trim();const u=location.origin+location.pathname+(BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}&s=${_kq.tongSao}&a=${_kq.soAi}`+(NGAY?`&ng=${NGAY}&v=${vaiChon}`:'')+(ten?`&n=${encodeURIComponent(ten)}`:'');
+  const ten=$('tenNC').value.trim();const u=location.origin+location.pathname+(BR&&BR.id?`?shop=${BR.id}&`:BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}&s=${_kq.tongSao}&a=${_kq.soAi}`+(NGAY?`&ng=${NGAY}&v=${vaiChon}`:'')+(ten?`&n=${encodeURIComponent(ten)}`:'');
   const t=$('kLuoi').textContent+`\nMình vượt ${_kq.soAi}/5 ải. Bạn vượt được mấy ải?`;tk('thach_ban',{sao:_kq.tongSao,thu_thach_ngay:NGAY?1:0});
   if(navigator.share)navigator.share({title:'Sống sót ngày Tết',text:t,url:u}).catch(()=>{});
   else{navigator.clipboard.writeText(t+' '+u);$('nutThach').textContent='✅ Đã chép lời thách, dán gửi bạn bè nhé'}
