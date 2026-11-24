@@ -104,6 +104,8 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
 .baolixi small{display:block;font-weight:400;color:#fecaca;font-size:.82rem;margin-top:3px}
 @keyframes phao{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(105vh) rotate(720deg);opacity:.2}}
 .hoa{position:fixed;top:-20px;font-size:22px;pointer-events:none;animation:phao linear forwards;z-index:9}
+.hiem{display:inline-block;background:linear-gradient(90deg,#f59e0b,#fde047,#f59e0b);color:#7c2d12;font-size:.7em;padding:2px 8px;border-radius:99px;vertical-align:middle;animation:anhKim 1.6s infinite}@keyframes anhKim{50%{filter:brightness(1.3)}}.bHiem{border-color:#f59e0b!important;background:#fffbeb}
+.lkTrailer{background:none;border:1px dashed #b91c1c;color:#b91c1c;border-radius:99px;padding:6px 14px;margin-top:8px;font:inherit;font-size:.85rem;cursor:pointer}#hopTrailer{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:99;display:flex;align-items:center;justify-content:center}#hopTrailer.an{display:none}#hopTrailer>div{display:flex;flex-direction:column;align-items:center;gap:10px}#vTrailer{max-height:82vh;max-width:92vw;border-radius:12px;background:#000}#hopTrailer button{background:#fff;border:0;border-radius:99px;padding:8px 18px;font:inherit;cursor:pointer}
 </style>
 </head>
 <body>
@@ -121,8 +123,10 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
   <div class="vai" id="dsVai"></div>
   <input id="tenNC" maxlength="18" placeholder="Tên bạn (in lên thẻ khoe, có thể bỏ trống)">
   <button class="nut" onclick="moDau()">Lên đường về quê ▶</button>
-  <p class="phu" style="font-size:.8rem;margin-top:10px">5 phút · không đăng nhập · chỉ đếm lượt chơi ẩn danh<br>Đã mở <b id="soMo">0</b>/12 danh hiệu · <b id="soKT">0</b>/20 kết truyện</p>
+  <p class="phu" style="font-size:.8rem;margin-top:10px">5 phút · không đăng nhập · chỉ đếm lượt chơi ẩn danh<br>Đã mở <b id="soMo">0</b>/12 danh hiệu · <b id="soKT">0</b>/20 kết truyện · 4 kết hiếm 🔒</p>
+  <button class="lkTrailer" onclick="moTrailer()">🎬 Xem trailer 40 giây</button>
 </div>
+<div id="hopTrailer" class="an" onclick="if(event.target===this)dongTrailer()"><div><video id="vTrailer" src="trailer.mp4" poster="trailer-poster.jpg" controls playsinline preload="none"></video><button onclick="dongTrailer()">✕ Đóng</button></div></div>
 
 <!-- MÀN CHƠI -->
 <div class="the nen an" id="mChoi">
@@ -228,7 +232,22 @@ const THE=[
 [0,"td","me","Con làm online ở nhà cả ngày, có đi làm thật không đấy?",[["Dạ con mở máy cho mẹ xem đơn hàng ạ",5,10,0,10,"kheo","Ối, cũng nhiều đấy nhỉ! (mẹ không hiểu lắm nhưng vui)",{lo:-10}],["Dạ có ạ, con làm lúc mọi người ngủ",-5,5,0,0,"ne","Thảo nào mắt thâm thế!"],["Con là CEO của chính con, mẹ ạ",5,-5,0,10,"hai","CEO mà ngủ trưa đến 2 giờ chiều?"]]],
 [1,"td","bac","Làm TikTok, YouTube có phải nghề đàng hoàng không? Có lương hưu không?",[["Dạ có thu nhập, cháu đóng bảo hiểm tự nguyện ạ",5,10,0,10,"kheo","À thế thì được!"],["Dạ nghề này mới, bác chưa quen thôi ạ",0,-5,0,5,"thang","Mới thì lại càng không chắc!",{lo:5}],["Dạ cháu vẫn đi làm công ty ạ",-5,5,0,5,"phet","Thế à? Thế mà bố cháu bảo… (bác nhìn bố bạn)",{lo:15}]]],
 [2,"td","chu","Cháu rành mạng thế, tư vấn chú đầu tư cái gì giàu nhanh đi!",[["Dạ đầu tư cho sức khỏe ạ, lãi suất cao nhất",5,10,0,0,"kheo","Ừ, câu này chuẩn!"],["Dạ giàu nhanh thường là lừa đảo đấy chú",0,0,0,10,"thang","Thế à… thế cái nhóm Zalo chú vừa vào?"],["Dạ để cháu lên livestream hỏi hộ chú ạ",5,5,0,0,"hai","Livestream thì nhớ đừng quay mặt chú!"]]],
-[3,"td","anh","Làm tự do thì rảnh nhỉ? Thiết kế hộ anh cái logo, anh em với nhau mà!",[["Dạ được ạ, em làm tặng anh lấy may đầu năm",0,15,0,0,"kheo","Đấy, anh em là phải thế! (sửa 17 lần)"],["Dạ em báo giá anh nhé, giá người nhà",5,-5,10,5,"thang","Người nhà mà cũng tính tiền à?"],["Dạ em đang kín lịch đến rằm tháng Giêng ạ",5,0,0,5,"ne","Thế rằm anh nhắn lại!"]]]
+[3,"td","anh","Làm tự do thì rảnh nhỉ? Thiết kế hộ anh cái logo, anh em với nhau mà!",[["Dạ được ạ, em làm tặng anh lấy may đầu năm",0,15,0,0,"kheo","Đấy, anh em là phải thế! (sửa 17 lần)"],["Dạ em báo giá anh nhé, giá người nhà",5,-5,10,5,"thang","Người nhà mà cũng tính tiền à?"],["Dạ em đang kín lịch đến rằm tháng Giêng ạ",5,0,0,5,"ne","Thế rằm anh nhắn lại!"]]],
+[0,null,"bo","Con bấm hộ bố cái điện thoại, tự dưng mất hết danh bạ với chữ bé tí chả đọc được!",[["Con chỉnh chữ to đại bàng, ghim số mẹ lên đầu cho bố dễ bấm nhé!",5,10,0,-5,"kheo","Hay quá, giờ nhìn rõ mồn một cả ảnh đại diện của mẹ mày rồi!"],["Bố đưa con nâng cấp giao diện 'bô lão VIP' một chạm gọi mẹ luôn!",10,5,-5,0,"hai","Khéo vẽ chuyện! Nhấn thử xem... ôi chuông reo giật cả mình!"],["Bố chờ tí, con đang trông nồi nước lá mùi kẻo trào ra bếp ạ!",-5,-10,0,5,"ne","Lá mùi thơm phức rồi, tí rửa mặt xong nhớ bấm máy cho bố đấy!"]]],
+[0,null,"anh","Mày đưa điều khiển đây, xem ca nhạc chứ Táo Quân năm nào chả như nhau!",[["Đêm 30 không xem Táo Quân thì mất nửa vị Tết, anh chuyển là em mách bà!",-10,-10,0,15,"thang","Gớm, mới nứt mắt ra đã dọa mách bà, xem thì xem làm gì căng!"],["Anh em mình mở mạng xem song song trên máy, ai cũng có phần anh nhé!",5,10,-10,0,"kheo","Thế bật phát mạng cho anh luôn đi, máy anh đang hết dung lượng!"],["Em nhường anh lúc quảng cáo, vào chương trình chính phải trả em nhé!",5,5,0,-5,"hai","Khôn như mày quê anh đầy... thôi được rồi, xem chung cho vui!"]]],
+[0,null,"me","Mày để dép kiểu gì mà con Vàng nó gặm nát một chiếc rồi kìa!",[["Dạ chứng tỏ dép con mua thơm mùi đồ mới, con Vàng có gu đấy mẹ!",5,5,-10,0,"hai","Mày còn khen nó à! Lát đi cúng tất niên đi chân đất nhé!"],["Con bảo xích nó lại mẹ cứ thả, giờ con lấy gì đi chúc Tết đây!",-10,-15,0,5,"thang","Tết nhất mắng chó xui cả năm, vào nhà lấy đôi tổ ong của bố mày đi!"],["Con để tạm góc nhà, mẹ đừng giận, tí con chạy ra chợ mua đôi khác liền!",5,10,-15,0,"kheo","Ừ đi nhanh kẻo chợ chiều 30 người ta dọn hàng về ăn Tết hết bây giờ!"]]],
+[1,null,"bac","Mày xem hộ bác cái wifi ở nhà, cứ quay tròn mãi không vào được mạng!",[["Bác chỉ cần rút nguồn ra cắm lại là êm ru, để cháu thao tác luôn ạ.",5,10,0,-5,"kheo","Sáng đèn xanh rồi này! Cháu bác đúng là cái gì cũng biết tuốt!"],["Cáp quang hơi nghẽn, để cháu kích sóng vệ tinh lên cho bác lướt mượt!",-5,5,0,15,"phet","Oai nhỉ, nghe như kỹ sư trưởng viễn thông không bằng ấy!"],["Wifi bảo mùng 1 nó cũng muốn nghỉ ngơi ăn Tết cùng gia đình bác ạ!",10,5,0,-10,"hai","Lại văn vở! Cắm lại dây nguồn cho bác nhanh còn ra ăn cỗ!"]]],
+[1,null,"co","Cỗ bàn xong rồi, cánh thanh niên bưng mâm xuống bếp rửa nhé, có 6 mâm thôi!",[["Dạ bọn cháu chia nhau đứa tráng đứa lau cho vui vẻ đầu năm ạ!",5,15,0,-5,"kheo","Biết bảo ban nhau thế là ngoan, cô cắt thêm cho đĩa giò lụa nhé!"],["Cháu vừa nhận nhiệm vụ cùng bà nội bóc bưởi tráng miệng rồi cô ơi!",5,-10,0,5,"ne","Bà bóc xong từ tám đời rồi, đừng có trốn việc mà lủi nhanh thế!"],["Năm nào cũng đè thanh niên ra rửa, các anh lớn ngồi uống trà kìa cô!",-15,-15,0,10,"thang","Ơ cái đứa này, các anh còn phải tiếp khách khứa họ hàng xa chứ!"]]],
+[1,null,"chu","Tối qua thấy thằng Nam xóm Đoài lên bản tin thời sự được khen, cháu có xem không?",[["Dạ bạn ấy giỏi thật chú ạ, chúng cháu cũng lấy đó làm gương noi theo!",5,10,0,-5,"kheo","Ừ, biết nhìn người ta mà học tập thì mới mau tiến bộ được cháu ạ!"],["Cháu lên tivi suốt, mỗi tội toàn lọt góc máy khán giả vỗ tay thôi chú!",10,10,0,-10,"hai","Ha ha ha, cái mồm láu cá thế thì ai mà giận cho được!"],["Bạn ấy cùng đội với cháu đấy, đợt này cháu bận nên nhường bạn lên sóng!",-10,0,0,20,"phet","Thật không đấy anh bạn trẻ? Khéo lại chém gió cho sang mồm!"]]],
+[1,null,"ba","Chiều đi với bà sang xem quẻ đầu năm xem chừng nào cháu mới cho bà bế chắt?",[["Dạ bà đi xin lộc thôi ạ, còn duyên số cháu để tự nhiên cho bất ngờ!",5,10,-5,0,"kheo","Tự nhiên mà mãi chẳng thấy đâu, thôi bà cầu sức khỏe cho cháu vậy!"],["Bà bói chuẩn nhất rồi, bà phán năm nay cháu phát tài là cháu tin liền!",10,15,0,-5,"hai","Bà phán luôn: năm nay bớt ngủ nướng thì khắc có người yêu rước đi!"],["Chiều cháu bận chuẩn bị đồ để mai sang ngoại chúc Tết rồi bà ạ!",-5,-5,0,5,"ne","Chưa hết mùng 1 đã tính chuyện đi chơi, đúng là lười đi lễ!"]]],
+[2,null,"cau","Cầm mic làm một bài bolero hay nhạc trẻ góp vui cho cả họ nào cháu ơi!",[["Cháu hát thì làng xóm chạy sang đông lắm vì tưởng còi báo động cháy ạ!",10,10,0,-10,"hai","Hát dở càng vui, Tết nhất phải rộn ràng mới ra không khí chứ!"],["Dạ cháu xin làm chân bấm bài và vỗ tay nhiệt tình để cậu tỏa sáng ạ!",5,10,0,-5,"kheo","Được! Chọn cho cậu bài 'Đón xuân này nhớ xuân xưa' liền tay nhé!"],["Loa kéo to quá ù hết cả tai rồi cậu ơi, vặn nhỏ lại kẻo hàng xóm mắng!",-10,-20,0,10,"thang","Tết năm có một lần, mày cứ khó tính như ông già khó nết ấy!"]]],
+[2,null,"mo","Em họ cháu bên nước ngoài bảo bên đấy tuyết rơi đẹp lắm, cháu tính bao giờ đi Tây?",[["Em giỏi quá mợ ạ, cháu cày cuốc ở nhà khi nào đủ duyên sẽ qua thăm em!",5,10,0,-5,"kheo","Ừ, chịu khó làm lụng mà sang đấy ngắm tuyết cho mở mang tầm mắt!"],["Cháu họp với đối tác ngoại suốt, đi Tây công tác chán chê rồi mợ ạ!",-10,0,0,20,"phet","Gớm, thế mà chưa thấy mang được hộp chocolate ngoại nào về biếu mợ!"],["Bên đấy rét lắm mợ ơi, cháu thích ở nhà ăn bánh chưng rán hơn!",10,5,0,-5,"hai","Đúng là tâm hồn ăn uống muôn đời không chịu nhìn xa ra thế giới!"]]],
+[2,null,"xom","Chiều xóm mình có đoàn đi đón dâu bị thiếu chân bê tráp, cháu đi giúp một tay nhé?",[["Dạ cháu vinh hạnh quá, để cháu về thay áo sơ mi cho thật bảnh bao ạ!",5,15,-10,5,"kheo","Nhanh nhẹn thế bà quý! Đi biết đâu lại nhặt được duyên lành luôn!"],["Cháu đi bảnh quá khéo họ gái tưởng cháu là chú rể thì khó xử lắm bà!",5,5,0,-5,"hai","Mặt mũi nhăn nhó thế ai thèm nhầm! Chuẩn bị đi mau lên!"],["Cháu vừa uống mấy chén với cậu, đi bê tráp sợ ngả nghiêng mất bà ơi!",5,-5,0,-5,"ne","Rượu chè từ trưa thế à! Thôi để bà sang gọi đứa khác vậy."]]],
+[2,null,"bac","Đất ở quê đang sốt, có đồng nào gửi về bác chung mua mảnh lướt sóng kiếm lời không?",[["Tiền làm ra cháu cất ngân hàng cho an toàn, không mạo hiểm đâu bác!",5,-15,0,5,"thang","Nhát gan thế thì muôn đời không phất lên làm giàu được con ạ!"],["Dạ vốn cháu mỏng manh, bác có lộc cứ mua trước giúp cả họ thơm lây ạ!",5,10,0,-5,"kheo","Khéo từ chối thế! Đến lúc người ta trúng tiền tỷ lại ngồi tiếc!"],["Cháu lướt web thì nhanh chứ lướt đất khéo ngã chổng vó bác ơi!",10,5,0,-10,"hai","Ăn nói tếu táo, thôi làm chén trà ấm vào cho tỉnh táo con ạ!"]]],
+[3,null,"lop","Họp lớp năm nay đi ăn nhà hàng sang chảnh nhé, mỗi bạn đóng 500k cho xôm tụ!",[["500k thì tớ xin phép ăn qua màn hình điện thoại, gửi lời chúc từ xa nha!",5,-5,0,-5,"hai","Lại trêu rồi, đến đi cho đủ mặt bạn bè cả năm gặp nhau có một lần!"],["Hay tụi mình ngồi quán nước chè cắn hướng dương chém gió cho ấm cúng?",10,10,-5,0,"kheo","Hợp lý đấy, nhiều bạn cũng nhắn bảo ăn nhẹ cho dễ tâm sự chuyện cũ!"],["Tớ chuyển khoản luôn 1 triệu, thừa cứ cho vào quỹ lớp liên hoan nhé!",-10,15,-25,25,"phet","Chủ tịch lớp đây rồi! Cả lớp vỗ tay cảm ơn bạn đại gia nào!"]]],
+[3,null,"anh","Anh hai nhóc chạy lon ton rồi, chú mày tính lông bông độc thân đến bao giờ?",[["Em đang hưởng nốt tự do trước khi nộp mình cho sư tử hà đông anh ạ!",5,5,0,-5,"hai","Cứ đùa đi, vài năm nữa nhìn bạn bè con bế con bồng lại thèm!"],["Em lo ổn định kinh tế đã, khi nào duyên tới em mời anh ngồi mâm đầu!",5,10,0,-5,"kheo","Nhớ đấy nhé, làm đám cưới to vào cho anh em nâng ly chúc phúc!"],["Nuôi hai đứa vất vả thế anh có thấy đau đầu không mà rủ em vào tròng?",-10,-10,0,10,"thang","Vất vả nhưng vui mày ơi! Sau này mày có con rồi sẽ hiểu!"]]],
+[3,null,"bo","Mai lên thành phố rồi, năm nay tính công việc ra sao, có cần bố hỗ trợ gì không?",[["Con tính kỹ rồi bố yên tâm, bố mẹ khỏe là chỗ dựa lớn nhất của con ạ!",10,15,0,-5,"kheo","Ừ, lớn rồi phải tự đứng vững, khó khăn gì thì cứ gọi về cho bố."],["Bố hỗ trợ con một lời chúc may mắn với phong bao lấy hên đầu xuân đi ạ!",5,10,0,-5,"hai","Chỉ giỏi vòi vĩnh! Đây, bố mừng cho tờ lấy may, nhớ đi đứng cẩn thận!"],["Năm nay con quyết tâm lên quản lý, cuối năm gửi bố chuyến du lịch xịn!",-5,5,-5,20,"phet","Cứ vẽ hươu vẽ vượn, sống đàng hoàng tử tế là bố mẹ vui rồi!"]]],
+[3,null,"me","Mẹ nhét thêm nửa con gà với yến gạo vào thùng xốp, xách lên mà ăn cho đỡ tốn!",[["Đồ mẹ chuẩn bị là ngon nhất, con mang lên ăn cho đỡ nhớ cơm nhà ạ!",5,15,0,-5,"kheo","Gớm, nhớ ăn uống đúng giờ, đừng có bỏ bữa mì tôm qua ngày nghe chưa!"],["Vali con sắp bục chỉ rồi mẹ ơi, cước xe khéo đắt hơn tiền mua gà mất!",10,5,-10,0,"hai","Đắt gì mà đắt, gà quê sạch trên đấy đào đâu ra mà chê ỏng chê eo!"],["Trên đấy cái gì cũng có mẹ để ở nhà ăn đi, con xách cồng kềnh lắm ạ!",-5,-10,0,5,"ne","Siêu thị làm sao bằng đồ mẹ làm! Cầm đi không mẹ dỗi bây giờ!"]]]
 ];
 
 // ----- Các cảnh truyện cố định -----
@@ -294,7 +313,15 @@ const SUKIEN=[
 ["🏍️","Mẹ sai chạy đi mua đá, mua lá dong, mua thêm hành. Ba lần.",{bt:-10,hk:10}],
 ["🍊","Xông đất nhà bác, bác bảo 'tuổi cháu hợp'. Được lì xì to.",{vi:10,sd:5}],
 ["💸","Cuối buổi đếm lại: lì xì phát ra nhiều hơn nhận về.",{vi:-10}],
-["😴","Ngủ trưa được 3 tiếng. Hồi phục hoàn toàn.",{bt:15}]
+["😴","Ngủ trưa được 3 tiếng. Hồi phục hoàn toàn.",{bt:15}],
+["🍲","Trúng miếng giòn ngon nhất trong nồi thịt đông mẹ nấu, ấm bụng lạ kỳ.",{"bt":10,"hk":5}],
+["🎮","Cùng đám em họ chơi cờ cá ngựa thắng giòn giã, cả nhà cười vang rộn rã.",{"bt":5,"hk":10,"sd":5}],
+["💌","Mở bao lì xì của ông nội thấy tờ tiền may mắn kèm lời chúc nắn nót.",{"bt":10,"vi":10}],
+["☕","Sáng mùng 1 pha trà ngồi với bố ngoài hiên, trời se lạnh mà lòng bình yên.",{"bt":15,"hk":5}],
+["💥","Đang ngủ say thì tiếng loa kéo nhà hàng xóm dội thẳng bài bolero vào tai.",{"bt":-15,"hk":-5}],
+["👗","Mặc áo mới đi chúc Tết thì trượt chân dính ngay vệt bùn ngõ quê.",{"bt":-10,"sd":-10}],
+["🍵","Bị ép uống liền tù tì 5 chén chè xanh đặc quánh, tim đập thình thịch.",{"bt":-10,"hk":5}],
+["💸","Rút nhầm tờ tiền to nhất trong ví đem mừng tuổi đứa cháu họ xa.",{"vi":-15,"bt":-5,"sd":10}]
 ];
 const KET={
  bao:["🌪️","Bão Tố Mâm Cỗ","Bình tĩnh về 0. Bạn đã nói ra điều cả họ không muốn nghe. Năm sau chắc được ngồi mâm riêng."],
@@ -309,9 +336,14 @@ const KET={
  nhau:["🍶","Huyền Thoại Bàn Nhậu","Cậu, chú, bác đều công nhận bạn là người nhà thật sự. Gan thì không đồng ý."],
  ngoan:["😇","Ngoan Quá Hóa Rối","Ai nhờ gì cũng nhận, ai hỏi gì cũng dạ. Họ hàng quý, nhưng bạn mệt rã rời."],
  thuongtich:["🩹","Sống Sót Có Thương Tích","Bạn trụ tới mùng 3, hơi trầy xước. Tối về nằm im 30 phút để hồi máu."],
- phet:["🎈","Vua Nổ Ngày Tết","Lương 50 triệu, người yêu xếp hàng, thưởng 3 tháng. Sang năm phải… làm thật."]
+ phet:["🎈","Vua Nổ Ngày Tết","Lương 50 triệu, người yêu xếp hàng, thưởng 3 tháng. Sang năm phải… làm thật."],
+ rong:["🐉","Rồng Vàng Ngày Tết","15/15 sao, không ải nào trượt. Cả họ lặng đi một giây rồi vỗ tay. Năm sau bạn là người được hỏi \"bí quyết\"."],
+ canbang:["⚖️","Thánh Cân Bằng","Bốn chỉ số gần như bằng nhau tăm tắp. Không nghiêng về ai, không mất lòng ai. Thiền sư của mâm cỗ."],
+ tackehoa:["🦎","Tắc Kè Hoa","Lúc khéo, lúc hài, lúc né, lúc nổ, lúc thẳng. Mỗi người họ hàng nhớ về bạn một kiểu khác nhau."],
+ daigia:["💰","Đại Gia Thầm Lặng","Ví vẫn dày cộp sau 3 ngày Tết mà không ai biết bạn có tiền. Cao thủ giữ của."]
 };
-const THU_TU=["ngoaigiao","conng","lang","noiloan","hai","nhau","ngoan","phet","thuongtich","bao","gach","chay","hien"];
+const HIEM=["rong","canbang","tackehoa","daigia"];
+const THU_TU=["rong","canbang","tackehoa","daigia","ngoaigiao","conng","lang","noiloan","hai","nhau","ngoan","phet","thuongtich","bao","gach","chay","hien"];
 // ----- 20 kết truyện: vai × (hieu, khoc, lo, giu, doi) -----
 const KT_LOAI=[["hieu","💗"],["khoc","🌧️"],["lo","💥"],["giu","🤐"],["doi","🫂"]];
 const KT={
@@ -365,12 +397,13 @@ function tk(ev,p){try{window.gtag&&gtag('event',ev,Object.assign({vai:vaiChon,ba
 let tBatDau=0,sao=[],moc=null,aiNay=0;
 
 // ----- âm thanh -----
-let ac;function tieng(loai){if(!am)return;try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(tongAm());const t=ac.currentTime;const m={tot:[660,880],xau:[300,180],bam:[520,520],ket:[523,1046],dem:[392,330]}[loai];o.frequency.setValueAtTime(m[0],t);o.frequency.exponentialRampToValueAtTime(m[1],t+.18);o.type=loai=="xau"?"sawtooth":"triangle";g.gain.setValueAtTime(.08,t);g.gain.exponentialRampToValueAtTime(.001,t+.25);o.start(t);o.stop(t+.26)}catch(e){}}
+let ac;const BUF={},SFX={tot:'s_tot',xau:'s_xau',bam:'s_bam'};
+function tieng(loai){if(!am)return;if(SFX[loai]&&BUF[SFX[loai]]&&ac){try{const s=ac.createBufferSource();s.buffer=BUF[SFX[loai]];const g=ac.createGain();g.gain.value=.7;s.connect(g);g.connect(tongAm());s.start();return}catch(e){}}try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(tongAm());const t=ac.currentTime;const m={tot:[660,880],xau:[300,180],bam:[520,520],ket:[523,1046],dem:[392,330]}[loai];o.frequency.setValueAtTime(m[0],t);o.frequency.exponentialRampToValueAtTime(m[1],t+.18);o.type=loai=="xau"?"sawtooth":"triangle";g.gain.setValueAtTime(.08,t);g.gain.exponentialRampToValueAtTime(.001,t+.25);o.start(t);o.stop(t+.26)}catch(e){}}
 function batTat(){am=!am;$('nutAm').textContent=am?'🔊':'🔇';if(ac)tongAm().gain.setTargetAtTime(am?1:0,ac.currentTime,.05);if(am&&!nen.k)nhac('que');tk('am',{bat:am?1:0})}
 // ----- nhạc (tự sáng tác, tools/nhac_tet.py) -----
 let tong,nen={k:null,src:null,g:null};const NHAC={};
 function tongAm(){ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(!tong){tong=ac.createGain();tong.gain.value=am?1:0;tong.connect(ac.destination)}return tong}
-function nhacNap(k){return NHAC[k]||(NHAC[k]=fetch('nhac/'+k+'.mp3').then(r=>r.arrayBuffer()).then(b=>new Promise((ok,er)=>ac.decodeAudioData(b,ok,er))).catch(e=>{delete NHAC[k];throw e}))}
+function nhacNap(k){return NHAC[k]||(NHAC[k]=fetch('nhac/'+k+'.mp3').then(r=>r.arrayBuffer()).then(b=>new Promise((ok,er)=>ac.decodeAudioData(b,ok,er))).then(x=>(BUF[k]=x)).catch(e=>{delete NHAC[k];throw e}))}
 function nhac(k,lap=true){
   try{tongAm();if(ac.state=='suspended')ac.resume();}catch(e){return}
   if(lap){if(k===nen.k)return;const cu=nen;if(cu.g){cu.g.gain.setTargetAtTime(0,ac.currentTime,.35);const s=cu.src;setTimeout(()=>{try{s.stop()}catch(e){}},2500)}nen={k,src:null,g:null}}
@@ -383,7 +416,7 @@ function nhacCanh(h,c){let k='que';if(h.i==3||h.loai=='boss')k='cang';if(h.i==4|
 function veMo(){
   $('mKet').classList.add('an');$('mChoi').classList.add('an');$('mMo').classList.remove('an');
   $('dsVai').innerHTML=Object.entries(VAI).map(([k,v])=>`<button class="${k==vaiChon?'chon':''}" onclick="chonVai('${k}')"><div class="hinh">${IMG['v_'+k]?`<img src="${IMG['v_'+k]}" alt="">`:v.hinh}</div>${v.ten}<small>${v.mo}</small></button>`).join('');
-  $('soMo').textContent=Object.keys(doc('sstet_bst')).length;
+  $('soMo').textContent=Object.keys(doc('sstet_bst')).filter(k=>!HIEM.includes(k)).length;
   $('soKT').textContent=Object.keys(doc('sstet_kt')).length;
   if(QS.get('k')&&KET[QS.get('k')]){const k=KET[QS.get('k')],sv=Math.min(15,+QS.get('s')||0),hg=hangTu(sv);$('loiThach').innerHTML=`<div class="thach">⚔️ ${QS.get('n')?esc(QS.get('n').slice(0,18)):'Bạn của bạn'} vừa vượt <b>${Math.min(5,+QS.get('a')||0)}/5 ải</b>, đạt hạng <b>${hg[1]} ${hg[2]}</b> (⭐ ${sv}/15)<br>với danh hiệu ${k[0]} ${k[1]}.<br>Bạn dám vượt mặt không?</div>`}
   if(BR){$('brMo').innerHTML=`🎁 <b>${esc(BR.ten)}</b> lì xì bạn: chơi xong nhận ưu đãi${BR.vt?' '+esc(BR.vt):''}`;$('brMo').classList.remove('an')}
@@ -391,7 +424,7 @@ function veMo(){
 }
 function chonVai(k){vaiChon=k;tieng('bam');veMo()}
 function moDau(){
-  tieng('bam');nhac('que');setTimeout(()=>['cang','dem','ai'].forEach(k=>nhacNap(k).catch(()=>{})),2500);
+  tieng('bam');nhac('que');setTimeout(()=>['s_bam','s_tot','s_xau','cang','dem','ai'].forEach(k=>nhacNap(k).catch(()=>{})),2500);
   $('mMo').classList.add('an');$('mKet').classList.add('an');$('mChoi').classList.remove('an');$('mChoi').classList.remove('dem');
   chiSo={...VAI[vaiChon].cs};capChiSo();
   $('tenChuong').textContent='🤫 Trước khi lên xe';$('hanhtrinh').innerHTML='';$('bimat').textContent='';$('bimat').className='bimat an';
@@ -512,6 +545,11 @@ function ketThuc(chet){
   if(chet)sao[aiNay]=0;else sao[4]=SAO_KT[kt];
   for(let i=0;i<5;i++)if(sao[i]===undefined)sao[i]=0;
   const tongSao=sao.reduce((a,b)=>a+b,0),soAi=sao.filter(x=>x>0).length,hg=hangTu(tongSao);
+  if(!chet){const v=[c.bt,c.hk,c.vi,c.sd];
+    if(tongSao>=15)k='rong';
+    else if(Math.max(...v)-Math.min(...v)<=12&&Math.min(...v)>=45)k='canbang';
+    else if(['kheo','hai','ne','phet','thang'].every(t=>(n[t]||0)>=2)&&['kheo','hai','ne','phet','thang'].filter(t=>(n[t]||0)>=3).length>=4)k='tackehoa';
+    else if(c.vi>=85&&c.sd<=50)k='daigia';}
   const ktInfo=KT[vaiChon][kt];
   const kq=KET[k];const diem=Math.round(c.bt+c.hk+c.vi+c.sd+soQuyet*10+(kt=='hieu'?100:kt=='doi'?60:0));
   const b=doc('sstet_bst');b[k]=1;localStorage.setItem('sstet_bst',JSON.stringify(b));
@@ -519,23 +557,25 @@ function ketThuc(chet){
   window._kq={k,diem,kt,tongSao,soAi,hg};
   const vui=['hieu','doi','giu'].includes(kt);nen.k&&nhac(vui?'que':'dem');nhac(vui?'ketvui':'ketbuon',false);
   $('mChoi').classList.add('an');$('mKet').classList.remove('an');
-  $('kDanhHieu').textContent=kq[0]+' '+kq[1];$('kMoTa').textContent=kq[2];
+  $('kDanhHieu').innerHTML=(HIEM.includes(k)?'<span class="hiem">KẾT HIẾM</span> ':'')+kq[0]+' '+esc(kq[1]);$('kMoTa').textContent=kq[2];
   $('kHang').innerHTML=`Hành trình về quê: vượt ${soAi}/5 ải<div class="saoTo">${'<i>⭐</i>'.repeat(Math.min(3,Math.round(tongSao/5)))}</div><b>${hg[1]} ${hg[2]}</b>⭐ ${tongSao}/15 sao${hg[0]<14?` · còn ${HANG[HANG.indexOf(hg)-1][0]-tongSao} sao nữa lên ${HANG[HANG.indexOf(hg)-1][2]}`:''}`;
   $('kLuoi').textContent=luoiKhoe(kq,diem);
   if(!BR)$('nutLixi').classList.remove('an');
-  tk('ket_thuc',{danh_hieu:k,ket_truyen:kt,diem,sao:tongSao,hang:hg[2],so_ai:soAi,chet:chet?1:0,giay:Math.round((Date.now()-tBatDau)/1000)});
-  if(tongSao>=10||kt=='hieu')phaoHoa();
+  tk('ket_thuc',{hiem:HIEM.includes(k)?1:0,danh_hieu:k,ket_truyen:kt,diem,sao:tongSao,hang:hg[2],so_ai:soAi,chet:chet?1:0,giay:Math.round((Date.now()-tBatDau)/1000)});
+  if(tongSao>=10||kt=='hieu'||HIEM.includes(k))phaoHoa();
   const icon=KT_LOAI.find(x=>x[0]==kt)[1];
   const ky=Object.keys(KY_UC).filter(f=>co[f]).map(f=>`<li>${KY_UC[f]}</li>`).join('');
   $('kTruyen').innerHTML=`<h3>${icon} Kết truyện: ${ktInfo[0]}</h3><div>${chet?'<i>Bạn không trụ được đến đêm mùng 3…</i><br>':''}${ktInfo[1]}</div>${ky?`<ul>${ky}</ul>`:''}<div style="font-size:.85rem;color:#92400e;margin-top:8px">Vai ${VAI[vaiChon].ten} còn ${5-KT_LOAI.filter(x=>bk[vaiChon+'_'+x[0]]).length} kết truyện chưa mở. Thử chọn khác đi?</div>`;
   if(BR){$('brKet').innerHTML=`🧧 <b>${esc(BR.ten)}</b> lì xì bạn vì đã sống sót!<br>${BR.vt?esc(BR.vt)+'<br>':''}${BR.vc?`Mã: <span style="font-size:1.4em;letter-spacing:2px;color:#b91c1c">${esc(BR.vc)}</span>`:''}`;$('brKet').classList.remove('an')}
   veThe(kq,diem,ktInfo[0],icon);veBST(k);window.scrollTo(0,0);
 }
-function luoiKhoe(kq,diem){const k=window._kq;return `Sống sót ngày Tết 2027 🧧\n${VAI[vaiChon].ten} · ${k.hg[1]} ${k.hg[2]}\n${AI_TEN.map((t,i)=>CHUONG[i][0]+' '+(sao[i]?'⭐'.repeat(sao[i])+'☆'.repeat(3-sao[i]):'💀')).join('\n')}\n${kq[0]} ${kq[1]} · ${diem} điểm`}
+function moTrailer(){$("hopTrailer").classList.remove("an");try{nen.k&&tongAm().gain.setTargetAtTime(0,0,0.2)}catch(e){}const v=$("vTrailer");v.play().catch(()=>{});tk("xem_trailer")}
+function dongTrailer(){const v=$("vTrailer");v.pause();$("hopTrailer").classList.add("an");try{nen.k&&tongAm().gain.setTargetAtTime(am?1:0,0,0.2)}catch(e){}}
+function luoiKhoe(kq,diem){const k=window._kq;return `Sống sót ngày Tết 2027 🧧\n${VAI[vaiChon].ten} · ${k.hg[1]} ${k.hg[2]}\n${AI_TEN.map((t,i)=>CHUONG[i][0]+' '+(sao[i]?'⭐'.repeat(sao[i])+'☆'.repeat(3-sao[i]):'💀')).join('\n')}\n${HIEM.includes(k.k)?"✨ KẾT HIẾM ✨\n":""}${kq[0]} ${kq[1]} · ${diem} điểm`}
 function phaoHoa(){const e=['🌸','🧧','✨','🏮','🌼'];for(let i=0;i<28;i++){const d=document.createElement('div');d.className='hoa';d.textContent=e[i%5];d.style.left=Math.random()*100+'vw';d.style.animationDuration=(2.5+Math.random()*2.5)+'s';d.style.animationDelay=Math.random()*1.2+'s';document.body.appendChild(d);setTimeout(()=>d.remove(),6500)}}
 function veBST(moi){
-  const b=doc('sstet_bst');$('kSo').textContent=`${Object.keys(b).length}/${THU_TU.length-1}`;
-  $('bst').innerHTML=THU_TU.map(k=>{const m=b[k];if(k=='phet'&&!m)return '';return `<div class="${m?'':'khoa'}" style="${k==moi?'border-color:#dc2626;border-style:solid':''}"><b>${m?KET[k][0]:'❔'}</b>${m?KET[k][1]:'Chưa mở'}</div>`}).join('');
+  const b=doc('sstet_bst');$('kSo').textContent=`${Object.keys(b).filter(k=>!HIEM.includes(k)).length}/${THU_TU.length-1-HIEM.length}`+(HIEM.some(k=>b[k])?` · hiếm ${HIEM.filter(k=>b[k]).length}/${HIEM.length}`:'');
+  $('bst').innerHTML=THU_TU.map(k=>{const m=b[k];if(k=='phet'&&!m)return '';const hm=HIEM.includes(k);return `<div class="${m?'':'khoa'}${hm?' bHiem':''}" style="${k==moi?'border-color:#dc2626;border-style:solid':''}"><b>${m?KET[k][0]:(hm?'🔒':'❔')}</b>${m?KET[k][1]:(hm?'Kết hiếm':'Chưa mở')}</div>`}).join('');
   const bk=doc('sstet_kt');$('kSoKT').textContent=`${Object.keys(bk).length}/20`;
   $('bstKT').innerHTML=Object.keys(VAI).map(v=>KT_LOAI.map(([t,ic])=>{const m=bk[v+'_'+t];return `<div class="${m?'':'khoa'}"><b>${m?ic:'❔'}</b>${m?KT[v][t][0]:VAI[v].ten}</div>`}).join('')).join('');
 }
@@ -547,7 +587,8 @@ function veThe(kq,diem,ktTen,ktIcon){
   x.textAlign='center';x.fillStyle='#fde68a';x.font='bold 58px system-ui,sans-serif';x.fillText('🧧 SỐNG SÓT NGÀY TẾT 2027',540,105);
   x.fillStyle='#fffbeb';rr(x,60,150,960,1060,48);x.fill();x.strokeStyle='#fbbf24';x.lineWidth=10;x.stroke();
   x.fillStyle='#92400e';x.font='40px system-ui,sans-serif';x.fillText(`${ten?ten+' · ':''}vai ${VAI[vaiChon].ten}`,540,230);
-  x.font='130px system-ui';x.fillText(kq[0],540,385);
+  if(HIEM.includes(window._kq.k)){x.fillStyle='#f59e0b';rr(x,390,252,300,50,25);x.fill();x.fillStyle='#7c2d12';x.font='bold 30px system-ui,sans-serif';x.fillText('✨ KẾT HIẾM ✨',540,288);x.font='100px system-ui';x.fillText(kq[0],540,410)}
+  else{x.font='130px system-ui';x.fillText(kq[0],540,385)}
   x.fillStyle='#b91c1c';x.font='bold 74px system-ui,sans-serif';let y=wrap(x,kq[1],540,490,880,86);
   x.fillStyle='#78350f';x.font='36px system-ui,sans-serif';y=wrap(x,kq[2],540,y+64,860,50);
   y+=80;x.fillStyle='#1e1b4b';rr(x,130,y-50,820,80,40);x.fill();x.fillStyle='#fde68a';x.font='bold 38px system-ui,sans-serif';x.fillText(`${ktIcon} Kết truyện: ${ktTen}`,540,y+4);
