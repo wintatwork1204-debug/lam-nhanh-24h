@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chợ Ải Tết: ai cũng làm được một ải họ hàng</title>
+<meta name="description" content="Tự làm một ải họ hàng ngày Tết trong 1 phút: câu hỏi nhà bạn, 3 cách đáp. Đăng lên là người khác chơi được ngay.">
+<meta property="og:title" content="Chợ Ải Tết: tự làm ải họ hàng, thả lên sông cho mọi người chơi">
+<meta property="og:description" content="Câu họ hàng hỏi nhà bạn thành một ải. Người khác chơi, thả 😂, gửi cho bạn bè.">
+<meta property="og:image" content="https://wintatwork1204-debug.github.io/lam-nhanh-24h/tet/og.jpg">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#1c0a0a;color:#fff7ed}
+main{max-width:560px;margin:0 auto;padding:12px 12px 60px}
+h1{font-family:"Noto Serif",Georgia,serif;font-size:25px;margin:6px 0 2px;color:#fde68a}
+.sub{margin:0 0 10px;opacity:.85;font-size:14px}
+/* dòng sông */
+.song{position:relative;height:150px;border-radius:16px;overflow:hidden;background:linear-gradient(#0b1d3a,#12325e 60%,#0b1d3a);margin:8px 0 6px}
+.song:after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 30px,transparent 30px 60px);animation:song 6s linear infinite}
+@keyframes song{to{background-position:60px 0}}
+.den{position:absolute;left:100%;max-width:190px;background:#facc15;color:#3f1d0b;border-radius:14px 14px 14px 4px;padding:6px 9px;font-size:13px;font-weight:600;box-shadow:0 0 18px rgba(250,204,21,.6);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;animation:troi linear forwards;z-index:1}
+.den small{display:block;font-weight:400;opacity:.75;font-size:11px}
+@keyframes troi{from{transform:translateX(0)}to{transform:translateX(calc(-100vw - 220px))}}
+.tab{display:flex;gap:6px;margin:10px 0}
+.tab button{flex:1;border:0;border-radius:12px;padding:11px;font-size:15px;font-weight:700;background:#3f1d1d;color:#fde68a;cursor:pointer}
+.tab button.on{background:#facc15;color:#7f1d1d}
+.the{background:#fff7ed;color:#3f1d0b;border-radius:16px;padding:14px;margin:10px 0}
+.the h2{font-size:16px;margin:0 0 8px}
+.ng{display:flex;align-items:center;gap:10px}
+.ng img{width:84px;height:84px;object-fit:contain}
+.cau{font-size:19px;font-weight:700;line-height:1.35}
+.dap button{display:block;width:100%;text-align:left;border:0;border-radius:12px;padding:12px;margin-top:8px;font-size:16px;background:#fde68a;color:#3f1d0b;cursor:pointer}
+.phan{margin-top:10px;padding:12px;border-radius:12px;background:#fee2e2;font-size:16px}
+.hang{display:flex;gap:8px;margin-top:10px}
+.hang button{flex:1}
+.nut{border:0;border-radius:12px;padding:12px;font-size:15px;font-weight:700;cursor:pointer;background:#facc15;color:#7f1d1d}
+.nut.phu{background:#fff7ed;color:#7f1d1d;border:1px solid #e7c9a5}
+.ai{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.ai button{border:2px solid transparent;background:#fde68a;border-radius:12px;padding:3px;font-size:11px;color:#3f1d0b;cursor:pointer}
+.ai button img{width:100%;aspect-ratio:1;object-fit:contain;display:block}
+.ai button.on{border-color:#dc2626;background:#fecaca}
+textarea,input,select{width:100%;border:1px solid #d6b38a;border-radius:10px;padding:9px;font:inherit;font-size:15px;resize:none;background:#fff}
+.o{border-top:1px dashed #d6b38a;padding-top:8px;margin-top:8px}
+.o label{font-size:13px;font-weight:700}
+.ds .muc{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #f1dcc0;cursor:pointer}
+.ds .muc span{font-size:13px;opacity:.7;white-space:nowrap}
+.loai{display:flex;gap:6px;margin-bottom:6px}
+.loai button{border:0;border-radius:999px;padding:6px 12px;background:#fee2e2;color:#7f1d1d;cursor:pointer}
+.loai button.on{background:#7f1d1d;color:#fff}
+.an{display:none}
+small.ghi{opacity:.75;font-size:12px}
+a{color:#fde68a}
+</style>
+</head>
+<body>
+<main>
+<h1>Chợ Ải Tết</h1>
+<p class="sub">Ai cũng làm được một ải: câu họ hàng hỏi nhà bạn, 3 cách đáp. Thả lên sông là mọi người chơi được ngay.</p>
+<div class="song" id="song"></div>
+<small class="ghi" id="dem">Đang tải dòng sông…</small>
+<div class="tab"><button id="tChoi" class="on">Chơi ải mọi người</button><button id="tLam">Làm ải của bạn</button></div>
+
+<section id="vChoi">
+  <div class="the" id="choi"><p>Đang vớt một ải trên sông…</p></div>
+  <div class="the ds"><div class="loai"><button data-l="moi" class="on">Mới thả</button><button data-l="hot">Nhiều 😂 nhất</button></div><div id="ds"></div></div>
+</section>
+
+<section id="vLam" class="an">
+  <div class="the"><h2>1. Ai hỏi?</h2><div class="ai" id="ai"></div></div>
+  <div class="the"><h2>2. Hỏi gì? (câu nhà bạn bị hỏi thật)</h2>
+    <textarea id="q" rows="2" maxlength="110" placeholder="VD: Lương tháng bao nhiêu rồi? Chắc hai chục nhỉ?"></textarea></div>
+  <div class="the"><h2>3. Ba cách đáp và họ hàng phản ứng ra sao</h2><div id="ods"></div></div>
+  <div class="the"><input id="tg" maxlength="24" placeholder="Tên hiện trên ải (không bắt buộc, VD: Linh ở Nam Định)">
+    <button class="nut" id="dang" style="width:100%;margin-top:10px">Thả ải lên sông</button>
+    <small class="ghi" id="bao"></small>
+    <p><small class="ghi">Ải đăng công khai, ai cũng xem được. Đừng ghi tên thật, số điện thoại của người khác. Ải chửi bới, xúc phạm sẽ bị gỡ.</small></p></div>
+</section>
+<p style="text-align:center"><a href="./?utm_source=cho&utm_medium=web&utm_campaign=ugc">Chơi game Vượt Ải Tết đầy đủ (5 ải, 5 phút)</a> · <a href="hoi.html">Làm ảnh câu bị hỏi</a></p>
+</main>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getFirestore,collection,addDoc,serverTimestamp,query,orderBy,limit,onSnapshot,doc,getDoc,updateDoc,increment} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const CFG={"apiKey": "AIzaSyB09Fsjvq-85S9CsD_WiPWOnmg-5_cH_1Y", "authDomain": "vuotaitet.firebaseapp.com", "projectId": "vuotaitet", "storageBucket": "vuotaitet.firebasestorage.app", "messagingSenderId": "438780790683", "appId": "1:438780790683:web:bb2c158e0589ba35e0c33e"};
+const db=getFirestore(initializeApp(CFG));
+const GA_ID='G-1VH65XEHJN';
+if(GA_ID){const g=document.createElement('script');g.async=1;g.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(g);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',GA_ID,{anonymize_ip:true});}
+const tk=(e,p)=>{try{window.gtag&&gtag('event',e,p||{})}catch(_){}};
+const $=i=>document.getElementById(i);
+const NGUOI={bac:"Bác",co:"Cô",chu:"Chú",mo:"Mợ",cau:"Cậu",ba:"Bà",ong:"Ông",me:"Mẹ",bo:"Bố",xom:"Hàng xóm",anh:"Anh họ",sep:"Sếp"};
+const KIEU={1:"😊 Họ hàng vui",0:"😐 Cho qua",[-1]:"😬 Căng"};
+const TUC=/\b(đm|dm|vcl|vkl|đéo|địt|lồn|cặc|buồi|đĩ|clm|cc|dcm|đcm|fuck|shit)\b/i;
+const sach=s=>String(s||"").replace(/\s+/g," ").trim();
+const coTuc=s=>TUC.test(s.normalize("NFC").toLowerCase());
+// ---------- chuyển tab
+function tab(choi){$("tChoi").classList.toggle("on",choi);$("tLam").classList.toggle("on",!choi);$("vChoi").classList.toggle("an",!choi);$("vLam").classList.toggle("an",choi);if(!choi)tk("cho_mo_lam")}
+$("tChoi").onclick=()=>tab(true);$("tLam").onclick=()=>tab(false);
+// ---------- dữ liệu sống
+let MOI=[],HOT=[],loai="moi",daChoi=new Set(JSON.parse(localStorage.getItem("cho_da")||"[]")),daThich=new Set(JSON.parse(localStorage.getItem("cho_thich")||"[]"));
+const luu=()=>{localStorage.setItem("cho_da",JSON.stringify([...daChoi].slice(-300)));localStorage.setItem("cho_thich",JSON.stringify([...daThich].slice(-300)))};
+const LOIFONT=/Ã|á»|áº|Æ°|Ä‘/;
+const hop=d=>d&&typeof d.q==="string"&&Array.isArray(d.da)&&d.da.length===3&&!coTuc(d.q)&&!LOIFONT.test(d.q+d.tac_gia+JSON.stringify(d.da));
+onSnapshot(query(collection(db,"ai"),orderBy("luc","desc"),limit(60)),s=>{
+  const cu=new Set(MOI.map(x=>x.id));MOI=s.docs.map(d=>({id:d.id,...d.data()})).filter(hop);
+  $("dem").textContent=MOI.length?`${MOI.length} ải mới nhất đang trôi. Chạm vào đèn để chơi.`:"Sông còn trống. Thả ải đầu tiên nhé!";
+  const moiVao=MOI.filter(x=>!cu.has(x.id));if(cu.size)moiVao.forEach(x=>tha(x,0));
+  if(loai==="moi")veDs();if(!dang&&MOI.length)choiNgauNhien();
+},e=>{$("dem").textContent="Chưa tải được dòng sông ("+e.code+"). Thử tải lại trang.";});
+onSnapshot(query(collection(db,"ai"),orderBy("thich","desc"),limit(30)),s=>{HOT=s.docs.map(d=>({id:d.id,...d.data()})).filter(hop);if(loai==="hot")veDs()});
+// đèn trôi trên sông
+function tha(x,tre){const e=document.createElement("div");e.className="den";e.textContent="“"+x.q+"”";const sm=document.createElement("small");sm.textContent=(NGUOI[x.nguoi]||"Họ hàng")+" · "+(x.tac_gia||"ẩn danh")+" · 😂"+(x.thich||0);e.append(sm);
+  e.style.top=(8+Math.random()*92)+"px";const t=16+Math.random()*10;e.style.animationDuration=t+"s";e.style.animationDelay=tre+"s";e.onclick=()=>{tab(true);choi(x);tk("cho_cham_den")};
+  $("song").append(e);setTimeout(()=>e.remove(),(t+tre)*1000+500)}
+setInterval(()=>{if(MOI.length&&document.visibilityState==="visible"){tha(MOI[Math.floor(Math.random()*Math.min(MOI.length,40))],0)}},2600);
+setTimeout(()=>{MOI.slice(0,5).forEach((x,i)=>tha(x,i*1.3))},600);
+function veDs(){const L=loai==="moi"?MOI:HOT;const v=$("ds");v.innerHTML="";L.slice(0,25).forEach(x=>{const m=document.createElement("div");m.className="muc";const a=document.createElement("div");a.textContent=(daChoi.has(x.id)?"✓ ":"")+x.q;const b=document.createElement("span");b.textContent="😂"+(x.thich||0)+" · ▶"+(x.choi||0);m.append(a,b);m.onclick=()=>{choi(x);scrollTo({top:0,behavior:"smooth"})};v.append(m)})}
+document.querySelectorAll(".loai button").forEach(b=>b.onclick=()=>{loai=b.dataset.l;document.querySelectorAll(".loai button").forEach(c=>c.classList.toggle("on",c===b));veDs()});
+// ---------- chơi
+let dang=null;
+function choiNgauNhien(){const chua=MOI.filter(x=>!daChoi.has(x.id));const L=chua.length?chua:MOI;if(L.length)choi(L[Math.floor(Math.random()*L.length)])}
+function choi(x){dang=x;const v=$("choi");v.innerHTML="";
+  const ng=document.createElement("div");ng.className="ng";const im=document.createElement("img");im.src="img/"+(NGUOI[x.nguoi]?x.nguoi:"bac")+".webp";im.alt="";
+  const w=document.createElement("div");const ai=document.createElement("small");ai.className="ghi";ai.textContent=(NGUOI[x.nguoi]||"Họ hàng")+" hỏi · ải của "+(x.tac_gia||"ẩn danh");const c=document.createElement("div");c.className="cau";c.textContent=x.q;w.append(ai,c);ng.append(im,w);v.append(ng);
+  const dp=document.createElement("div");dp.className="dap";const tron=[0,1,2].sort(()=>Math.random()-.5);
+  tron.forEach(i=>{const d=x.da[i]||{};const b=document.createElement("button");b.textContent=d.t||"…";b.onclick=()=>chon(x,d,dp);dp.append(b)});v.append(dp);tk("cho_choi")}
+async function chon(x,d,dp){dp.querySelectorAll("button").forEach(b=>b.disabled=true);
+  const v=$("choi");const p=document.createElement("div");p.className="phan";p.textContent=(KIEU[d.k]||"")+" — "+(d.p||"…");v.append(p);
+  if(!daChoi.has(x.id)){daChoi.add(x.id);luu();updateDoc(doc(db,"ai",x.id),{choi:increment(1)}).catch(()=>{})}
+  const h=document.createElement("div");h.className="hang";
+  const t=document.createElement("button");t.className="nut phu";t.textContent=daThich.has(x.id)?"😂 Đã thả":"😂 Hay";t.onclick=()=>{if(daThich.has(x.id))return;daThich.add(x.id);luu();t.textContent="😂 Đã thả";updateDoc(doc(db,"ai",x.id),{thich:increment(1)}).catch(()=>{});tk("cho_thich")};
+  const g=document.createElement("button");g.className="nut phu";g.textContent="Gửi bạn";g.onclick=()=>gui(x);
+  const n=document.createElement("button");n.className="nut";n.textContent="Ải tiếp →";n.onclick=choiNgauNhien;
+  h.append(t,g,n);v.append(h)}
+async function gui(x){const link=location.origin+location.pathname+"?utm_source=ban&utm_medium=gui&utm_campaign=cho#"+x.id;const txt="Bác hỏi câu này thì bạn đáp sao? 😅";tk("cho_gui");
+  if(navigator.share){try{await navigator.share({title:"Chợ Ải Tết",text:txt,url:link});return}catch(_){}}
+  try{await navigator.clipboard.writeText(txt+" "+link);alert("Đã chép link, dán vào Messenger/Zalo nhé.")}catch(_){prompt("Chép link:",link)}}
+// mở thẳng một ải từ link
+const idLink=location.hash.slice(1);
+if(/^[A-Za-z0-9]{10,40}$/.test(idLink)){getDoc(doc(db,"ai",idLink)).then(s=>{if(s.exists()&&hop(s.data())){choi({id:s.id,...s.data()});tk("cho_tu_link")}}).catch(()=>{})}
+tk("cho_mo",{tu_link:idLink?1:0});
+// ---------- làm ải
+let ng="bac";const vAi=$("ai");
+Object.entries(NGUOI).slice(0,10).forEach(([k,t])=>{const b=document.createElement("button");b.innerHTML='<img src="img/'+k+'.webp" alt="">';b.append(t);b.dataset.k=k;b.onclick=()=>{ng=k;[...vAi.children].forEach(c=>c.classList.toggle("on",c.dataset.k===k))};vAi.append(b)});
+vAi.children[0].classList.add("on");
+const MAU=[["Câu đáp khéo","Họ hàng nói gì sau đó",1],["Câu đáp né","Họ hàng nói gì sau đó",0],["Câu đáp thẳng/lầy","Họ hàng nói gì sau đó",-1]];
+MAU.forEach(([a,b,k],i)=>{const o=document.createElement("div");o.className="o";o.innerHTML=`<label>Cách đáp ${i+1}</label>`;
+  const t=document.createElement("input");t.maxLength=80;t.placeholder=a;t.id="t"+i;const p=document.createElement("input");p.maxLength=90;p.placeholder=b;p.id="p"+i;p.style.marginTop="6px";
+  const s=document.createElement("select");s.id="k"+i;s.style.marginTop="6px";[1,0,-1].forEach(v=>{const op=document.createElement("option");op.value=v;op.textContent=KIEU[v];if(v===k)op.selected=true;s.append(op)});
+  o.append(t,p,s);$("ods").append(o)});
+let lanCuoi=+localStorage.getItem("cho_dang_luc")||0;
+$("dang").onclick=async()=>{const q=sach($("q").value),tg=sach($("tg").value)||"ẩn danh";const da=[0,1,2].map(i=>({t:sach($("t"+i).value),p:sach($("p"+i).value),k:+$("k"+i).value}));
+  const bao=m=>{$("bao").textContent=m};
+  if(q.length<6)return bao("Gõ câu hỏi trước nhé.");if(da.some(d=>!d.t))return bao("Điền đủ 3 cách đáp nhé (phản ứng có thể để trống).");
+  if([q,tg,...da.map(d=>d.t+" "+d.p)].some(coTuc))return bao("Có từ chưa hợp, sửa giúp mình nhé.");
+  if(Date.now()-lanCuoi<60000)return bao("Đợi 1 phút rồi thả ải tiếp nhé.");
+  da.forEach(d=>{if(!d.p)d.p=d.k>0?"Ừ, thế là được.":d.k<0?"…Thôi ăn đi, nguội hết rồi.":"Ừ."});
+  $("dang").disabled=true;bao("Đang thả…");
+  try{const r=await addDoc(collection(db,"ai"),{nguoi:ng,q,da,tac_gia:tg,luc:serverTimestamp(),thich:0,choi:0});
+    lanCuoi=Date.now();localStorage.setItem("cho_dang_luc",lanCuoi);tk("cho_dang",{nguoi:ng});
+    bao("Đã thả lên sông! Gửi bạn bè chơi thử ải của bạn nhé.");tab(true);choi({id:r.id,nguoi:ng,q,da,tac_gia:tg,thich:0,choi:0});gui({id:r.id});
+    ["q","t0","t1","t2","p0","p1","p2"].forEach(i=>$(i).value="")}
+  catch(e){bao("Chưa thả được ("+(e.code||e.message)+"). Thử lại sau.")}
+  $("dang").disabled=false};
+</script>
+</body>
+</html>
