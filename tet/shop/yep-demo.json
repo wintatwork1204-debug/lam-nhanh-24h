@@ -1,0 +1,188 @@
+{
+ "ten": "Công ty Mây Xanh",
+ "vc": "",
+ "vt": "Chụp màn này gửi Ban tổ chức để nhận quà",
+ "url": "",
+ "het_han": "2027-03-01",
+ "mau": "#1d4ed8",
+ "ghi_chu": "Demo bản công ty (YEP). Tên minh họa.",
+ "the": [
+  [
+   0,
+   null,
+   "sep",
+   "Trước khi nghỉ Tết, em gửi anh báo cáo tổng kết năm nhé. Tối nay được không?",
+   [
+    [
+     "Dạ tối nay em gửi, kèm cả kế hoạch năm sau ạ",
+     -10,
+     15,
+     0,
+     5,
+     "kheo",
+     "Tốt! (sếp thả tim lúc 23:58)"
+    ],
+    [
+     "Dạ báo cáo năm nay ngắn thôi anh: em đã sống sót",
+     10,
+     5,
+     0,
+     -5,
+     "hai",
+     "Ha ha, sống sót là KPI quan trọng nhất."
+    ],
+    [
+     "Anh ơi em đang trên xe về quê rồi ạ",
+     5,
+     -10,
+     0,
+     0,
+     "ne",
+     "Ừ… thế ra Giêng gửi nhé. (giọng hơi buồn)"
+    ]
+   ]
+  ],
+  [
+   0,
+   null,
+   "hr",
+   "Tất niên công ty năm nay mỗi phòng góp một tiết mục văn nghệ nhé. Phòng em đăng ký chưa?",
+   [
+    [
+     "Phòng em múa quạt, đã tập 3 buổi rồi chị",
+     -5,
+     15,
+     0,
+     5,
+     "kheo",
+     "Ôi chuyên nghiệp thế! Chị xếp tiết mục mở màn."
+    ],
+    [
+     "Phòng em xin đóng vai khán giả nhiệt tình nhất",
+     10,
+     5,
+     0,
+     -5,
+     "hai",
+     "Khán giả cũng phải có tiết mục nhé!"
+    ],
+    [
+     "Em đang chạy deadline, chị hỏi sếp em ạ",
+     0,
+     -5,
+     0,
+     0,
+     "ne",
+     "Sếp em bảo hỏi em đấy."
+    ]
+   ]
+  ],
+  [
+   1,
+   null,
+   "dn",
+   "Thưởng Tết năm nay bên mình được mấy tháng thế? Phòng tớ đồn 3 tháng đấy!",
+   [
+    [
+     "Chuyện lương thưởng mỗi người một khác, mình không bàn nhé",
+     5,
+     5,
+     0,
+     5,
+     "kheo",
+     "Ừ, ý tứ ghê."
+    ],
+    [
+     "Phòng tớ được thưởng… một cái ôm của sếp",
+     10,
+     5,
+     0,
+     -5,
+     "hai",
+     "Ôm cũng ấm đấy chứ!"
+    ],
+    [
+     "3 tháng á? Tớ được 6 tháng cơ",
+     -5,
+     -10,
+     0,
+     15,
+     "phet",
+     "Thật á?! (cả phòng quay sang)"
+    ]
+   ]
+  ],
+  [
+   1,
+   null,
+   "sep",
+   "Năm sau công ty mở chi nhánh mới, em có muốn nhận làm trưởng nhóm không?",
+   [
+    [
+     "Dạ em xin nhận, em sẽ cố hết sức ạ",
+     -10,
+     10,
+     0,
+     15,
+     "kheo",
+     "Tốt. Ra Giêng mình bàn chi tiết."
+    ],
+    [
+     "Dạ cho em suy nghĩ qua Tết ạ",
+     5,
+     0,
+     0,
+     0,
+     "ne",
+     "Được, nhưng đừng suy nghĩ quá Rằm nhé."
+    ],
+    [
+     "Thế lương có tăng không anh?",
+     0,
+     -5,
+     10,
+     -5,
+     "thang",
+     "…Có, nhưng em hỏi thẳng quá đấy."
+    ]
+   ]
+  ],
+  [
+   2,
+   null,
+   "hr",
+   "Tiệc tất niên em ngồi bàn nào? Bàn sếp tổng còn đúng một ghế trống đấy!",
+   [
+    [
+     "Dạ em xin ngồi, tiện chúc Tết sếp luôn ạ",
+     -5,
+     10,
+     0,
+     10,
+     "kheo",
+     "Mạnh dạn thế là tốt!"
+    ],
+    [
+     "Em ngồi gần bàn đồ ăn, ghế nào cũng được",
+     10,
+     5,
+     0,
+     -5,
+     "hai",
+     "Đúng là người biết ưu tiên."
+    ],
+    [
+     "Chị xếp bạn thực tập ngồi đi ạ, cho bạn ấy cơ hội",
+     5,
+     10,
+     0,
+     -5,
+     "ne",
+     "Ừ, chị ghi tên em vào danh sách 'người tốt' nhé."
+    ]
+   ]
+  ]
+ ],
+ "loi_mo": "🎉 Year End Party Công ty Mây Xanh: ai sống sót qua Tết sẽ có quà từ Ban tổ chức!",
+ "loi_ket": "🎉 Bạn đã sống sót! Công ty Mây Xanh chúc mừng"
+}
