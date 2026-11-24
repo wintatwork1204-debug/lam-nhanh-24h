@@ -109,6 +109,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
 .ngay{display:block;margin:10px auto 0;max-width:340px;font-size:.88rem;background:#fff7ed;border:1px dashed #f59e0b;border-radius:12px;padding:8px 10px;cursor:pointer;text-align:left}.ngay.bat{background:#fef3c7;border-style:solid}.ngay input{vertical-align:middle}
 .nhanDemo{position:fixed;top:14px;right:-34px;transform:rotate(45deg);background:#1e1b4b;color:#fde68a;font-weight:800;font-size:12px;letter-spacing:1px;padding:4px 40px;z-index:98;pointer-events:none}
 .hauTruyen{margin-top:12px;padding:12px;border:2px dashed #b45309;border-radius:10px;background:#fffbeb;animation:hienHau 1.2s ease}.hauTruyen h3{margin:0 0 6px;color:#92400e}@keyframes hienHau{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
+.nk{background:#fff7ed;border-left:4px solid #b91c1c;border-radius:10px;padding:8px 12px;margin:10px 0;text-align:left;color:#3b0a0a;font-size:.92rem}.nk h3{margin:0 0 6px;font-size:1rem;color:#7f1d1d}.nk div{margin:6px 0}.nk q{font-style:italic;color:#7c2d12}.nk small{display:block;color:#92400e;font-size:.8rem}
 .bxh{background:#fffbeb;border:2px solid #f59e0b;border-radius:12px;padding:8px 12px;margin:10px 0;text-align:left;color:#3b0a0a}.bxh h3{margin:0 0 6px;text-align:center;font-size:1rem}.bxh ol{list-style:none;margin:0;padding:0}.bxh li{display:flex;justify-content:space-between;gap:8px;padding:4px 6px;border-bottom:1px dashed #fcd34d;font-size:.92rem}.bxh li.toi{background:#fde68a;border-radius:6px;font-weight:700}
 </style>
 </head>
@@ -152,6 +153,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
   <p class="phu" id="kMoTa"></p>
   <div class="hang" id="kHang"></div>
   <div class="ketTruyen" id="kTruyen"></div>
+  <div id="kNk"></div>
   <div class="thach an" id="brKet"></div>
   <canvas id="anh" width="1080" height="1350"></canvas>
   <button class="nut" onclick="taiAnh()">⬇️ Lưu thẻ về máy để khoe</button>
@@ -385,7 +387,7 @@ const KY_UC={
 };
 
 // ================= TRẠNG THÁI =================
-let vaiChon="dl",hang,st,chiSo,nhan,co,lo,am=true,ketTruyen,soQuyet;
+let vaiChon="dl",hang,st,chiSo,nhan,co,lo,am=true,ketTruyen,soQuyet,nk=[],cHien;
 const $=id=>document.getElementById(id);
 const QS=new URLSearchParams(location.search);
 // Bản thương hiệu chính thức: ?shop=<mã>, cấu hình ở shop/<mã>.json. Link ?b=... chỉ là bản DEMO (có nhãn).
@@ -462,7 +464,7 @@ function moDau(){
 
 // ================= CHƠI =================
 function batDau(){
-  nhan={kheo:0,ne:0,thang:0,hai:0,phet:0,nhau:0};co={};lo=20;soQuyet=0;
+  nhan={kheo:0,ne:0,thang:0,hai:0,phet:0,nhau:0};co={};lo=20;soQuyet=0;nk=[];
   RNG=NGAY?mb32(+NGAY*7+['sv','dl','dt','td'].indexOf(vaiChon)):Math.random;
   hang=[];
   CHUONG.forEach((c,i)=>{
@@ -525,7 +527,7 @@ function tiep(){
     const q=co.noi_som?"Chuyện hôm trước… giờ con định thế nào? Kể mẹ nghe cho hết đi.":co.hen_me?"Con hứa Tết xong kể mẹ nghe. Mai con đi rồi đấy.":"Mai con đi rồi. Có chuyện gì muốn nói với mẹ không?";
     c={...CANH.cuoi,q};
   }
-  const dem=!!c.dem;$('mChoi').classList.toggle('dem',dem);nhacCanh(h,c);
+  cHien=c;const dem=!!c.dem;$('mChoi').classList.toggle('dem',dem);nhacCanh(h,c);
   v.innerHTML=`${c.ke?`<div class="ke">${c.ke}</div>`:''}<div class="nguoi"><div class="mat">${hinhAi(c.ai)}</div><div style="flex:1"><div class="ten-ai">${c.boss?'👑 Trận cuối · ':''}${AI[c.ai][1]}</div><div class="bong">${c.q}</div></div></div><div id="dsDap"></div>`;
   (c.ke?c.da:tron(c.da)).forEach(d=>{const b=document.createElement('button');b.className='dap';b.textContent=d[0];b.onclick=()=>chon(d);$('dsDap').appendChild(b)});
 }
@@ -546,6 +548,7 @@ function chon(d){
   const tong=d[1]+d[2]+d[3]+d[4];
   if(tong<0){tieng('xau');const c=$('mChoi');c.classList.remove('rung');void c.offsetWidth;c.classList.add('rung');navigator.vibrate&&navigator.vibrate(60)}else tieng('tot');
   let ghiLo='';if(!co.noi_som&&dLo>0)ghiLo=`<span class="tru">🤫 Bí mật nặng thêm</span>`;else if(!co.noi_som&&dLo<0)ghiLo=`<span class="cong">🤫 Nhẹ lòng hơn</span>`;
+  if(cHien)nk.push({i:aiNay,ai:cHien.ai,q:cHien.q,d:d[0],t:tong,bm:!!(e.kt||e.f=='noi_som'||e.f2=='noi_som'||dLo<0)});
   const cuoi=st>=hang.length;
   $('dsDap').innerHTML=`<div class="phanhoi"><div style="opacity:.75;font-size:.9rem">Bạn: “${esc(d[0])}”</div>${d[6]}<div class="doi">${hienDoi(doi)}${ghiLo}</div><button class="nut" onclick="tiep()">${cuoi?'Xem kết truyện 🎬':'Tiếp ▶'}</button></div>`;
 }
@@ -560,6 +563,16 @@ const HAU={sv:["Bức tranh đầu tiên","Hè năm đó, bạn gửi về nhà 
  dl:["Chuyện của bố","Tháng Ba bạn có việc mới. Tối nhận lương đầu, bố gọi: \"Hồi bố bỏ nhà máy, ông nội không nói chuyện với bố nửa năm. Bố không muốn con phải qua nửa năm như thế.\" Đó là lần đầu hai bố con nói chuyện điện thoại quá 10 phút. Không ai nhắc chữ thưởng Tết."],
  dt:["Tết sau","Tết năm sau, bé Na là người đầu tiên chạy ra cổng, tay cầm bao lì xì mẹ bạn gửi từ rằm tháng Chạp. Bác cả vừa mở miệng \"bao giờ cưới\", bé Na đã trả lời hộ: \"Sắp rồi ạ!\" Cả mâm cười. Mẹ bạn gắp cho con bé miếng giò to nhất."],
  td:["Học trò mới","Tháng Tư, bố nhắn một tin dài nhất từ trước tới giờ: \"Mẹ muốn bán mấy hũ tương nhà làm lên mạng. Con dạy mẹ được không?\" Ba tuần sau, đơn đầu tiên đi Sài Gòn. Bố đứng đóng thùng, quay video gửi cả họ, chú thích: \"Nhà có chuyên gia online.\""]};
+function veNK(){
+  if(nk.length<3)return '';
+  const cat=x=>x.length>70?x.slice(0,68)+'…':x,ten=a=>(AI[a]||['',''])[1]||'';
+  const tot=nk.reduce((a,b)=>b.t>a.t?b:a),xau=nk.reduce((a,b)=>b.t<a.t?b:a),bm=[...nk].reverse().find(x=>x.bm);
+  const dong=(ic,nhan,x)=>`<div>${ic} <b>${nhan}</b> · Ải ${x.i+1} · ${esc(ten(x.ai))}: <q>${esc(cat(x.q.replace(/<[^>]+>/g,'')))}</q><small>Bạn đáp: “${esc(cat(x.d))}” (${x.t>0?'+':''}${x.t})</small></div>`;
+  let h=dong('🏆','Câu đáp đỉnh nhất',tot);
+  if(xau!==tot&&xau.t<0)h+=dong('💥','Pha "toang" nhất',xau);
+  if(bm&&bm!==tot&&bm!==xau)h+=dong('🤫','Khoảnh khắc bí mật',bm);
+  return `<div class="nk"><h3>📖 Khoảnh khắc Tết của bạn</h3>${h}</div>`;
+}
 function ketThuc(chet){
   let k=chet;const c=chiSo,n=nhan;
   if(!k){
@@ -596,6 +609,7 @@ function ketThuc(chet){
   $('mChoi').classList.add('an');$('mKet').classList.remove('an');
   $('kDanhHieu').innerHTML=(HIEM.includes(k)?'<span class="hiem">KẾT HIẾM</span> ':'')+kq[0]+' '+esc(kq[1]);$('kMoTa').textContent=kq[2];
   $('kHang').innerHTML=`Hành trình về quê: vượt ${soAi}/5 ải<div class="saoTo">${'<i>⭐</i>'.repeat(Math.min(3,Math.round(tongSao/5)))}</div><b>${hg[1]} ${hg[2]}</b>⭐ ${tongSao}/15 sao${hg[0]<14?` · còn ${HANG[HANG.indexOf(hg)-1][0]-tongSao} sao nữa lên ${HANG[HANG.indexOf(hg)-1][2]}`:''}`;
+  $('kNk').innerHTML=veNK();
   $('kLuoi').textContent=luoiKhoe(kq,diem);
   $('kBxh').innerHTML=BX.length?veBX(_kq.bx,_kq.hang)+(_kq.hang===0?'<div class="phu" style="text-align:center">👑 Bạn đang đứng đầu nhóm. Gửi link để giữ ngôi!</div>':_kq.hang>0?`<div class="phu" style="text-align:center">Còn ${_kq.bx[_kq.hang-1][1]-diem} điểm nữa là vượt ${esc(_kq.bx[_kq.hang-1][0])}. Chơi lại?</div>`:''):'';
   if(NGAY)$('kHang').insertAdjacentHTML('afterbegin',`<div style="font-size:.85rem;color:#fde68a">📅 Đề ${ngayDep(NGAY)} · ${diem} điểm${window._kq.kyLuc?' · 🏅 kỷ lục mới của bạn':''}</div>`);
