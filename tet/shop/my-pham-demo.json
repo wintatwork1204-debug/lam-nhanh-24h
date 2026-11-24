@@ -1,0 +1,82 @@
+{
+ "ten": "Nhà Mận Beauty",
+ "vc": "MANTET27",
+ "vt": "Tặng son dưỡng cho đơn từ 299k",
+ "mau": "#db2777",
+ "ghi_chu": "Demo ngành mỹ phẩm. Tên minh họa.",
+ "the": [
+  [
+   0,
+   null,
+   "co",
+   "Da cháu dạo này đẹp thế, dùng gì đấy? Cô cũng muốn trẻ ra mười tuổi!",
+   [
+    [
+     "Dạ cháu dùng bên Nhà Mận, cháu gửi cô mã ưu đãi luôn",
+     5,
+     15,
+     0,
+     5,
+     "kheo",
+     "Thế thì cô đặt luôn ba bộ, cho cả chị dâu!"
+    ],
+    [
+     "Dạ tại cháu ngủ đủ tám tiếng thôi ạ",
+     10,
+     0,
+     0,
+     5,
+     "phet",
+     "Ngủ tám tiếng? Thời buổi này ai làm được thế!"
+    ],
+    [
+     "Dạ… cháu đắp mặt nạ dưa chuột của bà",
+     5,
+     5,
+     0,
+     -5,
+     "hai",
+     "Thảo nào sáng nay rổ dưa chuột vơi đi một nửa!"
+    ]
+   ]
+  ],
+  [
+   1,
+   null,
+   "mo",
+   "Tết này mợ phải đẹp nhất xóm. Cháu chọn cho mợ thỏi son nào?",
+   [
+    [
+     "Màu đỏ gạch, vừa sang vừa hợp áo dài mợ ạ",
+     5,
+     15,
+     -5,
+     5,
+     "kheo",
+     "Ừ, mợ cũng thích màu này!"
+    ],
+    [
+     "Màu nào mợ cũng đẹp, khỏi cần son ạ",
+     10,
+     5,
+     0,
+     0,
+     "ne",
+     "Cái miệng dẻo thế không biết!"
+    ],
+    [
+     "Màu tím than cho cá tính mợ ạ",
+     -5,
+     -10,
+     0,
+     10,
+     "thang",
+     "Mợ đi ăn Tết chứ có phải đi đám nào đâu!"
+    ]
+   ]
+  ]
+ ],
+ "url": "https://wintatwork1204-debug.github.io/lam-nhanh-24h/tet/doanh-nghiep.html",
+ "het_han": "2027-03-01",
+ "logo": ""
+}

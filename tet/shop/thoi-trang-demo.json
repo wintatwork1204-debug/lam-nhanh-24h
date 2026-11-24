@@ -1,0 +1,82 @@
+{
+ "ten": "Tiệm Áo Mùa Xuân",
+ "vc": "XUAN27",
+ "vt": "Giảm 20% áo dài Tết",
+ "mau": "#b91c1c",
+ "ghi_chu": "Demo ngành thời trang. Tên minh họa.",
+ "the": [
+  [
+   0,
+   null,
+   "me",
+   "Mùng Một năm nay mặc áo dài chụp ảnh cả nhà nhé. Con có áo chưa?",
+   [
+    [
+     "Có rồi mẹ, con đặt ở Tiệm Áo Mùa Xuân, có cả áo cho mẹ",
+     5,
+     15,
+     -10,
+     5,
+     "kheo",
+     "Con gái mẹ chu đáo quá!"
+    ],
+    [
+     "Con mặc áo phông in chữ Tết là được mẹ ạ",
+     10,
+     -10,
+     5,
+     0,
+     "thang",
+     "Chụp ảnh gia đình mà mặc như đi đá bóng à?"
+    ],
+    [
+     "Con mặc lại áo năm ngoái, không ai nhớ đâu",
+     5,
+     0,
+     5,
+     -5,
+     "ne",
+     "Ảnh năm ngoái vẫn treo trên tường kia kìa!"
+    ]
+   ]
+  ],
+  [
+   1,
+   null,
+   "xom",
+   "Ơ cái áo này đẹp thế, mua ở đâu đấy? Bao nhiêu tiền?",
+   [
+    [
+     "Dạ tiệm quen của cháu, cháu gửi bà mã giảm giá ạ",
+     5,
+     15,
+     0,
+     5,
+     "kheo",
+     "Ừ, để bà mua cho con dâu một cái!"
+    ],
+    [
+     "Dạ hàng hiệu bên Ý đấy bà ạ",
+     0,
+     5,
+     0,
+     15,
+     "phet",
+     "Ý à? Thế mà giống hệt áo chợ huyện…"
+    ],
+    [
+     "Dạ bí mật ạ, sợ bà mặc trùng",
+     5,
+     -5,
+     0,
+     10,
+     "hai",
+     "Bà mặc trùng thì bà vẫn đẹp hơn!"
+    ]
+   ]
+  ]
+ ],
+ "url": "https://wintatwork1204-debug.github.io/lam-nhanh-24h/tet/doanh-nghiep.html",
+ "het_han": "2027-03-01",
+ "logo": ""
+}

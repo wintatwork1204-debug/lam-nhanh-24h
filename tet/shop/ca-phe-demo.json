@@ -1,0 +1,82 @@
+{
+ "ten": "Cà Phê Gác Mái",
+ "vc": "GACMAI27",
+ "vt": "Mua 2 tặng 1 bạc xỉu",
+ "mau": "#78350f",
+ "ghi_chu": "Demo ngành đồ uống. Tên minh họa.",
+ "the": [
+  [
+   0,
+   null,
+   "anh",
+   "Về quê chán nhỉ. Chiều nay ra quán cà phê ngồi không? Anh bao!",
+   [
+    [
+     "Đi! Em có mã của Gác Mái, mua 2 tặng 1 đấy",
+     10,
+     10,
+     5,
+     0,
+     "kheo",
+     "Thế thì rủ thêm thằng Tí cho đủ ba ly!"
+    ],
+    [
+     "Thôi anh, em ở nhà phụ mẹ gói bánh",
+     -5,
+     15,
+     0,
+     0,
+     "ne",
+     "Ngoan thế… mẹ cho nghỉ rồi kìa."
+    ],
+    [
+     "Anh bao thì em gọi ly đắt nhất nhé",
+     5,
+     -5,
+     5,
+     5,
+     "hai",
+     "Thằng này về quê vẫn tham như hồi bé!"
+    ]
+   ]
+  ],
+  [
+   2,
+   null,
+   "cau",
+   "Ở thành phố cháu toàn uống cà phê đắt tiền à? Bằng mấy cân thịt đấy!",
+   [
+    [
+     "Dạ cháu uống quán quen, rẻ mà ngon, cậu lên cháu mời",
+     5,
+     15,
+     0,
+     5,
+     "kheo",
+     "Ừ, lên cậu phải thử mới được!"
+    ],
+    [
+     "Dạ cà phê là nhiên liệu đi làm của cháu ạ",
+     5,
+     0,
+     0,
+     5,
+     "phet",
+     "Nhiên liệu gì mà ngày ba lít!"
+    ],
+    [
+     "Dạ cháu pha phin ở nhà cho tiết kiệm",
+     10,
+     5,
+     5,
+     -5,
+     "ne",
+     "Thế mới là biết lo!"
+    ]
+   ]
+  ]
+ ],
+ "url": "https://wintatwork1204-debug.github.io/lam-nhanh-24h/tet/doanh-nghiep.html",
+ "het_han": "2027-03-01",
+ "logo": ""
+}
