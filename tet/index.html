@@ -365,8 +365,19 @@ function tk(ev,p){try{window.gtag&&gtag('event',ev,Object.assign({vai:vaiChon,ba
 let tBatDau=0,sao=[],moc=null,aiNay=0;
 
 // ----- âm thanh -----
-let ac;function tieng(loai){if(!am)return;try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(ac.destination);const t=ac.currentTime;const m={tot:[660,880],xau:[300,180],bam:[520,520],ket:[523,1046],dem:[392,330]}[loai];o.frequency.setValueAtTime(m[0],t);o.frequency.exponentialRampToValueAtTime(m[1],t+.18);o.type=loai=="xau"?"sawtooth":"triangle";g.gain.setValueAtTime(.08,t);g.gain.exponentialRampToValueAtTime(.001,t+.25);o.start(t);o.stop(t+.26)}catch(e){}}
-function batTat(){am=!am;$('nutAm').textContent=am?'🔊':'🔇'}
+let ac;function tieng(loai){if(!am)return;try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(tongAm());const t=ac.currentTime;const m={tot:[660,880],xau:[300,180],bam:[520,520],ket:[523,1046],dem:[392,330]}[loai];o.frequency.setValueAtTime(m[0],t);o.frequency.exponentialRampToValueAtTime(m[1],t+.18);o.type=loai=="xau"?"sawtooth":"triangle";g.gain.setValueAtTime(.08,t);g.gain.exponentialRampToValueAtTime(.001,t+.25);o.start(t);o.stop(t+.26)}catch(e){}}
+function batTat(){am=!am;$('nutAm').textContent=am?'🔊':'🔇';if(ac)tongAm().gain.setTargetAtTime(am?1:0,ac.currentTime,.05);if(am&&!nen.k)nhac('que');tk('am',{bat:am?1:0})}
+// ----- nhạc (tự sáng tác, tools/nhac_tet.py) -----
+let tong,nen={k:null,src:null,g:null};const NHAC={};
+function tongAm(){ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(!tong){tong=ac.createGain();tong.gain.value=am?1:0;tong.connect(ac.destination)}return tong}
+function nhacNap(k){return NHAC[k]||(NHAC[k]=fetch('nhac/'+k+'.mp3').then(r=>r.arrayBuffer()).then(b=>new Promise((ok,er)=>ac.decodeAudioData(b,ok,er))).catch(e=>{delete NHAC[k];throw e}))}
+function nhac(k,lap=true){
+  try{tongAm();if(ac.state=='suspended')ac.resume();}catch(e){return}
+  if(lap){if(k===nen.k)return;const cu=nen;if(cu.g){cu.g.gain.setTargetAtTime(0,ac.currentTime,.35);const s=cu.src;setTimeout(()=>{try{s.stop()}catch(e){}},2500)}nen={k,src:null,g:null}}
+  else if(nen.g){nen.g.gain.setTargetAtTime(.12,ac.currentTime,.1);const g=nen.g;setTimeout(()=>{if(nen.g===g)g.gain.setTargetAtTime(.5,ac.currentTime,.6)},2600)}
+  nhacNap(k).then(buf=>{if(lap&&nen.k!==k)return;const s=ac.createBufferSource();s.buffer=buf;s.loop=lap;const g=ac.createGain();g.gain.value=0;s.connect(g);g.connect(tong);s.start();g.gain.setTargetAtTime(lap?.5:.85,ac.currentTime,lap?.5:.02);if(lap){nen.src=s;nen.g=g}}).catch(()=>{});
+}
+function nhacCanh(h,c){let k='que';if(h.i==3||h.loai=='boss')k='cang';if(h.i==4||(c&&c.dem))k='dem';nhac(k)}
 
 // ================= MỞ ĐẦU =================
 function veMo(){
@@ -380,7 +391,7 @@ function veMo(){
 }
 function chonVai(k){vaiChon=k;tieng('bam');veMo()}
 function moDau(){
-  tieng('bam');
+  tieng('bam');nhac('que');setTimeout(()=>['cang','dem','ai'].forEach(k=>nhacNap(k).catch(()=>{})),2500);
   $('mMo').classList.add('an');$('mKet').classList.add('an');$('mChoi').classList.remove('an');$('mChoi').classList.remove('dem');
   chiSo={...VAI[vaiChon].cs};capChiSo();
   $('tenChuong').textContent='🤫 Trước khi lên xe';$('hanhtrinh').innerHTML='';$('bimat').textContent='';$('bimat').className='bimat an';
@@ -429,8 +440,8 @@ function tiep(){
   $('mChoi').classList.toggle('dem',false);
   if(h.loai=='chuong'){
     let qua='';
-    if(moc){const s=chamAi(aiNay);qua=`<div class="hang" style="margin-bottom:14px">✅ Vượt ải ${aiNay+1}: ${AI_TEN[aiNay]}<b>${'⭐'.repeat(s)}${'☆'.repeat(3-s)}</b></div>`;tieng('ket')}
-    aiNay=h.i;moc={...chiSo};veHT();
+    if(moc){const s=chamAi(aiNay);nhac('ai',false);qua=`<div class="hang" style="margin-bottom:14px">✅ Vượt ải ${aiNay+1}: ${AI_TEN[aiNay]}<b>${'⭐'.repeat(s)}${'☆'.repeat(3-s)}</b></div>`}
+    aiNay=h.i;moc={...chiSo};veHT();setTimeout(()=>nhacCanh(h),moc&&h.i?1800:0);
     v.innerHTML=`${qua}<div class="sukien"><div class="to">${C[0]}</div><div style="font-weight:800;color:#b91c1c;letter-spacing:1px">ẢI ${h.i+1} · ${AI_TEN[h.i].toUpperCase()}</div><h2>${C[1]}</h2><p class="phu">${C[2]}</p><button class="nut" onclick="tiep()">Vào ải ▶</button></div>`;return;
   }
   if(h.loai=='goilai'){
@@ -452,7 +463,7 @@ function tiep(){
     const q=co.noi_som?"Chuyện hôm trước… giờ con định thế nào? Kể mẹ nghe cho hết đi.":co.hen_me?"Con hứa Tết xong kể mẹ nghe. Mai con đi rồi đấy.":"Mai con đi rồi. Có chuyện gì muốn nói với mẹ không?";
     c={...CANH.cuoi,q};
   }
-  const dem=!!c.dem;$('mChoi').classList.toggle('dem',dem);if(dem)tieng('dem');
+  const dem=!!c.dem;$('mChoi').classList.toggle('dem',dem);nhacCanh(h,c);
   v.innerHTML=`${c.ke?`<div class="ke">${c.ke}</div>`:''}<div class="nguoi"><div class="mat">${hinhAi(c.ai)}</div><div style="flex:1"><div class="ten-ai">${c.boss?'👑 Trận cuối · ':''}${AI[c.ai][1]}</div><div class="bong">${c.q}</div></div></div><div id="dsDap"></div>`;
   (c.ke?c.da:tron(c.da)).forEach(d=>{const b=document.createElement('button');b.className='dap';b.textContent=d[0];b.onclick=()=>chon(d);$('dsDap').appendChild(b)});
 }
@@ -506,7 +517,7 @@ function ketThuc(chet){
   const b=doc('sstet_bst');b[k]=1;localStorage.setItem('sstet_bst',JSON.stringify(b));
   const bk=doc('sstet_kt');bk[vaiChon+'_'+kt]=1;localStorage.setItem('sstet_kt',JSON.stringify(bk));
   window._kq={k,diem,kt,tongSao,soAi,hg};
-  tieng('ket');
+  const vui=['hieu','doi','giu'].includes(kt);nen.k&&nhac(vui?'que':'dem');nhac(vui?'ketvui':'ketbuon',false);
   $('mChoi').classList.add('an');$('mKet').classList.remove('an');
   $('kDanhHieu').textContent=kq[0]+' '+kq[1];$('kMoTa').textContent=kq[2];
   $('kHang').innerHTML=`Hành trình về quê: vượt ${soAi}/5 ải<div class="saoTo">${'<i>⭐</i>'.repeat(Math.min(3,Math.round(tongSao/5)))}</div><b>${hg[1]} ${hg[2]}</b>⭐ ${tongSao}/15 sao${hg[0]<14?` · còn ${HANG[HANG.indexOf(hg)-1][0]-tongSao} sao nữa lên ${HANG[HANG.indexOf(hg)-1][2]}`:''}`;
