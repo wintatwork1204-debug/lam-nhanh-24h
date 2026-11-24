@@ -434,7 +434,7 @@ function nhac(k,lap=true){
   else if(nen.g){nen.g.gain.setTargetAtTime(.12,ac.currentTime,.1);const g=nen.g;setTimeout(()=>{if(nen.g===g)g.gain.setTargetAtTime(.5,ac.currentTime,.6)},2600)}
   nhacNap(k).then(buf=>{if(lap&&nen.k!==k)return;const s=ac.createBufferSource();s.buffer=buf;s.loop=lap;const g=ac.createGain();g.gain.value=0;s.connect(g);g.connect(tong);s.start();g.gain.setTargetAtTime(lap?.5:.85,ac.currentTime,lap?.5:.02);if(lap){nen.src=s;nen.g=g}}).catch(()=>{});
 }
-function nhacCanh(h,c){let k=(h.i==1||h.i==2)?'mamco':'que';if(h.i==3||h.loai=='boss')k='cang';if(h.i==4||(c&&c.dem))k='dem';nhac(k)}
+function nhacCanh(h,c){let k=h.i==1?'mamco':h.i==2?'ruou':'que';if(h.i==3||h.loai=='boss')k='cang';if(h.i==4||(c&&c.dem))k='dem';nhac(k)}
 
 // ================= MỞ ĐẦU =================
 function veMo(){
@@ -451,7 +451,7 @@ function veMo(){
 function veNgay(){$('cbNgay').checked=!!NGAY;$('lbNgay').classList.toggle('bat',!!NGAY);const kl=doc('sstet_ngay')[HOMNAY+'_'+vaiChon];$('lbNgay').title='';const e=$('klNgay');if(e)e.remove();if(NGAY&&kl){const d=document.createElement('div');d.id='klNgay';d.className='phu';d.style.cssText='font-size:.85rem;margin-top:4px';d.textContent=`Kỷ lục đề ${ngayDep(HOMNAY)} của bạn (vai này): ${kl.diem} điểm, ⭐ ${kl.sao}/15`;$('lbNgay').after(d)}}
 function chonVai(k){vaiChon=k;tieng('bam');veMo();tk('chon_vai',{vai:k})}
 function moDau(){
-  tieng('bam');nhac('que');setTimeout(()=>['s_bam','s_tot','s_xau','mamco','cang','dem','ai'].forEach(k=>nhacNap(k).catch(()=>{})),2500);
+  tieng('bam');nhac('que');setTimeout(()=>['s_bam','s_tot','s_xau','mamco','ruou','cang','dem','ai'].forEach(k=>nhacNap(k).catch(()=>{})),2500);
   $('mMo').classList.add('an');$('mKet').classList.add('an');$('mChoi').classList.remove('an');$('mChoi').classList.remove('dem');
   chiSo={...VAI[vaiChon].cs};capChiSo();
   $('tenChuong').textContent='🤫 Trước khi lên xe';$('hanhtrinh').innerHTML='';$('bimat').textContent='';$('bimat').className='bimat an';
