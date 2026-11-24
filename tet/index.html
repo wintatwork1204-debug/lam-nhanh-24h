@@ -106,7 +106,18 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
 .hoa{position:fixed;top:-20px;font-size:22px;pointer-events:none;animation:phao linear forwards;z-index:9}
 .hiem{display:inline-block;background:linear-gradient(90deg,#f59e0b,#fde047,#f59e0b);color:#7c2d12;font-size:.7em;padding:2px 8px;border-radius:99px;vertical-align:middle;animation:anhKim 1.6s infinite}@keyframes anhKim{50%{filter:brightness(1.3)}}.bHiem{border-color:#f59e0b!important;background:#fffbeb}
 .lkTrailer{background:none;border:1px dashed #b91c1c;color:#b91c1c;border-radius:99px;padding:6px 14px;margin-top:8px;font:inherit;font-size:.85rem;cursor:pointer}#hopTrailer{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:99;display:flex;align-items:center;justify-content:center}#hopTrailer.an{display:none}#hopTrailer>div{display:flex;flex-direction:column;align-items:center;gap:10px}#vTrailer{max-height:82vh;max-width:92vw;border-radius:12px;background:#000}#hopTrailer button{background:#fff;border:0;border-radius:99px;padding:8px 18px;font:inherit;cursor:pointer}
-.ngay{display:block;margin:10px auto 0;max-width:340px;font-size:.88rem;background:#fff7ed;border:1px dashed #f59e0b;border-radius:12px;padding:8px 10px;cursor:pointer;text-align:left}.ngay.bat{background:#fef3c7;border-style:solid}.demTet{font-size:.85rem;color:#92400e;margin:6px 0 2px;text-align:center}.demTet b{color:#b91c1c}
+.ngay{display:block;margin:10px auto 0;max-width:340px;font-size:.88rem;background:#fff7ed;border:1px dashed #f59e0b;border-radius:12px;padding:8px 10px;cursor:pointer;text-align:left}.ngay.bat{background:#fef3c7;border-style:solid}#bossVao{position:fixed;inset:0;z-index:90;background:radial-gradient(circle at 50% 45%,#5b0d0d 0,#000 72%);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;animation:bvVao 2.8s forwards;cursor:pointer}
+#bossVao .bv1{font-size:.95rem;letter-spacing:6px;color:#fca5a5;font-weight:800;animation:bvChu .5s both}
+#bossVao b{font-family:"Noto Serif",Georgia,serif;font-size:2.9rem;line-height:1.1;color:#facc15;text-shadow:0 4px 0 #7f1d1d,0 0 30px rgba(250,204,21,.5);animation:bvChu .5s .15s both}
+#bossVao img{height:40vh;margin:14px 0 6px;filter:drop-shadow(0 0 34px rgba(220,38,38,.95));animation:bvAnh 2.8s both}
+#bossVao small{display:block;padding:0 28px;max-width:340px;font-size:1rem;color:#fde68a;animation:bvChu .4s 1.15s both}
+#bossVao.rung{animation:bvVao 2.8s forwards,bvRung .45s 1s}
+@keyframes bvVao{0%{opacity:0}6%{opacity:1}88%{opacity:1}100%{opacity:0}}
+@keyframes bvChu{from{opacity:0;transform:scale(1.6)}to{opacity:1;transform:none}}
+@keyframes bvAnh{0%,34%{opacity:0;transform:scale(.4)}38%{opacity:1;transform:scale(1.18)}48%{transform:scale(1)}100%{transform:scale(1.06)}}
+@keyframes bvRung{0%,100%{transform:none}20%{transform:translate(-9px,6px)}40%{transform:translate(8px,-7px)}60%{transform:translate(-6px,-4px)}80%{transform:translate(4px,5px)}}
+@media (prefers-reduced-motion:reduce){#bossVao,#bossVao *{animation-duration:.01s!important}}
+.demTet{font-size:.85rem;color:#92400e;margin:6px 0 2px;text-align:center}.demTet b{color:#b91c1c}
 .ngay input{display:inline-block;width:auto;margin:0 6px 0 0;padding:0;vertical-align:middle;transform:scale(1.25)}
 .nhanDemo{position:fixed;top:14px;right:-34px;transform:rotate(45deg);background:#1e1b4b;color:#fde68a;font-weight:800;font-size:12px;letter-spacing:1px;padding:4px 40px;z-index:98;pointer-events:none}
 .hauTruyen{margin-top:12px;padding:12px;border:2px dashed #b45309;border-radius:10px;background:#fffbeb;animation:hienHau 1.2s ease}.hauTruyen h3{margin:0 0 6px;color:#92400e}@keyframes hienHau{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
@@ -448,7 +459,7 @@ function tk(ev,p){try{window.gtag&&gtag('event',ev,Object.assign({vai:vaiChon,ba
 let tBatDau=0,sao=[],moc=null,aiNay=0;
 
 // ----- âm thanh -----
-let ac;const BUF={},SFX={tot:'s_tot',xau:'s_xau',bam:'s_bam',lo:'s_lo'};
+let ac;const BUF={},SFX={tot:'s_tot',xau:'s_xau',bam:'s_bam',lo:'s_lo',boss:'s_boss'};
 function tieng(loai){if(!am)return;if(SFX[loai]&&BUF[SFX[loai]]&&ac){try{const s=ac.createBufferSource();s.buffer=BUF[SFX[loai]];const g=ac.createGain();g.gain.value=.7;s.connect(g);g.connect(tongAm());s.start();return}catch(e){}}try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(tongAm());const t=ac.currentTime;const m={tot:[660,880],xau:[300,180],bam:[520,520],ket:[523,1046],dem:[392,330]}[loai];o.frequency.setValueAtTime(m[0],t);o.frequency.exponentialRampToValueAtTime(m[1],t+.18);o.type=loai=="xau"?"sawtooth":"triangle";g.gain.setValueAtTime(.08,t);g.gain.exponentialRampToValueAtTime(.001,t+.25);o.start(t);o.stop(t+.26)}catch(e){}}
 function batTat(){am=!am;$('nutAm').textContent=am?'🔊':'🔇';if(ac)tongAm().gain.setTargetAtTime(am?1:0,ac.currentTime,.05);if(am&&!nen.k)nhac('que');tk('am',{bat:am?1:0})}
 // ----- nhạc (tự sáng tác, tools/nhac_tet.py) -----
@@ -484,7 +495,7 @@ function veMo(){
 function veNgay(){$('cbNgay').checked=!!NGAY;$('lbNgay').classList.toggle('bat',!!NGAY);const kl=doc('sstet_ngay')[HOMNAY+'_'+vaiChon];$('lbNgay').title='';const e=$('klNgay');if(e)e.remove();if(NGAY&&kl){const d=document.createElement('div');d.id='klNgay';d.className='phu';d.style.cssText='font-size:.85rem;margin-top:4px';d.textContent=`Kỷ lục đề ${ngayDep(HOMNAY)} của bạn (vai này): ${kl.diem} điểm, ⭐ ${kl.sao}/15`;$('lbNgay').after(d)}}
 function chonVai(k){vaiChon=k;tieng('bam');veMo();tk('chon_vai',{vai:k})}
 function moDau(){
-  tieng('bam');nhac('que');setTimeout(()=>['s_bam','s_tot','s_xau','s_lo','mamco','ruou','cang','dem','ai'].forEach(k=>nhacNap(k).catch(()=>{})),2500);
+  tieng('bam');nhac('que');setTimeout(()=>['s_bam','s_tot','s_xau','s_lo','s_boss','mamco','ruou','cang','dem','ai'].forEach(k=>nhacNap(k).catch(()=>{})),2500);
   $('mMo').classList.add('an');$('mKet').classList.add('an');$('mChoi').classList.remove('an');$('mChoi').classList.remove('dem');
   chiSo={...VAI[vaiChon].cs};capChiSo();
   $('tenChuong').textContent='🤫 Trước khi lên xe';$('hanhtrinh').innerHTML='';$('bimat').textContent='';$('bimat').className='bimat an';
@@ -564,7 +575,9 @@ function tiep(){
   cHien=c;const dem=!!c.dem;$('mChoi').classList.toggle('dem',dem);nhacCanh(h,c);
   v.innerHTML=`${c.ke?`<div class="ke">${c.ke}</div>`:''}<div class="nguoi"><div class="mat">${hinhAi(c.ai)}</div><div style="flex:1"><div class="ten-ai">${c.boss?'👑 Trận cuối · ':''}${AI[c.ai][1]}</div><div class="bong">${c.q}</div></div></div><div id="dsDap"></div>`;
   (c.ke?c.da:tron(c.da)).forEach(d=>{const b=document.createElement('button');b.className='dap';b.textContent=d[0];b.onclick=()=>chon(d);$('dsDap').appendChild(b)});
+  if(c.boss)bossVao();
 }
+function bossVao(){const o=document.createElement('div');o.id='bossVao';o.className='rung';o.innerHTML=`<div class="bv1">⚔️ TRẬN CUỐI</div><b>BÁC CẢ</b>${IMG.bac?`<img src="${IMG.bac}" alt="">`:''}<small>Người hỏi câu khó nhất họ. Không ai qua cổng mà chưa trả lời bác.</small>`;const xoa=()=>o.remove();o.onclick=xoa;document.body.appendChild(o);tieng('boss');tk('boss');setTimeout(xoa,2800)}
 const tong4=o=>o.bt+o.hk+o.vi+o.sd;
 function chamAi(i){const d=tong4(chiSo)-tong4(moc);const ng=NG_AI[i];let s=d>=ng[0]?3:d>=ng[1]?2:1;if(Math.min(chiSo.bt,chiSo.hk,chiSo.vi,chiSo.sd)<=20)s=Math.min(s,1);sao[i]=s;tk('qua_ai',{ai:i+1,sao:s});return s}
 function veHT(){$('hanhtrinh').innerHTML=AI_TEN.map((t,i)=>i<aiNay?`<span class="xong" title="${t}">${sao[i]}★</span>`:`<span class="${i==aiNay?'nay':''}" title="${t}">${CHUONG[i][0]}</span>`).join('')}
