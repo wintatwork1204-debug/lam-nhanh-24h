@@ -592,7 +592,7 @@ function ketThuc(chet){
   {const ten=($('tenNC').value.trim()||'Bạn').slice(0,18),cu=BX.find(e=>e[0]===ten),me=cu&&cu[1]>diem?cu:[ten,diem,tongSao,soAi,vaiChon];
    const a=BX.filter(e=>e[0]!==ten).concat([me]).sort((x,y)=>y[1]-x[1]||y[2]-x[2]).slice(0,15);window._kq.bx=a;window._kq.hang=a.indexOf(me)}
   if(NGAY){const kn=doc('sstet_ngay'),kk=NGAY+'_'+vaiChon,cu=kn[kk];window._kq.kyLuc=!cu||diem>cu.diem;if(window._kq.kyLuc)kn[kk]={diem,sao:tongSao};for(const x in kn)if(x.slice(0,8)<NGAY)delete kn[x];localStorage.setItem('sstet_ngay',JSON.stringify(kn))}
-  const vui=['hieu','doi','giu'].includes(kt);nen.k&&nhac(vui?'que':'dem');nhac(vui?'ketvui':'ketbuon',false);
+  const vui=['hieu','doi','giu'].includes(kt);nen.k&&nhac(hau?'hau':vui?'que':'dem');nhac(vui?'ketvui':'ketbuon',false);
   $('mChoi').classList.add('an');$('mKet').classList.remove('an');
   $('kDanhHieu').innerHTML=(HIEM.includes(k)?'<span class="hiem">KẾT HIẾM</span> ':'')+kq[0]+' '+esc(kq[1]);$('kMoTa').textContent=kq[2];
   $('kHang').innerHTML=`Hành trình về quê: vượt ${soAi}/5 ải<div class="saoTo">${'<i>⭐</i>'.repeat(Math.min(3,Math.round(tongSao/5)))}</div><b>${hg[1]} ${hg[2]}</b>⭐ ${tongSao}/15 sao${hg[0]<14?` · còn ${HANG[HANG.indexOf(hg)-1][0]-tongSao} sao nữa lên ${HANG[HANG.indexOf(hg)-1][2]}`:''}`;
