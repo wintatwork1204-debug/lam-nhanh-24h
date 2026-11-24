@@ -108,6 +108,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
 .lkTrailer{background:none;border:1px dashed #b91c1c;color:#b91c1c;border-radius:99px;padding:6px 14px;margin-top:8px;font:inherit;font-size:.85rem;cursor:pointer}#hopTrailer{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:99;display:flex;align-items:center;justify-content:center}#hopTrailer.an{display:none}#hopTrailer>div{display:flex;flex-direction:column;align-items:center;gap:10px}#vTrailer{max-height:82vh;max-width:92vw;border-radius:12px;background:#000}#hopTrailer button{background:#fff;border:0;border-radius:99px;padding:8px 18px;font:inherit;cursor:pointer}
 .ngay{display:block;margin:10px auto 0;max-width:340px;font-size:.88rem;background:#fff7ed;border:1px dashed #f59e0b;border-radius:12px;padding:8px 10px;cursor:pointer;text-align:left}.ngay.bat{background:#fef3c7;border-style:solid}.ngay input{vertical-align:middle}
 .nhanDemo{position:fixed;top:14px;right:-34px;transform:rotate(45deg);background:#1e1b4b;color:#fde68a;font-weight:800;font-size:12px;letter-spacing:1px;padding:4px 40px;z-index:98;pointer-events:none}
+.hauTruyen{margin-top:12px;padding:12px;border:2px dashed #b45309;border-radius:10px;background:#fffbeb;animation:hienHau 1.2s ease}.hauTruyen h3{margin:0 0 6px;color:#92400e}@keyframes hienHau{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
 </style>
 </head>
 <body>
@@ -126,7 +127,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
   <input id="tenNC" maxlength="18" placeholder="Tên bạn (in lên thẻ khoe, có thể bỏ trống)">
   <label class="ngay" id="lbNgay"><input type="checkbox" id="cbNgay" onchange="NGAY=this.checked?HOMNAY:null;veNgay()"> 📅 <b>Thử thách hôm nay</b>: cả nhóm bạn cùng một đề, so điểm công bằng</label>
   <button class="nut" onclick="moDau()">Lên đường về quê ▶</button>
-  <p class="phu" style="font-size:.8rem;margin-top:10px">5 phút · không đăng nhập · chỉ đếm lượt chơi ẩn danh<br>Đã mở <b id="soMo">0</b>/12 danh hiệu · <b id="soKT">0</b>/20 kết truyện · 4 kết hiếm 🔒</p>
+  <p class="phu" style="font-size:.8rem;margin-top:10px">5 phút · không đăng nhập · chỉ đếm lượt chơi ẩn danh<br>Đã mở <b id="soMo">0</b>/12 danh hiệu · <b id="soKT">0</b>/20 kết truyện · 4 kết hiếm 🔒 · 4 hậu truyện 📜</p>
   <button class="lkTrailer" onclick="moTrailer()">🎬 Xem trailer 40 giây</button>
 </div>
 <div id="hopTrailer" class="an" onclick="if(event.target===this)dongTrailer()"><div><video id="vTrailer" src="trailer.mp4" poster="trailer-poster.jpg" controls playsinline preload="none"></video><button onclick="dongTrailer()">✕ Đóng</button></div></div>
@@ -544,6 +545,10 @@ function tinhKetTruyen(){
   if(t=='nua')return 'doi';
   return lo>=60?'lo':'giu';
 }
+const HAU={sv:["Bức tranh đầu tiên","Hè năm đó, bạn gửi về nhà bức tranh đầu tiên bán được: cổng làng ngày Tết, khói bếp, cây nêu. Bố đóng khung, treo ngay phòng khách, chỗ trước kia treo giấy khen của bạn. Khách đến chơi hỏi, bố bảo: \"Con tôi vẽ đấy.\" Rồi bố kể thêm mười phút, không ai ngắt được."],
+ dl:["Chuyện của bố","Tháng Ba bạn có việc mới. Tối nhận lương đầu, bố gọi: \"Hồi bố bỏ nhà máy, ông nội không nói chuyện với bố nửa năm. Bố không muốn con phải qua nửa năm như thế.\" Đó là lần đầu hai bố con nói chuyện điện thoại quá 10 phút. Không ai nhắc chữ thưởng Tết."],
+ dt:["Tết sau","Tết năm sau, bé Na là người đầu tiên chạy ra cổng, tay cầm bao lì xì mẹ bạn gửi từ rằm tháng Chạp. Bác cả vừa mở miệng \"bao giờ cưới\", bé Na đã trả lời hộ: \"Sắp rồi ạ!\" Cả mâm cười. Mẹ bạn gắp cho con bé miếng giò to nhất."],
+ td:["Học trò mới","Tháng Tư, bố nhắn một tin dài nhất từ trước tới giờ: \"Mẹ muốn bán mấy hũ tương nhà làm lên mạng. Con dạy mẹ được không?\" Ba tuần sau, đơn đầu tiên đi Sài Gòn. Bố đứng đóng thùng, quay video gửi cả họ, chú thích: \"Nhà có chuyên gia online.\""]};
 function ketThuc(chet){
   let k=chet;const c=chiSo,n=nhan;
   if(!k){
@@ -571,6 +576,7 @@ function ketThuc(chet){
   const kq=KET[k];const diem=Math.round(c.bt+c.hk+c.vi+c.sd+soQuyet*10+(kt=='hieu'?100:kt=='doi'?60:0));
   const b=doc('sstet_bst');b[k]=1;localStorage.setItem('sstet_bst',JSON.stringify(b));
   const bk=doc('sstet_kt');bk[vaiChon+'_'+kt]=1;localStorage.setItem('sstet_kt',JSON.stringify(bk));
+  const hau=!chet&&kt=='hieu'&&tongSao>=13;if(hau){const bh=doc('sstet_hau');bh[vaiChon]=1;localStorage.setItem('sstet_hau',JSON.stringify(bh))}
   window._kq={k,diem,kt,tongSao,soAi,hg};
   if(NGAY){const kn=doc('sstet_ngay'),kk=NGAY+'_'+vaiChon,cu=kn[kk];window._kq.kyLuc=!cu||diem>cu.diem;if(window._kq.kyLuc)kn[kk]={diem,sao:tongSao};for(const x in kn)if(x.slice(0,8)<NGAY)delete kn[x];localStorage.setItem('sstet_ngay',JSON.stringify(kn))}
   const vui=['hieu','doi','giu'].includes(kt);nen.k&&nhac(vui?'que':'dem');nhac(vui?'ketvui':'ketbuon',false);
@@ -580,11 +586,11 @@ function ketThuc(chet){
   $('kLuoi').textContent=luoiKhoe(kq,diem);
   if(NGAY)$('kHang').insertAdjacentHTML('afterbegin',`<div style="font-size:.85rem;color:#fde68a">📅 Đề ${ngayDep(NGAY)} · ${diem} điểm${window._kq.kyLuc?' · 🏅 kỷ lục mới của bạn':''}</div>`);
   if(!BR)$('nutLixi').classList.remove('an');
-  tk('ket_thuc',{hiem:HIEM.includes(k)?1:0,danh_hieu:k,ket_truyen:kt,diem,sao:tongSao,hang:hg[2],so_ai:soAi,chet:chet?1:0,giay:Math.round((Date.now()-tBatDau)/1000)});
+  tk('ket_thuc',{hau:hau?1:0,hiem:HIEM.includes(k)?1:0,danh_hieu:k,ket_truyen:kt,diem,sao:tongSao,hang:hg[2],so_ai:soAi,chet:chet?1:0,giay:Math.round((Date.now()-tBatDau)/1000)});
   if(tongSao>=10||kt=='hieu'||HIEM.includes(k))phaoHoa();
   const icon=KT_LOAI.find(x=>x[0]==kt)[1];
   const ky=Object.keys(KY_UC).filter(f=>co[f]).map(f=>`<li>${KY_UC[f]}</li>`).join('');
-  $('kTruyen').innerHTML=`<h3>${icon} Kết truyện: ${ktInfo[0]}</h3><div>${chet?'<i>Bạn không trụ được đến đêm mùng 3…</i><br>':''}${ktInfo[1]}</div>${ky?`<ul>${ky}</ul>`:''}<div style="font-size:.85rem;color:#92400e;margin-top:8px">Vai ${VAI[vaiChon].ten} còn ${5-KT_LOAI.filter(x=>bk[vaiChon+'_'+x[0]]).length} kết truyện chưa mở. Thử chọn khác đi?</div>`;
+  $('kTruyen').innerHTML=`<h3>${icon} Kết truyện: ${ktInfo[0]}</h3><div>${chet?'<i>Bạn không trụ được đến đêm mùng 3…</i><br>':''}${ktInfo[1]}</div>${ky?`<ul>${ky}</ul>`:''}${hau?`<div class="hauTruyen"><h3>📜 Hậu truyện bí mật: ${HAU[vaiChon][0]}</h3>${HAU[vaiChon][1]}</div>`:''}<div style="font-size:.85rem;color:#92400e;margin-top:8px">Vai ${VAI[vaiChon].ten} còn ${5-KT_LOAI.filter(x=>bk[vaiChon+'_'+x[0]]).length} kết truyện chưa mở.${!hau&&!doc('sstet_hau')[vaiChon]?' Nghe nói nếu cả nhà hiểu bạn và bạn đạt từ 13 sao, còn một hậu truyện bí mật.':''} Thử chọn khác đi?</div>`;
   if(BR){$('brKet').innerHTML=`${BR.logo?`<img src="${BR.logo}" alt="" style="max-height:60px;max-width:85%;display:block;margin:0 auto 6px">`:''}${BR.loiKet?esc(BR.loiKet):`🧧 <b>${esc(BR.ten)}</b> lì xì bạn vì đã sống sót!`}<br>${BR.vt?esc(BR.vt)+'<br>':''}${BR.vc?`Mã: <span style="font-size:1.4em;letter-spacing:2px;color:#b91c1c">${esc(BR.vc)}</span>`:''}${BR.url?`<br><a class="nut" style="display:inline-block;margin-top:10px;text-decoration:none" href="${esc(BR.url)}" target="_blank" rel="noopener" onclick="tk('ve_shop')">🛍️ Dùng ưu đãi tại ${esc(BR.ten)}</a>`:''}${BR.demo?'<div style="font-size:.75rem;color:#92400e;margin-top:8px">Bản demo để shop xem thử. Bản chính thức không có nhãn DEMO.</div>':''}`;$('brKet').classList.remove('an')}
   veThe(kq,diem,ktInfo[0],icon);veBST(k);window.scrollTo(0,0);
 }
@@ -595,7 +601,7 @@ function phaoHoa(){const e=['🌸','🧧','✨','🏮','🌼'];for(let i=0;i<28;
 function veBST(moi){
   const b=doc('sstet_bst');$('kSo').textContent=`${Object.keys(b).filter(k=>!HIEM.includes(k)).length}/${THU_TU.length-1-HIEM.length}`+(HIEM.some(k=>b[k])?` · hiếm ${HIEM.filter(k=>b[k]).length}/${HIEM.length}`:'');
   $('bst').innerHTML=THU_TU.map(k=>{const m=b[k];if(k=='phet'&&!m)return '';const hm=HIEM.includes(k);return `<div class="${m?'':'khoa'}${hm?' bHiem':''}" style="${k==moi?'border-color:#dc2626;border-style:solid':''}"><b>${m?KET[k][0]:(hm?'🔒':'❔')}</b>${m?KET[k][1]:(hm?'Kết hiếm':'Chưa mở')}</div>`}).join('');
-  const bk=doc('sstet_kt');$('kSoKT').textContent=`${Object.keys(bk).length}/20`;
+  const bk=doc('sstet_kt');$('kSoKT').textContent=`${Object.keys(bk).length}/20 · hậu truyện ${Object.keys(doc('sstet_hau')).length}/4`;
   $('bstKT').innerHTML=Object.keys(VAI).map(v=>KT_LOAI.map(([t,ic])=>{const m=bk[v+'_'+t];return `<div class="${m?'':'khoa'}"><b>${m?ic:'❔'}</b>${m?KT[v][t][0]:VAI[v].ten}</div>`}).join('')).join('');
 }
 // ================= THẺ KHOE =================
