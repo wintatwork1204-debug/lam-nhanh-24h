@@ -762,7 +762,7 @@ function taiPoster(){
   x.fillText(`${ten} trong vai ${VAI[vaiChon].ten.toUpperCase()}  ·  BÁC CẢ  ·  BÀ NỘI  ·  CÔ ÚT  ·  MỢ`,540,1200);
   x.fillText('ĐẠO DIỄN HỌ HÀNG  ·  KỊCH BẢN BÀ HÀNG XÓM  ·  ÂM NHẠC TIẾNG TIM ĐẬP',540,1232);
   x.fillStyle='#facc15';x.font='bold 30px system-ui,sans-serif';x.fillText(`⭐ ${S}/15 · VƯỢT ${K.soAi}/5 ẢI · KHỞI CHIẾU MÙNG 1 TẾT`,540,1284);
-  x.fillStyle='#a8a29e';x.font='22px system-ui,sans-serif';x.fillText(BR?`Quà Tết từ ${BR.ten}`:'wintatwork1204-debug.github.io/lam-nhanh-24h/tet',540,1324);
+  x.fillStyle='#a8a29e';x.font='22px system-ui,sans-serif';x.fillText(BR?`Quà Tết từ ${BR.ten}${BR.demo?" · bản demo":""}`:'wintatwork1204-debug.github.io/lam-nhanh-24h/tet',540,1324);
   const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='poster-song-sot-ngay-tet.png';a.click();window._poster=a.href;tk('tai_anh',{kieu:'poster'})})}
 function thachBan(){
   const ten=$('tenNC').value.trim();const u=new URL('k/'+_kq.k+'.html',location.href).href+(BR&&BR.id?`?shop=${BR.id}&`:BR?`?b=${encodeURIComponent(BR.ten)}&vc=${encodeURIComponent(BR.vc)}&vt=${encodeURIComponent(BR.vt)}&`:'?')+`k=${_kq.k}&d=${_kq.diem}&s=${_kq.tongSao}&a=${_kq.soAi}&ss=${sao.join('')}`+(NGAY?`&ng=${NGAY}&v=${vaiChon}`:'')+(ten?`&n=${encodeURIComponent(ten)}`:'')+`&bx=${maBX(_kq.bx)}`;
