@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đại Gia Về Quê: 12 tháng làm giàu, Tết về khoe họ hàng</title>
+<meta name="description" content="Khởi nghiệp bằng 50 triệu tiền lì xì. 12 tháng buôn đào, ôm đất, mở quán trà sữa. Tết về quê bác hỏi: năm nay làm ăn thế nào?">
+<meta property="og:title" content="Đại Gia Về Quê: năm nay làm ăn thế nào cháu?">
+<meta property="og:description" content="12 tháng làm giàu (hoặc nợ 1.800 tỷ). Ra hồ sơ đại gia để khoe họ hàng.">
+<meta property="og:image" content="https://wintatwork1204-debug.github.io/lam-nhanh-24h/tet/og.jpg">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#1c0a0a;color:#fff7ed}
+main{max-width:520px;margin:0 auto;padding:12px 12px 60px}
+h1{font-family:"Noto Serif",Georgia,serif;font-size:26px;margin:6px 0 2px;color:#fde68a}
+.sub{margin:0 0 10px;opacity:.85;font-size:14px}
+.the{background:#fff7ed;color:#3f1d0b;border-radius:16px;padding:14px;margin:10px 0}
+.chi{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}
+.chi div{background:#3f1d1d;border-radius:12px;padding:8px;text-align:center}
+.chi b{display:block;font-size:16px;color:#fde68a}
+.chi small{font-size:11px;opacity:.8}
+.thang{font-size:13px;font-weight:700;color:#b45309;letter-spacing:.5px}
+.cau{font-size:19px;font-weight:700;line-height:1.35;margin:4px 0 6px}
+.chon button{display:block;width:100%;text-align:left;border:0;border-radius:12px;padding:12px;margin-top:8px;font-size:16px;background:#fde68a;color:#3f1d0b;cursor:pointer}
+.kq{margin-top:10px;padding:12px;border-radius:12px;background:#fee2e2;font-size:16px;line-height:1.4}
+.nut{display:block;width:100%;border:0;border-radius:12px;padding:13px;font-size:16px;font-weight:700;cursor:pointer;background:#facc15;color:#7f1d1d;margin-top:10px;text-align:center;text-decoration:none}
+.nut.phu{background:#3f1d1d;color:#fde68a}
+input{width:100%;padding:12px;border-radius:12px;border:1px solid #e7c9a5;font-size:16px}
+.an{display:none}
+.thach{background:#7f1d1d;border-radius:14px;padding:12px;margin:8px 0;font-size:15px}
+canvas{width:100%;border-radius:14px;display:block;margin-top:10px}
+.ng{display:flex;gap:10px;align-items:center}
+.ng img{width:80px;height:80px;object-fit:contain}
+.ghichu{font-size:12px;opacity:.6;margin-top:16px}
+</style>
+</head>
+<body>
+<main>
+<h1>Đại Gia Về Quê</h1>
+<p class="sub">Vốn khởi nghiệp: 50 triệu tiền lì xì tích từ bé. 12 tháng làm ăn. Tết về quê, bác sẽ hỏi: <b>"Năm nay làm ăn thế nào cháu?"</b></p>
+<div id="thach" class="thach an"></div>
+
+<section id="vMo" class="the">
+  <label for="ten"><b>Tên bạn (để in lên hồ sơ)</b></label>
+  <input id="ten" maxlength="24" placeholder="Ví dụ: Tuấn Đẹp Trai">
+  <button class="nut" id="batDau">Bắt đầu làm giàu →</button>
+  <p style="font-size:13px;margin:8px 0 0;opacity:.75">Chơi 2 phút, không cần đăng nhập. Tiền trong game là tiền ảo, nợ cũng ảo 😅</p>
+</section>
+
+<section id="vChoi" class="an">
+  <div class="chi">
+    <div><b id="sTien">50 tr</b><small>tiền mặt</small></div>
+    <div><b id="sNo">0</b><small>nợ</small></div>
+    <div><b id="sLo">0</b><small>lô đất</small></div>
+  </div>
+  <div class="the" id="khung"></div>
+</section>
+
+<section id="vKet" class="an">
+  <div class="the">
+    <div class="ng"><img id="kImg" src="img/bac.webp" alt=""><div><small style="opacity:.7">Mùng 1 Tết, bác hỏi:</small><div class="cau">Năm nay làm ăn thế nào cháu?</div></div></div>
+    <div class="kq" id="kLoi"></div>
+  </div>
+  <canvas id="cv" width="1080" height="1350"></canvas>
+  <button class="nut" id="taiAnh">📸 Lưu hồ sơ đại gia (khoe lên mạng)</button>
+  <button class="nut phu" id="thachBan">⚔️ Thách bạn bè giàu (hoặc nợ) hơn mình</button>
+  <button class="nut phu" id="choiLai">🔁 Làm lại cuộc đời</button>
+  <a class="nut phu" href="cho.html?utm_source=daigia&utm_medium=ket#lam" onclick="tk('dg_sang_cho')">🏮 Họ hàng nhà bạn hỏi câu gì khó đỡ hơn? Làm một ải</a>
+  <a class="nut phu" href="./?utm_source=daigia&utm_medium=ket" onclick="tk('dg_sang_game')">🧧 Chơi Vượt Ải Tết: đỡ 5 ải họ hàng</a>
+</section>
+<p class="ghichu">Trò chơi giải trí, mọi con số là hư cấu. Không phải lời khuyên đầu tư. Ngoài đời đừng vay 10 tỷ ôm đất nhé.</p>
+</main>
+<script>
+const GA_ID='G-1VH65XEHJN';
+if(GA_ID){const g=document.createElement('script');g.async=1;g.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(g);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',GA_ID,{anonymize_ip:true});}
+const tk=(e,p)=>{try{window.gtag&&gtag('event',e,p||{})}catch(_){}};
+const $=id=>document.getElementById(id);
+const r=(a,b)=>a+Math.random()*(b-a), co=p=>Math.random()<p;
+// tiền tính bằng triệu đồng
+function tienS(v){const a=Math.abs(v),s=v<0?'-':'';if(a>=1000){const t=a/1000;return s+(t>=100?Math.round(t).toLocaleString('vi-VN'):t.toLocaleString('vi-VN',{maximumFractionDigits:1}))+' tỷ'}return s+Math.round(a).toLocaleString('vi-VN')+' tr'}
+let S;
+function moi(){S={tien:50,no:0,lo:0,gia:800,uy:50,thue:0,vo:0,thang:0,co:{},ds:[]}}
+const THANG=['Tháng Giêng','Tháng Hai','Tháng Ba','Tháng Tư','Tháng Năm','Tháng Sáu','Tháng Bảy','Tháng Tám','Tháng Chín','Tháng Mười','Tháng Một','Tháng Chạp'];
+// mỗi sự kiện: câu, 3 lựa chọn [chữ, hàm trả về kết quả]
+const SK=[
+{q:'Bạn thân rủ góp vốn mở quán trà sữa thứ 37 trên cùng một con phố.',c:[
+ ['Góp hết tiền mặt',s=>{const v=s.tien;s.tien=0;if(co(.45)){s.tien+=v*r(2,3.5);return'Quán đông nghẹt vì có wifi mạnh nhất phố. Lãi gấp mấy lần.'}s.co.trasua=1;return'Ba tháng sau quán thành tiệm sửa xe. Bạn thân giữ lại cái máy dập ly.'}],
+ ['Vay ngân hàng 2 tỷ, mở luôn chuỗi 10 quán',s=>{s.no+=2000;if(co(.3)){s.tien+=r(6000,15000);s.co.chuoi=1;return'Chuỗi "Trà Sữa Họ Hàng" nổi như cồn. Có cả quán ở Campuchia.'}s.co.trasua=1;return'Cả 10 quán cùng đóng cửa trong một ngày. Ngân hàng nhớ số bạn.'}],
+ ['Góp bằng chất xám (không góp tiền)',s=>{s.uy+=5;return'Bạn góp ý đặt tên quán. Bạn thân bảo "để tao tính". Không mất gì, cũng không được gì.'}]]},
+{q:'Cò đất gọi: "Lô vùng ven sắp lên quận, anh lấy nhanh kẻo hết, mai giá lên gấp đôi."',c:[
+ ['Mua 1 lô bằng tiền mặt (và vay phần thiếu)',s=>{const thieu=Math.max(0,s.gia-s.tien);s.tien=Math.max(0,s.tien-s.gia);s.no+=thieu;s.lo+=1;return'Bạn có 1 lô đất. Chưa thấy sổ, nhưng có tấm ảnh chụp cột mốc.'}],
+ ['Vay gấp 10 lần, ôm 20 lô',s=>{s.no+=s.gia*20;s.lo+=20;s.co.omdat=1;return'Bạn sở hữu 20 lô đất giữa đồng. Cò đất gọi bạn là "anh Hai".'}],
+ ['Hỏi: "Sổ đỏ đâu em?"',s=>{s.uy+=10;return'Cò đất tắt máy. Bạn vừa tiết kiệm được rất nhiều tiền.'}]]},
+{q:'Còn 3 tháng nữa Tết. Nhập 500 gốc đào Nhật Tân về bán?',c:[
+ ['Nhập 500 gốc',s=>{s.tien-=300;if(co(.5)){s.tien+=r(900,1500);return'Đào nở đúng sáng 28 Tết. Bán hết, còn được khen "đào đẹp như ảnh".'}s.co.dao=1;return'Trời nồm, đào nở hết từ rằm tháng Chạp. Cả xóm có đào chơi miễn phí.'}],
+ ['Nhập 5.000 gốc, thuê cả bãi',s=>{s.no+=3000;if(co(.35)){s.tien+=r(7000,12000);return'Bạn thành "vua đào" của quận. Báo địa phương phỏng vấn 30 giây.'}s.co.dao=1;return'Rét đậm, đào không nở. Bạn có 5.000 cái cây khô trang trí.'}],
+ ['Bán quất cho lành',s=>{s.tien+=r(20,80);return'Quất bán được, lãi ít. Mẹ khen "biết làm ăn".'}]]},
+{q:'Bạn livestream bán bánh chưng online. Lúc mở máy chỉ có 1 người xem: là mẹ.',c:[
+ ['Diễn sung như có 10.000 người xem',s=>{if(co(.4)){s.tien+=r(300,900);s.uy+=10;return'Clip bạn hét "chốt đơn" bị cắt ra lên xu hướng. Đơn về ầm ầm.'}s.tien-=20;return'Mẹ chốt 2 cái. Bạn lỗ tiền lá dong.'}],
+ ['Thuê KOL 500 triệu quảng bá',s=>{s.no+=500;if(co(.35)){s.tien+=r(1500,3000);return'KOL cắn bánh, khen "dẻo như tình đầu". Hết hàng trong 2 giờ.'}return'KOL đọc nhầm tên shop thành shop đối thủ.'}],
+ ['Tắt máy, ăn bánh',s=>{s.uy+=2;return'Bánh ngon thật.'}]]},
+{q:'Có người mời vào nhóm kín "x10 tài khoản trong 7 ngày, chuyên gia dẫn dắt".',c:[
+ ['Nạp hết tiền theo "chuyên gia"',s=>{s.tien=0;s.co.luadao=1;return'Ngày thứ 7, nhóm giải tán. "Chuyên gia" đổi tên thành "Chuyên gia nấu ăn".'}],
+ ['Vay thêm để nạp gấp đôi',s=>{s.no+=1000;s.tien=0;s.co.luadao=1;return'Bạn x10… số nợ.'}],
+ ['Rời nhóm, báo cáo lừa đảo',s=>{s.uy+=15;return'Đúng bài. Ngoài đời cũng vậy nhé.'}]]},
+{q:'Muốn đi gặp đối tác cho "có hình ảnh". Mua siêu xe không?',c:[
+ ['Vay mua siêu xe 12 tỷ',s=>{s.no+=12000;s.uy+=30;s.co.xe=1;return'Đối tác chưa gặp, nhưng cả xóm đã biết bạn giàu.'}],
+ ['Thuê xe theo giờ để chụp ảnh',s=>{s.tien-=5;s.uy+=10;return'Ảnh đẹp. Trả xe đúng giờ.'}],
+ ['Đi xe máy, đội mũ bảo hiểm',s=>{s.uy+=3;return'An toàn là trên hết.'}]]},
+{q:'Có phiên đấu giá đất ở huyện. Giá khởi điểm 10 triệu/m².',c:[
+ ['Trả 300 triệu/m² cho "ngầu", rồi bỏ cọc',s=>{s.uy-=40;s.gia*=2.5;s.co.bococ=1;return'Cả vùng đất lên giá. Lô của bạn (nếu có) tự nhiên đắt gấp mấy lần. Bạn mất cọc và mất luôn tiếng.'}],
+ ['Trả giá hợp lý, mua 3 lô',s=>{const p=s.gia*3;s.no+=Math.max(0,p-s.tien);s.tien=Math.max(0,s.tien-p);s.lo+=3;return'Bạn thắng đấu giá. Ba lô đất có đường vào thật.'}],
+ ['Đứng ngoài xem cho biết',s=>{return'Bạn thấy một người trả 300 triệu/m² rồi bỏ về. Học được nhiều điều.'}]]},
+{q:'Bạn cùng phòng rủ làm nhà nuôi chim yến ở quê.',c:[
+ ['Xây nhà yến 3 tầng (vay 2 tỷ)',s=>{s.no+=2000;if(co(.4)){s.tien+=r(4000,8000);return'Yến về đông như đi hội. Bạn nghe tiếng chim là thấy tiền.'}return'Yến không về. Chim sẻ về ở miễn phí.'}],
+ ['Nuôi ốc nhồi cho chắc',s=>{s.tien-=30;if(co(.6)){s.tien+=r(80,200);return'Ốc lớn nhanh. Lãi đủ mua quần áo Tết.'}return'Ốc bò đi đâu mất.'}],
+ ['Thôi',s=>'Bạn ngủ thêm một giấc.']]},
+{q:'Chi cục thuế gửi thư "thăm hỏi" tình hình kinh doanh.',c:[
+ ['Nộp đủ, đúng hạn',s=>{const t=Math.max(5,Math.round(Math.max(0,s.tien)*.1));s.tien-=t;s.thue+=t;s.uy+=10;return'Bạn nộp '+tienS(t)+'. Được khen "công dân gương mẫu".'}],
+ ['"Tối ưu thuế" theo hướng dẫn trên mạng',s=>{if(co(.55)){const p=Math.max(200,Math.round(Math.abs(s.tien)*.3));s.tien-=p;s.thue+=p;s.vp=(s.vp||0)+1;return'Bị phạt '+tienS(p)+'. Hướng dẫn trên mạng không đi nộp phạt cùng bạn.'}return'Lần này thoát. Tim đập nhanh cả tháng.'}],
+ ['Xin hoãn vì "đang khó khăn"',s=>{s.uy-=5;return'Được hoãn. Năm sau tính tiếp.'}]]},
+{q:'Bạn làm startup AI. Có quỹ hỏi gọi vốn, bạn mới có 3 trang slide.',c:[
+ ['Định giá 500 tỷ, gọi 50 tỷ',s=>{if(co(.3)){s.tien+=50000;s.co.ai=1;return'Quỹ rót vốn thật. Sản phẩm là một cái nút gọi ChatGPT.'}s.uy-=5;return'Quỹ hỏi doanh thu. Bạn nói "chưa có nhưng có tầm nhìn". Quỹ đi về.'}],
+ ['Làm sản phẩm trước, gọi vốn sau',s=>{s.tien+=r(100,600);s.uy+=5;return'Có 300 người dùng thật, vài người trả tiền. Chậm mà chắc.'}],
+ ['Đổi tên công ty thành ".ai" cho sang',s=>{s.uy+=3;return'Danh thiếp đẹp hơn hẳn.'}]]},
+{q:'Mẹ đưa sổ đỏ nhà: "Cầm lấy làm vốn, mẹ tin con."',c:[
+ ['Thế chấp sổ đỏ vay 3 tỷ',s=>{s.no+=3000;s.tien+=3000;s.co.sodo=1;return'Bạn có 3 tỷ tiền mặt. Mẹ nhìn bạn với ánh mắt rất tin tưởng.'}],
+ ['Trả lại sổ, xin 5 triệu thôi',s=>{s.tien+=5;s.uy+=10;return'Mẹ đưa 5 triệu, dặn thêm "ăn uống đầy đủ vào".'}],
+ ['Cất sổ vào két hộ mẹ',s=>{s.uy+=5;return'Sổ vẫn an toàn. Bạn vẫn nghèo.'}]]},
+{q:'Phường mời thầu làm cổng chào Tết. Thời gian: 5 ngày.',c:[
+ ['Nhận thầu, làm xuyên đêm',s=>{if(co(.6)){s.tien+=r(200,600);s.uy+=10;return'Cổng chào lung linh. Ông tổ trưởng chụp ảnh đăng Zalo nhóm.'}s.tien-=150;return'Gió thổi bay chữ "XUÂN". Cổng chỉ còn "MỪNG".'}],
+ ['Nhận thầu rồi giao cho người khác làm',s=>{s.tien+=r(50,150);s.uy-=5;return'Bạn ăn chênh lệch. Cổng đẹp, nhưng không ai biết bạn là ai.'}],
+ ['Từ chối, đi chợ hoa',s=>'Chợ hoa vui thật.']]},
+{q:'Đặt tour du lịch Tết cho cả họ 40 người "cho nở mày nở mặt".',c:[
+ ['Bao trọn gói Phú Quốc',s=>{s.tien-=800;s.uy+=40;s.co.tour=1;return'Cả họ đi chơi vui vẻ. Từ nay không ai hỏi lương bạn nữa (họ hỏi số dư).'}],
+ ['Đặt xe khách đi chùa gần nhà',s=>{s.tien-=30;s.uy+=15;return'Rẻ mà vui. Bà nội rất hài lòng.'}],
+ ['Gửi lời chúc qua Zalo',s=>{s.uy-=5;return'Cả họ seen.'}]]},
+{q:'Bạn được mời làm "diễn giả truyền cảm hứng làm giàu" ở một hội thảo.',c:[
+ ['Nhận lời, kể chuyện từ 50 triệu lì xì',s=>{s.tien+=r(50,200);s.uy+=5;return'Khán giả vỗ tay. Không ai hỏi bạn đang nợ bao nhiêu.'}],
+ ['Bán luôn khóa học "Tư duy đại gia" 29 triệu',s=>{s.tien+=r(500,1500);s.uy-=25;s.co.khoahoc=1;return'Khóa học bán chạy. Bình luận bắt đầu có chữ "lùa gà".'}],
+ ['Từ chối: "Tôi còn đang nợ"',s=>{s.uy+=10;return'Sự thật được tôn trọng.'}]]},
+{lon:1,q:'Ngân hàng thấy bạn "có quy mô", mời vay tiếp để làm khu đô thị 300 ha.',c:[
+ ['Vay gấp 20 lần tài sản hiện có',s=>{const v=Math.max(20000,Math.abs(rong())*20);s.no+=v;s.lo+=300;if(co(.3)){s.gia*=r(1.3,2.2);return'Khu đô thị "Hoàng Kim Riverside" bán hết trong một buổi. Bạn được gọi là "nhà phát triển".'}s.gia*=.15;return'Dự án nằm im sau hàng rào tôn. Cỏ mọc cao hơn biển quảng cáo.'}],
+ ['Vay vừa phải, làm 1 ha',s=>{s.no+=3000;s.lo+=5;return'Bạn có 5 lô đất có điện, có nước. Hiếm đấy.'}],
+ ['Từ chối, về quê nuôi gà',s=>{s.uy+=5;return'Gà đẻ đều. Ngân hàng buồn.'}]]},
+{lon:1,q:'Công ty bạn phát hành trái phiếu, lãi suất 15%/năm. Người ta xếp hàng mua.',c:[
+ ['Huy động thật nhiều, ôm thêm đất',s=>{const v=Math.max(50000,Math.abs(rong())*15);s.no+=v;s.lo+=Math.round(v/s.gia);s.co.traiphieu=1;if(co(.25)){s.gia*=r(1.2,2);return'Đất lên giá, bạn trả lãi đúng hạn. Lên báo mục "doanh nhân trẻ".'}s.gia*=r(.1,.3);return'Đất đóng băng. Người mua trái phiếu đứng trước cổng công ty từ 6 giờ sáng.'}],
+ ['Huy động ít, làm đúng dự án',s=>{s.no+=2000;s.tien+=2600;return'Dự án nhỏ, xong đúng hạn. Không ai biết bạn, và thế là tốt.'}],
+ ['Không phát hành',s=>{s.uy+=5;return'Giấc ngủ của bạn vẫn ngon.'}]]},
+{lon:1,q:'Đối tác nước ngoài muốn mua 49% công ty bạn. Họ hỏi: "Định giá bao nhiêu?"',c:[
+ ['"10.000 tỷ, không mặc cả"',s=>{if(co(.15)){s.tien+=r(300000,900000);return'Họ gật đầu. Bạn nghe xong phải vào nhà vệ sinh ngồi 15 phút.'}s.uy-=10;return'Họ cười lịch sự, xin phép về khách sạn. Không quay lại.'}],
+ ['Mời họ đi ăn lẩu dê rồi tính',s=>{s.tien-=10;if(co(.5)){s.tien+=r(5000,20000);return'Lẩu ngon, deal nhỏ mà chắc.'}return'Lẩu ngon. Deal thì không.'}],
+ ['"Công ty đang nợ, các anh mua nợ không?"',s=>{if(co(.3)){const g=s.no*.6;s.no-=g;return'Họ mua luôn một phần nợ. Bạn nhẹ người.'}return'Họ xin số tài khoản ngân hàng của bạn… để tránh.'}]]},
+];
+function veChi(){$('sTien').textContent=tienS(S.tien);$('sNo').textContent=tienS(S.no);$('sLo').textContent=S.lo}
+function thang(){
+  if(S.thang>=12)return ket();
+  let chua=SK.map((x,i)=>i).filter(i=>!S.ds.includes(i));const lon=chua.filter(i=>SK[i].lon);if(S.thang<5)chua=chua.filter(i=>!SK[i].lon);else if(lon.length&&co(.45))chua=lon;const i=chua[Math.floor(Math.random()*chua.length)];S.ds.push(i);const e=SK[i];
+  // biến động giá đất mỗi tháng
+  S.gia*=r(.85,1.35);
+  const k=$('khung');k.innerHTML='';
+  const t=document.createElement('div');t.className='thang';t.textContent=THANG[S.thang]+' · giá đất: '+tienS(S.gia)+'/lô';
+  const q=document.createElement('div');q.className='cau';q.textContent=e.q;
+  const d=document.createElement('div');d.className='chon';
+  e.c.forEach(([txt,f],j)=>{const b=document.createElement('button');b.textContent=txt;b.onclick=()=>{d.querySelectorAll('button').forEach(x=>x.disabled=true);b.style.outline='3px solid #b45309';
+    const kq=f(S);
+    // lãi ngân hàng mỗi tháng + vỡ nợ
+    S.no*=1.01;
+    if(S.tien<0){S.no+=-S.tien;S.tien=0}
+    if(S.no>0&&S.no>S.tien+S.lo*S.gia+2000&&!S.co['vo'+S.thang]){S.vo++;S.co['vo'+S.thang]=1}
+    veChi();
+    const p=document.createElement('div');p.className='kq';p.textContent=kq;k.append(p);
+    const n=document.createElement('button');n.className='nut';n.textContent=S.thang<11?'Sang tháng sau →':'Về quê ăn Tết →';n.onclick=()=>{S.thang++;thang()};k.append(n);tk('dg_chon',{thang:S.thang+1,sk:i,lc:j})};d.append(b)});
+  k.append(t,q,d);veChi();
+}
+function rong(){return S.tien+S.lo*S.gia-S.no}
+function danh(R){const c=S.co;
+  if(R<-500000)return['CON NỢ QUỐC DÂN','Bác lặng đi. Rồi bác rút ví lì xì ngược cho cháu.'];
+  if(R<-20000)return[c.omdat?'ĐẠI GIA ÂM · VUA ĐẤT NỢ':'ĐẠI GIA ÂM','Bác gật gù: "Nợ được từng ấy tiền là cũng có số má đấy."'];
+  if(R<-1000)return['CHỦ NỢ… CỦA NGÂN HÀNG','Bác hỏi tiếp: "Thế năm sau định làm gì?" Bạn: "Dạ… trả nợ."'];
+  if(R<50)return[c.luadao?'NẠN NHÂN CỦA CHUYÊN GIA':'CHÁU NGOAN TAY TRẮNG','Bác bảo: "Thôi, còn người là còn của." Rồi gắp cho miếng giò.'];
+  if(R<2000)return['TIỂU THƯƠNG CÓ TƯƠNG LAI','Bác khen: "Được đấy, có đồng ra đồng vào." Mợ hỏi luôn: "Thế bao giờ cưới?"'];
+  if(R<1000000&&R>=50000)return['ĐẠI GIA TỈNH','Họ hàng xếp hàng xin vay. Bà nội bảo: "Nhớ làm từ thiện nhé con."'];
+  if(R<50000)return[c.dao?'VUA ĐÀO TẾT':c.chuoi?'VUA TRÀ SỮA':c.ai?'CEO AI (CÓ VỐN)':'ĐẠI GIA PHỐ HUYỆN','Cả mâm im lặng. Chú bắt đầu gọi bạn là "anh".'];
+  return['TỶ PHÚ VỀ QUÊ','Bác hỏi: "Cháu có cần người trông nhà không?"']}
+function ket(){
+  const R=rong(),[d,loi]=danh(R),ten=($('ten').value.trim()||'Đại gia giấu tên').slice(0,24);
+  $('vChoi').classList.add('an');$('vKet').classList.remove('an');$('kLoi').textContent=loi;
+  $('kImg').src='img/'+['bac','chu','cau','co','mo'][Math.floor(Math.random()*5)]+'.webp';
+  window._kq={R,d,ten};ve(R,d,ten);tk('dg_ket',{rong:Math.round(R),danh:d});
+  try{const best=+localStorage.getItem('dg_max')||-1e15;if(R>best)localStorage.setItem('dg_max',R)}catch(_){}
+  scrollTo({top:0,behavior:'smooth'})}
+function ve(R,d,ten){const c=$('cv'),x=c.getContext('2d'),W=1080,H=1350;
+  const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#7f1d1d');g.addColorStop(1,'#1c0a0a');x.fillStyle=g;x.fillRect(0,0,W,H);
+  x.fillStyle='#fff7ed';rr(x,60,60,W-120,H-120,36);x.fill();
+  x.fillStyle='#7f1d1d';x.font='800 44px "Noto Serif",Georgia,serif';x.textAlign='center';x.fillText('HỒ SƠ ĐẠI GIA VỀ QUÊ · TẾT 2027',W/2,150);
+  x.fillStyle='#3f1d0b';x.font='900 72px system-ui,sans-serif';x.fillText(ten,W/2,260);
+  x.font='600 34px system-ui,sans-serif';x.fillStyle='#92400e';x.fillText('Vốn khởi nghiệp: 50 triệu tiền lì xì',W/2,315);
+  x.fillStyle=R<0?'#b91c1c':'#15803d';x.font='900 120px system-ui,sans-serif';x.fillText(tienS(R).replace('tr','triệu'),W/2,470);
+  x.fillStyle='#3f1d0b';x.font='600 34px system-ui,sans-serif';x.fillText('TÀI SẢN RÒNG',W/2,545);
+  const dong=[['Lô đất',S.lo+' lô'],['Nợ ngân hàng (và mẹ)',tienS(S.no)],['Đã nộp thuế',tienS(S.thue)],['Số lần suýt vỡ nợ',S.vo],['Uy tín với họ hàng',Math.round(S.uy)],['Vi phạm',(S.vp||0)+' lần']];
+  x.textAlign='left';x.font='600 38px system-ui,sans-serif';dong.forEach(([a,b],i)=>{const y=625+i*66;x.fillStyle='#78350f';x.fillText(a,130,y);x.textAlign='right';x.fillStyle='#3f1d0b';x.font='800 38px system-ui,sans-serif';x.fillText(String(b),W-130,y);x.textAlign='left';x.font='600 38px system-ui,sans-serif'});
+  x.fillStyle='#facc15';rr(x,110,1030,W-220,130,24);x.fill();x.fillStyle='#7f1d1d';x.textAlign='center';
+  let fs=60;x.font=`900 ${fs}px system-ui,sans-serif`;while(x.measureText(d).width>W-260&&fs>30){fs-=2;x.font=`900 ${fs}px system-ui,sans-serif`}x.fillText(d,W/2,1115);
+  x.fillStyle='#a8a29e';x.font='600 30px system-ui,sans-serif';x.fillText('Bạn giàu hay nợ hơn? is.gd/daigiatet',W/2,1230)}
+function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
+$('batDau').onclick=()=>{moi();$('vMo').classList.add('an');$('vChoi').classList.remove('an');tk('dg_bat_dau',{tu_thach:THACH?1:0});thang()};
+$('choiLai').onclick=()=>{moi();$('vKet').classList.add('an');$('vChoi').classList.remove('an');tk('dg_choi_lai');thang();scrollTo({top:0})};
+$('taiAnh').onclick=()=>{tk('dg_tai_anh');$('cv').toBlob(b=>{const f=new File([b],'ho-so-dai-gia.png',{type:'image/png'});
+  if(navigator.canShare&&navigator.canShare({files:[f]}))navigator.share({files:[f],title:'Hồ sơ đại gia về quê'}).catch(()=>luu(b));else luu(b)})};
+function luu(b){const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='ho-so-dai-gia.png';a.click()}
+$('thachBan').onclick=async()=>{const k=window._kq;const u=location.origin+location.pathname+'?utm_source=ban&utm_medium=thach#'+btoa(unescape(encodeURIComponent(JSON.stringify({r:Math.round(k.R),d:k.d,n:k.ten}))));
+  const t=`Mình làm ăn 12 tháng, Tết về quê tài sản ròng ${tienS(k.R)} (${k.d}). Bạn giàu hay nợ hơn mình? 😏`;tk('dg_thach');
+  if(navigator.share){try{await navigator.share({title:'Đại Gia Về Quê',text:t,url:u});return}catch(_){}}
+  try{await navigator.clipboard.writeText(t+' '+u);$('thachBan').textContent='✅ Đã chép lời thách, dán gửi bạn bè nhé'}catch(_){prompt('Chép link:',u)}};
+// đến từ link thách
+let THACH=null;try{const h=location.hash.slice(1);if(h){THACH=JSON.parse(decodeURIComponent(escape(atob(h))));if(typeof THACH.r!=='number')THACH=null}}catch(_){THACH=null}
+if(THACH){const e=$('thach');e.classList.remove('an');e.textContent=`${String(THACH.n||'Bạn bạn').slice(0,24)} làm ăn 12 tháng, Tết về quê tài sản ròng ${tienS(THACH.r)} (${String(THACH.d||'').slice(0,40)}). Đến lượt bạn.`;tk('dg_tu_thach')}
+tk('dg_mo');
+</script>
+</body>
+</html>
