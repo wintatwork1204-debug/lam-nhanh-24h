@@ -184,6 +184,7 @@ canvas{width:100%;border-radius:16px;margin-top:8px;display:block}
   <div id="kBxh"></div>
   <details style="margin:8px 0"><summary class="phu" style="cursor:pointer">📋 Kết quả dạng chữ để dán vào nhóm chat</summary><div class="luoi" id="kLuoi"></div></details>
   <button class="nut phu2" onclick="window._vt='duoi';thachBan()" id="nutThach">⚔️ Thách bạn bè vượt mặt mình</button>
+  <button class="nut phu2 an" id="nutCho" onclick="tk('sang_cho');location.href='cho.html?utm_source=game&utm_medium=ket&utm_campaign=cho#lam'">🏮 Nhà bạn bị hỏi câu gì? Làm một ải thả lên Chợ Ải</button>
   <button class="nut phu2" onclick="tk('choi_lai');veMo()">🔁 Chơi lại, thử cách khác</button>
   <button class="baolixi an" id="nutLixi" onclick="moLixi()">🧧 Lì xì tác giả một bao<small>Game miễn phí, không quảng cáo. Bao nhiêu cũng quý.</small></button>
   <div class="thach an" id="lixi">Cảm ơn bạn đã chơi tới đêm mùng 3 🥹<br>Mở app ngân hàng, quét mã để lì xì. Tác giả sẽ dùng để làm thêm vai và chương mới cho Tết sau.<img id="lixiImg" alt="Mã QR lì xì tác giả"><small style="font-weight:400">Lời chúc ghi ở phần nội dung chuyển khoản, tác giả đọc hết.</small></div>
@@ -703,6 +704,7 @@ function ketThuc(chet){
   $('kBxh').innerHTML=BX.length?veBX(_kq.bx,_kq.hang)+(_kq.hang===0?`<div class="phu" style="text-align:center">👑 Bạn đang đứng đầu ${QS.get('chuyen')?'bàn':'nhóm'}. ${QS.get('chuyen')?'Chuyền máy cho người tiếp theo thử hạ bạn!':'Gửi link để giữ ngôi!'}</div>`:_kq.hang>0?`<div class="phu" style="text-align:center">Còn ${_kq.bx[_kq.hang-1][1]-diem} điểm nữa là vượt ${esc(_kq.bx[_kq.hang-1][0])}. Chơi lại?</div>`:''):'';
   if(NGAY)$('kHang').insertAdjacentHTML('afterbegin',`<div style="font-size:.85rem;color:#fde68a">📅 Đề ${ngayDep(NGAY)} · ${diem} điểm${window._kq.kyLuc?' · 🏅 kỷ lục mới của bạn':''}${window._kq.chuoi>=2?` · 🔥 chuỗi ${window._kq.chuoi} ngày`:''}</div>`);
   if(!BR)$('nutLixi').classList.remove('an');
+  if(!BR)$('nutCho').classList.remove('an');
   tk('ket_thuc',{bxh:BX.length,hau:hau?1:0,hiem:HIEM.includes(k)?1:0,danh_hieu:k,ket_truyen:kt,diem,sao:tongSao,hang:hg[2],so_ai:soAi,chet:chet?1:0,giay:Math.round((Date.now()-tBatDau)/1000)});
   if(tongSao>=10||kt=='hieu'||HIEM.includes(k))phaoHoa();
   const icon=KT_LOAI.find(x=>x[0]==kt)[1];

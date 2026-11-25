@@ -129,12 +129,14 @@ async function chon(x,d,dp){dp.querySelectorAll("button").forEach(b=>b.disabled=
   const t=document.createElement("button");t.className="nut phu";t.textContent=daThich.has(x.id)?"😂 Đã thả":"😂 Hay";t.onclick=()=>{if(daThich.has(x.id))return;daThich.add(x.id);luu();t.textContent="😂 Đã thả";updateDoc(doc(db,"ai",x.id),{thich:increment(1)}).catch(()=>{});tk("cho_thich")};
   const g=document.createElement("button");g.className="nut phu";g.textContent="Gửi bạn";g.onclick=()=>gui(x);
   const n=document.createElement("button");n.className="nut";n.textContent="Ải tiếp →";n.onclick=choiNgauNhien;
-  h.append(t,g,n);v.append(h)}
+  h.append(t,g,n);v.append(h);
+  const lm=document.createElement("button");lm.className="nut";lm.style.cssText="width:100%;margin-top:10px";lm.textContent="🏮 Nhà bạn bị hỏi câu gì? Làm ải của bạn →";lm.onclick=()=>{tk("cho_sau_choi_lam");tab(false);scrollTo({top:$("tLam").offsetTop-10,behavior:"smooth"})};v.append(lm)}
 async function gui(x){const link=location.origin+location.pathname+"?utm_source=ban&utm_medium=gui&utm_campaign=cho#"+x.id;const txt="Bác hỏi câu này thì bạn đáp sao? 😅";tk("cho_gui");
   if(navigator.share){try{await navigator.share({title:"Chợ Ải Tết",text:txt,url:link});return}catch(_){}}
   try{await navigator.clipboard.writeText(txt+" "+link);alert("Đã chép link, dán vào Messenger/Zalo nhé.")}catch(_){prompt("Chép link:",link)}}
 // mở thẳng một ải từ link
 const idLink=location.hash.slice(1);
+if(idLink==="lam")setTimeout(()=>{tab(false);scrollTo({top:$("tLam").offsetTop-10})},300);
 if(/^[A-Za-z0-9]{10,40}$/.test(idLink)){getDoc(doc(db,"ai",idLink)).then(s=>{if(s.exists()&&hop(s.data())){choi({id:s.id,...s.data()});tk("cho_tu_link")}}).catch(()=>{})}
 tk("cho_mo",{tu_link:idLink?1:0});
 // ---------- làm ải
