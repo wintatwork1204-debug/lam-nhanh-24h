@@ -67,9 +67,9 @@ a{color:#fde68a}
 
 <section id="vLam" class="an">
   <div class="the"><h2>1. Ai hỏi?</h2><div class="ai" id="ai"></div></div>
-  <div class="the"><h2>2. Hỏi gì? (câu nhà bạn bị hỏi thật)</h2>
+  <div class="the"><h2>2. Hỏi gì? (chỉ cần gõ câu này là thả được)</h2>
     <textarea id="q" rows="2" maxlength="110" placeholder="VD: Lương tháng bao nhiêu rồi? Chắc hai chục nhỉ?"></textarea></div>
-  <div class="the"><h2>3. Ba cách đáp và họ hàng phản ứng ra sao</h2><div id="ods"></div></div>
+  <div class="the"><details><summary><b>3. Tự viết 3 cách đáp (không bắt buộc)</b><br><small class="ghi">Bỏ qua cũng được, mình điền sẵn câu đáp vui.</small></summary><div id="ods"></div></details></div>
   <div class="the"><input id="tg" maxlength="24" placeholder="Tên hiện trên ải (không bắt buộc, VD: Linh ở Nam Định)">
     <button class="nut" id="dang" style="width:100%;margin-top:10px">Thả ải lên sông</button>
     <small class="ghi" id="bao"></small>
@@ -151,7 +151,7 @@ MAU.forEach(([a,b,k],i)=>{const o=document.createElement("div");o.className="o";
 let lanCuoi=+localStorage.getItem("cho_dang_luc")||0;
 $("dang").onclick=async()=>{const q=sach($("q").value),tg=sach($("tg").value)||"ẩn danh";const da=[0,1,2].map(i=>({t:sach($("t"+i).value),p:sach($("p"+i).value),k:+$("k"+i).value}));
   const bao=m=>{$("bao").textContent=m};
-  if(q.length<6)return bao("Gõ câu hỏi trước nhé.");if(da.some(d=>!d.t))return bao("Điền đủ 3 cách đáp nhé (phản ứng có thể để trống).");
+  if(q.length<6)return bao("Gõ câu hỏi trước nhé.");const MD=["Dạ cháu đang cố ạ 😅","Dạ… bác ăn thêm miếng giò đi ạ","Thế còn bác năm nay thế nào ạ?"];da.forEach((d,i)=>{if(!d.t){d.t=MD[i];d.k=[1,0,-1][i]}});
   if([q,tg,...da.map(d=>d.t+" "+d.p)].some(coTuc))return bao("Có từ chưa hợp, sửa giúp mình nhé.");
   if(Date.now()-lanCuoi<60000)return bao("Đợi 1 phút rồi thả ải tiếp nhé.");
   da.forEach(d=>{if(!d.p)d.p=d.k>0?"Ừ, thế là được.":d.k<0?"…Thôi ăn đi, nguội hết rồi.":"Ừ."});
