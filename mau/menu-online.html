@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thực đơn — Cà Phê Gác Nhỏ</title>
+  <meta name="description" content="Thực đơn điện tử tại bàn của Cà Phê Gác Nhỏ — cà phê phin, trà trái cây, đá xay và bánh nướng mỗi ngày.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #F4EDE2;
+      --bg-surface: #FFFDF9;
+      --bg-surface-alt: #EFE6D8;
+      --bg-header: #3B2418;
+      --bg-header-chip: rgba(255, 248, 238, 0.13);
+      --text-header: #FAF4EB;
+      --text-header-sub: #DFCBB8;
+
+      --text-primary: #2B1B12;
+      --text-secondary: #685041;
+      --text-muted: #8C7565;
+
+      --accent: #8B4A2B;
+      --accent-hover: #70391F;
+      --accent-soft: #F3E3D3;
+      --accent-contrast: #FFFDF9;
+
+      --border: #E4D6C4;
+      --border-strong: #D2BFA7;
+
+      --badge-hot-bg: #FDE8D2;
+      --badge-hot-text: #9A3412;
+      --badge-new-bg: #DCF2E4;
+      --badge-new-text: #1E6B43;
+      --badge-sold-bg: #E6DFD6;
+      --badge-sold-text: #6E6157;
+
+      --demo-bg: #FEF3C7;
+      --demo-border: #E5B94C;
+      --demo-text: #78350F;
+
+      --shadow-sm: 0 2px 6px rgba(43, 27, 18, 0.06);
+      --shadow-md: 0 8px 24px rgba(43, 27, 18, 0.12);
+      --shadow-bar: 0 10px 28px rgba(43, 27, 18, 0.24);
+      --backdrop: rgba(24, 15, 10, 0.56);
+
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-pill: 999px;
+
+      --font-body: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+      --max-w: 560px;
+      --gutter: 16px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg-page: #16100D;
+        --bg-surface: #221914;
+        --bg-surface-alt: #2E221B;
+        --bg-header: #2A1D16;
+        --bg-header-chip: rgba(255, 240, 224, 0.1);
+        --text-header: #F6EDE2;
+        --text-header-sub: #CBB6A3;
+
+        --text-primary: #F5ECE2;
+        --text-secondary: #C6B2A1;
+        --text-muted: #968171;
+
+        --accent: #D79460;
+        --accent-hover: #E3A777;
+        --accent-soft: #3A291E;
+        --accent-contrast: #1C120D;
+
+        --border: #382A21;
+        --border-strong: #4F3C30;
+
+        --badge-hot-bg: #4A2B18;
+        --badge-hot-text: #FDBA74;
+        --badge-new-bg: #183929;
+        --badge-new-text: #6EE7B7;
+        --badge-sold-bg: #332A24;
+        --badge-sold-text: #A9998D;
+
+        --demo-bg: #3A2C12;
+        --demo-border: #8C6A23;
+        --demo-text: #FDE68A;
+
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.28);
+        --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.45);
+        --shadow-bar: 0 12px 32px rgba(0, 0, 0, 0.55);
+        --backdrop: rgba(8, 5, 3, 0.72);
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg-page: #16100D;
+      --bg-surface: #221914;
+      --bg-surface-alt: #2E221B;
+      --bg-header: #2A1D16;
+      --bg-header-chip: rgba(255, 240, 224, 0.1);
+      --text-header: #F6EDE2;
+      --text-header-sub: #CBB6A3;
+
+      --text-primary: #F5ECE2;
+      --text-secondary: #C6B2A1;
+      --text-muted: #968171;
+
+      --accent: #D79460;
+      --accent-hover: #E3A777;
+      --accent-soft: #3A291E;
+      --accent-contrast: #1C120D;
+
+      --border: #382A21;
+      --border-strong: #4F3C30;
+
+      --badge-hot-bg: #4A2B18;
+      --badge-hot-text: #FDBA74;
+      --badge-new-bg: #183929;
+      --badge-new-text: #6EE7B7;
+      --badge-sold-bg: #332A24;
+      --badge-sold-text: #A9998D;
+
+      --demo-bg: #3A2C12;
+      --demo-border: #8C6A23;
+      --demo-text: #FDE68A;
+
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.28);
+      --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.45);
+      --shadow-bar: 0 12px 32px rgba(0, 0, 0, 0.55);
+      --backdrop: rgba(8, 5, 3, 0.72);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-primary);
+      background-color: var(--bg-page);
+      overflow-x: clip;
+      min-height: 100dvh;
+    }
+
+    button, input, textarea {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding-bottom: 104px;
+    }
+
+    /* Header */
+    .shop-header-wrap {
+      padding: 14px var(--gutter) 10px;
+    }
+
+    .shop-header {
+      background: var(--bg-header);
+      color: var(--text-header);
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shop-header::after {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      right: -52px;
+      top: -58px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(215, 148, 96, 0.22) 0%, rgba(215, 148, 96, 0) 70%);
+      pointer-events: none;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      background: var(--bg-header-chip);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 244, 230, 0.14);
+    }
+
+    .brand-text {
+      min-width: 0;
+    }
+
+    .shop-name {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 23px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+    }
+
+    .shop-sub {
+      margin: 3px 0 0;
+      font-size: 12.5px;
+      color: var(--text-header-sub);
+    }
+
+    .theme-btn {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 244, 230, 0.18);
+      background: var(--bg-header-chip);
+      color: var(--text-header);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .theme-btn:hover {
+      background: rgba(255, 248, 238, 0.22);
+    }
+
+    .theme-btn:active {
+      transform: scale(0.94);
+    }
+
+    .shop-meta {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-header-chip);
+      font-size: 12px;
+      color: var(--text-header);
+      white-space: nowrap;
+    }
+
+    /* Sticky Search + Categories */
+    .sticky-controls {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: var(--bg-page);
+      border-bottom: 1px solid var(--border);
+      padding: 10px var(--gutter) 10px;
+    }
+
+    .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      color: var(--text-muted);
+      pointer-events: none;
+      display: flex;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 40px;
+      padding: 0 38px 0 38px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      font-size: 14px;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .search-input::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 8px;
+      width: 26px;
+      height: 26px;
+      border: none;
+      border-radius: 50%;
+      background: var(--bg-surface-alt);
+      color: var(--text-secondary);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      line-height: 1;
+    }
+
+    .search-clear.is-visible {
+      display: inline-flex;
+    }
+
+    .cat-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 2px;
+    }
+
+    .cat-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-pill {
+      flex: 0 0 auto;
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .cat-pill:hover {
+      border-color: var(--border-strong);
+      color: var(--text-primary);
+    }
+
+    .cat-pill.is-active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-contrast);
+    }
+
+    /* Menu Sections */
+    .menu-main {
+      padding: 10px var(--gutter) 0;
+    }
+
+    .menu-section {
+      margin-top: 18px;
+      scroll-margin-top: 112px;
+    }
+
+    .menu-section:first-child {
+      margin-top: 8px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .section-count {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Item Card */
+    .item-card {
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.18s ease;
+    }
+
+    .item-card.is-in-cart {
+      border-color: var(--accent);
+    }
+
+    .item-card.is-soldout {
+      opacity: 0.62;
+    }
+
+    .item-card.is-soldout .item-art {
+      filter: grayscale(0.55);
+    }
+
+    .item-art {
+      width: 76px;
+      height: 76px;
+      border-radius: 12px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(43, 27, 18, 0.06);
+      overflow: hidden;
+    }
+
+    .item-body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .item-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .item-name {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text-primary);
+    }
+
+    .badge {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .badge-hot {
+      background: var(--badge-hot-bg);
+      color: var(--badge-hot-text);
+    }
+
+    .badge-new {
+      background: var(--badge-new-bg);
+      color: var(--badge-new-text);
+    }
+
+    .badge-sold {
+      background: var(--badge-sold-bg);
+      color: var(--badge-sold-text);
+    }
+
+    .item-desc {
+      margin: 3px 0 0;
+      font-size: 12.5px;
+      line-height: 1.42;
+      color: var(--text-secondary);
+    }
+
+    .item-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .price-size-group {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .item-price {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .size-switch {
+      display: inline-flex;
+      background: var(--bg-surface-alt);
+      border-radius: var(--radius-pill);
+      padding: 2px;
+      border: 1px solid var(--border);
+    }
+
+    .size-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      line-height: 1.25;
+      white-space: nowrap;
+      transition: background-color 0.16s ease, color 0.16s ease;
+    }
+
+    .size-btn.is-selected {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .stepper {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-surface-alt);
+      border-radius: var(--radius-pill);
+      padding: 2px;
+      border: 1px solid var(--border);
+    }
+
+    .stepper.has-qty {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .step-btn {
+      width: 28px;
+      height: 28px;
+      border: none;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.15s ease, transform 0.12s ease;
+    }
+
+    .step-btn.step-plus {
+      background: var(--accent);
+      color: var(--accent-contrast);
+    }
+
+    .step-btn.step-plus:hover {
+      background: var(--accent-hover);
+    }
+
+    .step-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .step-btn:not(:disabled):active {
+      transform: scale(0.92);
+    }
+
+    .step-qty {
+      min-width: 22px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .soldout-note {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .other-size-hint {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: -2px;
+    }
+
+    /* Empty search */
+    .empty-state {
+      text-align: center;
+      padding: 36px 20px;
+      background: var(--bg-surface);
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-md);
+      margin-top: 16px;
+    }
+
+    .empty-state p {
+      margin: 0 0 12px;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .empty-reset {
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .shop-footer {
+      margin-top: 28px;
+      padding: 16px var(--gutter) 8px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* Sticky Bottom Cart Bar */
+    .cart-bar-wrap {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 40;
+      padding: 10px var(--gutter) calc(12px + env(safe-area-inset-bottom, 0px));
+      pointer-events: none;
+    }
+
+    .cart-bar-inner {
+      max-width: calc(var(--max-w) - 32px);
+      margin: 0 auto;
+      pointer-events: auto;
+    }
+
+    .cart-bar {
+      width: 100%;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: var(--shadow-bar);
+      transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    }
+
+    .cart-bar.has-items {
+      background: var(--bg-header);
+      border-color: transparent;
+      color: var(--text-header);
+    }
+
+    .cart-bar:active {
+      transform: scale(0.99);
+    }
+
+    .cart-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .cart-count-badge {
+      min-width: 28px;
+      height: 28px;
+      padding: 0 8px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-surface-alt);
+      color: var(--text-primary);
+      font-size: 13px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .cart-bar.has-items .cart-count-badge {
+      background: var(--accent);
+      color: var(--accent-contrast);
+    }
+
+    .cart-bar-text {
+      text-align: left;
+      min-width: 0;
+    }
+
+    .cart-bar-label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.25;
+    }
+
+    .cart-bar.has-items .cart-bar-label {
+      color: var(--text-header-sub);
+    }
+
+    .cart-bar-total {
+      display: block;
+      font-size: 15.5px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .cart-bar-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      padding: 7px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-surface-alt);
+      color: var(--text-secondary);
+    }
+
+    .cart-bar.has-items .cart-bar-cta {
+      background: rgba(255, 248, 238, 0.16);
+      color: var(--text-header);
+    }
+
+    /* Order Summary Bottom Sheet */
+    .sheet-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: var(--backdrop);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.22s ease, visibility 0.22s ease;
+    }
+
+    .sheet-backdrop.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .sheet {
+      width: 100%;
+      max-width: var(--max-w);
+      max-height: 88dvh;
+      background: var(--bg-surface);
+      border-radius: 22px 22px 0 0;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transform: translateY(28px);
+      transition: transform 0.24s ease;
+      overflow: hidden;
+    }
+
+    .sheet-backdrop.is-open .sheet {
+      transform: translateY(0);
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      border-radius: 99px;
+      background: var(--border-strong);
+      margin: 10px auto 2px;
+      flex-shrink: 0;
+    }
+
+    .sheet-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 18px 12px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .sheet-title {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .sheet-close {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--bg-surface-alt);
+      color: var(--text-primary);
+      font-size: 20px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sheet-body {
+      padding: 14px 18px 18px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 24px 12px;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .cart-items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cart-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-page);
+      border: 1px solid var(--border);
+    }
+
+    .cart-row-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .cart-row-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .cart-row-meta {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .cart-row-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .cart-row-subtotal {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .clear-cart-wrap {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 8px;
+    }
+
+    .clear-cart-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 4px 2px;
+      text-decoration: underline;
+    }
+
+    .clear-cart-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .order-fields {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .field-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+    }
+
+    .field-input, .field-textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-page);
+      color: var(--text-primary);
+      font-size: 14px;
+      outline: none;
+    }
+
+    .field-textarea {
+      resize: vertical;
+      min-height: 64px;
+    }
+
+    .field-input:focus, .field-textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .demo-alert {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background: var(--demo-bg);
+      border: 1px solid var(--demo-border);
+      color: var(--demo-text);
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+
+    .demo-alert.is-visible {
+      display: block;
+    }
+
+    .demo-alert strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .sheet-foot {
+      padding: 12px 18px calc(14px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--border);
+      background: var(--bg-surface);
+      flex-shrink: 0;
+    }
+
+    .sheet-summary {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .sheet-summary-label {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .sheet-summary-total {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .submit-btn {
+      width: 100%;
+      height: 46px;
+      border: none;
+      border-radius: var(--radius-md);
+      background: var(--accent);
+      color: var(--accent-contrast);
+      font-size: 15px;
+      font-weight: 700;
+      transition: background-color 0.18s ease, opacity 0.18s ease;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background: var(--accent-hover);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 360px) {
+      .item-art {
+        width: 66px;
+        height: 66px;
+      }
+
+      .shop-name {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="shop-header-wrap">
+      <header class="shop-header">
+        <div class="header-top">
+          <div class="brand">
+            <div class="brand-mark" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+                <path d="M5 11.5h13.5v6a5.5 5.5 0 0 1-5.5 5.5h-2.5A5.5 5.5 0 0 1 5 17.5v-6Z" stroke="#FAF4EB" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M18.5 13h2a2.5 2.5 0 0 1 0 5h-2" stroke="#FAF4EB" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8.5 7.5c0-1.5 1.5-1.8 1.5-3.2M13.5 7.5c0-1.5 1.5-1.8 1.5-3.2" stroke="#DFCBB8" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="brand-text">
+              <h1 class="shop-name">Cà Phê Gác Nhỏ</h1>
+              <p class="shop-sub">Rang mộc mỗi tuần · Quét mã chọn món tại bàn</p>
+            </div>
+          </div>
+          <button type="button" class="theme-btn" id="themeToggle" aria-label="Chuyển chế độ sáng hoặc tối" title="Đổi giao diện sáng/tối">
+            <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="shop-meta">
+          <span class="meta-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7v5l3 2"/>
+            </svg>
+            7:00–22:00
+          </span>
+          <span class="meta-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+              <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+              <circle cx="12" cy="19.5" r="1"/>
+            </svg>
+            Wi-Fi: hỏi quầy
+          </span>
+        </div>
+      </header>
+    </div>
+
+    <div class="sticky-controls">
+      <div class="search-box">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7.5"/>
+            <path d="m20 20-3.5-3.5"/>
+          </svg>
+        </span>
+        <input type="search" id="searchInput" class="search-input" placeholder="Tìm món (vd: bạc xỉu, trà đào, bánh...)" aria-label="Tìm món theo tên" autocomplete="off">
+        <button type="button" id="searchClear" class="search-clear" aria-label="Xóa từ khóa tìm kiếm">×</button>
+      </div>
+      <nav class="cat-nav" id="catNav" aria-label="Danh mục thực đơn"></nav>
+    </div>
+
+    <main class="menu-main" id="menuContainer"></main>
+
+    <footer class="shop-footer">
+      Trang mẫu minh họa. Quán và giá là giả định.
+    </footer>
+  </div>
+
+  <!-- Sticky Bottom Cart Bar -->
+  <div class="cart-bar-wrap">
+    <div class="cart-bar-inner">
+      <button type="button" class="cart-bar" id="cartBarBtn" aria-haspopup="dialog" aria-controls="orderSheet">
+        <span class="cart-bar-left">
+          <span class="cart-count-badge" id="cartBarCount">0</span>
+          <span class="cart-bar-text">
+            <span class="cart-bar-label" id="cartBarLabel">Chưa chọn món</span>
+            <span class="cart-bar-total" id="cartBarTotal">0đ</span>
+          </span>
+        </span>
+        <span class="cart-bar-cta" id="cartBarCta">Xem đơn</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Order Summary Modal / Bottom Sheet -->
+  <div class="sheet-backdrop" id="sheetBackdrop" aria-hidden="true">
+    <div class="sheet" id="orderSheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-head">
+        <h2 class="sheet-title" id="sheetTitle">Tóm tắt đơn hàng</h2>
+        <button type="button" class="sheet-close" id="sheetCloseBtn" aria-label="Đóng bảng tóm tắt đơn">×</button>
+      </div>
+
+      <div class="sheet-body">
+        <div id="sheetCartContent"></div>
+
+        <div class="order-fields">
+          <div class="field-group">
+            <label for="tableNumber">Số bàn</label>
+            <input type="text" id="tableNumber" class="field-input" placeholder="Ví dụ: Bàn 04, Gác 2..." maxlength="30" autocomplete="off">
+          </div>
+          <div class="field-group">
+            <label for="orderNote">Ghi chú</label>
+            <textarea id="orderNote" class="field-textarea" placeholder="Ví dụ: Ít đá, ít ngọt, mang ra cùng lúc..." maxlength="200"></textarea>
+          </div>
+        </div>
+
+        <div class="demo-alert" id="demoAlert" role="status" aria-live="polite">
+          <strong>Đây là bản demo, đơn chưa được gửi đi</strong>
+          <span id="demoAlertDetail"></span>
+        </div>
+      </div>
+
+      <div class="sheet-foot">
+        <div class="sheet-summary">
+          <span class="sheet-summary-label" id="sheetSummaryLabel">Tổng cộng (0 món)</span>
+          <span class="sheet-summary-total" id="sheetSummaryTotal">0đ</span>
+        </div>
+        <button type="button" class="submit-btn" id="submitOrderBtn" disabled>Gửi đơn cho quầy</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var SIZE_L_SURCHARGE = 5000;
+
+      var CATEGORIES = [
+        { id: "ca-phe", name: "Cà phê" },
+        { id: "tra", name: "Trà" },
+        { id: "da-xay", name: "Đá xay" },
+        { id: "banh", name: "Bánh" },
+        { id: "topping", name: "Topping" }
+      ];
+
+      var MENU_ITEMS = [
+        // Cà phê (6 món)
+        {
+          id: "cf-sua-da",
+          category: "ca-phe",
+          name: "Cà phê sữa đá",
+          desc: "Phin Robusta rang vừa đậm vị, hòa cùng sữa đặc béo ngọt vừa phải.",
+          price: 32000,
+          hasSize: true,
+          badge: "hot",
+          soldOut: false,
+          art: { type: "iced-coffee", bg: "#EFE2D2", c1: "#6F3E23", c2: "#D8B38E" }
+        },
+        {
+          id: "cf-den-da",
+          category: "ca-phe",
+          name: "Cà phê đen đá",
+          desc: "Chiết xuất phin truyền thống, hậu đắng thanh và thơm mùi hạt rang mộc.",
+          price: 28000,
+          hasSize: true,
+          badge: "",
+          soldOut: false,
+          art: { type: "iced-coffee", bg: "#EAE1D7", c1: "#3E2215", c2: "#5E3724" }
+        },
+        {
+          id: "bac-xiu",
+          category: "ca-phe",
+          name: "Bạc xỉu Gác Nhỏ",
+          desc: "Nhiều sữa tươi mát lành, điểm lớp cà phê phin nhẹ nhàng dễ uống.",
+          price: 35000,
+          hasSize: true,
+          badge: "hot",
+          soldOut: false,
+          art: { type: "iced-coffee", bg: "#F4E9DA", c1: "#9C6644", c2: "#F5E6D3" }
+        },
+        {
+          id: "cf-muoi",
+          category: "ca-phe",
+          name: "Cà phê muối",
+          desc: "Cà phê phin đậm đà phủ lớp kem muối đánh mịn, béo mặn hài hòa.",
+          price: 39000,
+          hasSize: true,
+          badge: "new",
+          soldOut: false,
+          art: { type: "cheese-tea", bg: "#F2E4D5", c1: "#7B4526", c2: "#FFF7EC" }
+        },
+        {
+          id: "cold-brew-cam-sa",
+          category: "ca-phe",
+          name: "Cold Brew cam sả",
+          desc: "Cà phê ủ lạnh 16 giờ thanh dịu, thơm mát cùng lát cam vàng và sả tươi.",
+          price: 42000,
+          hasSize: true,
+          badge: "",
+          soldOut: false,
+          art: { type: "cold-brew", bg: "#F5E8D6", c1: "#8C471F", c2: "#F29D38" }
+        },
+        {
+          id: "latte-yen-mach",
+          category: "ca-phe",
+          name: "Latte sữa yến mạch",
+          desc: "Espresso Arabica Cầu Đất pha cùng sữa yến mạch ấm nóng, thơm bùi.",
+          price: 45000,
+          hasSize: true,
+          badge: "",
+          soldOut: true,
+          art: { type: "hot-cup", bg: "#EDE4D8", c1: "#A47149", c2: "#F7EDE2" }
+        },
+
+        // Trà (5 món)
+        {
+          id: "tra-dao-cam-sa",
+          category: "tra",
+          name: "Trà đào cam sả",
+          desc: "Hồng trà ủ tươi cùng đào miếng giòn ngọt, thoảng hương sả và cam vàng.",
+          price: 39000,
+          hasSize: true,
+          badge: "hot",
+          soldOut: false,
+          art: { type: "fruit-tea", bg: "#F9E6D4", c1: "#D96B27", c2: "#F4A261" }
+        },
+        {
+          id: "tra-vai-hoa-lai",
+          category: "tra",
+          name: "Trà vải hoa lài",
+          desc: "Trà xanh ướp hoa lài dịu nhẹ kết hợp vải ngâm mọng nước, mát thanh.",
+          price: 38000,
+          hasSize: true,
+          badge: "",
+          soldOut: false,
+          art: { type: "fruit-tea", bg: "#F4ECE0", c1: "#C78D44", c2: "#F2D7B6" }
+        },
+        {
+          id: "tra-o-long-kem-cheese",
+          category: "tra",
+          name: "Trà ô long kem phô mai",
+          desc: "Ô long nướng thơm sâu, phủ lớp kem phô mai đánh sánh mặn nhẹ.",
+          price: 42000,
+          hasSize: true,
+          badge: "hot",
+          soldOut: false,
+          art: { type: "cheese-tea", bg: "#F2E9DB", c1: "#9F642B", c2: "#FFF4DC" }
+        },
+        {
+          id: "tra-sen-vang",
+          category: "tra",
+          name: "Trà sen vàng củ năng",
+          desc: "Trà sen thanh mát, thêm củ năng giòn sần sật và lớp kem béo dịu.",
+          price: 40000,
+          hasSize: true,
+          badge: "",
+          soldOut: false,
+          art: { type: "cheese-tea", bg: "#EEF1E4", c1: "#B68D40", c2: "#FCF6E6" }
+        },
+        {
+          id: "tra-oi-hong-dau-tam",
+          category: "tra",
+          name: "Trà ổi hồng dâu tằm",
+          desc: "Chua ngọt giải nhiệt từ ổi hồng tươi và mứt dâu tằm nấu tại quán.",
+          price: 42000,
+          hasSize: true,
+          badge: "new",
+          soldOut: false,
+          art: { type: "fruit-tea", bg: "#F8E3E4", c1: "#C94C64", c2: "#EE8C9B" }
+        },
+
+        // Đá xay (4 món)
+        {
+          id: "cf-cot-dua-da-xay",
+          category: "da-xay",
+          name: "Cà phê cốt dừa đá xay",
+          desc: "Cốt dừa xay mịn béo thơm hòa quyện cùng cà phê phin đậm vị.",
+          price: 45000,
+          hasSize: true,
+          badge: "hot",
+          soldOut: false,
+          art: { type: "frappe", bg: "#EFE6D8", c1: "#855233", c2: "#FAF3E8" }
+        },
+        {
+          id: "matcha-da-xay",
+          category: "da-xay",
+          name: "Matcha đá xay kem tươi",
+          desc: "Bột matcha Nhật thơm dịu, xay đá sánh mịn kèm lớp kem tươi béo nhẹ.",
+          price: 48000,
+          hasSize: true,
+          badge: "",
+          soldOut: false,
+          art: { type: "frappe", bg: "#E6EFE2", c1: "#5B8A4E", c2: "#F6FAF3" }
+        },
+        {
+          id: "socola-da-xay",
+          category: "da-xay",
+          name: "Sô-cô-la đá xay",
+          desc: "Ca cao nguyên chất đậm vị, xay đá nhuyễn mát lạnh cho ngày nắng.",
+          price: 46000,
+          hasSize: true,
+          badge: "new",
+          soldOut: false,
+          art: { type: "frappe", bg: "#EDE2DA", c1: "#5A3324", c2: "#E9D6C5" }
+        },
+        {
+          id: "khoai-mon-da-xay",
+          category: "da-xay",
+          name: "Khoai môn sữa đá xay",
+          desc: "Khoai môn nghiền bùi thơm kết hợp sữa tươi lạnh béo mịn.",
+          price: 45000,
+          hasSize: true,
+          badge: "",
+          soldOut: true,
+          art: { type: "frappe", bg: "#ECE5F0", c1: "#8B6A9C", c2: "#F5EFF8" }
+        },
+
+        // Bánh (5 món)
+        {
+          id: "croissant-bo-phap",
+          category: "banh",
+          name: "Croissant bơ Pháp",
+          desc: "Bánh sừng bò nướng nóng mỗi sáng, vỏ ngàn lớp giòn thơm mùi bơ.",
+          price: 32000,
+          hasSize: false,
+          badge: "hot",
+          soldOut: false,
+          art: { type: "croissant", bg: "#F6E9D5", c1: "#C67C32", c2: "#E8A85E" }
+        },
+        {
+          id: "tiramisu-ca-phe",
+          category: "banh",
+          name: "Tiramisu cà phê",
+          desc: "Cốt bánh thấm espresso nhẹ, lớp kem mascarpone mềm tan phủ ca cao.",
+          price: 42000,
+          hasSize: false,
+          badge: "hot",
+          soldOut: false,
+          art: { type: "cake", bg: "#EFE4D6", c1: "#6F3E23", c2: "#F6E7D4" }
+        },
+        {
+          id: "banh-chuoi-oc-cho",
+          category: "banh",
+          name: "Bánh chuối nướng óc chó",
+          desc: "Chuối chín tự nhiên ít ngọt, nướng ẩm mềm cùng hạt óc chó rang.",
+          price: 30000,
+          hasSize: false,
+          badge: "",
+          soldOut: false,
+          art: { type: "bread", bg: "#F2E6D4", c1: "#9C6131", c2: "#DFB584" }
+        },
+        {
+          id: "cheesecake-chanh-day",
+          category: "banh",
+          name: "Cheesecake chanh dây",
+          desc: "Phô mai béo mịn cân bằng cùng lớp sốt chanh dây chua thanh.",
+          price: 45000,
+          hasSize: false,
+          badge: "new",
+          soldOut: false,
+          art: { type: "cake", bg: "#FAF0D7", c1: "#E09F1F", c2: "#FFF7E2" }
+        },
+        {
+          id: "banh-mi-bo-toi",
+          category: "banh",
+          name: "Bánh mì bơ tỏi phô mai",
+          desc: "Vỏ bánh nướng giòn rụm, nhân phô mai kem thơm béo mùi bơ tỏi.",
+          price: 35000,
+          hasSize: false,
+          badge: "",
+          soldOut: true,
+          art: { type: "bread", bg: "#F3EAD8", c1: "#B67D34", c2: "#F3D99C" }
+        },
+
+        // Topping (4 món)
+        {
+          id: "tran-chau-trang",
+          category: "topping",
+          name: "Trân châu trắng giòn",
+          desc: "Hạt trân châu dai giòn nhẹ, hợp với các món trà trái cây.",
+          price: 8000,
+          hasSize: false,
+          badge: "hot",
+          soldOut: false,
+          art: { type: "topping", bg: "#F1EAE0", c1: "#D8C5AE", c2: "#FFFDF9" }
+        },
+        {
+          id: "thach-ca-phe",
+          category: "topping",
+          name: "Thạch cà phê nhà làm",
+          desc: "Thạch nấu từ cà phê phin, mát dịu và thoảng vị đắng nhẹ.",
+          price: 8000,
+          hasSize: false,
+          badge: "",
+          soldOut: false,
+          art: { type: "topping", bg: "#EBE1D6", c1: "#583220", c2: "#8F5A3C" }
+        },
+        {
+          id: "kem-pho-mai-man",
+          category: "topping",
+          name: "Kem phô mai mặn",
+          desc: "Lớp kem đánh bông mịn, vị béo mặn vừa phải thêm vào trà hoặc cà phê.",
+          price: 10000,
+          hasSize: false,
+          badge: "new",
+          soldOut: false,
+          art: { type: "topping", bg: "#F8F0DF", c1: "#E5C687", c2: "#FFFBF0" }
+        },
+        {
+          id: "cu-nang-gion",
+          category: "topping",
+          name: "Củ năng giòn",
+          desc: "Củ năng tươi áo bột mỏng, ăn giòn sần sật vui miệng.",
+          price: 10000,
+          hasSize: false,
+          badge: "",
+          soldOut: false,
+          art: { type: "topping", bg: "#F5E7E4", c1: "#C96A62", c2: "#F4C2BC" }
+        }
+      ];
+
+      // State
+      var selectedSizeByItem = {};
+      var cart = {}; // key: itemId + "::" + size ("M" | "L" | "STD") -> quantity
+      var activeCategoryId = CATEGORIES[0].id;
+      var searchQuery = "";
+
+      MENU_ITEMS.forEach(function (item) {
+        selectedSizeByItem[item.id] = item.hasSize ? "M" : "STD";
+      });
+
+      // DOM refs
+      var catNavEl = document.getElementById("catNav");
+      var menuContainerEl = document.getElementById("menuContainer");
+      var searchInputEl = document.getElementById("searchInput");
+      var searchClearEl = document.getElementById("searchClear");
+
+      var cartBarBtnEl = document.getElementById("cartBarBtn");
+      var cartBarCountEl = document.getElementById("cartBarCount");
+      var cartBarLabelEl = document.getElementById("cartBarLabel");
+      var cartBarTotalEl = document.getElementById("cartBarTotal");
+      var cartBarCtaEl = document.getElementById("cartBarCta");
+
+      var sheetBackdropEl = document.getElementById("sheetBackdrop");
+      var sheetCloseBtnEl = document.getElementById("sheetCloseBtn");
+      var sheetCartContentEl = document.getElementById("sheetCartContent");
+      var sheetSummaryLabelEl = document.getElementById("sheetSummaryLabel");
+      var sheetSummaryTotalEl = document.getElementById("sheetSummaryTotal");
+      var submitOrderBtnEl = document.getElementById("submitOrderBtn");
+      var tableNumberEl = document.getElementById("tableNumber");
+      var orderNoteEl = document.getElementById("orderNote");
+      var demoAlertEl = document.getElementById("demoAlert");
+      var demoAlertDetailEl = document.getElementById("demoAlertDetail");
+
+      var themeToggleEl = document.getElementById("themeToggle");
+      var themeIconEl = document.getElementById("themeIcon");
+
+      // Helpers
+      function formatVnd(amount) {
+        return String(amount).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "đ";
+      }
+
+      function normalizeVi(str) {
+        return String(str)
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/đ/g, "d")
+          .trim();
+      }
+
+      function getItemById(id) {
+        for (var i = 0; i < MENU_ITEMS.length; i++) {
+          if (MENU_ITEMS[i].id === id) return MENU_ITEMS[i];
+        }
+        return null;
+      }
+
+      function getUnitPrice(item, size) {
+        if (item.hasSize && size === "L") {
+          return item.price + SIZE_L_SURCHARGE;
+        }
+        return item.price;
+      }
+
+      function getCartKey(itemId, size) {
+        return itemId + "::" + size;
+      }
+
+      function getQty(itemId, size) {
+        return cart[getCartKey(itemId, size)] || 0;
+      }
+
+      function updateQty(itemId, size, delta) {
+        var item = getItemById(itemId);
+        if (!item || item.soldOut) return;
+        var key = getCartKey(itemId, size);
+        var next = (cart[key] || 0) + delta;
+        if (next <= 0) {
+          delete cart[key];
+        } else {
+          cart[key] = next;
+        }
+        hideDemoAlert();
+        renderMenu();
+        updateCartUI();
+        if (sheetBackdropEl.classList.contains("is-open")) {
+          renderSheetCart();
+        }
+      }
+
+      function getCartSummary() {
+        var entries = [];
+        var totalQty = 0;
+        var totalPrice = 0;
+
+        Object.keys(cart).forEach(function (key) {
+          var qty = cart[key];
+          if (!qty || qty <= 0) return;
+          var parts = key.split("::");
+          var item = getItemById(parts[0]);
+          var size = parts[1];
+          if (!item) return;
+          var unitPrice = getUnitPrice(item, size);
+          var lineTotal = unitPrice * qty;
+          totalQty += qty;
+          totalPrice += lineTotal;
+          entries.push({
+            key: key,
+            item: item,
+            size: size,
+            qty: qty,
+            unitPrice: unitPrice,
+            lineTotal: lineTotal
+          });
+        });
+
+        return {
+          entries: entries,
+          totalQty: totalQty,
+          totalPrice: totalPrice
+        };
+      }
+
+      function buildArtSvg(art) {
+        var c1 = art.c1;
+        var c2 = art.c2;
+        switch (art.type) {
+          case "iced-coffee":
+            return (
+              '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">' +
+              '<path d="M29 7l3 8" stroke="#6E4A35" stroke-width="2.4" stroke-linecap="round"/>' +
+              '<path d="M16 15h20l-2.4 27a3 3 0 0 1-3 2.7h-9.2a3 3 0 0 1-3-2.7L16 15Z" fill="' + c2 + '" stroke="#5A3928" stroke-width="1.6"/>' +
+              '<path d="M17.2 26h17.6l-1.3 15.6a2.4 2.4 0 0 1-2.4 2.2H20.9a2.4 2.4 0 0 1-2.4-2.2L17.2 26Z" fill="' + c1 + '"/>' +
+              '<rect x="19" y="18" width="6" height="6" rx="1.5" fill="#FFFDF9" fill-opacity="0.7"/>' +
+              '<rect x="27" y="19" width="5.5" height="5.5" rx="1.5" fill="#FFFDF9" fill-opacity="0.65"/>' +
+              "</svg>"
+            );
+          case "cold-brew":
+            return (
+              '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">' +
+              '<path d="M16 15h20l-2 26.5a3 3 0 0 1-3 2.7H21a3 3 0 0 1-3-2.7L16 15Z" fill="' + c1 + '" stroke="#5A3928" stroke-width="1.6"/>' +
+              '<circle cx="29" cy="24" r="6" fill="' + c2 + '" stroke="#FFF5E1" stroke-width="1.4"/>' +
+              '<path d="M29 19v10M24 24h10" stroke="#FFF5E1" stroke-width="1.1"/>' +
+              '<rect x="19" y="29" width="6" height="6" rx="1.4" fill="#FFFDF9" fill-opacity="0.45"/>' +
+              '<path d="M20 11l3 10" stroke="#5A8F49" stroke-width="2" stroke-linecap="round"/>' +
+              "</svg>"
+            );
+          case "hot-cup":
+            return (
+              '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">' +
+              '<path d="M19 14c0-2 2-2.2 2-4M26 14c0-2 2-2.2 2-4" stroke="#8C6A54" stroke-width="1.8" stroke-linecap="round"/>' +
+              '<path d="M13 20h21v12a9.5 9.5 0 0 1-9.5 9.5h-2A9.5 9.5 0 0 1 13 32V20Z" fill="' + c2 + '" stroke="#5A3928" stroke-width="1.7"/>' +
+              '<path d="M34 22.5h3a4 4 0 0 1 0 8h-3" stroke="#5A3928" stroke-width="1.8" stroke-linecap="round"/>' +
+              '<ellipse cx="23.5" cy="20" rx="10.2" ry="3.2" fill="' + c1 + '" stroke="#5A3928" stroke-width="1.4"/>' +
+              '<path d="M11 43h25" stroke="#8C6A54" stroke-width="2" stroke-linecap="round"/>' +
+              "</svg>"
+            );
+          case "fruit-tea":
+            return (
+              '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">' +
+              '<path d="M29 7l-1.5 9" stroke="#5A3928" stroke-width="2.4" stroke-linecap="round"/>' +
+              '<path d="M16 15h20l-2.3 27a3 3 0 0 1-3 2.7h-9.4a3 3 0 0 1-3-2.7L16 15Z" fill="' + c1 + '" fill-opacity="0.88" stroke="#5A3928" stroke-width="1.6"/>' +
+              '<path d="M19 25a7 7 0 0 1 12 0z" fill="' + c2 + '" stroke="#FFFDF9" stroke-width="1.2"/>' +
+              '<circle cx="22" cy="36" r="2.6" fill="' + c2 + '"/>' +
+              '<circle cx="29" cy="35" r="2.4" fill="' + c2 + '"/>' +
+              '<circle cx="25.5" cy="39" r="2.3" fill="#FFFDF9" fill-opacity="0.7"/>' +
+              "</svg>"
+            );
+          case "cheese-tea":
+            return (
+              '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">' +
+              '<path d="M16 14h20l-2.3 28a3 3 0 0 1-3 2.7h-9.4a3 3 0 0 1-3-2.7L16 14Z" fill="' + c1 + '" stroke="#5A3928" stroke-width="1.6"/>' +
+              '<path d="M16.2 14h19.6l-.8 9.2c-2.8 1.5-5.8-1.4-9 0-3.2 1.4-6.2-1.2-9 0L16.2 14Z" fill="' + c2 + '"/>' +
+              '<path d="M15 14h22" stroke="#5A3928" stroke-width="1.8" stroke-linecap="round"/>' +
+              "</svg>"
+            );
+          case "frappe":
+            return (
+              '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">' +
+              '<path d="M31 6l-2.5 9" stroke="#5A3928" stroke-width="2.3" stroke-linecap="round"/>' +
+              '<path d="M17 22c0-5.5 4-9 9-9s9 3.5 9 9" fill="' + c2 + '" stroke="#5A3928" stroke-width="1.6"/>' +
+              '<path d="M16 22h20l-2.2 20a3 3 0 0 1-3 2.7h-9.6a3 3 0 0 1-3-2.7L16 22Z" fill="' + c1 + '" stroke="#5A3928" stroke-width="1.6"/>' +
+              '<path d="M21 18c2-2 8-2 10 0" stroke="' + c1 + '" stroke-width="1.6" stroke-linecap="round"/>' +
+              '<path d="M14.5 22h23" stroke="#5A3928" stroke-width="1.8" stroke-linecap="round"/>' +
+              "</svg>"
+            );
+          case "croissant":
+            return (
+              '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">' +
+              '<path d="M11 32c2-9 9-14 15-14s13 5 15 14c-3 3.5-7 3-9 0-2-2.5-4-3.5-6-3.5s-4 1-6 3.5c-2 3-6 3.5-9 0Z" fill="' + c2 + '" stroke="#6E411C" stroke-width="1.7" stroke-linejoin="round"/>' +
+              '<path d="M20 20c-1 3.5-1 7 0 10M32 20c1 3.5 1 7 0 10M26 18v10.5" stroke="' + c1 + '" stroke-width="1.6" stroke-linecap="round"/>' +
+              "</svg>"
+            );
+          case "cake":
+            return (
+              '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">' +
+              '<path d="M12 24l24-8 4 8H12Z" fill="' + c1 + '" stroke="#5A3928" stroke-width="1.6" stroke-linejoin="round"/>' +
+              '<rect x="12" y="24" width="28" height="15" rx="2" fill="' + c2 + '" stroke="#5A3928" stroke-width="1.6"/>' +
+              '<path d="M12 30h28M12 34.5h28" stroke="' + c1 + '" stroke-width="2.2"/>' +
+              '<path d="M9 41h34" stroke="#8C6A54" stroke-width="2" stroke-linecap="round"/>' +
+              "</svg>"
+            );
+          case "bread":
+            return (
+              '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">' +
+              '<path d="M13 24c0-5 5.5-9 13-9s13 4 13 9v13a3 3 0 0 1-3 3H16a3 3 0 0 1-3-3V24Z" fill="' + c2 + '" stroke="#6E411C" stroke-width="1.7"/>' +
+              '<path d="M13 24c0-5 5.5-9 13-9s13 4 13 9" stroke="' + c1 + '" stroke-width="3.2" stroke-linecap="round"/>' +
+              '<circle cx="21" cy="28" r="1.8" fill="' + c1 + '"/>' +
+              '<circle cx="30" cy="27" r="2" fill="' + c1 + '"/>' +
+              '<circle cx="26" cy="34" r="1.7" fill="' + c1 + '"/>' +
+              "</svg>"
+            );
+          default:
+            return (
+              '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">' +
+              '<path d="M13 26h26a13 13 0 0 1-26 0Z" fill="' + c2 + '" stroke="#5A3928" stroke-width="1.7"/>' +
+              '<circle cx="21" cy="23" r="3.4" fill="' + c1 + '" stroke="#5A3928" stroke-width="1.2"/>' +
+              '<circle cx="27" cy="21" r="3.4" fill="' + c1 + '" stroke="#5A3928" stroke-width="1.2"/>' +
+              '<circle cx="32" cy="23.5" r="3.2" fill="' + c1 + '" stroke="#5A3928" stroke-width="1.2"/>' +
+              '<path d="M18 40h16" stroke="#8C6A54" stroke-width="2" stroke-linecap="round"/>' +
+              "</svg>"
+            );
+        }
+      }
+
+      function renderCatNav() {
+        catNavEl.innerHTML = "";
+        CATEGORIES.forEach(function (cat) {
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "cat-pill" + (cat.id === activeCategoryId ? " is-active" : "");
+          btn.dataset.catId = cat.id;
+          btn.textContent = cat.name;
+          btn.addEventListener("click", function () {
+            if (searchQuery) {
+              searchQuery = "";
+              searchInputEl.value = "";
+              searchClearEl.classList.remove("is-visible");
+              renderMenu();
+            }
+            activeCategoryId = cat.id;
+            updateActiveCatPill();
+            var target = document.getElementById("sec-" + cat.id);
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          });
+          catNavEl.appendChild(btn);
+        });
+      }
+
+      function updateActiveCatPill() {
+        var pills = catNavEl.querySelectorAll(".cat-pill");
+        pills.forEach(function (pill) {
+          var isAct = pill.dataset.catId === activeCategoryId;
+          pill.classList.toggle("is-active", isAct);
+          if (isAct) {
+            pill.setAttribute("aria-current", "true");
+            pill.scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" });
+          } else {
+            pill.removeAttribute("aria-current");
+          }
+        });
+      }
+
+      function renderMenu() {
+        var normQuery = normalizeVi(searchQuery);
+        menuContainerEl.innerHTML = "";
+        var totalMatched = 0;
+
+        CATEGORIES.forEach(function (cat) {
+          var items = MENU_ITEMS.filter(function (item) {
+            if (item.category !== cat.id) return false;
+            if (!normQuery) return true;
+            return normalizeVi(item.name).indexOf(normQuery) !== -1;
+          });
+
+          if (items.length === 0) return;
+          totalMatched += items.length;
+
+          var section = document.createElement("section");
+          section.className = "menu-section";
+          section.id = "sec-" + cat.id;
+          section.dataset.catId = cat.id;
+
+          var head = document.createElement("div");
+          head.className = "section-head";
+          var title = document.createElement("h2");
+          title.className = "section-title";
+          title.textContent = cat.name;
+          var count = document.createElement("span");
+          count.className = "section-count";
+          count.textContent = items.length + " món";
+          head.appendChild(title);
+          head.appendChild(count);
+          section.appendChild(head);
+
+          var list = document.createElement("div");
+          list.className = "item-list";
+
+          items.forEach(function (item) {
+            var currentSize = selectedSizeByItem[item.id] || (item.hasSize ? "M" : "STD");
+            var currentQty = getQty(item.id, currentSize);
+            var otherSize = item.hasSize ? (currentSize === "M" ? "L" : "M") : null;
+            var otherQty = otherSize ? getQty(item.id, otherSize) : 0;
+            var anyInCart = currentQty > 0 || otherQty > 0;
+
+            var card = document.createElement("article");
+            card.className = "item-card" + (item.soldOut ? " is-soldout" : "") + (anyInCart ? " is-in-cart" : "");
+
+            // Illustration
+            var artBox = document.createElement("div");
+            artBox.className = "item-art";
+            artBox.style.backgroundColor = item.art.bg;
+            artBox.innerHTML = buildArtSvg(item.art);
+            card.appendChild(artBox);
+
+            // Body
+            var body = document.createElement("div");
+            body.className = "item-body";
+
+            var topWrap = document.createElement("div");
+            var topRow = document.createElement("div");
+            topRow.className = "item-top";
+
+            var nameEl = document.createElement("h3");
+            nameEl.className = "item-name";
+            nameEl.textContent = item.name;
+            topRow.appendChild(nameEl);
+
+            if (item.soldOut) {
+              var soldBadge = document.createElement("span");
+              soldBadge.className = "badge badge-sold";
+              soldBadge.textContent = "Tạm hết";
+              topRow.appendChild(soldBadge);
+            } else if (item.badge === "hot") {
+              var hotBadge = document.createElement("span");
+              hotBadge.className = "badge badge-hot";
+              hotBadge.textContent = "Bán chạy";
+              topRow.appendChild(hotBadge);
+            } else if (item.badge === "new") {
+              var newBadge = document.createElement("span");
+              newBadge.className = "badge badge-new";
+              newBadge.textContent = "Mới";
+              topRow.appendChild(newBadge);
+            }
+
+            topWrap.appendChild(topRow);
+
+            var descEl = document.createElement("p");
+            descEl.className = "item-desc";
+            descEl.textContent = item.desc;
+            topWrap.appendChild(descEl);
+            body.appendChild(topWrap);
+
+            // Bottom Controls
+            var controls = document.createElement("div");
+            controls.className = "item-controls";
+
+            var leftGroup = document.createElement("div");
+            leftGroup.className = "price-size-group";
+
+            var priceEl = document.createElement("span");
+            priceEl.className = "item-price";
+            priceEl.textContent = formatVnd(getUnitPrice(item, currentSize));
+            leftGroup.appendChild(priceEl);
+
+            if (item.hasSize && !item.soldOut) {
+              var sizeSwitch = document.createElement("div");
+              sizeSwitch.className = "size-switch";
+              sizeSwitch.setAttribute("role", "group");
+              sizeSwitch.setAttribute("aria-label", "Chọn size cho " + item.name);
+
+              var btnM = document.createElement("button");
+              btnM.type = "button";
+              btnM.className = "size-btn" + (currentSize === "M" ? " is-selected" : "");
+              btnM.textContent = "M";
+              btnM.setAttribute("aria-pressed", currentSize === "M" ? "true" : "false");
+              btnM.addEventListener("click", function () {
+                selectedSizeByItem[item.id] = "M";
+                renderMenu();
+              });
+
+              var btnL = document.createElement("button");
+              btnL.type = "button";
+              btnL.className = "size-btn" + (currentSize === "L" ? " is-selected" : "");
+              btnL.textContent = "L +5k";
+              btnL.title = "Size L (+5.000đ)";
+              btnL.setAttribute("aria-pressed", currentSize === "L" ? "true" : "false");
+              btnL.addEventListener("click", function () {
+                selectedSizeByItem[item.id] = "L";
+                renderMenu();
+              });
+
+              sizeSwitch.appendChild(btnM);
+              sizeSwitch.appendChild(btnL);
+              leftGroup.appendChild(sizeSwitch);
+            }
+
+            controls.appendChild(leftGroup);
+
+            if (item.soldOut) {
+              var soldNote = document.createElement("span");
+              soldNote.className = "soldout-note";
+              soldNote.textContent = "Tạm hết";
+              controls.appendChild(soldNote);
+            } else {
+              var stepper = document.createElement("div");
+              stepper.className = "stepper" + (currentQty > 0 ? " has-qty" : "");
+
+              var minusBtn = document.createElement("button");
+              minusBtn.type = "button";
+              minusBtn.className = "step-btn";
+              minusBtn.textContent = "−";
+              minusBtn.disabled = currentQty === 0;
+              minusBtn.setAttribute("aria-label", "Giảm số lượng " + item.name);
+              minusBtn.addEventListener("click", function () {
+                updateQty(item.id, currentSize, -1);
+              });
+
+              var qtySpan = document.createElement("span");
+              qtySpan.className = "step-qty";
+              qtySpan.textContent = String(currentQty);
+
+              var plusBtn = document.createElement("button");
+              plusBtn.type = "button";
+              plusBtn.className = "step-btn step-plus";
+              plusBtn.textContent = "+";
+              plusBtn.setAttribute("aria-label", "Thêm " + item.name + (item.hasSize ? " size " + currentSize : ""));
+              plusBtn.addEventListener("click", function () {
+                updateQty(item.id, currentSize, 1);
+              });
+
+              stepper.appendChild(minusBtn);
+              stepper.appendChild(qtySpan);
+              stepper.appendChild(plusBtn);
+              controls.appendChild(stepper);
+            }
+
+            body.appendChild(controls);
+
+            if (!item.soldOut && otherQty > 0) {
+              var hint = document.createElement("div");
+              hint.className = "other-size-hint";
+              hint.textContent = "Trong giỏ đã có size " + otherSize + " × " + otherQty;
+              body.appendChild(hint);
+            }
+
+            card.appendChild(body);
+            list.appendChild(card);
+          });
+
+          section.appendChild(list);
+          menuContainerEl.appendChild(section);
+        });
+
+        if (totalMatched === 0) {
+          var empty = document.createElement("div");
+          empty.className = "empty-state";
+          var msg = document.createElement("p");
+          msg.textContent = 'Không tìm thấy món nào khớp với "' + searchQuery + '".';
+          var resetBtn = document.createElement("button");
+          resetBtn.type = "button";
+          resetBtn.className = "empty-reset";
+          resetBtn.textContent = "Xem lại toàn bộ thực đơn";
+          resetBtn.addEventListener("click", function () {
+            searchQuery = "";
+            searchInputEl.value = "";
+            searchClearEl.classList.remove("is-visible");
+            renderMenu();
+          });
+          empty.appendChild(msg);
+          empty.appendChild(resetBtn);
+          menuContainerEl.appendChild(empty);
+        }
+      }
+
+      function updateCartUI() {
+        var summary = getCartSummary();
+        cartBarCountEl.textContent = String(summary.totalQty);
+        cartBarTotalEl.textContent = formatVnd(summary.totalPrice);
+        cartBarBtnEl.classList.toggle("has-items", summary.totalQty > 0);
+
+        if (summary.totalQty > 0) {
+          cartBarLabelEl.textContent = summary.totalQty + " món đã chọn";
+          cartBarCtaEl.textContent = "Xem đơn ›";
+        } else {
+          cartBarLabelEl.textContent = "Chưa chọn món";
+          cartBarCtaEl.textContent = "Xem đơn";
+        }
+
+        sheetSummaryLabelEl.textContent = "Tổng cộng (" + summary.totalQty + " món)";
+        sheetSummaryTotalEl.textContent = formatVnd(summary.totalPrice);
+        submitOrderBtnEl.disabled = summary.totalQty === 0;
+      }
+
+      function renderSheetCart() {
+        var summary = getCartSummary();
+        sheetCartContentEl.innerHTML = "";
+
+        if (summary.entries.length === 0) {
+          var emptyDiv = document.createElement("div");
+          emptyDiv.className = "cart-empty";
+          emptyDiv.textContent = "Giỏ hàng đang trống. Bạn chọn món bằng nút + ở thực đơn nhé.";
+          sheetCartContentEl.appendChild(emptyDiv);
+          return;
+        }
+
+        var list = document.createElement("div");
+        list.className = "cart-items";
+
+        summary.entries.forEach(function (entry) {
+          var row = document.createElement("div");
+          row.className = "cart-row";
+
+          var info = document.createElement("div");
+          info.className = "cart-row-info";
+
+          var name = document.createElement("div");
+          name.className = "cart-row-name";
+          name.textContent = entry.item.name;
+
+          var meta = document.createElement("div");
+          meta.className = "cart-row-meta";
+          var sizeLabel = entry.item.hasSize ? "Size " + entry.size + " · " : "";
+          meta.textContent = sizeLabel + formatVnd(entry.unitPrice);
+
+          info.appendChild(name);
+          info.appendChild(meta);
+
+          var right = document.createElement("div");
+          right.className = "cart-row-right";
+
+          var subtotal = document.createElement("div");
+          subtotal.className = "cart-row-subtotal";
+          subtotal.textContent = formatVnd(entry.lineTotal);
+
+          var stepper = document.createElement("div");
+          stepper.className = "stepper has-qty";
+
+          var minusBtn = document.createElement("button");
+          minusBtn.type = "button";
+          minusBtn.className = "step-btn";
+          minusBtn.textContent = "−";
+          minusBtn.setAttribute("aria-label", "Giảm " + entry.item.name);
+          minusBtn.addEventListener("click", function () {
+            updateQty(entry.item.id, entry.size, -1);
+          });
+
+          var qtySpan = document.createElement("span");
+          qtySpan.className = "step-qty";
+          qtySpan.textContent = String(entry.qty);
+
+          var plusBtn = document.createElement("button");
+          plusBtn.type = "button";
+          plusBtn.className = "step-btn step-plus";
+          plusBtn.textContent = "+";
+          plusBtn.setAttribute("aria-label", "Tăng " + entry.item.name);
+          plusBtn.addEventListener("click", function () {
+            updateQty(entry.item.id, entry.size, 1);
+          });
+
+          stepper.appendChild(minusBtn);
+          stepper.appendChild(qtySpan);
+          stepper.appendChild(plusBtn);
+
+          right.appendChild(subtotal);
+          right.appendChild(stepper);
+
+          row.appendChild(info);
+          row.appendChild(right);
+          list.appendChild(row);
+        });
+
+        sheetCartContentEl.appendChild(list);
+
+        var clearWrap = document.createElement("div");
+        clearWrap.className = "clear-cart-wrap";
+        var clearBtn = document.createElement("button");
+        clearBtn.type = "button";
+        clearBtn.className = "clear-cart-btn";
+        clearBtn.textContent = "Xóa tất cả món";
+        clearBtn.addEventListener("click", function () {
+          cart = {};
+          hideDemoAlert();
+          renderMenu();
+          updateCartUI();
+          renderSheetCart();
+        });
+        clearWrap.appendChild(clearBtn);
+        sheetCartContentEl.appendChild(clearWrap);
+      }
+
+      function hideDemoAlert() {
+        demoAlertEl.classList.remove("is-visible");
+        demoAlertDetailEl.textContent = "";
+      }
+
+      function openSheet() {
+        hideDemoAlert();
+        renderSheetCart();
+        updateCartUI();
+        sheetBackdropEl.classList.add("is-open");
+        sheetBackdropEl.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        sheetCloseBtnEl.focus();
+      }
+
+      function closeSheet() {
+        sheetBackdropEl.classList.remove("is-open");
+        sheetBackdropEl.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        cartBarBtnEl.focus();
+      }
+
+      // Events
+      searchInputEl.addEventListener("input", function () {
+        searchQuery = searchInputEl.value;
+        searchClearEl.classList.toggle("is-visible", searchQuery.length > 0);
+        renderMenu();
+      });
+
+      searchClearEl.addEventListener("click", function () {
+        searchQuery = "";
+        searchInputEl.value = "";
+        searchClearEl.classList.remove("is-visible");
+        renderMenu();
+        searchInputEl.focus();
+      });
+
+      cartBarBtnEl.addEventListener("click", openSheet);
+      sheetCloseBtnEl.addEventListener("click", closeSheet);
+
+      sheetBackdropEl.addEventListener("click", function (e) {
+        if (e.target === sheetBackdropEl) {
+          closeSheet();
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && sheetBackdropEl.classList.contains("is-open")) {
+          closeSheet();
+        }
+      });
+
+      submitOrderBtnEl.addEventListener("click", function () {
+        var summary = getCartSummary();
+        if (summary.totalQty === 0) return;
+        var tableVal = tableNumberEl.value.trim();
+        var noteVal = orderNoteEl.value.trim();
+        var parts = [summary.totalQty + " món · " + formatVnd(summary.totalPrice)];
+        if (tableVal) parts.push("Bàn: " + tableVal);
+        if (noteVal) parts.push("Ghi chú: " + noteVal);
+        demoAlertDetailEl.textContent = parts.join(" | ");
+        demoAlertEl.classList.add("is-visible");
+        demoAlertEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+
+      // Scrollspy for active category pill
+      var scrollTicking = false;
+      window.addEventListener("scroll", function () {
+        if (scrollTicking || searchQuery) return;
+        scrollTicking = true;
+        window.requestAnimationFrame(function () {
+          var sections = menuContainerEl.querySelectorAll(".menu-section");
+          var offset = 135;
+          var current = activeCategoryId;
+          sections.forEach(function (sec) {
+            var rect = sec.getBoundingClientRect();
+            if (rect.top <= offset) {
+              current = sec.dataset.catId;
+            }
+          });
+          if (current !== activeCategoryId) {
+            activeCategoryId = current;
+            updateActiveCatPill();
+          }
+          scrollTicking = false;
+        });
+      }, { passive: true });
+
+      // Theme toggle (honors system dark mode initially, allows manual switch)
+      function isDarkActive() {
+        var attr = document.documentElement.getAttribute("data-theme");
+        if (attr === "dark") return true;
+        if (attr === "light") return false;
+        return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      }
+
+      function syncThemeIcon() {
+        if (isDarkActive()) {
+          themeIconEl.innerHTML =
+            '<circle cx="12" cy="12" r="4.5"/>' +
+            '<path d="M12 2.5v2.2M12 19.3v2.2M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/>';
+        } else {
+          themeIconEl.innerHTML =
+            '<path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"/>';
+        }
+      }
+
+      themeToggleEl.addEventListener("click", function () {
+        var next = isDarkActive() ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", next);
+        syncThemeIcon();
+      });
+
+      if (window.matchMedia) {
+        var mq = window.matchMedia("(prefers-color-scheme: dark)");
+        if (mq.addEventListener) {
+          mq.addEventListener("change", syncThemeIcon);
+        }
+      }
+
+      // Init
+      syncThemeIcon();
+      renderCatNav();
+      renderMenu();
+      updateCartUI();
+    })();
+  </script>
+</body>
+</html>
