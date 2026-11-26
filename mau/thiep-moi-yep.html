@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <title>Thiệp mời Tiệc tất niên 2026 — Công ty TNHH Mộc An</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #0b0a08;
+      --bg-radial: #1a150c;
+      --surface: #14120e;
+      --surface-elevated: #1c1811;
+      --surface-input: #0f0d0a;
+      --ink: #f4eee1;
+      --ink-muted: #c2b69d;
+      --ink-subtle: #8f846d;
+      --gold: #d4af37;
+      --gold-bright: #f2d98d;
+      --gold-deep: #9c7a1f;
+      --gold-tint: rgba(212, 175, 55, 0.12);
+      --border: rgba(212, 175, 55, 0.28);
+      --border-strong: rgba(212, 175, 55, 0.56);
+      --danger: #f08a7e;
+      --success-bg: rgba(212, 175, 55, 0.14);
+      --shadow-card: 0 18px 42px rgba(0, 0, 0, 0.55);
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --font-sans: "Be Vietnam Pro", system-ui, -apple-system, sans-serif;
+      --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-base: #0a0907;
+        --bg-radial: #18130b;
+        --surface: #13110d;
+        --surface-elevated: #1b1710;
+        --surface-input: #0e0c09;
+        --ink: #f5efe3;
+        --ink-muted: #c5b9a0;
+      }
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-base);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--ink);
+      background-color: var(--bg-base);
+      background-image:
+        radial-gradient(ellipse 80% 45% at 50% 0%, var(--bg-radial), transparent 72%),
+        repeating-linear-gradient(
+          90deg,
+          transparent 0,
+          transparent 47px,
+          rgba(212, 175, 55, 0.025) 47px,
+          rgba(212, 175, 55, 0.025) 48px
+        );
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: var(--gold-bright);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--gold-bright);
+      outline-offset: 3px;
+    }
+
+    .page-wrap {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 20px 16px 48px;
+    }
+
+    /* Khung Art Deco chung cho các phần */
+    .deco-card {
+      position: relative;
+      background: linear-gradient(180deg, var(--surface-elevated), var(--surface));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px 20px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .deco-card::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border: 1px solid rgba(212, 175, 55, 0.16);
+      border-radius: calc(var(--radius-md) - 4px);
+      pointer-events: none;
+    }
+
+    /* Bìa thiệp */
+    .hero {
+      padding: 40px 20px 34px;
+      text-align: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(212, 175, 55, 0.15), transparent 62%),
+        linear-gradient(180deg, #1b160e 0%, #110f0b 100%);
+      border-color: var(--border-strong);
+    }
+
+    .hero-sunburst {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px;
+      height: 140px;
+      opacity: 0.28;
+      pointer-events: none;
+    }
+
+    .corner {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      pointer-events: none;
+      color: var(--gold);
+    }
+
+    .corner-tl { top: 12px; left: 12px; }
+    .corner-tr { top: 12px; right: 12px; transform: scaleX(-1); }
+    .corner-bl { bottom: 12px; left: 12px; transform: scaleY(-1); }
+    .corner-br { bottom: 12px; right: 12px; transform: scale(-1, -1); }
+
+    .eyebrow {
+      position: relative;
+      display: inline-block;
+      margin: 0 0 12px;
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+    }
+
+    .company-name {
+      position: relative;
+      margin: 0 0 6px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+    }
+
+    .hero-title {
+      position: relative;
+      margin: 10px 0 8px;
+      font-family: var(--font-serif);
+      font-size: clamp(2.15rem, 8.5vw, 3.25rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      color: var(--gold-bright);
+      background: linear-gradient(180deg, #fff1c2 0%, #e0ba56 52%, #b68a25 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      position: relative;
+      margin: 0 0 18px;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1.05rem, 3.6vw, 1.25rem);
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 18px auto;
+      max-width: 260px;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .divider-diamond {
+      width: 7px;
+      height: 7px;
+      background: var(--gold-bright);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .hero-meta {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 22px auto 20px;
+      padding: 16px;
+      max-width: 520px;
+      background: rgba(11, 10, 8, 0.58);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .meta-value {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .hero-note {
+      position: relative;
+      max-width: 520px;
+      margin: 0 auto 24px;
+      color: var(--ink-muted);
+      font-size: 14.5px;
+    }
+
+    .btn-row {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      border: 1px solid var(--gold-bright);
+      background: linear-gradient(135deg, #e5c260 0%, #c4972a 100%);
+      color: #141008;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #f2d98d 0%, #d4af37 100%);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border-strong);
+      background: rgba(212, 175, 55, 0.06);
+      color: var(--gold-bright);
+    }
+
+    .btn-outline:hover {
+      background: var(--gold-tint);
+      border-color: var(--gold-bright);
+    }
+
+    .inline-status {
+      margin: 12px 0 0;
+      min-height: 20px;
+      font-size: 13px;
+      color: var(--gold-bright);
+      text-align: center;
+    }
+
+    /* Tiêu đề từng mục */
+    .section-head {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .section-kicker {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: clamp(1.4rem, 5vw, 1.75rem);
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .section-desc {
+      margin: 8px auto 0;
+      max-width: 540px;
+      font-size: 14px;
+      color: var(--ink-muted);
+    }
+
+    /* Đồng hồ đếm ngược */
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .countdown-box {
+      padding: 14px 6px;
+      text-align: center;
+      background: rgba(11, 10, 8, 0.6);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+
+    .countdown-num {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 6vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--gold-bright);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .countdown-unit {
+      display: block;
+      margin-top: 6px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    .countdown-msg {
+      margin: 14px 0 0;
+      text-align: center;
+      font-size: 14px;
+      color: var(--gold-bright);
+    }
+
+    /* Lịch trình buổi tối */
+    .schedule-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    .schedule-list::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      bottom: 10px;
+      left: 68px;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, var(--border-strong) 12%, var(--border-strong) 88%, transparent);
+    }
+
+    .schedule-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 24px;
+      padding: 12px 0;
+    }
+
+    .schedule-item::after {
+      content: "";
+      position: absolute;
+      top: 19px;
+      left: 64px;
+      width: 9px;
+      height: 9px;
+      background: var(--gold-bright);
+      border: 2px solid var(--surface);
+      transform: rotate(45deg);
+    }
+
+    .schedule-time {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold-bright);
+      padding-top: 1px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .schedule-content h3 {
+      margin: 0 0 3px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .schedule-content p {
+      margin: 0;
+      font-size: 13.5px;
+      color: var(--ink-muted);
+    }
+
+    /* Trang phục */
+    .swatch-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0 auto 18px;
+      max-width: 460px;
+    }
+
+    .swatch {
+      padding: 12px 8px;
+      text-align: center;
+      background: rgba(11, 10, 8, 0.5);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+
+    .swatch-dot {
+      width: 38px;
+      height: 38px;
+      margin: 0 auto 8px;
+      border-radius: 50%;
+      border: 1px solid var(--border-strong);
+    }
+
+    .dot-black {
+      background: radial-gradient(circle at 30% 30%, #2d2b28, #080706 70%);
+    }
+
+    .dot-gold {
+      background: linear-gradient(135deg, #f8e4a1 0%, #d4af37 52%, #8e6b16 100%);
+    }
+
+    .dot-champagne {
+      background: linear-gradient(135deg, #f6ead0 0%, #d7c08e 100%);
+    }
+
+    .swatch-name {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .attire-tips {
+      margin: 0;
+      padding: 14px 16px;
+      background: rgba(212, 175, 55, 0.06);
+      border-left: 2px solid var(--gold);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 14px;
+      color: var(--ink-muted);
+    }
+
+    /* Địa điểm */
+    .venue-box {
+      padding: 16px;
+      background: rgba(11, 10, 8, 0.55);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      text-align: center;
+    }
+
+    .venue-name {
+      margin: 0 0 4px;
+      font-family: var(--font-serif);
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--gold-bright);
+    }
+
+    .venue-addr {
+      margin: 0 0 12px;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .venue-note {
+      margin: 0 0 18px;
+      font-size: 13.5px;
+      color: var(--ink-muted);
+    }
+
+    /* Form xác nhận */
+    .rsvp-form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field-label {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .required-mark {
+      color: var(--gold-bright);
+      margin-left: 2px;
+    }
+
+    .input,
+    .select,
+    .textarea {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background-color: var(--surface-input);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 14.5px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .select {
+      appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%),
+        linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+      background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      padding-right: 36px;
+    }
+
+    .textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+
+    .input::placeholder,
+    .textarea::placeholder {
+      color: var(--ink-subtle);
+    }
+
+    .input:focus,
+    .select:focus,
+    .textarea:focus {
+      outline: none;
+      border-color: var(--gold-bright);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.16);
+    }
+
+    .input[aria-invalid="true"],
+    .select[aria-invalid="true"] {
+      border-color: var(--danger);
+    }
+
+    .fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .fieldset legend {
+      padding: 0;
+      margin-bottom: 8px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .choice-grid-three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .choice-option {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 12px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--ink-muted);
+      background: var(--surface-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .choice-option input {
+      position: absolute;
+      opacity: 0;
+      inset: 0;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .choice-option:has(input:checked) {
+      border-color: var(--gold-bright);
+      background: var(--gold-tint);
+      color: var(--gold-bright);
+      font-weight: 500;
+    }
+
+    .choice-option:has(input:focus-visible) {
+      outline: 2px solid var(--gold-bright);
+      outline-offset: 2px;
+    }
+
+    .is-muted {
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .field-error {
+      margin: 2px 0 0;
+      min-height: 18px;
+      font-size: 12.5px;
+      color: var(--danger);
+    }
+
+    .form-result {
+      margin-top: 16px;
+      padding: 16px;
+      border: 1px solid var(--gold-bright);
+      border-radius: var(--radius-sm);
+      background: var(--success-bg);
+    }
+
+    .form-result[hidden] {
+      display: none;
+    }
+
+    .form-result-title {
+      margin: 0 0 6px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gold-bright);
+    }
+
+    .form-result-summary {
+      margin: 0;
+      font-size: 13.5px;
+      color: var(--ink);
+    }
+
+    /* Chân trang */
+    .footer {
+      text-align: center;
+      padding: 12px 8px 0;
+      color: var(--ink-muted);
+      font-size: 13px;
+    }
+
+    .footer p {
+      margin: 6px 0;
+    }
+
+    .footer-disclaimer {
+      font-size: 12px;
+      color: var(--ink-subtle);
+    }
+
+    @media (min-width: 560px) {
+      .page-wrap {
+        padding: 32px 16px 64px;
+      }
+
+      .deco-card {
+        padding: 34px 32px;
+      }
+
+      .hero {
+        padding: 50px 36px 42px;
+      }
+
+      .hero-meta {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .btn {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-wrap">
+    <!-- Bìa thiệp -->
+    <header class="deco-card hero">
+      <svg class="hero-sunburst" viewBox="0 0 320 140" fill="none" aria-hidden="true">
+        <path d="M160 138L160 8M160 138L116 14M160 138L204 14M160 138L74 32M160 138L246 32M160 138L38 62M160 138L282 62M160 138L14 100M160 138L306 100" stroke="#d4af37" stroke-width="1"/>
+        <path d="M96 138A64 64 0 0 1 224 138" stroke="#d4af37" stroke-width="1"/>
+        <path d="M52 138A108 108 0 0 1 268 138" stroke="#d4af37" stroke-width="0.8" stroke-dasharray="3 4"/>
+      </svg>
+
+      <svg class="corner corner-tl" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M1 23V1H23M6 23V6H23" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+      <svg class="corner corner-tr" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M1 23V1H23M6 23V6H23" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+      <svg class="corner corner-bl" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M1 23V1H23M6 23V6H23" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+      <svg class="corner corner-br" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M1 23V1H23M6 23V6H23" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+
+      <p class="eyebrow">Thiệp mời Tiệc tất niên · Year End Party 2026</p>
+      <p class="company-name">Công ty TNHH Mộc An trân trọng kính mời</p>
+      <h1 class="hero-title">Đêm Gatsby</h1>
+      <p class="hero-subtitle">Một buổi tối ấm cúng để cùng nhìn lại năm 2026</p>
+
+      <div class="divider" aria-hidden="true">
+        <span class="divider-line"></span>
+        <span class="divider-diamond"></span>
+        <span class="divider-line"></span>
+      </div>
+
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Thời gian</span>
+          <span class="meta-value">18:00 · Thứ Bảy, 19/12/2026</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Địa điểm</span>
+          <span class="meta-value">Nhà hàng Sen Hồ Tây, Hà Nội</span>
+        </div>
+      </div>
+
+      <p class="hero-note">
+        Cảm ơn anh chị và các bạn đã đồng hành suốt một năm nhiều nỗ lực.
+        Phòng Hành chính – Nhân sự thân mời toàn thể thành viên cùng người thân
+        tới chung vui bữa tiệc cuối năm.
+      </p>
+
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#xac-nhan">Xác nhận tham dự</a>
+        <button type="button" class="btn btn-outline" id="btn-add-calendar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M8 3v4M16 3v4M3 10h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          Thêm vào lịch
+        </button>
+      </div>
+      <p class="inline-status" id="calendar-status" role="status" aria-live="polite"></p>
+    </header>
+
+    <!-- Đồng hồ đếm ngược -->
+    <section class="deco-card" aria-labelledby="heading-countdown">
+      <div class="section-head">
+        <span class="section-kicker">Hẹn gặp cuối năm</span>
+        <h2 class="section-title" id="heading-countdown">Đếm ngược tới giờ khai tiệc</h2>
+        <p class="section-desc">Tính theo giờ Việt Nam — 18:00 ngày 19/12/2026.</p>
+      </div>
+
+      <div class="countdown-grid" id="countdown-grid" aria-label="Đồng hồ đếm ngược">
+        <div class="countdown-box">
+          <span class="countdown-num" id="cd-days">00</span>
+          <span class="countdown-unit">Ngày</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-num" id="cd-hours">00</span>
+          <span class="countdown-unit">Giờ</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-num" id="cd-mins">00</span>
+          <span class="countdown-unit">Phút</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-num" id="cd-secs">00</span>
+          <span class="countdown-unit">Giây</span>
+        </div>
+      </div>
+      <p class="countdown-msg" id="countdown-msg" aria-live="polite"></p>
+    </section>
+
+    <!-- Lịch trình buổi tối -->
+    <section class="deco-card" aria-labelledby="heading-schedule">
+      <div class="section-head">
+        <span class="section-kicker">Chương trình</span>
+        <h2 class="section-title" id="heading-schedule">Lịch trình buổi tối</h2>
+        <p class="section-desc">Mong anh chị tới đúng giờ để kịp chụp ảnh tập thể trước khi khai tiệc.</p>
+      </div>
+
+      <ol class="schedule-list">
+        <li class="schedule-item">
+          <span class="schedule-time">18:00</span>
+          <div class="schedule-content">
+            <h3>Đón khách và chụp ảnh kỷ niệm</h3>
+            <p>Nhận số thứ tự bốc thăm tại bàn đón tiếp, thưởng thức đồ uống chào mừng.</p>
+          </div>
+        </li>
+        <li class="schedule-item">
+          <span class="schedule-time">18:30</span>
+          <div class="schedule-content">
+            <h3>Nhìn lại năm 2026 và khai tiệc</h3>
+            <p>Chia sẻ ngắn từ Ban Giám đốc, chiếu đoạn phim kỷ niệm và nâng ly khai tiệc.</p>
+          </div>
+        </li>
+        <li class="schedule-item">
+          <span class="schedule-time">19:15</span>
+          <div class="schedule-content">
+            <h3>Dùng tiệc tối và giao lưu văn nghệ</h3>
+            <p>Thực đơn mùa đông ấm cúng cùng các tiết mục tự biên của các phòng ban.</p>
+          </div>
+        </li>
+        <li class="schedule-item">
+          <span class="schedule-time">20:30</span>
+          <div class="schedule-content">
+            <h3>Tri ân gắn bó và bốc thăm may mắn</h3>
+            <p>Vinh danh cá nhân nổi bật trong năm và quay số trao các phần quà cuối năm.</p>
+          </div>
+        </li>
+        <li class="schedule-item">
+          <span class="schedule-time">21:30</span>
+          <div class="schedule-content">
+            <h3>Âm nhạc, trò chuyện và khép lại</h3>
+            <p>Nhạc nhẹ thập niên 20, chụp ảnh nhóm và kết thúc chương trình lúc 22:00.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Trang phục -->
+    <section class="deco-card" aria-labelledby="heading-attire">
+      <div class="section-head">
+        <span class="section-kicker">Chủ đề Đêm Gatsby</span>
+        <h2 class="section-title" id="heading-attire">Gợi ý trang phục</h2>
+        <p class="section-desc">Bảng màu chủ đạo là đen tuyền và vàng ánh kim để ảnh chụp tập thể hài hòa.</p>
+      </div>
+
+      <div class="swatch-row" aria-label="Bảng màu trang phục gợi ý">
+        <div class="swatch">
+          <span class="swatch-dot dot-black" aria-hidden="true"></span>
+          <span class="swatch-name">Đen tuyền</span>
+        </div>
+        <div class="swatch">
+          <span class="swatch-dot dot-gold" aria-hidden="true"></span>
+          <span class="swatch-name">Vàng ánh kim</span>
+        </div>
+        <div class="swatch">
+          <span class="swatch-dot dot-champagne" aria-hidden="true"></span>
+          <span class="swatch-name">Vàng kem nhẹ</span>
+        </div>
+      </div>
+
+      <p class="attire-tips">
+        Không bắt buộc cầu kỳ: nam có thể mặc áo sơ mi tối màu, áo khoác vest kèm cà vạt hoặc nơ;
+        nữ chọn váy đen, váy ánh vàng hoặc điểm xuyết phụ kiện ánh kim.
+        Buổi tối tháng 12 ở Hà Nội khá lạnh, anh chị nhớ mang thêm áo khoác ngoài.
+      </p>
+    </section>
+
+    <!-- Địa điểm & bản đồ -->
+    <section class="deco-card" aria-labelledby="heading-venue">
+      <div class="section-head">
+        <span class="section-kicker">Chỉ đường</span>
+        <h2 class="section-title" id="heading-venue">Địa điểm tổ chức</h2>
+      </div>
+
+      <div class="venue-box">
+        <h3 class="venue-name">Nhà hàng Sen Hồ Tây</h3>
+        <p class="venue-addr">Tầng 2, Sảnh Hoàng Kim · Đường ven hồ Tây, quận Tây Hồ, Hà Nội</p>
+        <p class="venue-note">
+          Nhà hàng có bãi gửi xe máy và ô tô miễn phí ngay trước sảnh.
+          Nếu có dùng đồ uống có cồn, anh chị vui lòng đặt xe công nghệ cho an toàn.
+        </p>
+        <div class="btn-row">
+          <a href="#" class="btn btn-outline" id="btn-google-maps">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 21s7-6.2 7-11.5A7 7 0 1 0 5 9.5C5 14.8 12 21 12 21Z" stroke="currentColor" stroke-width="1.8"/>
+              <circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+            Mở Google Maps
+          </a>
+        </div>
+        <p class="inline-status" id="map-status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- Form xác nhận tham dự -->
+    <section class="deco-card" id="xac-nhan" aria-labelledby="heading-rsvp">
+      <div class="section-head">
+        <span class="section-kicker">Phản hồi trước ngày 12/12/2026</span>
+        <h2 class="section-title" id="heading-rsvp">Xác nhận tham dự</h2>
+        <p class="section-desc">
+          Anh chị điền giúp thông tin bên dưới để Phòng Hành chính – Nhân sự sắp xếp bàn tiệc và suất ăn chu đáo.
+        </p>
+      </div>
+
+      <form class="rsvp-form" id="rsvp-form" novalidate>
+        <div class="field">
+          <label class="field-label" for="ho-ten">
+            Họ và tên <span class="required-mark" aria-hidden="true">*</span>
+          </label>
+          <input
+            class="input"
+            type="text"
+            id="ho-ten"
+            name="ho_ten"
+            autocomplete="name"
+            placeholder="Ví dụ: Nguyễn Minh Anh"
+            required
+          >
+          <p class="field-error" id="err-ho-ten" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="phong-ban">
+            Phòng ban <span class="required-mark" aria-hidden="true">*</span>
+          </label>
+          <select class="select" id="phong-ban" name="phong_ban" required>
+            <option value="">Chọn phòng ban</option>
+            <option value="Ban Giám đốc">Ban Giám đốc</option>
+            <option value="Phòng Kinh doanh">Phòng Kinh doanh</option>
+            <option value="Phòng Kỹ thuật">Phòng Kỹ thuật</option>
+            <option value="Phòng Sản phẩm">Phòng Sản phẩm</option>
+            <option value="Phòng Tiếp thị">Phòng Tiếp thị</option>
+            <option value="Phòng Tài chính – Kế toán">Phòng Tài chính – Kế toán</option>
+            <option value="Phòng Hành chính – Nhân sự">Phòng Hành chính – Nhân sự</option>
+          </select>
+          <p class="field-error" id="err-phong-ban" role="alert"></p>
+        </div>
+
+        <fieldset class="fieldset">
+          <legend>Khả năng tham dự <span class="required-mark" aria-hidden="true">*</span></legend>
+          <div class="choice-grid">
+            <label class="choice-option">
+              <input type="radio" name="tham_du" value="co" checked>
+              <span>Có, tôi sẽ tham dự</span>
+            </label>
+            <label class="choice-option">
+              <input type="radio" name="tham_du" value="khong">
+              <span>Rất tiếc, tôi bận</span>
+            </label>
+          </div>
+          <p class="field-error" id="err-tham-du" role="alert"></p>
+        </fieldset>
+
+        <div id="attend-details" class="rsvp-form">
+          <fieldset class="fieldset">
+            <legend>Đi kèm người thân (tối đa 2 người)</legend>
+            <div class="choice-grid choice-grid-three">
+              <label class="choice-option">
+                <input type="radio" name="nguoi_than" value="0" checked>
+                <span>0 người</span>
+              </label>
+              <label class="choice-option">
+                <input type="radio" name="nguoi_than" value="1">
+                <span>1 người</span>
+              </label>
+              <label class="choice-option">
+                <input type="radio" name="nguoi_than" value="2">
+                <span>2 người</span>
+              </label>
+            </div>
+            <p class="field-error" id="err-nguoi-than" role="alert"></p>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend>Nhu cầu món chay</legend>
+            <div class="choice-grid">
+              <label class="choice-option">
+                <input type="radio" name="mon_chay" value="khong" checked>
+                <span>Không</span>
+              </label>
+              <label class="choice-option">
+                <input type="radio" name="mon_chay" value="co">
+                <span>Có, cần suất chay</span>
+              </label>
+            </div>
+            <p class="field-error" id="err-mon-chay" role="alert"></p>
+          </fieldset>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="loi-nhan">Lời nhắn cho ban tổ chức</label>
+          <textarea
+            class="textarea"
+            id="loi-nhan"
+            name="loi_nhan"
+            rows="3"
+            placeholder="Ghi chú dị ứng món ăn, trẻ nhỏ đi cùng hoặc lời nhắn gửi đồng nghiệp..."
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Gửi xác nhận</button>
+      </form>
+
+      <div class="form-result" id="form-result" role="status" aria-live="polite" hidden>
+        <p class="form-result-title">Đây là bản demo, phản hồi chưa được gửi đi</p>
+        <p class="form-result-summary" id="form-result-summary"></p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Phòng Hành chính – Nhân sự · Công ty TNHH Mộc An</p>
+      <p class="footer-disclaimer">Trang mẫu minh họa. Công ty và địa điểm là giả định.</p>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      /* 1. Đồng hồ đếm ngược theo giờ Việt Nam (UTC+7) */
+      var EVENT_START = new Date("2026-12-19T18:00:00+07:00").getTime();
+      var EVENT_END = new Date("2026-12-19T22:00:00+07:00").getTime();
+
+      var elDays = document.getElementById("cd-days");
+      var elHours = document.getElementById("cd-hours");
+      var elMins = document.getElementById("cd-mins");
+      var elSecs = document.getElementById("cd-secs");
+      var elCountdownMsg = document.getElementById("countdown-msg");
+      var timerId = null;
+
+      function pad2(num) {
+        return num < 10 ? "0" + num : String(num);
+      }
+
+      function updateCountdown() {
+        var now = Date.now();
+        var diff = EVENT_START - now;
+
+        if (diff > 0) {
+          var days = Math.floor(diff / 86400000);
+          var hours = Math.floor((diff % 86400000) / 3600000);
+          var mins = Math.floor((diff % 3600000) / 60000);
+          var secs = Math.floor((diff % 60000) / 1000);
+
+          elDays.textContent = pad2(days);
+          elHours.textContent = pad2(hours);
+          elMins.textContent = pad2(mins);
+          elSecs.textContent = pad2(secs);
+          elCountdownMsg.textContent = "";
+          return;
+        }
+
+        elDays.textContent = "00";
+        elHours.textContent = "00";
+        elMins.textContent = "00";
+        elSecs.textContent = "00";
+
+        if (now < EVENT_END) {
+          elCountdownMsg.textContent = "Buổi tiệc đang diễn ra. Hẹn gặp bạn tại Nhà hàng Sen Hồ Tây.";
+        } else {
+          elCountdownMsg.textContent = "Tiệc tất niên 2026 đã khép lại. Cảm ơn bạn đã đồng hành suốt một năm qua.";
+          if (timerId !== null) {
+            clearInterval(timerId);
+            timerId = null;
+          }
+        }
+      }
+
+      updateCountdown();
+      if (Date.now() < EVENT_END) {
+        timerId = setInterval(updateCountdown, 1000);
+      }
+
+      /* 2. Tải tệp lịch .ics bằng Blob */
+      var btnCalendar = document.getElementById("btn-add-calendar");
+      var elCalendarStatus = document.getElementById("calendar-status");
+
+      function formatUtcStamp(date) {
+        return (
+          date.getUTCFullYear() +
+          pad2(date.getUTCMonth() + 1) +
+          pad2(date.getUTCDate()) +
+          "T" +
+          pad2(date.getUTCHours()) +
+          pad2(date.getUTCMinutes()) +
+          pad2(date.getUTCSeconds()) +
+          "Z"
+        );
+      }
+
+      btnCalendar.addEventListener("click", function () {
+        var icsLines = [
+          "BEGIN:VCALENDAR",
+          "VERSION:2.0",
+          "PRODID:-//Cong ty TNHH Moc An//Tiec tat nien 2026//VI",
+          "CALSCALE:GREGORIAN",
+          "METHOD:PUBLISH",
+          "BEGIN:VEVENT",
+          "UID:yep-2026-moc-an@mau-thiep.invalid",
+          "DTSTAMP:" + formatUtcStamp(new Date()),
+          "DTSTART:20261219T110000Z",
+          "DTEND:20261219T150000Z",
+          "SUMMARY:Tiệc tất niên 2026 — Đêm Gatsby (Công ty TNHH Mộc An)",
+          "LOCATION:Nhà hàng Sen Hồ Tây, quận Tây Hồ, Hà Nội",
+          "DESCRIPTION:Tiệc tất niên Year End Party 2026 của Công ty TNHH Mộc An. Chủ đề: Đêm Gatsby (trang phục đen, vàng). Đón khách từ 18:00.",
+          "END:VEVENT",
+          "END:VCALENDAR"
+        ];
+
+        var blob = new Blob([icsLines.join("\r\n")], {
+          type: "text/calendar;charset=utf-8"
+        });
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement("a");
+        link.href = url;
+        link.download = "tiec-tat-nien-moc-an-2026.ics";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        setTimeout(function () {
+          URL.revokeObjectURL(url);
+        }, 1000);
+
+        elCalendarStatus.textContent = "Đã tạo tệp lịch (.ics) để thêm vào ứng dụng lịch của bạn.";
+      });
+
+      /* 3. Nút bản đồ minh họa */
+      var btnMaps = document.getElementById("btn-google-maps");
+      var elMapStatus = document.getElementById("map-status");
+
+      btnMaps.addEventListener("click", function (event) {
+        event.preventDefault();
+        elMapStatus.textContent = "Nút bản đồ chỉ mang tính minh họa vì địa điểm là giả định.";
+      });
+
+      /* 4. Form xác nhận tham dự */
+      var form = document.getElementById("rsvp-form");
+      var inputName = document.getElementById("ho-ten");
+      var selectDept = document.getElementById("phong-ban");
+      var inputNote = document.getElementById("loi-nhan");
+      var attendDetails = document.getElementById("attend-details");
+      var resultBox = document.getElementById("form-result");
+      var resultSummary = document.getElementById("form-result-summary");
+
+      var errName = document.getElementById("err-ho-ten");
+      var errDept = document.getElementById("err-phong-ban");
+      var errAttend = document.getElementById("err-tham-du");
+      var errGuests = document.getElementById("err-nguoi-than");
+      var errVeg = document.getElementById("err-mon-chay");
+
+      function getCheckedValue(name) {
+        var el = form.querySelector('input[name="' + name + '"]:checked');
+        return el ? el.value : "";
+      }
+
+      function syncAttendDetails() {
+        var isAttending = getCheckedValue("tham_du") === "co";
+        var inputs = attendDetails.querySelectorAll("input");
+        attendDetails.classList.toggle("is-muted", !isAttending);
+        for (var i = 0; i < inputs.length; i++) {
+          inputs[i].disabled = !isAttending;
+        }
+      }
+
+      var attendRadios = form.querySelectorAll('input[name="tham_du"]');
+      for (var r = 0; r < attendRadios.length; r++) {
+        attendRadios[r].addEventListener("change", syncAttendDetails);
+      }
+      syncAttendDetails();
+
+      function clearErrors() {
+        errName.textContent = "";
+        errDept.textContent = "";
+        errAttend.textContent = "";
+        errGuests.textContent = "";
+        errVeg.textContent = "";
+        inputName.removeAttribute("aria-invalid");
+        selectDept.removeAttribute("aria-invalid");
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        clearErrors();
+
+        var fullName = inputName.value.trim();
+        var dept = selectDept.value;
+        var attend = getCheckedValue("tham_du");
+        var guests = getCheckedValue("nguoi_than");
+        var veg = getCheckedValue("mon_chay");
+        var firstInvalid = null;
+
+        if (fullName.length < 2) {
+          errName.textContent = "Vui lòng nhập họ và tên (ít nhất 2 ký tự).";
+          inputName.setAttribute("aria-invalid", "true");
+          firstInvalid = firstInvalid || inputName;
+        }
+
+        if (!dept) {
+          errDept.textContent = "Vui lòng chọn phòng ban của bạn.";
+          selectDept.setAttribute("aria-invalid", "true");
+          firstInvalid = firstInvalid || selectDept;
+        }
+
+        if (attend !== "co" && attend !== "khong") {
+          errAttend.textContent = "Vui lòng chọn khả năng tham dự.";
+          firstInvalid = firstInvalid || attendRadios[0];
+        }
+
+        if (attend === "co") {
+          if (guests !== "0" && guests !== "1" && guests !== "2") {
+            errGuests.textContent = "Vui lòng chọn số người thân đi kèm (từ 0 đến 2).";
+            firstInvalid = firstInvalid || form.querySelector('input[name="nguoi_than"]');
+          }
+          if (veg !== "co" && veg !== "khong") {
+            errVeg.textContent = "Vui lòng chọn nhu cầu món chay.";
+            firstInvalid = firstInvalid || form.querySelector('input[name="mon_chay"]');
+          }
+        }
+
+        if (firstInvalid) {
+          resultBox.hidden = true;
+          firstInvalid.focus();
+          return;
+        }
+
+        var parts = [fullName + " (" + dept + ")"];
+        if (attend === "co") {
+          parts.push("tham dự");
+          parts.push(guests === "0" ? "không đi kèm người thân" : "đi kèm " + guests + " người thân");
+          parts.push(veg === "co" ? "có suất chay" : "không dùng món chay");
+        } else {
+          parts.push("báo bận không tham dự");
+        }
+        var noteText = inputNote.value.trim();
+        if (noteText) {
+          parts.push("lời nhắn: \"" + noteText + "\"");
+        }
+
+        resultSummary.textContent = "Thông tin vừa nhập: " + parts.join(" · ") + ".";
+        resultBox.hidden = false;
+        resultBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    })();
+  </script>
+</body>
+</html>
