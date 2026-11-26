@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Giỏ Quà Nhà Sen — Giỏ quà Tết Đinh Mùi 2027</title>
+  <meta name="description" content="Giỏ Quà Nhà Sen nhận gói giỏ quà Tết Đinh Mùi 2027 với trà, mứt và hạt đóng mẻ mới. Có gói lẻ và đơn công ty từ 10 giỏ.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf5ec;
+      --surface: #fffdf8;
+      --surface-soft: #f2e8d9;
+      --text: #241916;
+      --text-muted: #5c4e46;
+      --accent: #8b2025;
+      --accent-hover: #6e161a;
+      --accent-soft: #f5e3e3;
+      --gold: #a87b2e;
+      --gold-soft: #f3e8d0;
+      --border: #e3d5c0;
+      --on-accent: #fffaf2;
+      --ok-bg: #edf5ee;
+      --ok-text: #1f542a;
+      --ok-border: #bdd6c1;
+      --err-bg: #fbeceb;
+      --err-text: #8c1d18;
+      --err-border: #e5b8b5;
+      --shadow: 0 8px 24px rgba(46, 28, 19, 0.07);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --font-sans: "Be Vietnam Pro", system-ui, -apple-system, sans-serif;
+      --font-serif: "Lora", Georgia, serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #17110f;
+        --surface: #221916;
+        --surface-soft: #2c211d;
+        --text: #f4ece0;
+        --text-muted: #c2b3a3;
+        --accent: #b8373c;
+        --accent-hover: #cf464b;
+        --accent-soft: #3a2021;
+        --gold: #d6aa59;
+        --gold-soft: #33291b;
+        --border: #3a2d27;
+        --on-accent: #fffaf2;
+        --ok-bg: #1c2c20;
+        --ok-text: #a9d9b2;
+        --ok-border: #2e4a35;
+        --err-bg: #361c1b;
+        --err-text: #f3b0ac;
+        --err-border: #5c2e2c;
+        --shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+      }
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: clip;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      overflow-x: clip;
+      padding-bottom: 84px;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1040px;
+      margin-inline: auto;
+      padding-inline: 16px;
+    }
+
+    /* Thanh điều hướng */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background-color: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 60px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: var(--accent);
+      letter-spacing: -0.01em;
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      line-height: 1.2;
+      cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: var(--on-accent);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--accent-soft);
+    }
+
+    .btn-sm {
+      padding: 8px 15px;
+      font-size: 0.875rem;
+    }
+
+    /* Phần mở đầu */
+    .hero {
+      padding-block: 28px 36px;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background-color: var(--gold-soft);
+      color: var(--gold);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-serif);
+      line-height: 1.25;
+      margin: 0;
+      color: var(--text);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.85rem, 6vw, 2.75rem);
+      margin-bottom: 12px;
+    }
+
+    .hero-lead {
+      margin: 0 0 22px;
+      color: var(--text-muted);
+      font-size: 1.025rem;
+      max-width: 48ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-media {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background-color: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-media img {
+      aspect-ratio: 4 / 3;
+    }
+
+    /* Khối nội dung chung */
+    .section {
+      padding-block: 36px;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-head {
+      margin-bottom: 22px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.45rem, 4.5vw, 2rem);
+      margin-bottom: 6px;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--text-muted);
+      max-width: 60ch;
+    }
+
+    /* 3 gói giỏ quà */
+    .pack-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .pack-card {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .pack-card.featured {
+      border-color: var(--gold);
+    }
+
+    .pack-thumb {
+      position: relative;
+      background-color: var(--surface-soft);
+    }
+
+    .pack-thumb img {
+      aspect-ratio: 4 / 3;
+    }
+
+    .pack-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background-color: var(--accent);
+      color: var(--on-accent);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .pack-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 18px;
+    }
+
+    .pack-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .pack-top h3 {
+      font-size: 1.25rem;
+    }
+
+    .pack-price {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .pack-fit {
+      margin: 0 0 14px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .pack-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 18px;
+      display: grid;
+      gap: 8px;
+      font-size: 0.925rem;
+    }
+
+    .pack-list li {
+      position: relative;
+      padding-left: 16px;
+    }
+
+    .pack-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.62em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--gold);
+    }
+
+    .pack-body .btn {
+      margin-top: auto;
+      width: 100%;
+    }
+
+    /* Điểm qua trà và mứt */
+    .item-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .item-card {
+      display: grid;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .item-card img {
+      aspect-ratio: 16 / 10;
+    }
+
+    .item-copy {
+      padding: 16px;
+    }
+
+    .item-copy h3 {
+      font-size: 1.075rem;
+      margin-bottom: 4px;
+    }
+
+    .item-copy p {
+      margin: 0;
+      font-size: 0.925rem;
+      color: var(--text-muted);
+    }
+
+    /* Quà cho công ty */
+    .b2b-box {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .b2b-points {
+      display: grid;
+      gap: 14px;
+      margin: 18px 0 20px;
+    }
+
+    .b2b-item {
+      background-color: var(--surface-soft);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+    }
+
+    .b2b-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--accent);
+      font-size: 0.975rem;
+    }
+
+    .b2b-item p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Hạn đặt và giao */
+    .schedule-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .schedule-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .schedule-date {
+      display: inline-block;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .schedule-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .schedule-card p {
+      margin: 0;
+      font-size: 0.925rem;
+      color: var(--text-muted);
+    }
+
+    .tet-note {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background-color: var(--gold-soft);
+      color: var(--text);
+      font-size: 0.925rem;
+    }
+
+    /* Câu hỏi hay gặp */
+    .faq-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .faq-item {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0;
+    }
+
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 15px 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "+";
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--accent);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .faq-item[open] summary::after {
+      content: "−";
+    }
+
+    .faq-answer {
+      padding: 0 16px 16px;
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+    }
+
+    /* Biểu mẫu đặt hàng */
+    .order-layout {
+      display: grid;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .order-aside {
+      background-color: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+
+    .order-aside h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+
+    .order-aside ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.925rem;
+    }
+
+    .order-form {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 14px;
+    }
+
+    .form-row {
+      display: grid;
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .req {
+      color: var(--accent);
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 84px;
+    }
+
+    .field-error {
+      font-size: 0.825rem;
+      color: var(--err-text);
+      min-height: 1.1em;
+    }
+
+    .field input[aria-invalid="true"],
+    .field select[aria-invalid="true"] {
+      border-color: var(--err-text);
+    }
+
+    .estimate-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      background-color: var(--surface-soft);
+      font-size: 0.925rem;
+    }
+
+    .estimate-bar strong {
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .form-notice {
+      display: none;
+      padding: 13px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.925rem;
+      border: 1px solid transparent;
+    }
+
+    .form-notice.show {
+      display: block;
+    }
+
+    .form-notice.ok {
+      background-color: var(--ok-bg);
+      color: var(--ok-text);
+      border-color: var(--ok-border);
+    }
+
+    .form-notice.err {
+      background-color: var(--err-bg);
+      color: var(--err-text);
+      border-color: var(--err-border);
+    }
+
+    .form-notice strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* Chân trang */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding-block: 24px 28px;
+      margin-top: 12px;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .footer-note {
+      font-size: 0.8125rem;
+      margin: 0;
+    }
+
+    /* Nút gọi và Zalo cố định góc dưới trên điện thoại */
+    .mobile-fab {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px;
+      border-radius: 999px;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 26px rgba(24, 14, 10, 0.22);
+    }
+
+    .mobile-fab a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .fab-call {
+      background-color: var(--accent);
+      color: var(--on-accent);
+    }
+
+    .fab-zalo {
+      background-color: var(--gold-soft);
+      color: var(--text);
+    }
+
+    .mobile-fab svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* Màn hình rộng hơn */
+    @media (min-width: 640px) {
+      .item-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .form-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .schedule-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding-bottom: 0;
+      }
+
+      .nav-links {
+        display: flex;
+      }
+
+      .hero {
+        padding-block: 44px 48px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 32px;
+      }
+
+      .section {
+        padding-block: 48px;
+      }
+
+      .b2b-points {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .order-layout {
+        grid-template-columns: 0.82fr 1.18fr;
+        gap: 24px;
+      }
+
+      .footer-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .mobile-fab {
+        display: none;
+      }
+    }
+
+    @media (min-width: 840px) {
+      .pack-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#dau-trang">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>Giỏ Quà Nhà Sen</span>
+      </a>
+      <nav class="nav-links" aria-label="Điều hướng chính">
+        <a href="#goi-qua">Gói quà</a>
+        <a href="#qua-cong-ty">Quà công ty</a>
+        <a href="#lich-giao">Hạn đặt và giao</a>
+        <a href="#hoi-dap">Hỏi đáp</a>
+      </nav>
+      <a class="btn btn-primary btn-sm" href="#dat-hang">Đặt giỏ</a>
+    </div>
+  </header>
+
+  <main id="dau-trang">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Tết Đinh Mùi 2027 · Mùng 1 ngày 06/02</span>
+          <h1>Giỏ quà Tết gọn gàng, đồ ngon dễ biếu</h1>
+          <p class="hero-lead">Nhà Sen tự gói trà, mứt và hạt theo đơn, hộp cứng cáp và giao tận tay trước Tết.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#dat-hang">Đặt giỏ</a>
+            <a class="btn btn-outline" href="#goi-qua">Xem 3 gói giá</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <img src="../tet/anh-sp/gio-2.jpg" alt="Giỏ quà Tết Nhà Sen bày sẵn trà, mứt và hạt trong hộp chắc chắn" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="goi-qua">
+      <div class="container">
+        <div class="section-head">
+          <h2>Ba gói giỏ quà sẵn mẫu</h2>
+          <p>Đồ bên trong đều đóng mẻ mới sát Tết, có thể đổi món tương đương nếu bạn muốn bỏ rượu hoặc thêm trà.</p>
+        </div>
+
+        <div class="pack-grid">
+          <article class="pack-card">
+            <div class="pack-thumb">
+              <img src="../tet/anh-sp/gio-1.jpg" alt="Gói Sum Vầy giá 350.000 đồng gồm trà, mứt, hạt điều và bánh quy" loading="lazy">
+            </div>
+            <div class="pack-body">
+              <div class="pack-top">
+                <h3>Gói Sum Vầy</h3>
+                <span class="pack-price">350.000đ</span>
+              </div>
+              <p class="pack-fit">Gọn nhẹ, hợp biếu đồng nghiệp, hàng xóm hoặc thầy cô.</p>
+              <ul class="pack-list">
+                <li>Trà sen ướp hương tự nhiên (hộp thiếc 100g)</li>
+                <li>Mứt gừng lát dẻo ít đường (hũ 200g)</li>
+                <li>Hạt điều rang củi còn vỏ lụa (hũ 200g)</li>
+                <li>Bánh quy bơ trứng nướng giòn (hộp 180g)</li>
+                <li>Giỏ mây đan tay, thắt nơ vải và thiệp chúc Tết</li>
+              </ul>
+              <button class="btn btn-outline js-pick-pack" type="button" data-pack="sum-vay">Chọn gói này</button>
+            </div>
+          </article>
+
+          <article class="pack-card featured">
+            <div class="pack-thumb">
+              <span class="pack-tag">Đặt nhiều</span>
+              <img src="../tet/anh-sp/gio-2.jpg" alt="Gói An Khang giá 650.000 đồng hộp gỗ nắp cài kèm trà, mứt và hạt" loading="lazy">
+            </div>
+            <div class="pack-body">
+              <div class="pack-top">
+                <h3>Gói An Khang</h3>
+                <span class="pack-price">650.000đ</span>
+              </div>
+              <p class="pack-fit">Đầy đặn, vừa tay cầm, hợp biếu gia đình hai bên và người thân.</p>
+              <ul class="pack-list">
+                <li>Trà ô long hương nhẹ (hộp 150g)</li>
+                <li>Rượu mơ ủ chum 500ml (hoặc đổi nước ép nho không cồn)</li>
+                <li>Mứt vỏ bưởi sấy dẻo (hũ 250g)</li>
+                <li>Hạt điều rang củi (250g) và hạnh nhân rang bơ (200g)</li>
+                <li>Xoài sấy dẻo cắt lát (gói 150g)</li>
+                <li>Hộp gỗ nắp cài, túi xách giấy dày và thiệp viết tay</li>
+              </ul>
+              <button class="btn btn-primary js-pick-pack" type="button" data-pack="an-khang">Chọn gói này</button>
+            </div>
+          </article>
+
+          <article class="pack-card">
+            <div class="pack-thumb">
+              <img src="../tet/anh-sp/gio-3.jpg" alt="Gói Đoàn Viên giá 1.200.000 đồng khay gỗ sơn đỏ trầm kèm trà, rượu và hạt" loading="lazy">
+            </div>
+            <div class="pack-body">
+              <div class="pack-top">
+                <h3>Gói Đoàn Viên</h3>
+                <span class="pack-price">1.200.000đ</span>
+              </div>
+              <p class="pack-fit">Đủ đầy, hộp chắc tay, hợp biếu bố mẹ, đối tác và khách thân.</p>
+              <ul class="pack-list">
+                <li>Trà cổ thụ sao chảo (hộp gỗ 200g)</li>
+                <li>Rượu vang đỏ chai 750ml (hoặc đổi mật ong rừng 500ml)</li>
+                <li>Bộ 3 hũ thủy tinh: mứt gừng, mứt sen trần và xoài dẻo</li>
+                <li>Hạt mắc ca nứt vỏ (300g) và hạt điều rang củi (250g)</li>
+                <li>Cà phê rang mộc xay sẵn (túi 250g)</li>
+                <li>Khay gỗ sơn đỏ trầm, túi vải bố và thiệp chúc Tết</li>
+              </ul>
+              <button class="btn btn-outline js-pick-pack" type="button" data-pack="doan-vien">Chọn gói này</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="item-grid" aria-label="Đồ bên trong giỏ">
+          <div class="item-card">
+            <img src="../tet/anh-sp/mut-1.jpg" alt="Các hũ mứt Tết làm mẻ mới, ít đường và đóng kín nắp" loading="lazy">
+            <div class="item-copy">
+              <h3>Mứt làm mẻ mới sát Tết</h3>
+              <p>Vị dịu, không gắt đường, đóng hũ thủy tinh kín nắp và có ghi rõ ngày đóng gói dưới đáy.</p>
+            </div>
+          </div>
+          <div class="item-card">
+            <img src="../tet/anh-sp/tra-1.jpg" alt="Trà khô chọn lá đều, đóng hộp thiếc giữ hương" loading="lazy">
+            <div class="item-copy">
+              <h3>Trà chọn vụ thu đông</h3>
+              <p>Hương thanh, dễ uống cho cả người lớn tuổi lẫn khách ghé chơi nhà, đóng hộp thiếc chống ẩm.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="qua-cong-ty">
+      <div class="container">
+        <div class="b2b-box">
+          <div class="section-head">
+            <h2>Quà cho công ty</h2>
+            <p>Nhận đặt từ 10 giỏ trở lên, có thể ghép món lại theo mức ngân sách riêng của từng đơn vị.</p>
+          </div>
+          <div class="b2b-points">
+            <div class="b2b-item">
+              <strong>Đặt từ 10 giỏ</strong>
+              <p>Áp dụng giá chiết khấu theo bậc số lượng, giữ mẫu hộp đồng đều từ giỏ đầu đến giỏ cuối.</p>
+            </div>
+            <div class="b2b-item">
+              <strong>In thiệp tên công ty</strong>
+              <p>In sẵn tên đơn vị, dấu nhận diện và lời chúc riêng trên thiệp kèm theo từng giỏ quà.</p>
+            </div>
+            <div class="b2b-item">
+              <strong>Giao theo danh sách</strong>
+              <p>Nhận giao một điểm về văn phòng hoặc chia giao tận tay nhiều địa chỉ theo bảng danh sách bạn gửi.</p>
+            </div>
+          </div>
+          <button class="btn btn-primary js-pick-b2b" type="button">Đặt đơn công ty từ 10 giỏ</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="lich-giao">
+      <div class="container">
+        <div class="section-head">
+          <h2>Hạn đặt và lịch giao Tết Đinh Mùi 2027</h2>
+          <p>Đặt sớm giúp Nhà Sen giữ đủ hộp gỗ, gói kỹ từng hũ thủy tinh và sắp lịch giao đúng ngày bạn cần.</p>
+        </div>
+        <div class="schedule-grid">
+          <div class="schedule-card">
+            <span class="schedule-date">Trước 25/01/2027</span>
+            <h3>Hạn chốt đơn giữ mẫu</h3>
+            <p>Chốt số lượng, món đổi trong giỏ và nội dung thiệp công ty trước ngày 25/01/2027 để đủ hộp theo yêu cầu.</p>
+          </div>
+          <div class="schedule-card">
+            <span class="schedule-date">15/01 – 25/01/2027</span>
+            <h3>Giao đợt 1</h3>
+            <p>Ưu tiên đơn công ty, đơn gửi đi tỉnh và đơn giao nhiều địa chỉ theo danh sách để kịp trước kỳ nghỉ.</p>
+          </div>
+          <div class="schedule-card">
+            <span class="schedule-date">26/01 – 03/02/2027</span>
+            <h3>Giao đợt 2 (sát Tết)</h3>
+            <p>Giao nội thành theo khung giờ hẹn trước. Kiểm hàng lúc nhận, đổi mới ngay nếu hộp bị móp méo.</p>
+          </div>
+        </div>
+        <p class="tet-note"><strong>Mốc Tết Đinh Mùi 2027:</strong> Mùng 1 rơi vào Thứ Bảy, ngày <strong>06/02/2027</strong>. Sau ngày 25/01/2027, Nhà Sen chỉ nhận thêm đơn có sẵn mẫu tại tiệm.</p>
+      </div>
+    </section>
+
+    <section class="section" id="hoi-dap">
+      <div class="container">
+        <div class="section-head">
+          <h2>Câu hỏi hay gặp</h2>
+          <p>Những điều khách hay hỏi trước khi chốt giỏ quà Tết.</p>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>Có đổi món trong giỏ theo nhu cầu không?</summary>
+            <p class="faq-answer">Có. Bạn chỉ cần ghi ở ô ghi chú món muốn đổi, ví dụ thay rượu bằng mật ong rừng hoặc nước ép trái cây. Nhà Sen báo lại mức giá khớp ngay trước khi đóng giỏ.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Hạn sử dụng của trà, mứt và hạt còn bao lâu?</summary>
+            <p class="faq-answer">Tất cả đồ ăn đều đóng mẻ mới trong tháng 01/2027, hạn dùng còn từ 4 đến 6 tháng kể từ ngày giao. Mỗi hũ đều có nhãn ghi rõ ngày đóng gói và hạn dùng.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Đặt 1 giỏ lẻ có giao tận nhà không?</summary>
+            <p class="faq-answer">Có. Từ 1 giỏ Nhà Sen vẫn nhận gói và giao nội thành theo giờ hẹn. Đơn từ 3 giỏ trở lên được miễn phí giao trong bán kính 7 km.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Công ty đặt từ 10 giỏ cần gửi thông tin gì?</summary>
+            <p class="faq-answer">Bạn chỉ cần gửi số lượng dự kiến, ngân sách mỗi giỏ, lời chúc in thiệp và ngày muốn nhận. Nếu giao nhiều điểm, gửi thêm bảng địa chỉ trước ngày giao tối thiểu 3 ngày.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="dat-hang">
+      <div class="container">
+        <div class="section-head">
+          <h2>Đặt giỏ quà Tết</h2>
+          <p>Điền thông tin bên dưới để giữ mẫu và ngày giao. Nên gửi trước 25/01/2027 để đủ hộp theo yêu cầu.</p>
+        </div>
+
+        <div class="order-layout">
+          <aside class="order-aside">
+            <h3>Cách Nhà Sen xác nhận đơn</h3>
+            <ul>
+              <li>Kiểm tra lại mẫu giỏ, món muốn đổi và khung giờ nhận phù hợp.</li>
+              <li>Gửi ảnh giỏ gói mẫu thực tế trước khi xuất giao với đơn từ 10 giỏ.</li>
+              <li>Cho xem hàng khi nhận; hộp bị cấn móp trong lúc chở đi được đổi lại ngay.</li>
+            </ul>
+          </aside>
+
+          <form class="order-form" id="orderForm" novalidate>
+            <div class="form-row">
+              <div class="field">
+                <label for="customerName">Họ và tên <span class="req">*</span></label>
+                <input id="customerName" name="customerName" type="text" autocomplete="name" placeholder="Ví dụ: Nguyễn Minh Anh" required>
+                <span class="field-error" id="errName"></span>
+              </div>
+              <div class="field">
+                <label for="customerPhone">Số điện thoại <span class="req">*</span></label>
+                <input id="customerPhone" name="customerPhone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Ví dụ: 0900 000 000" required>
+                <span class="field-error" id="errPhone"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="packSelect">Chọn gói giỏ quà <span class="req">*</span></label>
+                <select id="packSelect" name="packSelect" required>
+                  <option value="sum-vay">Gói Sum Vầy — 350.000đ</option>
+                  <option value="an-khang" selected>Gói An Khang — 650.000đ</option>
+                  <option value="doan-vien">Gói Đoàn Viên — 1.200.000đ</option>
+                  <option value="cong-ty">Gói riêng cho công ty (từ 10 giỏ)</option>
+                </select>
+                <span class="field-error" id="errPack"></span>
+              </div>
+              <div class="field">
+                <label for="quantity">Số lượng (giỏ) <span class="req">*</span></label>
+                <input id="quantity" name="quantity" type="number" min="1" max="500" value="1" required>
+                <span class="field-error" id="errQty"></span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="deliveryDate">Ngày muốn nhận <span class="req">*</span></label>
+              <input id="deliveryDate" name="deliveryDate" type="date" min="2027-01-10" max="2027-02-05" value="2027-01-24" required>
+              <span class="field-error" id="errDate"></span>
+            </div>
+
+            <div class="field">
+              <label for="note">Ghi chú (không bắt buộc)</label>
+              <textarea id="note" name="note" placeholder="Ví dụ: đổi rượu sang mật ong, in thiệp tên công ty, giao buổi sáng..."></textarea>
+            </div>
+
+            <div class="estimate-bar">
+              <span>Tạm tính</span>
+              <strong id="estimateValue">650.000đ</strong>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Gửi yêu cầu đặt giỏ</button>
+
+            <div class="form-notice" id="formNotice" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><strong>Giỏ Quà Nhà Sen</strong> · Tết Đinh Mùi 2027</div>
+      <p class="footer-note">Trang mẫu minh họa. Shop và giá là giả định.</p>
+    </div>
+  </footer>
+
+  <div class="mobile-fab" aria-label="Liên hệ đặt giỏ nhanh">
+    <a class="fab-call" href="#dat-hang">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+      <span>Gọi đặt</span>
+    </a>
+    <a class="fab-zalo" href="#dat-hang">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+      </svg>
+      <span>Zalo</span>
+    </a>
+  </div>
+
+  <script>
+    (function () {
+      var prices = {
+        "sum-vay": 350000,
+        "an-khang": 650000,
+        "doan-vien": 1200000
+      };
+
+      var labels = {
+        "sum-vay": "Gói Sum Vầy (350.000đ)",
+        "an-khang": "Gói An Khang (650.000đ)",
+        "doan-vien": "Gói Đoàn Viên (1.200.000đ)",
+        "cong-ty": "Gói riêng cho công ty"
+      };
+
+      var form = document.getElementById("orderForm");
+      var nameInput = document.getElementById("customerName");
+      var phoneInput = document.getElementById("customerPhone");
+      var packSelect = document.getElementById("packSelect");
+      var qtyInput = document.getElementById("quantity");
+      var dateInput = document.getElementById("deliveryDate");
+      var noteInput = document.getElementById("note");
+      var estimateEl = document.getElementById("estimateValue");
+      var noticeEl = document.getElementById("formNotice");
+
+      var errMap = {
+        name: document.getElementById("errName"),
+        phone: document.getElementById("errPhone"),
+        pack: document.getElementById("errPack"),
+        qty: document.getElementById("errQty"),
+        date: document.getElementById("errDate")
+      };
+
+      function formatVnd(amount) {
+        return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "đ";
+      }
+
+      function updateEstimate() {
+        var pack = packSelect.value;
+        var qty = parseInt(qtyInput.value, 10);
+        if (pack === "cong-ty") {
+          estimateEl.textContent = "Báo giá theo ngân sách";
+          return;
+        }
+        if (!qty || qty < 1) {
+          estimateEl.textContent = "—";
+          return;
+        }
+        estimateEl.textContent = formatVnd(prices[pack] * qty);
+      }
+
+      function clearErrors() {
+        Object.keys(errMap).forEach(function (k) {
+          errMap[k].textContent = "";
+        });
+        [nameInput, phoneInput, packSelect, qtyInput, dateInput].forEach(function (el) {
+          el.removeAttribute("aria-invalid");
+        });
+      }
+
+      function setFieldError(input, errEl, message) {
+        input.setAttribute("aria-invalid", "true");
+        errEl.textContent = message;
+      }
+
+      function formatDateVn(isoDate) {
+        var parts = isoDate.split("-");
+        if (parts.length !== 3) return isoDate;
+        return parts[2] + "/" + parts[1] + "/" + parts[0];
+      }
+
+      document.querySelectorAll(".js-pick-pack").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          packSelect.value = btn.getAttribute("data-pack");
+          if (parseInt(qtyInput.value, 10) < 1 || isNaN(parseInt(qtyInput.value, 10))) {
+            qtyInput.value = "1";
+          }
+          updateEstimate();
+          document.getElementById("dat-hang").scrollIntoView({ behavior: "smooth" });
+          nameInput.focus({ preventScroll: true });
+        });
+      });
+
+      var b2bBtn = document.querySelector(".js-pick-b2b");
+      if (b2bBtn) {
+        b2bBtn.addEventListener("click", function () {
+          packSelect.value = "cong-ty";
+          if (parseInt(qtyInput.value, 10) < 10 || isNaN(parseInt(qtyInput.value, 10))) {
+            qtyInput.value = "10";
+          }
+          if (!noteInput.value.trim()) {
+            noteInput.value = "Đơn công ty, cần in thiệp tên đơn vị.";
+          }
+          updateEstimate();
+          document.getElementById("dat-hang").scrollIntoView({ behavior: "smooth" });
+          nameInput.focus({ preventScroll: true });
+        });
+      }
+
+      packSelect.addEventListener("change", updateEstimate);
+      qtyInput.addEventListener("input", updateEstimate);
+      updateEstimate();
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        clearErrors();
+
+        var nameVal = nameInput.value.trim();
+        var phoneRaw = phoneInput.value.replace(/[\s.-]/g, "");
+        var packVal = packSelect.value;
+        var qtyVal = parseInt(qtyInput.value, 10);
+        var dateVal = dateInput.value;
+        var firstInvalid = null;
+
+        if (nameVal.length < 2) {
+          setFieldError(nameInput, errMap.name, "Vui lòng nhập họ và tên.");
+          firstInvalid = firstInvalid || nameInput;
+        }
+
+        if (!/^0\d{9,10}$/.test(phoneRaw)) {
+          setFieldError(phoneInput, errMap.phone, "Nhập số điện thoại gồm 10 hoặc 11 chữ số, bắt đầu bằng số 0.");
+          firstInvalid = firstInvalid || phoneInput;
+        }
+
+        if (!labels[packVal]) {
+          setFieldError(packSelect, errMap.pack, "Vui lòng chọn gói giỏ quà.");
+          firstInvalid = firstInvalid || packSelect;
+        }
+
+        if (isNaN(qtyVal) || qtyVal < 1 || qtyVal > 500) {
+          setFieldError(qtyInput, errMap.qty, "Nhập số lượng từ 1 đến 500 giỏ.");
+          firstInvalid = firstInvalid || qtyInput;
+        } else if (packVal === "cong-ty" && qtyVal < 10) {
+          setFieldError(qtyInput, errMap.qty, "Đơn công ty nhận từ 10 giỏ trở lên.");
+          firstInvalid = firstInvalid || qtyInput;
+        }
+
+        if (!dateVal) {
+          setFieldError(dateInput, errMap.date, "Vui lòng chọn ngày muốn nhận.");
+          firstInvalid = firstInvalid || dateInput;
+        } else if (dateVal < "2027-01-10" || dateVal > "2027-02-05") {
+          setFieldError(dateInput, errMap.date, "Chọn ngày giao trong khoảng 10/01/2027 đến 05/02/2027.");
+          firstInvalid = firstInvalid || dateInput;
+        }
+
+        if (firstInvalid) {
+          noticeEl.className = "form-notice show err";
+          noticeEl.innerHTML = "";
+          var errTitle = document.createElement("strong");
+          errTitle.textContent = "Vui lòng kiểm tra lại thông tin.";
+          var errText = document.createElement("span");
+          errText.textContent = "Một vài mục đang báo đỏ phía trên chưa hợp lệ.";
+          noticeEl.appendChild(errTitle);
+          noticeEl.appendChild(errText);
+          firstInvalid.focus();
+          return;
+        }
+
+        noticeEl.className = "form-notice show ok";
+        noticeEl.innerHTML = "";
+
+        var okTitle = document.createElement("strong");
+        okTitle.textContent = "Đây là bản demo, đơn chưa được gửi đi";
+
+        var okDetail = document.createElement("span");
+        okDetail.textContent = "Thông tin vừa kiểm hợp lệ: " + nameVal + " · " + labels[packVal] + " × " + qtyVal + " giỏ · nhận ngày " + formatDateVn(dateVal) + ".";
+
+        noticeEl.appendChild(okTitle);
+        noticeEl.appendChild(okDetail);
+      });
+    })();
+  </script>
+</body>
+</html>
